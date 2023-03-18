@@ -85,7 +85,7 @@ void Tilemap::BoxFill(std::unique_ptr<BuildingManager>& building_manager, std::u
 					building_manager->DestroyStructure(origin);
 
 					// Adjust the vibe of the tiles around the structure destroyed
-					vibe_tilemap->VibeChange(origin, -5, sqrt(tiles_to_remove.size()));
+					vibe_tilemap->VibeChange(origin, -5, sqrt(tiles_to_remove.size()), sqrt(tiles_to_remove.size()));
 				}
 
 				tilemap[tile_pos.x][tile_pos.z]->UnoccupyTile();
