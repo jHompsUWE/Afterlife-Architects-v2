@@ -101,13 +101,28 @@ void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int
 		corner_expand.clear();
 	}
 
-	int pos_dist;
-	for (int i = 0; i < added_positions.size(); i++)
+	if (tile_size % 2 == 0)
 	{
-		if (ValidTile(added_positions[i]))
+		float pos_dist;
+		for (int i = 0; i < added_positions.size(); i++)
 		{
-			pos_dist = abs(tile_pos.x - added_positions[i].x + (int)(tile_size / 2)) + abs(tile_pos.z - added_positions[i].z + (int)(tile_size / 2));
-			vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff +(range-pos_dist));
+			if (ValidTile(added_positions[i]))
+			{
+				pos_dist = abs(tile_pos.x - added_positions[i].x - 0.5f + (tile_size / 2)) + abs(tile_pos.z - added_positions[i].z - 0.5f + (tile_size / 2));
+				vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff * ( 1 + range - pos_dist + tile_size / 2) / range);
+			}
+		}
+	}
+	else
+	{
+		int pos_dist;
+		for (int i = 0; i < added_positions.size(); i++)
+		{
+			if (ValidTile(added_positions[i]))
+			{
+				pos_dist = abs(tile_pos.x - added_positions[i].x + (tile_size / 2)) + abs(tile_pos.z - added_positions[i].z + (tile_size / 2));
+				vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff * ( 2 + range - pos_dist + tile_size / 2) / range);
+			}
 		}
 	}
 	added_positions.clear();
