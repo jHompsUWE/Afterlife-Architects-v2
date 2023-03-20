@@ -32,7 +32,9 @@ public:
 	void DestroyStructure(Vector3 tile_position);
 	std::vector<Vector3> GetStructureOccupiedTiles(Vector3 tile_position);
 
+	int GetTotalStructure();
 	static int GetSizeOfStructure(StructureType structure_type);
+	static int GetCostOfStructure(StructureType structure_type);
 
 protected:
 

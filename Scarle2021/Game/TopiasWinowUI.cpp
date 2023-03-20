@@ -19,22 +19,22 @@ TopiasWindowUI::TopiasWindowUI(Vector2 _windowPosition, ID3D11Device* _d3dDevice
     windowBackGround->SetPos(window_pos);
 
     //setup button text
-    text_vec.push_back(new TextGO2D("Heaven Topias \n""Cost 100 Credits"));
+    text_vec.push_back(new TextGO2D("Heaven Topias \n""Cost " + std::to_string(BuildingManager::GetCostOfStructure(Topia_T1)) + " Credits"));
     text_vec.back()->SetColour(Color((float*)&Colors::Black));
     text_vec.back()->SetPos(Vector2(window_pos.x+ 35,window_pos.y+ 95));
     text_vec.back()->SetScale(Vector2(0.3,0.3));
 
-    text_vec.push_back(new TextGO2D("Heaven Topias T2\n""Cost 100 Credits"));
-    text_vec.back()->SetColour(Color((float*)&Colors::Black));
-    text_vec.back()->SetPos(Vector2(window_pos.x+ 140,window_pos.y+ 95));
-    text_vec.back()->SetScale(Vector2(0.3,0.3));
- 
-    text_vec.push_back(new TextGO2D("Hell Topias\n""Cost 100 Credits"));
+    text_vec.push_back(new TextGO2D("Hell Topias\n""Cost " + std::to_string(BuildingManager::GetCostOfStructure(Topia_T1)) + " Credits"));
     text_vec.back()->SetColour(Color((float*)&Colors::Black));
     text_vec.back()->SetPos(Vector2(window_pos.x+ 35,window_pos.y+ 220));
     text_vec.back()->SetScale(Vector2(0.3,0.3));
-    
-    text_vec.push_back(new TextGO2D("Hell Topias T2\n""Cost 100 Credits"));
+
+    text_vec.push_back(new TextGO2D("Heaven Topias T2\n""Cost " + std::to_string(BuildingManager::GetCostOfStructure(Topia_T2)) + " Credits"));
+    text_vec.back()->SetColour(Color((float*)&Colors::Black));
+    text_vec.back()->SetPos(Vector2(window_pos.x+ 140,window_pos.y+ 95));
+    text_vec.back()->SetScale(Vector2(0.3,0.3));
+     
+    text_vec.push_back(new TextGO2D("Hell Topias T2\n""Cost " + std::to_string(BuildingManager::GetCostOfStructure(Topia_T2)) + " Credits"));
     text_vec.back()->SetColour(Color((float*)&Colors::Black));
     text_vec.back()->SetPos(Vector2(window_pos.x+ 140,window_pos.y+ 220));
     text_vec.back()->SetScale(Vector2(0.3,0.3));

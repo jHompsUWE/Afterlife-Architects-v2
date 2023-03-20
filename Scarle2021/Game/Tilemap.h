@@ -8,6 +8,7 @@
 
 #include "Tile.h"
 #include "BuildingManager.h"
+#include "EconomyManager.h"
 #include "VibeTilemap.h"
 #include "TextureManager.h"
 #include "PlaneType.h"
@@ -16,7 +17,7 @@ class Tilemap
 {
 public:
 	Tilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager,
-		int _size, Vector3 _start, PlaneType _plane);
+		int _size, Vector3 _start, PlaneType _plane, std::shared_ptr<EconomyManager> _economy_manager);
 	~Tilemap();
 
 	void Draw(DrawData* _DD);
@@ -51,5 +52,6 @@ protected:
 private:
 	std::shared_ptr<TextureManager> texture_manager;
 	std::shared_ptr<PopulationManager> population_manager;
+	std::shared_ptr<EconomyManager> economy_manager;
 };
 

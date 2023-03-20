@@ -171,6 +171,7 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
 
     //converts float to string to int
     text[0]->ChangeString("Year: " +std::to_string((int)economy_manager->GetYear()));
+    text[1]->ChangeString("Credits: " +std::to_string((int)economy_manager->GetMoney()));
     text[2]->ChangeString(std::to_string((int)population_manager->GetTotalSouls()));
     
     //timer for years
