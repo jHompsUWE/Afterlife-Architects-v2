@@ -3,8 +3,8 @@
 #include <iostream>
 
 BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager,
-	EconomyManager* _econ_manager, int _size, Vector3 _start, PlaneType _plane) :
-	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), econ_manager(_econ_manager)
+	std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane) :
+	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), economy_manager(_economy_manager)
 {
 	for (int x = 0; x < _size; x++)
 	{
@@ -184,7 +184,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case Gate_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size), 
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				10); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -199,7 +199,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case Gate_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				50); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -214,7 +214,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case Gate_T3:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				100); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -293,7 +293,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case TrainingCenter_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager, population_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				10); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{
@@ -308,7 +308,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case TrainingCenter_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager, population_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				20); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{
@@ -323,7 +323,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case TrainingCenter_T3:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, econ_manager, population_manager,
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
 				30); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{

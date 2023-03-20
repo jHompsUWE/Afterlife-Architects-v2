@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "UIPanel.h"
-#include "EconomyManager.h"
 
 UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
                  _d3dDevice, std::string _filepath,Vector2 _newScale)
@@ -17,6 +16,9 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
 	
     panel_pos = _panelPosition;
     panel_back_ground->SetPos(panel_pos);
+
+    population_manager = GameplaySingletons::GetPopulationManager();
+    economy_manager = GameplaySingletons::GetEconomyManager();
     
     // UI game play buttons
 
@@ -123,17 +125,17 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     
     //UI Text Vector
 
-    text.push_back(new TextGO2D("Year: " + std::to_string(EconomyManager::GetYear())));
+    text.push_back(new TextGO2D("Year: " + std::to_string(economy_manager->GetYear())));
     text[0]->SetPos(Vector2(30,35));
     text[0]->SetScale(Vector2(0.5,0.5));
     text[0]->SetColour(Color((float*)&Colors::Green));
 
-    text.push_back(new TextGO2D("Credits: " + std::to_string(EconomyManager::GetCurrency())));
+    text.push_back(new TextGO2D("Credits: " + std::to_string(economy_manager->GetMoney())));
     text[1]->SetPos(Vector2(30,60));
     text[1]->SetScale(Vector2(0.5,0.5));
     text[1]->SetColour(Color((float*)&Colors::Green));
 
-    text.push_back(new TextGO2D(" " + std::to_string(EconomyManager::GetSouls())));
+    text.push_back(new TextGO2D(" " + std::to_string(population_manager->GetTotalSouls())));
     text[2]->SetPos(Vector2(135,455));
     text[2]->SetScale(Vector2(0.4,0.4));
     text[2]->SetColour(Color((float*)&Colors::Green));
@@ -168,8 +170,8 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     //updates buttons
 
     //converts float to string to int
-    text[0]->ChangeString("Year: " +std::to_string((int)EconomyManager::GetYear()));
-    text[2]->ChangeString(std::to_string((int)EconomyManager::GetSouls()));
+    text[0]->ChangeString("Year: " +std::to_string((int)economy_manager->GetYear()));
+    text[2]->ChangeString(std::to_string((int)population_manager->GetTotalSouls()));
     
     //timer for years
     // 

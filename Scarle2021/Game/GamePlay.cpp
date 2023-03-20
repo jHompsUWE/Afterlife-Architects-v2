@@ -52,6 +52,9 @@ bool GamePlay::init()
     mouse_screen_pos.z = 0;
     mouse_world_pos = std::make_shared<Vector3>(0, 0, 0);
 
+    // Economy
+    economy_manager = GameplaySingletons::GetEconomyManager();
+
     // Building System
     building_system = std::make_unique<BuildingSystem>(mouse_world_pos, DataManager::GetD3DDevice());
     do_once = true;
@@ -90,12 +93,13 @@ void GamePlay::Update(GameData* game_data)
     //training centre
     window_four_training_centers_window->update(game_data,mouse_pos);
 
+    // Economy
+    economy_manager->Tick(game_data);
+
     // Building System
     building_system->Tick(game_data);
     
     adv_man->Update(game_data);
-    EconomyManager::UpdateCurrency(game_data);
-    EconomyManager::UpdateSouls();
 }
 
 void GamePlay::ScaledUpdate(GameData* game_data, float& scaled_dt)

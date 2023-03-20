@@ -11,6 +11,8 @@
 
 #include "PlaneAssembler.h"
 
+#include "GameplaySingletons.h"
+
 class BuildingSystem : public IEventReceiver
 {
 public:
@@ -31,8 +33,6 @@ private:
 	bool TryCreateHouse(std::unique_ptr<Tilemap>& tilemap, std::unique_ptr<VibeTilemap>& vibe, std::unique_ptr<BuildingManager>& building_manager, ZoneType zone);
 	void StartCreateStructure(StructureType structure_type);
 	void PlaceSelectedStructure(PlaneType plane);
-
-	bool SoulExceedsCapacity(PlaneType plane, ZoneType zone);
 
 	bool CallEverySeconds(float dt, float time_interval);
 
@@ -61,23 +61,23 @@ private:
 	Vector3 mouse_released_hell_pos;
 
 	// Heaven
-	std::unique_ptr<Tilemap> tilemap_heaven{};
-	std::unique_ptr<VibeTilemap> vibe_tilemap_heaven{};
-	std::unique_ptr<BuildingManager> building_manager_heaven{};
+	std::unique_ptr<Tilemap> tilemap_heaven;
+	std::unique_ptr<VibeTilemap> vibe_tilemap_heaven;
+	std::unique_ptr<BuildingManager> building_manager_heaven;
 
 	// Hell
-	std::unique_ptr<Tilemap> tilemap_hell{};
-	std::unique_ptr<VibeTilemap> vibe_tilemap_hell{};
-	std::unique_ptr<BuildingManager> building_manager_hell{};
+	std::unique_ptr<Tilemap> tilemap_hell;
+	std::unique_ptr<VibeTilemap> vibe_tilemap_hell;
+	std::unique_ptr<BuildingManager> building_manager_hell;
 
 	bool show_vibes = false;
 
-	std::shared_ptr<TextureManager> texture_manager{};
-	std::shared_ptr<PopulationManager> population_manager{};
-	EconomyManager* econ_manager = nullptr;
+	std::shared_ptr<TextureManager> texture_manager;
+	std::shared_ptr<PopulationManager> population_manager;
+	std::shared_ptr<EconomyManager> economy_manager;
 
 	// Preview Quad
 	bool show_preview_quad;
-	std::unique_ptr<PreviewQuad> preview_quad{};
+	std::unique_ptr<PreviewQuad> preview_quad;
 };
 

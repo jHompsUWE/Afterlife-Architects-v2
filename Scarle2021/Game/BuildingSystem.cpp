@@ -7,17 +7,17 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
     Vector3 start_heaven = Vector3(60, 0, 60);
     Vector3 start_hell = Vector3(-60, 0, -60);
 
-    econ_manager = &EconomyManager::Get();
-    population_manager = std::make_shared<PopulationManager>();
+    population_manager = GameplaySingletons::GetPopulationManager();
+    economy_manager = GameplaySingletons::GetEconomyManager();
     texture_manager = std::make_shared<TextureManager>(GD);
 
     tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven);
     vibe_tilemap_heaven = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_heaven);
-    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, econ_manager, 100, start_heaven, Heaven);
+    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_heaven, Heaven);
 
     tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell);
     vibe_tilemap_hell = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_hell);
-    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, econ_manager, 100, start_hell, Hell);
+    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_hell, Hell);
 
     PlaneAssembler::RefreshResSeed();
     GenerateTerrain(tilemap_heaven, vibe_tilemap_heaven, building_manager_heaven, Heaven);
@@ -49,7 +49,7 @@ void BuildingSystem::Tick(GameData* game_data)
         {
             ZoneType zone = (ZoneType)i;
 
-            if (!population_manager->GetZoneFull(Heaven, zone) && SoulExceedsCapacity(Heaven, zone))
+            if (!population_manager->GetZoneFull(Heaven, zone) && population_manager->PopulationCheck(Heaven, zone))
             {
                 // Zone is NOT full and needs more houses
                 if (!TryCreateHouse(tilemap_heaven, vibe_tilemap_heaven, building_manager_heaven, zone))
@@ -59,7 +59,7 @@ void BuildingSystem::Tick(GameData* game_data)
                 }
             }
 
-            if (!population_manager->GetZoneFull(Hell, zone) && SoulExceedsCapacity(Hell, zone))
+            if (!population_manager->GetZoneFull(Hell, zone) && population_manager->PopulationCheck(Hell, zone))
             {
                 // Zone is NOT full and needs more houses
                 if(!TryCreateHouse(tilemap_hell, vibe_tilemap_hell, building_manager_hell, zone))
@@ -424,120 +424,6 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
         }
         break;
     }
-}
-
-/// <summary>
-/// Checks if the souls of the given PlaneType and ZoneType exceeds its capacity
-/// </summary>
-/// <param name="plane">Heaven/Hell</param>
-/// <param name="zone">ZoneType of the soul</param>
-/// <returns>True if it exceeds capacity, False otherwise</returns>
-bool BuildingSystem::SoulExceedsCapacity(PlaneType plane, ZoneType zone)
-{
-    switch (plane)
-    {
-    case Heaven:
-        switch (zone)
-        {
-        case Green:
-            if (econ_manager->GetSoulsHeavenGreen() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Yellow:
-            if (econ_manager->GetSoulsHeavenYellow() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Orange:
-            if (econ_manager->GetSoulsHeavenOrange() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Brown:
-            if (econ_manager->GetSoulsHeavenBrown() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Purple:
-            if (econ_manager->GetSoulsHeavenPurple() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Red:
-            if (econ_manager->GetSoulsHeavenRed() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Blue:
-            if (econ_manager->GetSoulsHeavenBlue() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        default:
-            break;
-        }
-        break;
-
-    case Hell:
-        switch (zone)
-        {
-        case Green:
-            if (econ_manager->GetSoulsHellGreen() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Yellow:
-            if (econ_manager->GetSoulsHellYellow() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Orange:
-            if (econ_manager->GetSoulsHellOrange() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Brown:
-            if (econ_manager->GetSoulsHellBrown() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Purple:
-            if (econ_manager->GetSoulsHellPurple() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Red:
-            if (econ_manager->GetSoulsHellRed() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        case Blue:
-            if (econ_manager->GetSoulsHellBlue() > population_manager->GetZoneCapacity(plane, zone))
-            {
-                return true;
-            }
-
-        default:
-            break;
-        }
-        break;
-    }
-
-    return false;
 }
 
 /// <summary>
