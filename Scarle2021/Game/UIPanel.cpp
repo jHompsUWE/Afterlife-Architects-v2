@@ -169,16 +169,29 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     panel_back_ground->Tick(_gameData);
     //updates buttons
 
+    if (economy_manager->GetMoney() < 10000)
+    {
+        text[1]->ChangeString("Credit: " + std::to_string((int)economy_manager->GetMoney()));
+    }
+
+
+    else if (economy_manager->GetMoney() < 1000000)
+    {
+        text[1]->ChangeString("Credit: " + (std::to_string((int)economy_manager->GetMoney()/1000) + " K"));
+    }
+
+    else if (economy_manager->GetMoney() > 1000000)
+    {
+        text[1]->ChangeString("Credit: " + (std::to_string((int)economy_manager->GetMoney()/1000000) + " M"));
+    }
+
     //converts float to string to int
     text[0]->ChangeString("Year: " +std::to_string((int)economy_manager->GetYear()));
+    //text[1]->ChangeString("Credit: " + std::to_string((int)economy_manager->GetMoney()));
     text[2]->ChangeString(std::to_string((int)population_manager->GetTotalSouls()));
     
-    //timer for years
-    // 
-    //year = year + 0.016f;
-    // 
-    //credits = credits + EconomyManager::GetCurrency();
-    
+   
+
     for (auto& button : buttons)
     {
         button->update(_gameData);

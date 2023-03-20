@@ -3,7 +3,7 @@
 
 EconomyManager::EconomyManager()
 {
-	money = 999999;
+	money = 999;
 	year = 0;
     timer = 0;
 }
