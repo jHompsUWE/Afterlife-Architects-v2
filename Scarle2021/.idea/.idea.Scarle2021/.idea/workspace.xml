@@ -10,17 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b8328b1-bf6f-49f8-981b-3c7317042b6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Game/WindowBoarder.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/WindowBoarder.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Textures/Window_file.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Window_file.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Bird_birdText10.jpg.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Bird_birdText6.jpg.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Bird_birdText7.jpg.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Bird_birdText9.jpg.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Table_table.fbm_jalka.png.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Table_table.fbm_poytalevy.png.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Users_scott_Documents_GitHub_Afterlife-Architects-v2_Scarle2021_Models_Vase_jemina vase__df.jpg.dds" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BirdModelV1.cmo" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BirdModelV1.cmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/JEMINA vase -up.cmo" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JEMINA vase -up.cmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Program Files_Microsoft Visual Studio_2022_Community_Common7_IDE_Extensions_Microsoft_VsGraphics_Assets_Effects_Lambert.dgsl.cso" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Program Files_Microsoft Visual Studio_2022_Community_Common7_IDE_Extensions_Microsoft_VsGraphics_Assets_Effects_Lambert.dgsl.cso" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Program Files_Microsoft Visual Studio_2022_Community_Common7_IDE_Extensions_Microsoft_VsGraphics_Assets_Effects_Phong.dgsl.cso" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Program Files_Microsoft Visual Studio_2022_Community_Common7_IDE_Extensions_Microsoft_VsGraphics_Assets_Effects_Phong.dgsl.cso" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/table.cmo" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/table.cmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/ActionListInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/ActionListInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj.filters" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/GamePlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/GamePlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Textures/Textures.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Textures/Textures.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Textures/Textures.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Textures/Textures.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/MainMenu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/WindowBoarder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/WindowBoarder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Window_file.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_file.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Window_file.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_file.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Textures/Window_file.png" beforeDir="false" afterPath="$PROJECT_DIR$/Textures/Window_file.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +210,9 @@
       <workItem from="1678704047163" duration="1239000" />
       <workItem from="1678705762049" duration="4554000" />
       <workItem from="1679343087649" duration="3932000" />
-      <workItem from="1679348349396" duration="43000" />
+      <workItem from="1679348349396" duration="759000" />
+      <workItem from="1679349138705" duration="3199000" />
+      <workItem from="1679352407524" duration="855000" />
     </task>
     <servers />
   </component>

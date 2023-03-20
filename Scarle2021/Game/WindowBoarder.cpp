@@ -21,19 +21,19 @@ WindowBoarder::WindowBoarder(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
     //window buttons.....................
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+25,window_pos.y+10),
         DataManager::GetD3DDevice(),"Green",
-        AL::EventType::event_ui,AL::UI::window_file, TrainingCenter_T1,Vector2(1.5,1)));
+        AL::EventType::event_ui,AL::UI::window_file, 0,Vector2(1.5,1)));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+100,window_pos.y+10),
         DataManager::GetD3DDevice(),"Green",
-        AL::EventType::event_ui,AL::UI::window_global, TrainingCenter_T2,Vector2(1.5,1)));
+        AL::EventType::event_ui,AL::UI::window_global, 0,Vector2(1.5,1)));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+200,window_pos.y+10),
         DataManager::GetD3DDevice(),"Green",
-        AL::EventType::event_ui,AL::UI::window_window, TrainingCenter_T1,Vector2(1.5,1)));
+        AL::EventType::event_ui,AL::UI::window_window, 0,Vector2(1.5,1)));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+300,window_pos.y+10),
         DataManager::GetD3DDevice(),"Green",
-        AL::EventType::event_ui,AL::UI::window_tutorial, TrainingCenter_T2,Vector2(1.5,1)));
+        AL::EventType::event_ui,AL::UI::window_tutorial, 0,Vector2(1.5,1)));
 }
 
 WindowBoarder::~WindowBoarder()

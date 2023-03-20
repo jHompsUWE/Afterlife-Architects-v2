@@ -20,6 +20,7 @@
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
 #include "WindowBoarder.h"
+#include "Window_file.h"
 
 class GPGO;
 
@@ -72,6 +73,7 @@ private:
     TrainingCentersWindow* window_four_training_centers_window;
     SoulViewWindow* soul_view;
     WindowBoarder* window_boarder;
+    Window_file* window_file;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 

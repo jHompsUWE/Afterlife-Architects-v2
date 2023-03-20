@@ -39,7 +39,7 @@ bool MainMenu::init()
     
     //Quit afterlife button
     buttons.push_back(new Button<AL::Game::Action, int>(Vector2(791,661),DataManager::GetD3DDevice(),
-        "Quit AfterLife","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5)));
+        "Quit AfterLife","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::quit_game, 0,Vector2(0.5,0.5)));
     
     return true;
 }
@@ -93,7 +93,7 @@ void MainMenu::GetEvents(const AL::Event& al_event)
             break;
                             
         case AL::Game::quit_game:
-            //Quit game
+            PostQuitMessage(0);
             break;
                         
         default:
