@@ -11,8 +11,8 @@
 #include "SoulViewWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
-//
-#include "EconomyManager.h"
+// Economy and Population
+#include "GameplaySingletons.h"
 
 // Building System
 #include "BuildingSystem.h"
@@ -75,5 +75,8 @@ private:
     SoulViewWindow* soul_view;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
+
+    // Economy
+    std::shared_ptr<EconomyManager> economy_manager;
 };
 

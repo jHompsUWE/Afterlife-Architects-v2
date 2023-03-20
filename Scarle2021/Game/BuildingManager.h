@@ -22,7 +22,7 @@ class BuildingManager
 {
 public:
 	BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, 
-		EconomyManager* _econ_manager, int _size, Vector3 _start, PlaneType _plane);
+		std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane);
 	~BuildingManager();
 
 	void Tick(GameData* game_data);
@@ -41,8 +41,8 @@ private:
 	Vector3 start;
 	std::vector<std::vector<std::unique_ptr<StructureSprite>>> structure_map;
 
-	EconomyManager* econ_manager = nullptr;
 	std::shared_ptr<PopulationManager> population_manager;
+	std::shared_ptr<EconomyManager> economy_manager;
 	std::shared_ptr<TextureManager> texture_manager;
 
 	PlaneType plane;

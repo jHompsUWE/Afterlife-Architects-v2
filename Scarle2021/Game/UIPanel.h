@@ -7,7 +7,8 @@
 #include "UIButtonInterFace.h"
 #include "Button.h"
 #include "DataManager.h"
-#include "EconomyManager.h"
+
+#include "GameplaySingletons.h"
 
 
 class UIPanel : public IEventReceiver
@@ -52,5 +53,8 @@ private:
     bool toggle_click_panel = false;
     //float year = 0;
     //int credits = 0;
+
+    std::shared_ptr<PopulationManager> population_manager;
+    std::shared_ptr<EconomyManager> economy_manager;
 };
 

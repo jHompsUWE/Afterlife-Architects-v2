@@ -1,167 +1,25 @@
 #pragma once
-#include <chrono>
+#include <memory>
 #include "GameData.h"
-#include "NewEventManager.h"
 
 class EconomyManager
 {
 public:
-	static EconomyManager& Get();
-
-	static void UpdateCurrency(GameData* game_data);
-	static void UpdateSouls();
-
-	static int GetYear();
-	static void ResetEconomy();
-
-	static int GetCurrency();
-	static void SetCurrency(float _currency);
-
-	static int GetSouls();
-	static void SetSouls(int _souls);
-
-	static float GetTax();
-	static void SetTax(float _tax);
-
-	static float GetSoulRateMultiplier();
-	static void SetSoulRateMultiplier(float _soul_rate_multiplier);
-
-	static int GetSoulsHeavenGreen();
-	static void SetSoulsHeavenGreen(int _souls_heaven_green);
-	static int GetSoulsHellGreen();
-	static void SetSoulsHellGreen(int _souls_hell_green);
-
-	static int GetSoulsHeavenYellow();
-	static void SetSoulsHeavenYellow(int _souls_heaven_yellow);
-	static int GetSoulsHellYellow();
-	static void SetSoulsHellYellow(int _souls_hell_yellow);
-
-	static int GetSoulsHeavenOrange();
-	static void SetSoulsHeavenOrange(int _souls_heaven_orange);
-	static int GetSoulsHellOrange();
-	static void SetSoulsHellOrange(int _souls_hell_orange);
-
-	static int GetSoulsHeavenBrown();
-	static void SetSoulsHeavenBrown(int _souls_heaven_brown);
-	static int GetSoulsHellBrown();
-	static void SetSoulsHellBrown(int _souls_hell_brown);
-
-	static int GetSoulsHeavenPurple();
-	static void SetSoulsHeavenPurple(int _souls_heaven_purple);
-	static int GetSoulsHellPurple();
-	static void SetSoulsHellPurple(int _souls_hell_purple);
-
-	static int GetSoulsHeavenRed();
-	static void SetSoulsHeavenRed(int _souls_heaven_red);
-	static int GetSoulsHellRed();
-	static void SetSoulsHellRed(int _souls_hell_red);
-
-	static int GetSoulsHeavenBlue();
-	static void SetSoulsHeavenBlue(int _souls_heaven_blue);
-	static int GetSoulsHellBlue();
-	static void SetSoulsHellBlue(int _souls_hell_blue);
-
-	static int GetAngels() { return Get().IGetAngels(); }
-	static void SetAngels(int _angels) { Get().ISetAngels(_angels); }
-	static int GetDemons() { return Get().IGetDemons(); }
-	static void SetDemons(int _demons) { Get().ISetDemons(_demons); }
-
-
-private:
-	EconomyManager() = default;
+	EconomyManager();
 	~EconomyManager() = default;
 
-	void IUpdateCurrency(GameData* game_data);
-	void IUpdateSouls();
+	void Tick(GameData* game_data);
+	void SetMoney(float new_amount) { money = new_amount; }
+	void IncrementMoney(float money_increase) { money += money_increase; }
+	float GetMoney() { return money; }
+	int GetYear() { return year; }
 
-	int IGetYear();
+private:
+	bool CallEverySeconds(float dt, float time_interval);
 
-	int IGetCurrency();
-	void ISetCurrency(float _currency);
+	float money;
+	int year;
 
-	int IGetSouls();
-	void ISetSouls(int _souls_total);
-
-	float IGetTax();
-	void ISetTax(float _tax);
-
-	float IGetSoulRateMultiplier();
-	void ISetSoulRateMultiplier(float _soul_rate_multiplier);
-	//float IGetPassiveTaxMultiplier();
-	//void ISetPassiveTaxMultiplier(float _tax_multiplier);
-
-	int IGetSoulsHeavenGreen();
-	void ISetSoulsHeavenGreen(int _souls_heaven_green);
-	int IGetSoulsHellGreen();
-	void ISetSoulsHellGreen(int _souls_hell_green);
-
-	int IGetSoulsHeavenYellow();
-	void ISetSoulsHeavenYellow(int _souls_heaven_yellow);
-	int IGetSoulsHellYellow();
-	void ISetSoulsHellYellow(int _souls_hell_yellow);
-
-	int IGetSoulsHeavenOrange();
-	void ISetSoulsHeavenOrange(int _souls_heaven_orange);
-	int IGetSoulsHellOrange();
-	void ISetSoulsHellOrange(int _souls_hell_orange);
-
-	int IGetSoulsHeavenBrown();
-	void ISetSoulsHeavenBrown(int _souls_heaven_brown);
-	int IGetSoulsHellBrown();
-	void ISetSoulsHellBrown(int _souls_hell_brown);
-
-	int IGetSoulsHeavenPurple();
-	void ISetSoulsHeavenPurple(int _souls_heaven_purple);
-	int IGetSoulsHellPurple();
-	void ISetSoulsHellPurple(int _souls_hell_purple);
-
-	int IGetSoulsHeavenRed();
-	void ISetSoulsHeavenRed(int _souls_heaven_red);
-	int IGetSoulsHellRed();
-	void ISetSoulsHellRed(int _souls_hell_red);
-
-	int IGetSoulsHeavenBlue();
-	void ISetSoulsHeavenBlue(int _souls_heaven_blue);
-	int IGetSoulsHellBlue();
-	void ISetSoulsHellBlue(int _souls_hell_blue);
-
-	int IGetAngels() { return angels; }
-	void ISetAngels(int _angels) { angels = _angels; }
-	int IGetDemons() { return demons; }
-	void ISetDemons(int _demons) { demons = _demons; }
-
-	int year = 1;
-	int currency = 1000;
-
-	float soul_rate = 0.0f;
-	float tax = 0.0f;
-
-	float soul_rate_multiplier = 1.0f;
-	float tax_multiplier = 1.0f;
-
-
-	int souls_heaven_green = 0;
-	int souls_heaven_yellow = 0;
-	int souls_heaven_orange = 0;
-	int souls_heaven_brown = 0;
-	int souls_heaven_purple = 0;
-	int souls_heaven_red = 0;
-	int souls_heaven_blue = 0;
-	int angels = 0;
-
-	int souls_hell_green = 0;
-	int souls_hell_yellow = 0;
-	int souls_hell_orange = 0;
-	int souls_hell_brown = 0;
-	int souls_hell_purple = 0;
-	int souls_hell_red = 0;
-	int souls_hell_blue = 0;
-	int demons = 0;
-
-	int souls_total = 0;
-
-	float timer = 0;
-
-	float year_update_interval = 0.5f;
+	float timer;
 };
 
