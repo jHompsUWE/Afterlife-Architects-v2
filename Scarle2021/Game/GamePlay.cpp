@@ -7,7 +7,7 @@ GamePlay::GamePlay()
 
 GamePlay::~GamePlay()
 {
-    delete ui_frame;
+    delete window_boarder;
     delete window_one_gate;
     delete advisor_window;
     delete window_two_karma_station;
@@ -44,9 +44,7 @@ bool GamePlay::init()
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
     
     // ui frame init
-    ui_frame = new ImageGO2D("UIFrame",DataManager::GetD3DDevice());
-    ui_frame->SetOrigin(Vector2(0,0));
-    ui_frame->SetScale(Vector2(1,1));
+    window_boarder = new WindowBoarder(Vector2(0,0),DataManager::GetD3DDevice(),"","UIFrame",Vector2(1,1));
     
     // Mouse
     mouse_screen_pos.z = 0;
@@ -66,7 +64,7 @@ bool GamePlay::init()
     window_two_karma_station->setVisibility(false);
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
-    
+    window_boarder->setVisibility(true);
     return true;
 }
 
@@ -188,7 +186,8 @@ void GamePlay::GetEvents(const AL::Event& al_event)
 
 void GamePlay::Render2D(DrawData2D* draw_data2D)
 {
-    ui_frame->Draw(draw_data2D);
+    //UI boarder
+    window_boarder->render(draw_data2D);
     
     //render advisor
     advisor_window->render(draw_data2D);
@@ -243,8 +242,9 @@ void GamePlay::UpdateMousePos(DrawData* draw_data)
 
 void GamePlay::ResizeUI()
 {
+    //resize UI based on window resolution 
     screen_size = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
-    ui_frame->ReSize(screen_size.x, screen_size.y);
+    window_boarder->reSize(screen_size);
     window_one_gate->reSize(screen_size);
     main_panel->reSize(screen_size);
     advisor_window->reSize(screen_size);

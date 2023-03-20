@@ -19,6 +19,7 @@
 #include "Raycast.h"
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
+#include "WindowBoarder.h"
 
 class GPGO;
 
@@ -59,9 +60,6 @@ private:
     Vector2 mouse_pos {0,0};
     Vector3 mouse_screen_pos;
     std::shared_ptr<Vector3> mouse_world_pos;
-
-    //ui Boarder
-    ImageGO2D* ui_frame;
     
     //main build panel
     UIPanel* main_panel;
@@ -73,6 +71,7 @@ private:
     TopiasWindowUI* window_three_topias;
     TrainingCentersWindow* window_four_training_centers_window;
     SoulViewWindow* soul_view;
+    WindowBoarder* window_boarder;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
