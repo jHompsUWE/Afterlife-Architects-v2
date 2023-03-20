@@ -32,7 +32,8 @@ enum StructureType
 
 	KarmaAnchor,
 	KarmaPortal,
-	KarmaStation,
+	KarmaStation_T1,
+	KarmaStation_T2,
 	KarmaTrack,
 
 	Rock_1,

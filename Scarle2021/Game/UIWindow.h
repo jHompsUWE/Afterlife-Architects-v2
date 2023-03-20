@@ -5,6 +5,7 @@
 #include "TextGO2D.h"
 #include "NewEventManager.h"
 #include "DataManager.h"
+#include "BuildingManager.h"
 
 
 class UIWindow : public IEventReceiver

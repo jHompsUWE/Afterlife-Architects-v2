@@ -2,8 +2,8 @@
 #include "Tilemap.h"
 
 Tilemap::Tilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager,
-	int _size, Vector3 _start, PlaneType _plane) :
-	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane)
+	int _size, Vector3 _start, PlaneType _plane, std::shared_ptr<EconomyManager> _economy_manager) :
+	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane), economy_manager(_economy_manager)
 {
 	for (int x = 0; x < size; x++)
 	{
@@ -104,11 +104,13 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 {
 	if (!IsPosValid(tile_pos) ||
 		tilemap[tile_pos.x][tile_pos.z]->GetZoneType() == zone_type ||
-		!CanTileBeReplaced(tilemap[tile_pos.x][tile_pos.z]->GetZoneType()))
+		!CanTileBeReplaced(tilemap[tile_pos.x][tile_pos.z]->GetZoneType()) ||
+		economy_manager->GetMoney() < 5 )
 	{
 		// Tile position exceeds tilemap size
 		// Don't change texture if ZoneType is the same
 		// This tile cannot be replaced
+		// Cannot be purchsed
 		return false;
 	}
 
@@ -121,6 +123,7 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 	case Purple:
 	case Red:
 	case Blue:
+		economy_manager->PurchaseStructure(5);
 		if (!IsRoadNearby(tile_pos))
 		{
 			// Turn zone to inactive if there is no road nearby
@@ -140,6 +143,7 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 	case Inactive_Purple:
 	case Inactive_Red:
 	case Inactive_Blue:
+		economy_manager->PurchaseStructure(5);
 		if (IsRoadNearby(tile_pos))
 		{
 			// Dont set tile as inactive if there is a road nearby
@@ -148,11 +152,16 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 		break;
 
 	case Road:
+		economy_manager->PurchaseStructure(5);
 		// Activate inactive tiles near road
 		tilemap[tile_pos.x][tile_pos.z]->SetTexture(texture_manager->GetTextureZone(zone_type));
 		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
 		ActivateNearbyTile(tile_pos);
 		return true;
+
+	case Karma_Tracks:
+		economy_manager->PurchaseStructure(5);
+		break;
 
 	default:
 		break;

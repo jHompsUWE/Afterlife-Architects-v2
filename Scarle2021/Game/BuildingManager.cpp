@@ -239,7 +239,13 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
 		break;
 
-	case KarmaStation:
+	case KarmaStation_T1:
+		structure_map[tile_position.x][tile_position.z] =
+			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+		break;
+
+	case KarmaStation_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
 				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
@@ -366,6 +372,19 @@ std::vector<Vector3> BuildingManager::GetStructureOccupiedTiles(Vector3 tile_pos
 	}
 }
 
+int BuildingManager::GetTotalStructure()
+{
+	int total = 0;
+	for (auto& x : structure_map)
+	{
+		for (auto& y : x)
+		{
+
+		}
+	}
+	return 0;
+}
+
 /// <summary>
 /// Get how many tiles a structure occupy
 /// </summary>
@@ -402,7 +421,8 @@ int BuildingManager::GetSizeOfStructure(StructureType structure_type)
 	case Gate_T1:
 	case Gate_T2:
 	case KarmaAnchor:
-	case KarmaStation:
+	case KarmaStation_T1:
+	case KarmaStation_T2:
 	case TrainingCenter_T1:
 	case TrainingCenter_T2:
 	case TrainingCenter_T3:
@@ -413,6 +433,60 @@ int BuildingManager::GetSizeOfStructure(StructureType structure_type)
 	case Topia_T1:
 	case Topia_T2:
 		return 4;
+
+	default:
+		return 0;
+	}
+}
+
+/// <summary>
+/// Get how much a structure costs to create
+/// </summary>
+/// <param name="structure_type">The type of structure</param>
+/// <returns>Int of the cost of the structure</returns>
+int BuildingManager::GetCostOfStructure(StructureType structure_type)
+{
+	switch (structure_type)
+	{
+	case Building_Green_T1:
+	case Building_Yellow_T1:
+	case Building_Orange_T1:
+	case Building_Brown_T1:
+	case Building_Purple_T1:
+	case Building_Red_T1:
+	case Building_Blue_T1:
+	case Bank_T1:
+	case KarmaTrack:
+	case Rock_1:
+	case Rock_2:
+	case Rock_3:
+		return 100;
+
+	case Building_Green_T2:
+	case Building_Yellow_T2:
+	case Building_Orange_T2:
+	case Building_Brown_T2:
+	case Building_Purple_T2:
+	case Building_Red_T2:
+	case Building_Blue_T2:
+	case Bank_T2:
+		return 200;
+
+	case Gate_T1:
+	case Gate_T2:
+	case KarmaAnchor:
+	case KarmaStation_T1:
+	case KarmaStation_T2:
+	case TrainingCenter_T1:
+	case TrainingCenter_T2:
+	case TrainingCenter_T3:
+		return 300;
+
+	case KarmaPortal:
+	case Gate_T3:
+	case Topia_T1:
+	case Topia_T2:
+		return 400;
 
 	default:
 		return 0;

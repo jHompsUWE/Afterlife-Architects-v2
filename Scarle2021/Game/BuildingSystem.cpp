@@ -11,11 +11,11 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
     economy_manager = GameplaySingletons::GetEconomyManager();
     texture_manager = std::make_shared<TextureManager>(GD);
 
-    tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven);
+    tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven, economy_manager);
     vibe_tilemap_heaven = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_heaven);
     building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_heaven, Heaven);
 
-    tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell);
+    tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell, economy_manager);
     vibe_tilemap_hell = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_hell);
     building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_hell, Hell);
 
@@ -392,8 +392,9 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
     {
     case Heaven:
         end = Vector3(mouse_released_heaven_pos.x + size - 1.0f, 0, mouse_released_heaven_pos.z + size - 1.0f);
-        if (tilemap_heaven->IsAreaValid(mouse_released_heaven_pos, size))
+        if (tilemap_heaven->IsAreaValid(mouse_released_heaven_pos, size) && economy_manager->GetMoney() >= BuildingManager::GetCostOfStructure(selected_structure))
         {
+            economy_manager->PurchaseStructure(BuildingManager::GetCostOfStructure(selected_structure));
             // Structure is within the tilemap
             // Fill the area of the structure and mark is as occupied
             tilemap_heaven->BoxFill(building_manager_heaven, vibe_tilemap_heaven, Structure, mouse_released_heaven_pos, end);
@@ -409,8 +410,9 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
 
     case Hell:
         end = Vector3(mouse_released_hell_pos.x + size - 1.0f, 0, mouse_released_hell_pos.z + size - 1.0f);
-        if (tilemap_hell->IsAreaValid(mouse_released_hell_pos, size))
+        if (tilemap_hell->IsAreaValid(mouse_released_hell_pos, size) && economy_manager->GetMoney() >= BuildingManager::GetCostOfStructure(selected_structure))
         {
+            economy_manager->PurchaseStructure(BuildingManager::GetCostOfStructure(selected_structure));
             // Structure is within the tilemap
             // Fill the area of the structure and mark is as occupied
             tilemap_hell->BoxFill(building_manager_hell, vibe_tilemap_hell, Structure, mouse_released_hell_pos, end);

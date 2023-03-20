@@ -10,5 +10,5 @@ GameplaySingletons& GameplaySingletons::Get()
 GameplaySingletons::GameplaySingletons()
 {
 	population_manager = std::make_shared<PopulationManager>();
-	economy_manager = std::make_shared<EconomyManager>();
+	economy_manager = std::make_shared<EconomyManager>(population_manager);
 }
