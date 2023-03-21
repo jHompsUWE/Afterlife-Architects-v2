@@ -191,6 +191,7 @@ void BuildingSystem::GenerateTerrain(std::unique_ptr<Tilemap>& tilemap, std::uni
 
             tilemap->BoxFill(building_manager, vibe, Rock, Vector3(tile.x, 0, tile.y), Vector3(tile.x, 0, tile.y));
             tilemap->OccupyTile(Vector3(tile.x, 0, tile.y), 1);
+            //vibe->VibeChange(Vector3(tile.x, 0, tile.y), -5, 1, 3);
 
             switch (rand() % 2)
             {
@@ -277,7 +278,7 @@ bool BuildingSystem::TryCreateHouse(std::unique_ptr<Tilemap>& tilemap, std::uniq
     {
         tilemap->OccupyTile(empty_tile, 2);
 
-        vibe->VibeChange(empty_tile, 5, 2);
+        vibe->VibeChange(empty_tile, 5, 2, 1);
 
         switch (zone)
         {
@@ -322,7 +323,7 @@ bool BuildingSystem::TryCreateHouse(std::unique_ptr<Tilemap>& tilemap, std::uniq
     {
         tilemap->OccupyTile(empty_tile, 1);
 
-        vibe->VibeChange(empty_tile, 5, 1);
+        vibe->VibeChange(empty_tile, 5, 1, 1);
 
         switch (zone)
         {
@@ -404,7 +405,7 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
             building_manager_heaven->CreateStructure(selected_structure, mouse_released_heaven_pos);
 
             // Change the vibe of the tiles around the structure
-            vibe_tilemap_heaven->VibeChange(mouse_released_heaven_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure));
+            vibe_tilemap_heaven->VibeChange(mouse_released_heaven_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure), BuildingManager::GetSizeOfStructure(selected_structure));
         }
         break;
 
@@ -422,7 +423,7 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
             building_manager_hell->CreateStructure(selected_structure, mouse_released_hell_pos);
 
             // Change the vibe of the tiles around the structure
-            vibe_tilemap_hell->VibeChange(mouse_released_hell_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure));
+            vibe_tilemap_hell->VibeChange(mouse_released_hell_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure), BuildingManager::GetSizeOfStructure(selected_structure));
         }
         break;
     }
