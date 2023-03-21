@@ -101,7 +101,7 @@ void AudioManager::ReceiveEvents(const AL::Event& al_event)
 /// <param name="filename"></param>
 void AudioManager::PlaySound(string filename)
 {
-    Sound* sound_eff = new Sound(audEngine.get(), filename);
+    Sound* sound_eff = new Sound(audEngine.get(), filename, master_volume * sound_volume);
     sounds_list.push_back(sound_eff);
 }
 
@@ -112,7 +112,7 @@ void AudioManager::PlaySound(string filename)
 void AudioManager::PlayMusic(int index)
 {
     string temp_str = "Afterlife Theme " + std::to_string(index);
-    Sound* sound_eff = new Sound(audEngine.get(), temp_str);
+    Sound* sound_eff = new Sound(audEngine.get(), temp_str, master_volume * music_volume);
     music = sound_eff;
 }
 
