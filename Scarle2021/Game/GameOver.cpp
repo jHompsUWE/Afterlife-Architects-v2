@@ -2,6 +2,8 @@
 #include "GameOver.h"
 #include "AStarPathfinding.h"
 
+#include "Vector2Int.h"
+
 GameOver::GameOver()
 = default;
 

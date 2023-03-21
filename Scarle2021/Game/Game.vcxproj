@@ -255,6 +255,7 @@
     <ClInclude Include="VBQuad.h" />
     <ClInclude Include="VBSnail.h" />
     <ClInclude Include="VBspiral.h" />
+    <ClInclude Include="Vector2Int.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="VibeTilemap.h" />
     <ClInclude Include="VibeTile.h" />
