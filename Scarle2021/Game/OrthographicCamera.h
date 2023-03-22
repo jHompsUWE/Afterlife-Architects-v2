@@ -22,10 +22,10 @@ public:
 	void MouseInput(GameData* _GD, int win_x, int win_y);
 	void ReceiveEvents(const AL::Event& al_event) override;
 
-	void MoveUp();
-	void MoveDown();
-	void MoveLeft();
-	void MoveRight();
+	void MoveUp(float scalar = 1.f);
+	void MoveDown(float scalar = 1.f);
+	void MoveLeft(float scalar = 1.f);
+	void MoveRight(float scalar = 1.f);
 	void ZoomIn(float magintude);
 	void ZoomOut(float magnitude);
 
@@ -59,6 +59,9 @@ private:
 	int win_x{};
 	int win_y{};
 	int boundary = 20;
+
+	// Movement scale
+	float movement_scale = 0.01f;
 };
 
 

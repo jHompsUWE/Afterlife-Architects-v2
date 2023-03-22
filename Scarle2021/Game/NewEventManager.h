@@ -5,10 +5,10 @@
 #include "Observable.h"
 #include "Observer.h"
 #include "Packet.h"
+#include "Vector2Int.h"
 
 #include <unordered_map>
-
-#include "SimpleMath.h"
+#include <SimpleMath.h>
 
 namespace AL
 {
@@ -39,7 +39,8 @@ namespace AL
 		//Input polling
 		void PollKeyboard(Keyboard::State keyboard);
 		void PollMouse(Mouse::State mouse);
-		void PollGamepad(GamePad::State gamepad);
+		void PollGamepad(GamePad::State gamepad, const float& dt);
+		void UpdateCursorPos(const int& window_width, const int& window_height);
 
 		//Button Work Around
 		void GenerateEventSoundStart(const char filename[32], const float& volume, const bool& loop);
@@ -53,7 +54,9 @@ namespace AL
 		void GenerateEvent(EventType type, const Payload&... args);
 
 		//Getter for cursor sprite
-		const SimpleMath::Vector2 GetCursorPos() const; 
+		SimpleMath::Vector2 GetCursorPos() const;
+		//Setter for sprite speed
+		void SetSpriteSpeed(const SimpleMath::Vector2& new_speed);
 		
 	private:
 		//Private constructor and de-constructor
@@ -62,7 +65,6 @@ namespace AL
 
 		//Key mapping
 		void MouseScrollToEvent(const Mouse::State& mouse);
-		void MouseMovToEvent(const Mouse::State& mouse);
 		void MapEntryToEvent(bool state, Input::Action action, bool repeat = false);
 		void MapEntryToEvent(bool state, Cursor::Action action, bool repeat = false);
 
@@ -80,14 +82,26 @@ namespace AL
 		//events
 		std::vector<Event> event_list{};
 
-		//Saves mouse data
-		int cursor_speed = 8;
+		//Input data
+		float cursor_speed = 0.15f;
 		int mouse_scroll = 0;
-		int mouse_x = 0.f;
-		int mouse_y = 0.f;
+		
+		//Position of the cursor on the screen
+		Vector2Int prev_cursor_pos {0,0};
+		Vector2Int cursor_pos {540,360};
 
-		//controller
-		bool controller_connected = false;
+		//Mouse position handling
+		Vector2Int prev_mouse_pos {0,0};
+		Vector2Int mouse_pos {0,0};
+
+		//Controller position handling
+		Vector2Int prev_controller_pos {0,0};
+		SimpleMath::Vector2 controller_pos_float {0,0};
+		Vector2Int controller_pos {0,0};
+
+		//Keeping track of controller usage
+		bool controller_active = false;
+		int dead_zone = 0;
 	};
 }
 
