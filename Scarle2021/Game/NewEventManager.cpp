@@ -127,10 +127,11 @@ namespace AL
 	 */
 	void NewEventManager::PollKeyboard(Keyboard::State keyboard)
 	{
-		if(controller_connected) return;
+		//Do not map keybindings if controller is being used 
+		if(controller_active) return;
 		
 		//Map keyboard keys here
-		//TEMPORARY
+		///TEMPORARY
 		MapEntryToEvent(keyboard.E, Input::build_houses);
 		MapEntryToEvent(keyboard.P, Input::show_vibes);
 		MapEntryToEvent(keyboard.D1, Input::place_zone_green);
@@ -148,14 +149,15 @@ namespace AL
 	 */
 	void NewEventManager::PollMouse(Mouse::State mouse)
 	{
-		//Creates event for mouse moved and scroll if necessary
-		//But only if the controller is not connected!
-		MouseMovToEvent(mouse);
+		//Creates event for mouse scroll if necessary
 		MouseScrollToEvent(mouse);
 
-		//Prevents conflcts 
-		if(controller_connected) return;
+		//Maps mouse_pos to the mouse state pos
+		mouse_pos = {mouse.x, mouse.y};
 
+		//Do not map keybindings if controller is being used 
+		if(controller_active) return;
+		
 		//Map mouse keys here
 		MapEntryToEvent(mouse.leftButton, Cursor::button_input1);
 		MapEntryToEvent(mouse.rightButton, Cursor::button_input2);
@@ -166,48 +168,49 @@ namespace AL
 	 * \brief to map gamepad entries to events
 	 * \param gamepad state in this current frame
 	 */
-	void NewEventManager::PollGamepad(GamePad::State gamepad)
+	void NewEventManager::PollGamepad(GamePad::State gamepad, const float& dt)
 	{
 		if(gamepad.IsConnected())
 		{
-			//Updates the controller state
-			controller_connected = true;
+			//Gathers all the input axis from the first controller connected
 			
-			//Map controller behaviour here
-			//std::cout << gamepad.thumbSticks.leftX << ", " << gamepad.thumbSticks.leftY << " Thumbstick left" << std::endl;
-			// std::cout << gamepad.thumbSticks.rightX << ", " << gamepad.thumbSticks.rightY << " Thumbstick right" << std::endl;
-			// std::cout << gamepad.triggers.left << " Triggher left" << std::endl;
-			// std::cout << gamepad.triggers.right << " Triggher rgiht" << std::endl;
+			//Comtroller Thumbs-ticks int value 0 - 100
+			Vector2Int thumb_l = {static_cast<int>(gamepad.thumbSticks.leftX * 100),
+								  static_cast<int>(gamepad.thumbSticks.leftY * 100)};
+			//Applies a dead-zone
+			thumb_l.x = thumb_l.x > dead_zone || thumb_l.x < -dead_zone ? thumb_l.x : 0;
+			thumb_l.y = thumb_l.y > dead_zone || thumb_l.y < -dead_zone ? thumb_l.y : 0;
+			
+			Vector2Int thumb_r = {static_cast<int>(gamepad.thumbSticks.rightX * 100),
+								  static_cast<int>(gamepad.thumbSticks.rightY * 100)};
+			//Applies a dead-zone
+			thumb_r.x = thumb_r.x > dead_zone || thumb_r.x < -dead_zone ? thumb_r.x : 0;
+			thumb_r.y = thumb_r.y > dead_zone || thumb_r.y < -dead_zone ? thumb_r.y : 0;
 
-			//Camera Movement 
-			if(gamepad.thumbSticks.rightX < -0.2f || gamepad.thumbSticks.rightX > 0.2f)
+			//Controller triggers int value 0 - 100
+			Vector2Int triggers = {static_cast<int>(gamepad.triggers.left * 100),
+								   static_cast<int>(gamepad.triggers.right * 100)};
+			//Applies a dead-zone
+			triggers.x = triggers.x > dead_zone || triggers.x < -dead_zone ? triggers.x : 0;
+			triggers.y = triggers.y > dead_zone || triggers.y < -dead_zone ? triggers.y : 0;
+
+			//Left thumbstick axis are mapped to cursor movement
+			controller_pos.x += thumb_l.x * cursor_speed;
+			controller_pos.y -= thumb_l.y * cursor_speed;
+
+			//Right thumbstick axis are mapped to camera movement
+			if(thumb_r.x != 0 || thumb_r.y != 0)
 			{
-				if(gamepad.thumbSticks.rightX > 0.5f)
-				{
-					MapEntryToEvent(true, Input::camera_right, true);
-				}
-				else if(gamepad.thumbSticks.rightX < 0.5f)
-				{
-					MapEntryToEvent(true, Input::camera_left, true);
-				}
+				//Sends the Y and X axis of thumbstick right to the camera when
+				//they are not 0
+				GenerateEvent(event_camera, thumb_r.x, thumb_r.y);
 			}
-
-			if(gamepad.thumbSticks.rightY < -0.2f || gamepad.thumbSticks.rightY > 0.2f)
-			{
-				if(gamepad.thumbSticks.rightY > 0.5f)
-				{
-					MapEntryToEvent(true, Input::camera_up, true);
-
-				}
-				else if(gamepad.thumbSticks.rightY < 0.5f)
-				{
-					MapEntryToEvent(true, Input::camera_down, true);
-
-				}
-			}
-
-			//Camera movement 
-			if(gamepad.triggers.left > 0.5f)
+			
+			//Do not map specific controller keybindings if mouse is active
+			if(!controller_active) return;
+			
+			//Cursor interaction 
+			if(triggers.x > 0.8f || triggers.y > 0.8f)
 			{
 				MapEntryToEvent(true, Cursor::button_input1);
 			}
@@ -215,54 +218,56 @@ namespace AL
 			{
 				MapEntryToEvent(false, Cursor::button_input1);
 			}
-				
-			// MapEntryToEvent(gamepad.IsLeftThumbStickUp(), Input::camera_up, true);
-			// MapEntryToEvent(gamepad.IsLeftThumbStickDown(), Input::camera_down, true);
-			// MapEntryToEvent(gamepad.IsLeftThumbStickLeft(), Input::camera_left, true);
-			// MapEntryToEvent(gamepad.IsLeftThumbStickRight(), Input::camera_right, true);
 			
-			// //Camera zoom
-			MapEntryToEvent(gamepad.IsLeftShoulderPressed(), Cursor::scroll_down);
-			MapEntryToEvent(gamepad.IsRightShoulderPressed(), Cursor::scroll_up);
-			
-			// //Cursor interactions
-			// MapEntryToEvent(gamepad.IsRightTriggerPressed(), Cursor::button_input1);
-			// MapEntryToEvent(gamepad.IsLeftTriggerPressed(), Cursor::button_input2);
-
-			//Mouse movement
-			if(gamepad.thumbSticks.leftX < -0.2f || gamepad.thumbSticks.leftX > 0.2f)
-			{
-				if(gamepad.thumbSticks.leftX > 0.5f)
-				{
-					mouse_x += cursor_speed;
-					return;
-				}
-				if(gamepad.thumbSticks.leftX < 0.5f)
-				{
-					mouse_x -= cursor_speed;
-					return;
-				}
-			}
-
-			if(gamepad.thumbSticks.leftY < -0.2f || gamepad.thumbSticks.leftY > 0.2f)
-			{
-				if(gamepad.thumbSticks.leftY > 0.5f)
-				{
-					mouse_y -= cursor_speed;
-					return;
-
-				}
-				if(gamepad.thumbSticks.leftY < 0.5f)
-				{
-					mouse_y += cursor_speed;
-					return;
-
-				}
-			}
+			//Camera zoom
+			MapEntryToEvent(gamepad.IsLeftShoulderPressed(), Cursor::Action::scroll_down);
+			MapEntryToEvent(gamepad.IsRightShoulderPressed(), Cursor::Action::scroll_up);
 		}
-		else
+	}
+
+	/**
+	 * @brief Checks the position of the various pointing devices and generates an event accordingly
+	 * Based on the last input registered, the input will be automatically set to controller or m&k
+	 */
+	void NewEventManager::UpdateCursorPos(const int& window_width, const int& window_height)
+	{
+		//Check if mouse position has changed
+		if(prev_mouse_pos != mouse_pos)
 		{
-			controller_connected = false;
+			prev_mouse_pos = mouse_pos;
+			cursor_pos = mouse_pos;
+
+			controller_active = false;
+		}
+		
+		//Chech if the controller pointer has been moved
+		if(controller_pos != prev_controller_pos)
+		{
+			prev_controller_pos = controller_pos;
+			cursor_pos = controller_pos;
+
+			controller_active = true;
+		}
+
+		//If the cursor pos has changed, send an event
+		if(cursor_pos != prev_cursor_pos)
+		{
+			//Caps cursor inside the X axis of the screen
+			if(cursor_pos.x > window_width) cursor_pos.x = window_width;
+			else if(cursor_pos.x < 0) cursor_pos.x = 0;
+
+			//Caps the cursor inside the Y axis of the screen 
+			if(cursor_pos.y > window_height) cursor_pos.y = window_height;
+			else if(cursor_pos.y < 0) cursor_pos.y = 0;
+			
+			prev_cursor_pos = cursor_pos;
+			
+			//Syncs the mouse input to 
+			controller_pos = cursor_pos;
+			prev_controller_pos = cursor_pos;
+
+			//Generate Event accordingly
+			GenerateEvent(event_cursor_move, cursor_pos.x, cursor_pos.y);
 		}
 	}
 
@@ -333,22 +338,7 @@ namespace AL
 			mouse_scroll = current_scroll;
 		}
 	}
-	
-	void NewEventManager::MouseMovToEvent(const Mouse::State& mouse)
-	{
-		//Check if mouse position has changed, and generate and event is so
-		if(mouse.x != mouse_x || mouse.y != mouse_y)
-		{
-			if(!controller_connected)
-			{
-				mouse_x = mouse.x;
-				mouse_y = mouse.y;
-			}
 
-			GenerateEvent(event_cursor_move, mouse_x, mouse_y);
-		}
-	}
-	
 	void NewEventManager::MapEntryToEvent(bool state, Input::Action action, bool repeat)
 	{
 		//If the input is set as repeat, generate an input event each poll action while
@@ -428,7 +418,7 @@ namespace AL
 	 * \tparam Payload variadic template, this is the packet of values and types that need to be inserted
 	 * \param event reference to the event
 	 */
-	template <typename ... Payload>
+	template <typename... Payload>
 	void NewEventManager::SetEventData(Event& event, const Payload&... args)
 	{
 		//Gets the inital data offset of the event and starts the population process
@@ -464,9 +454,7 @@ namespace AL
 			//Checks if the string is small enough to fit into a char[32]
 			if (len < size)
 			{
-				//Copies the string, in this case, named arg, to the memory location defined
-				//*(char(*)[sizeof(T)]) is used to cast that memory pointer to a char[] of
-				//sizeof(T) value.
+
 				strcpy_s(*(char(*)[sizeof(T)])((char*)&event + byte_offset), arg);
 			}
 			else
@@ -494,13 +482,18 @@ namespace AL
 		}
 	}
 
-	//Cursor Getter ----------------------------------------------------------------------------------------------------
+	//Cursor Getters ---------------------------------------------------------------------------------------------------
 
-	const SimpleMath::Vector2 NewEventManager::GetCursorPos() const
+	Vector2 NewEventManager::GetCursorPos() const
 	{
-		return SimpleMath::Vector2{(float)mouse_x, (float)mouse_y};
+		return Vector2{(float)cursor_pos.x, (float)cursor_pos.y};
 	}
-	
+
+	void NewEventManager::SetSpriteSpeed(const Vector2& new_speed)
+	{
+		cursor_speed *= new_speed.x;
+	}
+
 	//Template function specialization ---------------------------------------------------------------------------------
 	
 	//Input Event
@@ -522,4 +515,6 @@ namespace AL
 	template void NewEventManager::GenerateEventSt<Game::Action>(EventType, const Game::Action&);
 	//Advisor Fault Event
 	template void NewEventManager::GenerateEventSt<int>(EventType, const int&);
+	//Camera Event
+	template void NewEventManager::GenerateEventSt<int>(EventType, const int&, const int&);
 }

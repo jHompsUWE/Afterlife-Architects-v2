@@ -90,11 +90,17 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 		switch (al_event.cursor_interact.action)
 		{
 			case AL::Cursor::scroll_up:
-				ZoomIn(1);
+				if(al_event.cursor_interact.active)
+				{
+					ZoomIn(1);
+				}
 				break;
 
 			case AL::Cursor::scroll_down:
-				ZoomOut(1);
+				if(al_event.cursor_interact.active)
+				{
+					ZoomOut(1);
+				}
 				break;
 
 			default:
@@ -113,6 +119,28 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 			break;
 		}
 
+	case AL::event_camera:
+		//Calles the move functions with a scalar to have a scaled controller movement
+		//By deafult the scalar is 1
+		if(al_event.camera.pos_x > 0)
+		{
+			MoveLeft((float)al_event.camera.pos_x * -movement_scale);
+		}
+		else if(al_event.camera.pos_x < 0)
+		{
+			MoveRight((float)al_event.camera.pos_x * movement_scale);
+		}
+
+		if(al_event.camera.pos_y > 0)
+		{
+			MoveUp((float)al_event.camera.pos_y * movement_scale);
+		}
+		else if(al_event.camera.pos_y < 0)
+		{
+			MoveDown((float)al_event.camera.pos_y * -movement_scale);
+		}
+		break;
+		
 	default:
 		break;
 	}
@@ -121,33 +149,33 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 /// <summary>
 /// Moves camera up
 /// </summary>
-void OrthographicCamera::MoveUp()
+void OrthographicCamera::MoveUp(float scalar)
 {
-	camera_target += vertical_move;
+	camera_target += vertical_move * scalar;
 }
 
 /// <summary>
 /// Moves camera down
 /// </summary>
-void OrthographicCamera::MoveDown()
+void OrthographicCamera::MoveDown(float scalar)
 {
-	camera_target -= vertical_move;
+	camera_target -= vertical_move * scalar;
 }
 
 /// <summary>
 /// Moves camera left
 /// </summary>
-void OrthographicCamera::MoveLeft()
+void OrthographicCamera::MoveLeft(float scalar)
 {
-	camera_target -= horizontal_move;
+	camera_target -= horizontal_move * scalar;
 }
 
 /// <summary>
 /// Moves camera right
 /// </summary>
-void OrthographicCamera::MoveRight()
+void OrthographicCamera::MoveRight(float scalar)
 {
-	camera_target += horizontal_move;
+	camera_target += horizontal_move * scalar;
 }
 
 /// <summary>

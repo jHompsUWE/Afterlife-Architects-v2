@@ -129,7 +129,9 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     //Makes a custom mouse cursor!
     cursor_sprite = new ImageGO2D("Cursor", d3d_device.Get());
     cursor_sprite->set_layer_depth(128);
-    cursor_sprite->SetOrigin(Vector2{0,0});   
+    cursor_sprite->SetOrigin(Vector2{0,0});
+    cursor_sprite->SetScale(0.8f);
+    cursor_offset = cursor_sprite->GetRes();
 }
 
 // Executes the basic game loop
@@ -166,11 +168,14 @@ void Afterlife::ReadInput()
     const auto _keyboard = keyboard->GetState();
     const auto _gamepad= gamepad->GetState(gamepad_index);
     const auto _mouse = mouse->GetState();
+    
     //Sends input to the event manager
     event_manager->FlushEventList();
     event_manager->PollKeyboard(_keyboard);
     event_manager->PollMouse(_mouse);
-    event_manager->PollGamepad(_gamepad);
+    event_manager->PollGamepad(_gamepad, game_data->delta_time);
+    event_manager->UpdateCursorPos(output_width - (int)cursor_offset.x,
+                                   output_height - (int)cursor_offset.y);
 
     //TODO:: USE THIS IF STRICTLY NEEDED
     // game_data->keyboard_state = _keyboard;
@@ -293,6 +298,7 @@ void Afterlife::OnWindowSizeChanged(int _width, int _height)
 
     // TODO: Game main_window is being resized.
     event_manager->GenerateInterfaceEvent(AL::UI::Action::resize_ui);
+    event_manager->SetSpriteSpeed(cursor_sprite->ReSize((int)output_width, (int)output_height));
 }
 
 // Properties

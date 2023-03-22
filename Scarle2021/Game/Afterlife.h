@@ -111,5 +111,6 @@ private:
 
     //Out mouse pointer! Yippie!
     ImageGO2D* cursor_sprite = nullptr;
+    Vector2 cursor_offset {0,0};
 };
 

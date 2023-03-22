@@ -22,7 +22,8 @@ namespace AL
         event_ui,
         event_build_sys,
         event_game,
-        event_adv_fault
+        event_adv_fault,
+        event_camera
     };
 
     //Normal input event
@@ -122,6 +123,15 @@ namespace AL
             int fault_index = NULL;
         };
 
+        /**
+         * \brief Event for camera movement
+         */
+        struct CameraEvent
+        {
+            int pos_x = NULL;
+            int pos_y = NULL;
+        };
+
         //What kind of general event is this
         EventType type = unknown;
         
@@ -139,6 +149,7 @@ namespace AL
             InterfaceEvent ui;
             GameEvent game;
             AdvisorEvent advisor;
+            CameraEvent camera;
         };
     };
 }
