@@ -6,11 +6,12 @@ RaDTilemap::RaDTilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _textur
 {
 	for (int x = 0; x < size; x++)
 	{
-		RaD_tilemap.emplace_back();
+		rad_tilemap.emplace_back();
 		for (int y = 0; y < size; y++)
 		{
-			RaD_tilemap[x].emplace_back(std::make_unique<RaDTile>(GD, _texture_manager->GetTextureZone(Vibe), start + Vector3(x, 0, y), Vibe));
-			RaD_tilemap[x][y]->UpdateWorldMatrix();
+			rad_tilemap[x].emplace_back(std::make_unique<RaDTile>(GD, _texture_manager->GetTextureZone(Vibe), start + Vector3(x, 0, y), Vibe));
+			rad_tilemap[x][y]->UpdateWorldMatrix();
+			rad_tilemap[x][y]->ChangeRaD(100);
 		}
 	}
 }
@@ -21,7 +22,7 @@ RaDTilemap::~RaDTilemap()
 
 void RaDTilemap::Draw(DrawData* _DD)
 {
-	for (auto& x : RaD_tilemap)
+	for (auto& x : rad_tilemap)
 	{
 		for (auto& y : x)
 		{
@@ -44,7 +45,12 @@ void RaDTilemap::RaDChange(Vector3 tile_pos, int RaD_diff, int tile_size, int ra
 	{
 		for (int z = 0; z < tile_size; z++)
 		{
-			RaD_tilemap[tile_pos.x + x][tile_pos.z + z]->ChangeRaD(RaD_diff);
+			rad_tilemap[tile_pos.x + x][tile_pos.z + z]->ChangeRaD(RaD_diff);
 		}
 	}
+}
+
+int RaDTilemap::GetRaD(Vector3 tile_pos)
+{
+	return rad_tilemap[tile_pos.x][tile_pos.z]->GetRaD();
 }

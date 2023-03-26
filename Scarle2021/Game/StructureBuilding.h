@@ -10,8 +10,8 @@
 class StructureBuilding : public StructureSprite
 {
 public:
-	StructureBuilding(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, ID3D11ShaderResourceView* texture,
-		PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, float _capacity);
+	StructureBuilding(ID3D11Device* GD, Vector2 width_height, Vector3 _tile_pos, Vector3 _start, int _tile_size, ID3D11ShaderResourceView* texture,
+		PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity);
 	~StructureBuilding();
 
 	void TickStructure(GameData* game_data) override;
@@ -23,10 +23,15 @@ private:
 	void EvolveCheck();
 	void EvolveStructure();
 	void DevolveStructure();
+	int EfficiencyValue();
 
 	std::shared_ptr<PopulationManager> population_manager;
+	std::unique_ptr<VibeTilemap>& vibe_tilemap;
+	std::unique_ptr<RaDTilemap>& rad_tilemap;
 
 	ZoneType zone;
+	Vector3 tile_pos;
+	Vector3 start;
 
 	float base_capacity; // How many souls this building can first hold
 	float capacity; // How many souls this building can hold currently

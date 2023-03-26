@@ -14,10 +14,11 @@ public:
 	void Draw(DrawData* _DD);
 
 	void RaDChange(Vector3 tile_pos, int RaD_diff, int tile_size, int range);
+	int GetRaD(Vector3 tile_pos);
 
 protected:
 
-	std::vector<std::vector<std::unique_ptr<RaDTile>>> RaD_tilemap;
+	std::vector<std::vector<std::unique_ptr<RaDTile>>> rad_tilemap;
 	float size;
 	Vector3 start;
 

@@ -6,11 +6,12 @@ public:
 	RaDTile(ID3D11Device* GD, ID3D11ShaderResourceView* texture, Vector3 _tile_pos, ZoneType zone_type);
 	~RaDTile();
 
-	void ChangeRaD(int RaD_diff);
+	void ChangeRaD(int new_rad);
+	int GetRaD();
 
 protected:
-	int RaD_value = 0;
-	float colour_scaling = 10.0f;
+	int rad_value = 0;
+	float colour_scaling = 3.0f;
 
 private:
 };

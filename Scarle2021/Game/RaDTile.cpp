@@ -17,14 +17,14 @@ RaDTile::~RaDTile()
 /// Changes individual tile colour and vibe value
 /// </summary>
 /// <param name="vibe_diff">The delta of the vibe</param>
-void RaDTile::ChangeRaD(int RaD_diff)
+void RaDTile::ChangeRaD(int new_rad)
 {
-	RaD_value += RaD_diff;
+	rad_value = new_rad;
 	// Create temporary int and colour to produce required colour
 	Color new_color;
-	int temp_int = RaD_value;
+	int temp_int = rad_value - 50;
 	// Make vibe value absolute
-	if (RaD_value < 0)
+	if (rad_value < 50)
 	{
 		temp_int = -temp_int;
 	}
@@ -34,16 +34,19 @@ void RaDTile::ChangeRaD(int RaD_diff)
 	new_color.z = (255.0f - (temp_int * colour_scaling)) / 255.0f;
 
 	// If positive vibe, lean towards green
-	if (RaD_value > 0)
+	if (rad_value > 0)
 	{
 		new_color.y = 1;
 	}
 	// If negative vibe, lean towards red
-	else if (RaD_value < 0)
+	else if (rad_value < 0)
 	{
 		new_color.x = 1;
 	}
 	quad->SetColor(new_color);
 }
 
-
+int RaDTile::GetRaD()
+{
+	return rad_value;
+}

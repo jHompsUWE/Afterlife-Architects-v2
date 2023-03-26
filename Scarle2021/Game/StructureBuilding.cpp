@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "StructureBuilding.h"
 
-StructureBuilding::StructureBuilding(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, ID3D11ShaderResourceView* texture, 
-	PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, float _capacity):
-	StructureSprite(GD, width_height, tile_pos, _tile_size, texture, _plane), base_capacity(_capacity), capacity(_capacity), population_manager(_population_manager), zone(_zone)
+StructureBuilding::StructureBuilding(ID3D11Device* GD, Vector2 width_height, Vector3 _tile_pos, Vector3 _start, int _tile_size, ID3D11ShaderResourceView* texture, 
+	PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity):
+	StructureSprite(GD, width_height, _tile_pos, _tile_size, texture, _plane), base_capacity(_capacity), capacity(_capacity), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), population_manager(_population_manager), zone(_zone), tile_pos(_tile_pos), start(_start)
 {
 	// Increment soul capacity on creation
 	srand(time(0));
@@ -43,11 +43,11 @@ bool StructureBuilding::CallEveryTicks(int tick_interval)
 
 void StructureBuilding::EvolveCheck()
 {
-	if (efficiency <= 25)
+	if (EfficiencyValue() <= 25)
 	{
 		DevolveStructure();
 	}
-	else if (efficiency >= 75)
+	else if (EfficiencyValue() >= 75)
 	{
 		EvolveStructure();
 	}
@@ -71,4 +71,12 @@ void StructureBuilding::DevolveStructure()
 		level -= 1;
 		population_manager->IncrementZoneCapacity(plane, zone, -base_capacity);
 	}
+}
+
+int StructureBuilding::EfficiencyValue()
+{
+	int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (rad_tilemap->GetRaD(tile_pos-start));
+	eff_val = eff_val * 0.5f;
+	std::cout << eff_val << std::endl;
+	return eff_val;
 }

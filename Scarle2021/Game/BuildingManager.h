@@ -24,7 +24,7 @@
 class BuildingManager
 {
 public:
-	BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, 
+	BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap,
 		std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane);
 	~BuildingManager();
 
@@ -38,6 +38,7 @@ public:
 	int GetTotalStructure();
 	static int GetSizeOfStructure(StructureType structure_type);
 	static int GetCostOfStructure(StructureType structure_type);
+	static int GetVibeOfStructure(StructureType structure_type);
 
 protected:
 
@@ -46,8 +47,8 @@ private:
 	Vector3 start;
 	std::vector<std::vector<std::unique_ptr<StructureSprite>>> structure_map;
 
-	std::shared_ptr<VibeTilemap> vibe_tilemap;
-	std::shared_ptr<RaDTilemap> rad_tilemap;
+	std::unique_ptr<VibeTilemap>& vibe_tilemap;
+	std::unique_ptr<RaDTilemap>& rad_tilemap;
 
 	std::shared_ptr<PopulationManager> population_manager;
 	std::shared_ptr<EconomyManager> economy_manager;
