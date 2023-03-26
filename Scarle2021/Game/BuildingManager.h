@@ -11,6 +11,9 @@
 #include "EconomyManager.h"
 #include "NewEventManager.h"
 
+#include "VibeTilemap.h"
+#include "RaDTilemap.h"
+
 #include "StructureGate.h"
 #include "StructureTopia.h"
 #include "StructureTrainingCenter.h"
@@ -42,6 +45,9 @@ private:
 	ID3D11Device* d11_device = nullptr;
 	Vector3 start;
 	std::vector<std::vector<std::unique_ptr<StructureSprite>>> structure_map;
+
+	std::shared_ptr<VibeTilemap> vibe_tilemap;
+	std::shared_ptr<RaDTilemap> rad_tilemap;
 
 	std::shared_ptr<PopulationManager> population_manager;
 	std::shared_ptr<EconomyManager> economy_manager;

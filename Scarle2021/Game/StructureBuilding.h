@@ -3,6 +3,8 @@
 #include "GameData.h"
 #include "StructureSprite.h"
 #include "PopulationManager.h"
+#include "VibeTilemap.h"
+#include "RaDTilemap.h"
 #include "ZoneType.h"
 
 class StructureBuilding : public StructureSprite

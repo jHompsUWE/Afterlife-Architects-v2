@@ -133,6 +133,7 @@ namespace AL
 		//TEMPORARY
 		MapEntryToEvent(keyboard.E, Input::build_houses);
 		MapEntryToEvent(keyboard.P, Input::show_vibes);
+		MapEntryToEvent(keyboard.R, Input::show_rad);
 		MapEntryToEvent(keyboard.D1, Input::place_zone_green);
 
 		//Camera movement linked to keyboard

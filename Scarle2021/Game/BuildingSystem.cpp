@@ -13,10 +13,12 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
 
     tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven, economy_manager);
     vibe_tilemap_heaven = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_heaven);
+    rad_tilemap_heaven = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_heaven);
     building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_heaven, Heaven);
 
     tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell, economy_manager);
     vibe_tilemap_hell = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_hell);
+    rad_tilemap_hell = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_hell);
     building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_hell, Hell);
 
     PlaneAssembler::RefreshResSeed();
@@ -92,6 +94,13 @@ void BuildingSystem::ReceiveEvents(const AL::Event& al_event)
                 show_vibes = !show_vibes;
             }
             break;
+    
+        case AL::Input::show_rad:
+            if(al_event.input.active)
+            {
+                show_rad = !show_rad;
+            }
+            break;
 
         case AL::Input::place_zone_green:
             selected_zone = Green;
@@ -146,6 +155,11 @@ void BuildingSystem::Render3D(DrawData* draw_data)
     {
         vibe_tilemap_heaven->Draw(draw_data);
         vibe_tilemap_hell->Draw(draw_data);
+    }
+    else if (show_rad)
+    {
+        rad_tilemap_heaven->Draw(draw_data);
+        rad_tilemap_hell->Draw(draw_data);
     }
     else
     {

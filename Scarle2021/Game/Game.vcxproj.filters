@@ -136,6 +136,9 @@
     <Filter Include="Afterlife\User Interface\UIWindow">
       <UniqueIdentifier>{4bbe157e-0adb-4290-a984-36c803e7d3bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\Managers\ResearchAndDevelopment">
+      <UniqueIdentifier>{4a355032-4b98-473e-b739-8a06e7b5b431}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -420,6 +423,12 @@
     <ClInclude Include="GameplaySingletons.h">
       <Filter>Afterlife\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="RaDTile.h">
+      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
+    </ClInclude>
+    <ClInclude Include="RaDTilemap.h">
+      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -607,6 +616,12 @@
     </ClCompile>
     <ClCompile Include="GameplaySingletons.cpp">
       <Filter>Afterlife\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="RaDTile.cpp">
+      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
+    </ClCompile>
+    <ClCompile Include="RaDTilemap.cpp">
+      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
