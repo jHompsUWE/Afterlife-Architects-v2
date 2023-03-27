@@ -618,4 +618,7 @@
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="H:\Personal\Game Engine Programming\Afterlife-Architects-v2\Scarle2021\json\JSON_Files\StructureValues.json" />
+  </ItemGroup>
 </Project>
