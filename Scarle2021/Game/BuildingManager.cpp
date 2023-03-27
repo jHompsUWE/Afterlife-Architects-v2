@@ -229,7 +229,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case KarmaAnchor:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaAnchor>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,0); 
 		break;
 
 	case KarmaPortal:
@@ -242,13 +242,31 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case KarmaStation_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+				100);
+		if (plane == Heaven)
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
+		else
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
 		break;
 
 	case KarmaStation_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+				200);
+		if (plane == Heaven)
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
+		else
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
 		break;
 
 	case KarmaTrack:
