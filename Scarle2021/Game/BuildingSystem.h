@@ -74,7 +74,6 @@ private:
 	std::unique_ptr<BuildingManager> building_manager_hell;
 
 	bool show_vibes = false;
-	bool show_rad = false;
 
 	std::shared_ptr<TextureManager> texture_manager;
 	std::shared_ptr<PopulationManager> population_manager;

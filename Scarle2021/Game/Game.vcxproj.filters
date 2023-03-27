@@ -423,9 +423,6 @@
     <ClInclude Include="GameplaySingletons.h">
       <Filter>Afterlife\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="RaDTile.h">
-      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
-    </ClInclude>
     <ClInclude Include="RaDTilemap.h">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClInclude>
@@ -616,9 +613,6 @@
     </ClCompile>
     <ClCompile Include="GameplaySingletons.cpp">
       <Filter>Afterlife\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="RaDTile.cpp">
-      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClCompile>
     <ClCompile Include="RaDTilemap.cpp">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>

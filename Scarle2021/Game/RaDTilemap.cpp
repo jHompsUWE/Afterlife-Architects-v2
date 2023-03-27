@@ -9,26 +9,13 @@ RaDTilemap::RaDTilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _textur
 		rad_tilemap.emplace_back();
 		for (int y = 0; y < size; y++)
 		{
-			rad_tilemap[x].emplace_back(std::make_unique<RaDTile>(GD, _texture_manager->GetTextureZone(Vibe), start + Vector3(x, 0, y), Vibe));
-			rad_tilemap[x][y]->UpdateWorldMatrix();
-			rad_tilemap[x][y]->ChangeRaD(100);
+			rad_tilemap[x].emplace_back(50);
 		}
 	}
 }
 
 RaDTilemap::~RaDTilemap()
 {
-}
-
-void RaDTilemap::Draw(DrawData* _DD)
-{
-	for (auto& x : rad_tilemap)
-	{
-		for (auto& y : x)
-		{
-			y->Draw(_DD);
-		}
-	}
 }
 
 /// <summary>
@@ -38,19 +25,19 @@ void RaDTilemap::Draw(DrawData* _DD)
 /// <param name="vibe_diff">The delta of the Research and Development</param>
 /// <param name="tile_size">The size of the area to be changed</param>
 /// <param name="range">The range around the area to be changed</param>
-void RaDTilemap::RaDChange(Vector3 tile_pos, int RaD_diff, int tile_size, int range)
+void RaDTilemap::RaDChange(Vector3 tile_pos, int RaD_diff, int tile_size)
 {
 	// Change square of area contained
 	for (int x = 0; x < tile_size; x++)
 	{
 		for (int z = 0; z < tile_size; z++)
 		{
-			rad_tilemap[tile_pos.x + x][tile_pos.z + z]->ChangeRaD(RaD_diff);
+			rad_tilemap[tile_pos.x + x][tile_pos.z + z] = RaD_diff;
 		}
 	}
 }
 
 int RaDTilemap::GetRaD(Vector3 tile_pos)
 {
-	return rad_tilemap[tile_pos.x][tile_pos.z]->GetRaD();
+	return rad_tilemap[tile_pos.x][tile_pos.z];
 }

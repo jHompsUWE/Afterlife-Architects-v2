@@ -94,13 +94,6 @@ void BuildingSystem::ReceiveEvents(const AL::Event& al_event)
                 show_vibes = !show_vibes;
             }
             break;
-    
-        case AL::Input::show_rad:
-            if(al_event.input.active)
-            {
-                show_rad = !show_rad;
-            }
-            break;
 
         case AL::Input::place_zone_green:
             selected_zone = Green;
@@ -155,11 +148,6 @@ void BuildingSystem::Render3D(DrawData* draw_data)
     {
         vibe_tilemap_heaven->Draw(draw_data);
         vibe_tilemap_hell->Draw(draw_data);
-    }
-    else if (show_rad)
-    {
-        rad_tilemap_heaven->Draw(draw_data);
-        rad_tilemap_hell->Draw(draw_data);
     }
     else
     {
