@@ -139,6 +139,9 @@
     <Filter Include="Afterlife\Managers\ResearchAndDevelopment">
       <UniqueIdentifier>{4a355032-4b98-473e-b739-8a06e7b5b431}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\User Interface\UISlider">
+      <UniqueIdentifier>{38efd9f4-20ab-476d-bd13-06988d3d7a81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

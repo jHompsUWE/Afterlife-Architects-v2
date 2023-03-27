@@ -212,6 +212,7 @@ void BuildingSystem::GenerateTerrain(std::unique_ptr<Tilemap>& tilemap, std::uni
 
         case 2:
             // Create River
+            tilemap->OccupyTile(Vector3(tile.x, 0, tile.y), 1);
 
             switch (plane)
             {
