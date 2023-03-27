@@ -58,119 +58,106 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	int size = GetSizeOfStructure(structure_type);
 	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
 
+	StructureData* structure_data = new StructureData(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size), 
+		tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+
 	switch (structure_type)
 	{
 	case Building_Green_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Green,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Green_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Green,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Yellow_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Yellow,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Yellow_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Yellow,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Orange_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Orange,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Orange_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Orange,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Brown_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Brown,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Brown_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Brown,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Purple_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Purple,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Purple_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Purple,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Red_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Red,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Red_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Red,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Blue_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Blue,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Blue_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager,
+			std::make_unique<StructureBuilding>(structure_data, Blue,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Bank_T1:
 		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureSprite>(structure_data);
 		AL::NewEventManager::GenerateEventSt(AL::event_sound_start, bank_sound, 1.0f, true);
 		break;
 
 	case Bank_T2:
 		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureSprite>(structure_data);
 		if (plane == Heaven)
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
@@ -183,8 +170,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case Gate_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size), 
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureGate>(structure_data,
 				10); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -198,8 +184,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case Gate_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureGate>(structure_data,
 				50); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -213,8 +198,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case Gate_T3:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureGate>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureGate>(structure_data,
 				100); // The number of souls this gate generates per year
 		if (plane == Heaven)
 		{
@@ -228,48 +212,41 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaAnchor:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaAnchor>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureKarmaAnchor>(structure_data);
 		break;
 
 	case KarmaPortal:
 		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureSprite>(structure_data);
 		break;
 
 	case KarmaStation_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureKarmaStation>(structure_data);
 		break;
 
 	case KarmaStation_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureKarmaStation>(structure_data);
 		break;
 
 	case KarmaTrack:
 		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureSprite>(structure_data);
 		break;
 
 	case Rock_1:
 	case Rock_2:
 	case Rock_3:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane);
+			std::make_unique<StructureSprite>(structure_data);
 		break;
 
 	case Topia_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureTopia>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureTopia>(structure_data,
 				100); // The capacity of angels/demons that this building provides
 		if (plane == Heaven)
 		{
@@ -283,8 +260,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case Topia_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureTopia>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureTopia>(structure_data,
 				200); // The capacity of angels/demons that this building provides
 		if (plane == Heaven)
 		{
@@ -298,8 +274,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case TrainingCenter_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureTrainingCenter>(structure_data,
 				10); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{
@@ -313,8 +288,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case TrainingCenter_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureTrainingCenter>(structure_data,
 				20); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{
@@ -328,8 +302,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case TrainingCenter_T3:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureTrainingCenter>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
+			std::make_unique<StructureTrainingCenter>(structure_data,
 				30); // The number of souls this training center convert to angels/demons per year
 		if (plane == Heaven)
 		{
@@ -344,6 +317,8 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	default:
 		break;
 	}
+
+	delete structure_data;
 }
 
 /// <summary>

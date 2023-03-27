@@ -202,6 +202,7 @@
     <ClInclude Include="PlaneType.h" />
     <ClInclude Include="PopulationManager.h" />
     <ClInclude Include="StructureBuilding.h" />
+    <ClInclude Include="StructureData.h" />
     <ClInclude Include="StructureGate.h" />
     <ClInclude Include="MapAssembler.h" />
     <ClInclude Include="GPGO.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="GameplaySingletons.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
+    <ClCompile Include="StructureData.cpp" />
     <ClCompile Include="StructureGate.cpp" />
     <ClCompile Include="GPGO.cpp" />
     <ClCompile Include="ImageGO2D.cpp" />

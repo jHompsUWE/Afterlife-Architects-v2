@@ -4,11 +4,12 @@
 
 #include "VBQuad.h"
 #include "PlaneType.h"
+#include "StructureData.h"
 
 class StructureSprite : public VBQuad
 {
 public:
-	StructureSprite(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, ID3D11ShaderResourceView* texture, PlaneType _plane);
+	StructureSprite(StructureData* structure_data);
 	~StructureSprite();
 
 	virtual void TickStructure(GameData* game_data) {}

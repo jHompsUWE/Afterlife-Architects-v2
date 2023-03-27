@@ -18,6 +18,8 @@
 #include "StructureKarmaAnchor.h"
 #include "StructureKarmaStation.h"
 
+#include "StructureData.h"
+
 class BuildingManager
 {
 public:

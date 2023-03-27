@@ -1,11 +1,12 @@
 #pragma once
 #include "StructureSprite.h"
 
+#include "StructureData.h"
+
 class StructureKarmaAnchor : public StructureSprite
 {
 public:
-	StructureKarmaAnchor(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, ID3D11ShaderResourceView* texture,
-		PlaneType _plane);
+	StructureKarmaAnchor(StructureData* structure_data);
 	~StructureKarmaAnchor();
 
 	void TickStructure(GameData* game_data) override;

@@ -423,6 +423,9 @@
     <ClInclude Include="Vector2Int.h">
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
+    <ClInclude Include="StructureData.h">
+      <Filter>Afterlife\Managers\Building System\Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -610,6 +613,9 @@
     </ClCompile>
     <ClCompile Include="GameplaySingletons.cpp">
       <Filter>Afterlife\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="StructureData.cpp">
+      <Filter>Afterlife\Managers\Building System\Structure</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

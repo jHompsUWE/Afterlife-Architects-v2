@@ -4,11 +4,13 @@
 #include "PopulationManager.h"
 #include "StructureSprite.h"
 
+#include "StructureData.h"
+#include "GameplaySingletons.h"
+
 class StructureTopia : public StructureSprite
 {
 public:
-	StructureTopia(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, ID3D11ShaderResourceView* texture,
-		PlaneType _plane, std::shared_ptr<PopulationManager> _population_manager, float _capacity);
+	StructureTopia(StructureData* structure_data, float _capacity);
 	~StructureTopia();
 
 	void TickStructure(GameData* game_data) override;
