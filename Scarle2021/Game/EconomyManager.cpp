@@ -6,6 +6,7 @@ EconomyManager::EconomyManager(std::shared_ptr<PopulationManager> _pop_manager) 
 {
 	money = 333333;
 	year = 0;
+    total_roads = 0;
     timer = 0;
     prev_year_population = 0;
 }
@@ -42,6 +43,8 @@ bool EconomyManager::PurchaseStructure(int cost)
 void EconomyManager::YearUpdate()
 {
     year++;
+    money -= total_roads * cost_per_road;
+
     // CHANGE TO FUNCTION RELATED WITH POPULATION MANAGER AND BUILDING MANAGER
     if (pop_manager->GetTotalSouls() == 0)
     {

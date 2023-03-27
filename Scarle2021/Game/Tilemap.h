@@ -48,6 +48,7 @@ protected:
 	float size; // Size of the tilemap
 	Vector3 start; // Starting/Origin point of the tilemap
 	PlaneType plane;
+	int total_roads;
 
 private:
 	std::shared_ptr<TextureManager> texture_manager;
