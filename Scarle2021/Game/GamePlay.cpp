@@ -27,9 +27,12 @@ bool GamePlay::init()
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
         GetD3DDevice(),"","AdvisorBackground",Vector2(0.5,0.5));
-    //advisor
+    //soul view
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
+    //micro manager
+    micro_manager= new MicromanagerWindow(Vector2(400,120),DataManager::
+        GetD3DDevice(),"","micro_window",Vector2(1,1));
     //karma station
     window_two_karma_station = new KarmaStationWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
@@ -86,6 +89,8 @@ void GamePlay::Update(GameData* game_data)
     advisor_window->update(game_data,mouse_pos);
     //update soul view
     soul_view->update(game_data,mouse_pos);
+    //update micro manager
+    micro_manager->update(game_data,mouse_pos);
     //karma station
     window_two_karma_station->update(game_data,mouse_pos);
     //Topais
@@ -169,6 +174,10 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 soul_view->generateRandSoul();
                 soul_view->is_visible = !soul_view->is_visible;
                 break;
+
+            case AL::UI::window_micro_manager:
+                micro_manager->is_visible = !micro_manager->is_visible;
+                break;
             
             default:
                 break;
@@ -195,6 +204,9 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
 
     //render soul view
     soul_view->render(draw_data2D);
+
+    //render micro manager
+    micro_manager->render(draw_data2D);
     
     // checks if window is open to render
 
@@ -249,6 +261,7 @@ void GamePlay::ResizeUI()
     main_panel->reSize(screen_size);
     advisor_window->reSize(screen_size);
     soul_view->reSize(screen_size);
+    micro_manager->reSize(screen_size);
     window_two_karma_station->reSize(screen_size);
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);

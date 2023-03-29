@@ -9,6 +9,7 @@
 #include "UIPanel.h"
 #include "UIWindow.h"
 #include "SoulViewWindow.h"
+#include "MicromanagerWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
 // Economy and Population
@@ -73,6 +74,7 @@ private:
     TopiasWindowUI* window_three_topias;
     TrainingCentersWindow* window_four_training_centers_window;
     SoulViewWindow* soul_view;
+    MicromanagerWindow* micro_manager;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 

@@ -187,6 +187,7 @@
     <ClInclude Include="EconomyManager.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="GameplaySingletons.h" />
+    <ClInclude Include="MicromanagerWindow.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="fileVBGO.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameplaySingletons.cpp" />
+    <ClCompile Include="MicromanagerWindow.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
     <ClCompile Include="RaDTilemap.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />

@@ -366,6 +366,16 @@
   <ItemGroup>
     <ImageContentTask Include="Cursor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\MicroManager\micro_window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\arrow_left.png" />
+    <ImageContentTask Include="Afterlife\Slider\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\slider_handle.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

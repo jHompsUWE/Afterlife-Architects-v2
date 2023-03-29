@@ -429,6 +429,9 @@
     <ClInclude Include="RaDTilemap.h">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClInclude>
+    <ClInclude Include="MicromanagerWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -619,6 +622,9 @@
     </ClCompile>
     <ClCompile Include="RaDTilemap.cpp">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
+    </ClCompile>
+    <ClCompile Include="MicromanagerWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -20,13 +20,17 @@ namespace AL
 			window_delete_structures,
 			window_advisors,
 			window_soulview,
+			window_micro_manager,
 			button_zoom_in,
 			button_zoom_out,
 			adv_option1,
 			adv_option2,
 			adv_option3,
 			adv_option4,
-			adv_option5
+			adv_option5,
+			micro_manager_arrow_l,
+			micro_manager_arrow_r,
+			micro_manager_pipette
 		};
 	};
 }
