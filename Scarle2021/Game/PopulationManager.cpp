@@ -135,6 +135,23 @@ int PopulationManager::GetTotalSouls()
 	return total;
 }
 
+int PopulationManager::GetTotalCapacity()
+{
+	int total = 0;
+
+	for (auto& soul: heaven_capacity)
+	{
+		total += soul;
+	}
+
+	for (auto& soul : hell_capacity)
+	{
+		total += soul;
+	}
+
+	return total;
+}
+
 int PopulationManager::GetADPopulation(PlaneType plane)
 {
 	switch (plane)

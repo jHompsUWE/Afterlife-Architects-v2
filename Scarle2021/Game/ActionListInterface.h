@@ -29,8 +29,7 @@ namespace AL
 			adv_option4,
 			adv_option5,
 			micro_manager_arrow_l,
-			micro_manager_arrow_r,
-			micro_manager_pipette
+			micro_manager_arrow_r
 		};
 	};
 }

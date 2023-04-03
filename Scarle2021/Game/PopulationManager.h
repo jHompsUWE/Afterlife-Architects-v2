@@ -20,6 +20,7 @@ public:
 	int GetZonePopulation(PlaneType plane, ZoneType zone);
 	int GetZoneCapacity(PlaneType plane, ZoneType zone);
 	int GetTotalSouls();
+	int GetTotalCapacity();
 
 	int GetADPopulation(PlaneType plane);
 	int GetADCapacity(PlaneType plane);

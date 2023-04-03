@@ -16,6 +16,8 @@ public:
 	void SetTotalRoads(int t_roads) { total_roads = t_roads; };
 	float GetMoney() { return money; }
 	int GetYear() { return year; }
+	void SetRaD(float _rad) { rad_prod_percent = _rad; };
+	float GetRaD() { return rad_prod_percent; };
 
 	bool PurchaseStructure(int cost);
 
@@ -34,5 +36,8 @@ private:
 	float cost_per_road = 1.0f;
 
 	float timer;
+	float money_per_soul = 0.1f;
+
+	float rad_prod_percent = 50;
 };
 

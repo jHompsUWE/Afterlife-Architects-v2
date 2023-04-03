@@ -17,6 +17,9 @@ GamePlay::~GamePlay()
 
 bool GamePlay::init()
 {
+    // Economy
+    economy_manager = GameplaySingletons::GetEconomyManager();
+
     // window init
     window_one_gate = new UIWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::GetD3DDevice(),"","Window",Vector2(0.5,0.5));
@@ -32,7 +35,7 @@ bool GamePlay::init()
         GetD3DDevice(),"","SoulView",Vector2(1,1));
     //micro manager
     micro_manager= new MicromanagerWindow(Vector2(400,120),DataManager::
-        GetD3DDevice(),"","micro_window",Vector2(1,1));
+        GetD3DDevice(),"","micro_window",Vector2(1,1), economy_manager);
     //karma station
     window_two_karma_station = new KarmaStationWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
@@ -55,8 +58,6 @@ bool GamePlay::init()
     mouse_screen_pos.z = 0;
     mouse_world_pos = std::make_shared<Vector3>(0, 0, 0);
 
-    // Economy
-    economy_manager = GameplaySingletons::GetEconomyManager();
 
     // Building System
     building_system = std::make_unique<BuildingSystem>(mouse_world_pos, DataManager::GetD3DDevice());

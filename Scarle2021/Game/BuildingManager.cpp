@@ -66,98 +66,98 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	case Building_Green_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Green_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Green, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Yellow_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Yellow_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Yellow, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Orange_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Orange_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Orange, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Brown_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Brown_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Brown, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Purple_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Purple_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Purple, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Red_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Red_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Red, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
 	case Building_Blue_T1:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				100); // The capacity of souls that this building provides
 		break;
 
 	case Building_Blue_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureBuilding>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
-				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager, vibe_tilemap, rad_tilemap,
+				tile_position + start, start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, Blue, population_manager, economy_manager, vibe_tilemap, rad_tilemap,
 				200); // The capacity of souls that this building provides
 		break;
 
@@ -458,13 +458,6 @@ int BuildingManager::GetCostOfStructure(StructureType structure_type)
 	case Building_Purple_T1:
 	case Building_Red_T1:
 	case Building_Blue_T1:
-	case Bank_T1:
-	case KarmaTrack:
-	case Rock_1:
-	case Rock_2:
-	case Rock_3:
-		return 100;
-
 	case Building_Green_T2:
 	case Building_Yellow_T2:
 	case Building_Orange_T2:
@@ -472,24 +465,43 @@ int BuildingManager::GetCostOfStructure(StructureType structure_type)
 	case Building_Purple_T2:
 	case Building_Red_T2:
 	case Building_Blue_T2:
+	case KarmaTrack:
+		return 100;
+
+	case Rock_1:
+	case Rock_2:
+	case Rock_3:
+		return 0;
+
+	case Bank_T1:
+		return 2000;
 	case Bank_T2:
-		return 200;
+		return 20000;
 
 	case Gate_T1:
+		return 50000;
 	case Gate_T2:
+		return 500000;
+
 	case KarmaAnchor:
 	case KarmaStation_T1:
+		return 10000;
 	case KarmaStation_T2:
+		return 250000;
 	case TrainingCenter_T1:
+		return 100000;
 	case TrainingCenter_T2:
+		return 250000;
 	case TrainingCenter_T3:
-		return 300;
+		return 1000000;
 
 	case KarmaPortal:
 	case Gate_T3:
+		return 1000000;
 	case Topia_T1:
+		return 100000;
 	case Topia_T2:
-		return 400;
+		return 1000000;
 
 	default:
 		return 0;
@@ -512,11 +524,6 @@ int BuildingManager::GetVibeOfStructure(StructureType structure_type)
 	case Building_Purple_T1:
 	case Building_Red_T1:
 	case Building_Blue_T1:
-	case Bank_T1:
-	case KarmaTrack:
-	case Rock_1:
-	case Rock_2:
-	case Rock_3:
 	case Building_Green_T2:
 	case Building_Yellow_T2:
 	case Building_Orange_T2:
@@ -524,20 +531,31 @@ int BuildingManager::GetVibeOfStructure(StructureType structure_type)
 	case Building_Purple_T2:
 	case Building_Red_T2:
 	case Building_Blue_T2:
-	case Bank_T2:
-	case Gate_T1:
-	case Gate_T2:
-	case KarmaAnchor:
+		return 2;
+	case Rock_1:
+	case Rock_2:
+	case Rock_3:
+		return -4;
 	case KarmaStation_T1:
 	case KarmaStation_T2:
 	case TrainingCenter_T1:
 	case TrainingCenter_T2:
 	case TrainingCenter_T3:
-	case KarmaPortal:
-	case Gate_T3:
-	case Topia_T1:
-	case Topia_T2:
 		return 3;
+	case Gate_T1:
+	case Gate_T2:
+	case Gate_T3:
+		return -4;
+	case Topia_T1:
+		return 5;
+	case Topia_T2:
+		return 6;
+	case Bank_T1:
+	case Bank_T2:
+	case KarmaAnchor:
+	case KarmaTrack:
+	case KarmaPortal:
+		return 0;
 
 	default:
 		return 0;

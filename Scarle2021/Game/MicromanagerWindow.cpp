@@ -6,7 +6,7 @@
 
 
 MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
-    std::string _filepath, Vector2 _setScale)
+    std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager)
 {
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
@@ -37,15 +37,13 @@ MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 292.5, window_pos.y + 32),
         DataManager::GetD3DDevice(), "arrow_right",
         AL::EventType::event_ui, AL::UI::micro_manager_arrow_r, 0, Vector2(1.0,1.0)));
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 177, window_pos.y + 88),
-        DataManager::GetD3DDevice(), "green",
-        AL::EventType::event_ui, AL::UI::micro_manager_pipette, 0, Vector2(1.3,1.7)));
 
     image_vec.push_back(new ImageGO2D("slider_handle", DataManager::GetD3DDevice()));
     image_vec[0]->SetPos(Vector2(window_pos.x + 177.5, window_pos.y + 33));
     image_vec[0]->SetScale(Vector2(1, 1));
 
     AL::NewEventManager::AddEventReceiver(this);
+    economy_manager = _economy_manager;
 }
 
 MicromanagerWindow::~MicromanagerWindow()
@@ -133,7 +131,6 @@ void MicromanagerWindow::render(DrawData2D* _drawData)
 {
     if (!is_visible) return;
 
-    buttons[2]->render(_drawData);
     windowBackGround->Draw(_drawData);
     buttons[0]->render(_drawData);
     buttons[1]->render(_drawData);
@@ -170,6 +167,7 @@ void MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
             if (slider_percent >= 5)
             {
                 slider_percent-=5;
+                economy_manager->SetRaD(slider_percent);
             }
             updateSlider();
         }
@@ -178,6 +176,7 @@ void MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
             if (slider_percent <= 95)
             {
                 slider_percent+=5;
+                economy_manager->SetRaD(slider_percent);
             }
             updateSlider();
         }

@@ -6,7 +6,7 @@ class MicromanagerWindow : public IEventReceiver
 public:
 
     MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
-        std::string _text, std::string _filepath, Vector2 _setScale);
+        std::string _text, std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager);
 
     ~MicromanagerWindow() override;
 
@@ -32,6 +32,7 @@ private:
     Vector2 old_mouse_pos{ 0,0 };
 
     ImageGO2D* windowBackGround = nullptr;
+    std::shared_ptr<EconomyManager> economy_manager;
 
     //vector of buttons 
     std::vector<UIButtonInterFace*> buttons;
