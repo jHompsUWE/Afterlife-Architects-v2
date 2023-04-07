@@ -115,6 +115,10 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 83,panel_pos.y + 355),DataManager::GetD3DDevice()
     ,"green",AL::EventType::event_ui, AL::UI::window_advisors, 0,Vector2(2.8, 1.5)));
 
+    //graphview button
+    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 51,panel_pos.y + 310),DataManager::GetD3DDevice()
+    ,"green",AL::EventType::event_ui, AL::UI::window_graphview, 0,Vector2(0.8, 0.7)));
+    
     //soul view button
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 93,panel_pos.y + 310),DataManager::GetD3DDevice()
     ,"green",AL::EventType::event_ui, AL::UI::window_soulview, 0,Vector2(0.8, 0.7)));

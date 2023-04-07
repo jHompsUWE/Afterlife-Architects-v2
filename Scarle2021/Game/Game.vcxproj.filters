@@ -432,6 +432,9 @@
     <ClInclude Include="MicromanagerWindow.h">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="GraphviewWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -624,6 +627,9 @@
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClCompile>
     <ClCompile Include="MicromanagerWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphviewWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
   </ItemGroup>

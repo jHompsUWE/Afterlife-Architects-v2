@@ -60,7 +60,7 @@ void StructureBuilding::EvolveStructure()
 {
 	if (level < max_level)
 	{
-		std::cout << "Structure evolved" << std::endl;
+		//std::cout << "Structure evolved" << std::endl;
 		level += 1;
 		population_manager->IncrementZoneCapacity(plane, zone, capacity);
 	}
@@ -70,7 +70,7 @@ void StructureBuilding::DevolveStructure()
 {
 	if (level > 0)
 	{
-		std::cout << "Structure devolved" << std::endl;
+		//std::cout << "Structure devolved" << std::endl;
 		level -= 1;
 		population_manager->IncrementZoneCapacity(plane, zone, -base_capacity);
 	}
@@ -81,6 +81,6 @@ int StructureBuilding::EfficiencyValue()
 	//int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (rad_tilemap->GetRaD(tile_pos-start));
 	int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (100 - economy_manager->GetRaD());
 	eff_val = eff_val * 0.5f;
-	std::cout << eff_val << std::endl;
+	//std::cout << eff_val << std::endl;
 	return eff_val;
 }

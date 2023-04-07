@@ -376,6 +376,11 @@
   <ItemGroup>
     <ImageContentTask Include="Afterlife\Slider\slider_handle.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_back.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_belief.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_population.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

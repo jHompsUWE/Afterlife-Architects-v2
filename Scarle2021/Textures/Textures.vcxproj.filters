@@ -458,6 +458,15 @@
     <ImageContentTask Include="Afterlife\Slider\slider_handle.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_back.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_belief.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_population.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tiles">

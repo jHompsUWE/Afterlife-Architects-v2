@@ -21,6 +21,7 @@ namespace AL
 			window_advisors,
 			window_soulview,
 			window_micro_manager,
+			window_graphview,
 			button_zoom_in,
 			button_zoom_out,
 			adv_option1,
@@ -29,7 +30,10 @@ namespace AL
 			adv_option4,
 			adv_option5,
 			micro_manager_arrow_l,
-			micro_manager_arrow_r
+			micro_manager_arrow_r,
+			graphview_bel,
+			graphview_rel,
+			graphview_pop
 		};
 	};
 }

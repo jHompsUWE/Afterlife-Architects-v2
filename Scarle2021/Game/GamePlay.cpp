@@ -36,6 +36,9 @@ bool GamePlay::init()
     //micro manager
     micro_manager= new MicromanagerWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","micro_window",Vector2(1,1), economy_manager);
+    //graphview
+    graphview = new GraphviewWindow(Vector2(400,120),DataManager::
+        GetD3DDevice(),"","graphview_back",Vector2(1,1), GameplaySingletons::GetPopulationManager());
     //karma station
     window_two_karma_station = new KarmaStationWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
@@ -92,6 +95,8 @@ void GamePlay::Update(GameData* game_data)
     soul_view->update(game_data,mouse_pos);
     //update micro manager
     micro_manager->update(game_data,mouse_pos);
+    //update graphview
+    graphview->update(game_data,mouse_pos);
     //karma station
     window_two_karma_station->update(game_data,mouse_pos);
     //Topais
@@ -179,6 +184,10 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             case AL::UI::window_micro_manager:
                 micro_manager->is_visible = !micro_manager->is_visible;
                 break;
+
+            case AL::UI::window_graphview:
+                graphview->is_visible = !graphview->is_visible;
+                break;
             
             default:
                 break;
@@ -208,6 +217,9 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
 
     //render micro manager
     micro_manager->render(draw_data2D);
+
+    //render micro manager
+    graphview->render(draw_data2D);
     
     // checks if window is open to render
 
@@ -263,6 +275,7 @@ void GamePlay::ResizeUI()
     advisor_window->reSize(screen_size);
     soul_view->reSize(screen_size);
     micro_manager->reSize(screen_size);
+    graphview->reSize(screen_size);
     window_two_karma_station->reSize(screen_size);
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);

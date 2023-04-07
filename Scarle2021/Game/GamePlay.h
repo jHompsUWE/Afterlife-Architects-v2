@@ -12,6 +12,7 @@
 #include "MicromanagerWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
+#include "GraphviewWindow.h"
 // Economy and Population
 #include "GameplaySingletons.h"
 
@@ -75,6 +76,7 @@ private:
     TrainingCentersWindow* window_four_training_centers_window;
     SoulViewWindow* soul_view;
     MicromanagerWindow* micro_manager;
+    GraphviewWindow* graphview;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
