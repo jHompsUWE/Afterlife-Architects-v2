@@ -1,7 +1,7 @@
 #pragma once
 #include "DataManager.h"
 #include "array"
-#include "Event.h"
+#include "Event.hpp"
 #include "StateTemplate.h"
 
 /**

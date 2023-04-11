@@ -14,6 +14,7 @@ namespace AL
     enum EventType
     {
         unknown = 0,
+        
         event_input,
         event_cursor_move,
         event_cursor_interact,
@@ -23,7 +24,9 @@ namespace AL
         event_build_sys,
         event_game,
         event_adv_fault,
-        event_camera
+        event_camera,
+
+        last_entry
     };
 
     //Normal input event
@@ -31,7 +34,7 @@ namespace AL
     {
     public:
         //Explicit constructor as event type is needed for sorting
-        explicit Event(EventType _type) : type(_type){}
+        explicit Event(EventType _type, float _delay = 0) : type(_type), delay(_delay){}
         ~Event() = default;
 
         /**
@@ -42,7 +45,7 @@ namespace AL
         struct InputEvent
         {
             Input::Action action = Input::Action::unknown;
-            bool active = NULL;
+            bool active = false;
         };
 
         /**
@@ -50,8 +53,8 @@ namespace AL
          */
         struct CursorEventMove
         {
-            int pos_x = NULL;
-            int pos_y = NULL;
+            int pos_x = 0;
+            int pos_y = 0;
         };
         
         /**
@@ -62,7 +65,7 @@ namespace AL
         struct CursorEventInteract
         {
             Cursor::Action action = Cursor::Action::unknown;
-            bool active = NULL;
+            bool active = 0;
         };
         
         /**
@@ -74,8 +77,8 @@ namespace AL
         struct SoundEventStart
         {
             char filename[32] = "unknown";
-            float volume = NULL;
-            bool loop = NULL;
+            float volume = 0;
+            bool loop = false;
         };
 
         /**
@@ -120,7 +123,7 @@ namespace AL
          */
         struct AdvisorEvent
         {
-            int fault_index = NULL;
+            int fault_index = 0;
         };
 
         /**
@@ -128,12 +131,12 @@ namespace AL
          */
         struct CameraEvent
         {
-            int pos_x = NULL;
-            int pos_y = NULL;
+            int pos_x = 0;
+            int pos_y = 0;
         };
-
-        //What kind of general event is this
+        
         EventType type = unknown;
+        float delay = 0;
         
         //Linking structs to keywords
         //A union will make it so that each element will share the same

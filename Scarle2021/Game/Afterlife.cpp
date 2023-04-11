@@ -55,7 +55,6 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     CreateResources();
 
     //TODO: Uncomment this for fixed 60FPS
-    
     timer.SetFixedTimeStep(true);
     timer.SetTargetElapsedSeconds(1.0 / 60);
     

@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-#include "DataManager.h"
-
 namespace AL
 {
 	//Default private constructor, no need to initialize inherited class
@@ -15,9 +13,7 @@ namespace AL
 
 	// Instance --------------------------------------------------------------------------------------------------------
 	
-	/**
-	 * \return Instance of EventManager
-	 */
+	//Gets singleton instance
 	NewEventManager& NewEventManager::Get()
 	{
 		static NewEventManager instance;
@@ -25,45 +21,22 @@ namespace AL
 	}
 	
 	// Static ----------------------------------------------------------------------------------------------------------
-
-	/**
-	 * \brief Static function to generate an event
-	 * \tparam Payload Data to be inserted in the event
-	 * \param type which type of even this is gonna be
-	 */
-	template <typename... Payload>
-	void NewEventManager::GenerateEventSt(EventType type, const Payload&... args)
-	{
-		Get().GenerateEvent(type, args...);
-	}
 	
-	/**
-	 * \return static func to return the event list
-	 */
 	std::vector<Event>& NewEventManager::GetEventListSt()
 	{
 		return Get().GetEventList();
 	}
-
-	/**
-	 * \brief Flushes the event list
-	 */
+	
 	void NewEventManager::FlushEventListSt()
 	{
 		Get().FlushEventList();
 	}
-
-	/**
-	 * \param observer to be subscribed to receive events
-	 */
+	
 	void NewEventManager::AddEventReceiver(IEventReceiver* observer)
 	{
 		Get().AddObserver(observer);
 	}
-
-	/**
-	 * \param observer to be unsubscribed from receiving events
-	 */
+	
 	void NewEventManager::RemoveEventReceiver(IEventReceiver* observer)
 	{
 		Get().RemoveObserver(observer);
@@ -71,29 +44,21 @@ namespace AL
 
 	// Event List ------------------------------------------------------------------------------------------------------
 	
-	/**
-	 * \return returns the event list.
-	 */
 	std::vector<Event>& NewEventManager::GetEventList()
 	{
 		return event_list;
 	}
-
-	/**
-	 * \brief Clear all data from the event list
-	 */
+	
 	void NewEventManager::FlushEventList()
 	{
 		event_list.clear();
 	}
 
 	// Data Sharing ----------------------------------------------------------------------------------------------------
-
-	/**
-	 * \brief Routes the events to each of the observers
-	 */
+	
 	void NewEventManager::BroadcastData()
 	{
+		//Gets a copy to prevent messing with the loop
 		const auto event_list_copy = event_list;
 		
 		FlushEventList();
@@ -119,12 +84,8 @@ namespace AL
 		FlushEventList();
 	}
 
-	// Input Mapping ---------------------------------------------------------------------------------------------------
-
-	/**
-	 * \brief To map keyboard entries to events
-	 * \param keyboard state in this current frame
-	 */
+	// Input Polling ---------------------------------------------------------------------------------------------------
+	
 	void NewEventManager::PollKeyboard(Keyboard::State keyboard)
 	{
 		//Do not map keybindings if controller is being used 
@@ -143,10 +104,6 @@ namespace AL
 		MapEntryToEvent(keyboard.D,Input::camera_right, true);
 	}
 	
-	/**
-	 * \brief to map mouse entries to events
-	 * \param mouse state in this current frame
-	 */
 	void NewEventManager::PollMouse(Mouse::State mouse)
 	{
 		//Creates event for mouse scroll if necessary
@@ -163,11 +120,7 @@ namespace AL
 		MapEntryToEvent(mouse.rightButton, Cursor::button_input2);
 		MapEntryToEvent(mouse.middleButton, Cursor::button_input3);
 	}
-
-	/**
-	 * \brief to map gamepad entries to events
-	 * \param gamepad state in this current frame
-	 */
+	
 	void NewEventManager::PollGamepad(GamePad::State gamepad, const float& dt)
 	{
 		if(gamepad.IsConnected())
@@ -224,11 +177,7 @@ namespace AL
 			MapEntryToEvent(gamepad.IsRightShoulderPressed(), Cursor::Action::scroll_up);
 		}
 	}
-
-	/**
-	 * @brief Checks the position of the various pointing devices and generates an event accordingly
-	 * Based on the last input registered, the input will be automatically set to controller or m&k
-	 */
+	
 	void NewEventManager::UpdateCursorPos(const int& window_width, const int& window_height)
 	{
 		//Check if mouse position has changed
@@ -270,10 +219,10 @@ namespace AL
 			GenerateEvent(event_cursor_move, cursor_pos.x, cursor_pos.y);
 		}
 	}
-
-	// TODO::IMPLEMENT THIS PROPERLY
+	
 	// BUTTON WORK AROUND ----------------------------------------------------------------------------------------------
 	
+	// TODO::IMPLEMENT THIS PROPERLY
 	void NewEventManager::GenerateEventSoundStart(const char filename[32], const float& volume, const bool& loop)
 	{
 		GenerateEvent(event_sound_start, filename, volume, loop);
@@ -298,22 +247,6 @@ namespace AL
 	void NewEventManager::GenerateGameEvent(const Game::Action& action)
 	{
 		GenerateEvent(event_game, action);
-	}
-
-	// Event Generation ------------------------------------------------------------------------------------------------
-
-	/**
-	 * \brief Generates an event form the data given, easy as that
-	 * \tparam Payload Data to be inserted in the event
-	 * \param type which type of even this is gonna be
-	 */
-	template <typename ... Payload>
-	void NewEventManager::GenerateEvent(EventType type, const Payload&... args)
-	{
-		//ATM are not in place any sort of memory checks on the size of data being moved inside an event
-		//If the size of data surpasses 40 bytes a memory override will happen. and we *do not* want that
-		event_list.emplace_back(type);
-		SetEventData(event_list.back(), args...);
 	}
 
 	// Key Mapping Handlers --------------------------------------------------------------------------------------------
@@ -353,7 +286,7 @@ namespace AL
 			return;
 		}
 
-		//Maps the current states of the outputs to keep track of pressed and relesed actions
+		//Maps the current states of the outputs to keep track of pressed and released actions
 		if(state)
 		{
 			if(!input_to_action_map[action])
@@ -410,111 +343,17 @@ namespace AL
 			}
 		}
 	}
-
-	// Event Data Insertion --------------------------------------------------------------------------------------------
-
-	/**
-	 * \brief This function takes and data, will the store all the data provided inside the event.
-	 * \tparam Payload variadic template, this is the packet of values and types that need to be inserted
-	 * \param event reference to the event
-	 */
-	template <typename... Payload>
-	void NewEventManager::SetEventData(Event& event, const Payload&... args)
-	{
-		//Gets the inital data offset of the event and starts the population process
-		int byte_offset = sizeof(EventType);
-		SetEventData(event, byte_offset, args...);
-	}
 	
-	/**
-	 * \brief This is closely linked to the previous function and will keep recurring until all the data has been moved
-	 * \tparam T type of the current type that is being inserted
-	 * \tparam Payload packet or remaining data 
-	 * \param event reference to the event
-	 * \param byte_offset offset of bytes from the initial memory address 
-	 */
-	template <typename T, typename ... Payload>
-	void NewEventManager::SetEventData(Event& event, int& byte_offset, const T& arg, const Payload&... args)
-	{
-		//Check the current allocation of memory to not overshoot
-		if(byte_offset + sizeof(T) > sizeof(Event))
-		{
-			std::cout << "Data inserted overshoots memory limit for Event, discarding data" << std::endl;
-			return;
-		}
-		
-		//Checks if the value is char
-		if constexpr (std::is_same<typename std::remove_cv<typename std::remove_extent<T>::type>::type, char>::value)
-		{
-			//If it is, save its size and save it as a char*
-			const int size = sizeof(event.sound_start.filename);
-			const char* string = arg;
-			size_t len = strnlen_s(string, size); //gets len of the string
-
-			//Checks if the string is small enough to fit into a char[32]
-			if (len < size)
-			{
-
-				strcpy_s(*(char(*)[sizeof(T)])((char*)&event + byte_offset), arg);
-			}
-			else
-			{
-				//string too big! not good!
-				std::cout << "This event value has not been saved, value exceeds buffer." << std::endl;
-			}
-
-			//Adds the size of the string to the buffer for the next values
-			byte_offset += size;
-		}
-		else
-		{
-			//If not a string cast value as T* and takes the correct place in memory
-			//To move the pointer of memory a char* is used because it is a single byte
-			//More appropriate would be using std::byte, but that is not introduced yet in c++ 14
-			*(T*)((char*)&event + byte_offset) = arg;
-			byte_offset += sizeof(T);
-		}
-
-		//Keep recurring until all the value in the data package are used
-		if constexpr (sizeof...(args) > 0)
-		{
-			SetEventData(event, byte_offset, args...);
-		}
-	}
-
 	//Cursor Getters ---------------------------------------------------------------------------------------------------
 
-	Vector2 NewEventManager::GetCursorPos() const
+	SimpleMath::Vector2 NewEventManager::GetCursorPos() const
 	{
-		return Vector2{(float)cursor_pos.x, (float)cursor_pos.y};
+		//Vector 2 for ease, casted before returning
+		return SimpleMath::Vector2{static_cast<float>(cursor_pos.x), static_cast<float>(cursor_pos.y)};
 	}
 
-	void NewEventManager::SetSpriteSpeed(const Vector2& new_speed)
+	void NewEventManager::SetSpriteSpeed(const SimpleMath::Vector2& new_speed)
 	{
 		cursor_speed *= new_speed.x;
 	}
-
-	//Template function specialization ---------------------------------------------------------------------------------
-	
-	//Input Event
-	template void NewEventManager::GenerateEventSt<Input::Action, bool>(EventType, const Input::Action&, const bool&);
-	//Cursor Event Move
-	template void NewEventManager::GenerateEventSt<int, int>(EventType, const int&, const int&);
-	//Cursor Event Interact
-	template void NewEventManager::GenerateEventSt<Cursor::Action, bool>(EventType, const Cursor::Action&, const bool&);
-	//Sound Event Start
-	template void NewEventManager::GenerateEventSt<char[32], float, bool>(EventType, const char(&)[32], const float&, const bool&);
-	//Sound Event Stop
-	template void NewEventManager::GenerateEventSt<char[32]>(EventType, const char(&)[32]);
-	//Interface Event
-	template void NewEventManager::GenerateEventSt<UI::Action>(EventType, const UI::Action&);
-	//Building System Event
-	template void NewEventManager::GenerateEventSt<BuildSys::Section, StructureType, ZoneType>(
-		EventType type, const BuildSys::Section&, const StructureType&, const ZoneType&);
-	//Game Event
-	template void NewEventManager::GenerateEventSt<Game::Action>(EventType, const Game::Action&);
-	//Advisor Fault Event
-	template void NewEventManager::GenerateEventSt<int>(EventType, const int&);
-	//Camera Event
-	template void NewEventManager::GenerateEventSt<int>(EventType, const int&, const int&);
 }

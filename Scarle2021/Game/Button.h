@@ -96,6 +96,7 @@ public:
 							break;
 					
 						case AL::event_ui:
+							std::cout << "diomerda" << std::endl;
 							AL::NewEventManager::Get().GenerateInterfaceEvent((AL::UI::Action)action_1);
 							break;
 					

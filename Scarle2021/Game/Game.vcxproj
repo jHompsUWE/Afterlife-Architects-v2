@@ -185,8 +185,9 @@
     <ClInclude Include="DrawData.h" />
     <ClInclude Include="DrawData2D.h" />
     <ClInclude Include="EconomyManager.h" />
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="fileVBGO.h" />
@@ -216,7 +217,7 @@
     <ClInclude Include="NewEventManager.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="OrthographicCamera.h" />
-    <ClInclude Include="Packet.h" />
+    <ClInclude Include="Packet.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="PerlinNoise.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameplaySingletons.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
     <ClCompile Include="StructureGate.cpp" />
@@ -329,6 +331,9 @@
     <ClCompile Include="VBSnail.cpp" />
     <ClCompile Include="VibeTilemap.cpp" />
     <ClCompile Include="VibeTile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NewEventManager.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

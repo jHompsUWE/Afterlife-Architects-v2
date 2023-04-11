@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Event.h"
+#include "Event.hpp"
 
 /**
  * \brief Base interface for an observer.

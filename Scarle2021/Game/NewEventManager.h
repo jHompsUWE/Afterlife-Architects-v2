@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "gamedata.h"
-#include "Event.h"
+#include "Event.hpp"
 #include "Observable.h"
 #include "Observer.h"
-#include "Packet.h"
+#include "Packet.hpp"
 #include "Vector2Int.h"
 
 #include <unordered_map>
@@ -19,43 +19,135 @@ namespace AL
 		NewEventManager(const NewEventManager&) = delete;
 		NewEventManager& operator=(const NewEventManager&) = delete;
 
-		//Gets singleton instance
+		/**
+		 * \return Instance of EventManager
+		 */
 		static NewEventManager& Get();
+
+		// Static ------------------------------------------------------------------------------------------------------
 		
-		//Static public functions, accessible via ::
+		/**
+		 * \brief Static function to generate an event
+         * \tparam Payload Data to be inserted in the event
+         * \param type which type of even this is gonna be
+         */
 		template <typename... Payload>
-		static void GenerateEventSt(EventType type, const Payload&... args);
+		static void GenerateEventSt(const EventType& type, const Payload&... args);
+
+		/**
+		 * \brief Static function to generate an event with a delay
+		 * \tparam Payload Data to be inserted in the event
+		 * \param type which type of even this is gonna be
+		 * \param delay delay in seconds before an event is fired
+		 */
+		template <typename... Payload>
+		static void GenerateEventWithDelaySt(const EventType& type, const float& delay, const Payload&... args);
+
+		/**
+		 * \return static func to return the event list
+		 */
 		static std::vector<Event>& GetEventListSt();
+
+		/**
+		 * \brief Flushes the event list
+		 */
 		static void FlushEventListSt();
+
+		/**
+		 * \param observer to be subscribed to receive events
+		 */
 		static void AddEventReceiver(IEventReceiver* observer);
+
+		/**
+	     * \param observer to be unsubscribed from receiving events
+	     */
 		static void RemoveEventReceiver(IEventReceiver* observer);
 
-		//Public functions, accessible via Get() or via singleton instance
+		// Public ------------------------------------------------------------------------------------------------------
+
+		/**
+		 * \return returns the event list.
+		 */
 		std::vector<Event>& GetEventList();
+
+		/**
+		 * \brief Clear all data from the event list
+		 */
 		void FlushEventList();
-		//Data sharing
+		
+		//Data sharing -------------------------------------------------------------------------------------------------
+
+		/**
+		 * \brief Routes the events to each of the observers
+		 */
 		void BroadcastData() override;
 
-		//Input polling
+		//Input polling ------------------------------------------------------------------------------------------------
+
+		/**
+		 * \brief To map keyboard entries to events
+		 * \param keyboard state in this current frame
+		 */
 		void PollKeyboard(Keyboard::State keyboard);
+
+		/**
+		 * \brief to map mouse entries to events
+		 * \param mouse state in this current frame
+		 */
 		void PollMouse(Mouse::State mouse);
+
+		/**
+		 * \brief to map gamepad entries to events
+		 * \param gamepad state in this current frame
+		 */
 		void PollGamepad(GamePad::State gamepad, const float& dt);
+
+		/**
+		 * @brief Checks the position of the various pointing devices and generates an event accordingly
+		 * Based on the last input registered, the input will be automatically set to controller or m&k
+		 */
 		void UpdateCursorPos(const int& window_width, const int& window_height);
 
-		//Button Work Around
+		// Button Work Around ------------------------------------------------------------------------------------------
+		
+		// TODO::IMPLEMENT THIS PROPERLY
 		void GenerateEventSoundStart(const char filename[32], const float& volume, const bool& loop);
 		void GenerateEventSoundStop(const char filename[32]);
 		void GenerateInterfaceEvent(const UI::Action& action);
 		void GenerateBuildSysEvent(const BuildSys::Section& section, const StructureType& structure, const ZoneType& zone);
 		void GenerateGameEvent(const Game::Action& action);
 
-		//Generate Events
+		// Event Generation --------------------------------------------------------------------------------------------
+
+		/**
+    	 * \brief Generates an event form the data given, no delay before is fired
+    	 * \tparam Payload Data to be inserted in the event
+     	 * \param type which type of even this is gonna be
+    	 */
 		template <typename... Payload>
 		void GenerateEvent(EventType type, const Payload&... args);
 
-		//Getter for cursor sprite
+		/**
+		 * \brief Generates an event form the data given, delay is applied
+		 * \tparam Payload Data to be inserted in the event
+		  * \param type which type of even this is gonna be
+		  * \param delay amount of delay before the event is fired, in seconds
+		 */
+		template <typename... Payload>
+		void GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args);
+
+		//Cursor Getters -----------------------------------------------------------------------------------------------
+
+		/**
+		 * \brief Access the Event Manager to retrieve cursor data
+		 * \return Cursor position in pixels
+		 */
 		SimpleMath::Vector2 GetCursorPos() const;
-		//Setter for sprite speed
+
+		/**
+		 * \brief Updates the cursor speed with the one provided
+		 * \param new_speed Speed on X and Y axis as vector2
+		 */
 		void SetSpriteSpeed(const SimpleMath::Vector2& new_speed);
 		
 	private:
@@ -63,17 +155,52 @@ namespace AL
 		NewEventManager();
 		~NewEventManager() override;
 
-		//Key mapping
+		// Key Mapping Handlers ----------------------------------------------------------------------------------------
+
+		/**
+		 * \brief Generates appropriate event when mouse wheel is scrolled
+		 * \param mouse reference to the directX mouse state in use
+		 */
 		void MouseScrollToEvent(const Mouse::State& mouse);
+
+		/**
+		 * \brief Maps a Input State to an action
+		 * \param state If the action is happening
+		 * \param action What action is happening
+		 * \param repeat Should the action be repeated every frame
+		 */
 		void MapEntryToEvent(bool state, Input::Action action, bool repeat = false);
+		
+		/**
+		 * \brief Maps a Cursor State to an action
+		 * \param state If the action is happening
+		 * \param action What action is happening
+		 * \param repeat Should the action be repeated every frame
+		 */
 		void MapEntryToEvent(bool state, Cursor::Action action, bool repeat = false);
 
-		//The following two functions are closely linked together and provide an
-		//easy way to bulk data inside events
+		// Event Data Insertion ----------------------------------------------------------------------------------------
+		
+		/**
+		 * \brief This function takes and data, will the store all the data provided inside the event.
+		 * \tparam Payload variadic template, this is the packet of values and types that need to be inserted
+		 * \param type type of the event to be generated
+		 * \param delay before the event is fired
+		 */
 		template<typename... Payload>
-		void SetEventData(Event& event, const Payload&... args);
+		void SetEventData(const EventType& type, const float& delay, const Payload&... args);
+
+		/**
+    	 * \brief This is closely linked to the previous function and will keep recurring until all the data has been moved
+    	 * \tparam T type of the current type that is being inserted
+    	 * \tparam Payload packet or remaining data 
+    	 * \param event reference to the event
+    	 * \param byte_offset offset of bytes from the initial memory address 
+    	 */
 		template<typename T, typename... Payload>
-		void SetEventData(Event& event, int& byte_offset, const T& arg, const Payload&... args);
+		void SetEventDataIterative(Event& event, size_t& byte_offset, const T& arg, const Payload&... args);
+
+		// Data --------------------------------------------------------------------------------------------------------
 		
 		//Key mapping data
 		std::unordered_map<Input::Action, bool> input_to_action_map{};
@@ -105,3 +232,5 @@ namespace AL
 	};
 }
 
+// A TPP file for templates is added at the bottom of this H file to allow the compiler to link it properly
+#include "NewEventManager.tpp"
