@@ -11,7 +11,8 @@ OrthographicCamera::OrthographicCamera(float _near_plane, float _far_plane, Vect
 	//win_x = _win_x;
 	//win_x = _win_y;
 
-	AL::NewEventManager::AddEventReceiver(this);
+	AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_input, AL::EventType::event_cursor_move,
+		AL::EventType::event_cursor_interact, AL::EventType::event_ui, AL::EventType::event_camera);
 }
 
 OrthographicCamera::~OrthographicCamera()

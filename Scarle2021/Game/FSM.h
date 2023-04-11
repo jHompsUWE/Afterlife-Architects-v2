@@ -7,11 +7,11 @@
 /**
  * \brief This is the main game Finite State Machine, basically, our game loop!
  */
-class FSM : public IEventReceiver
+class FSM : public AL::EventReceiver
 {
 public:
     explicit FSM(GameState& _current_state);
-    ~FSM() override = default;
+    ~FSM() override;
 
     bool init();
 

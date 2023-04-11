@@ -6,10 +6,15 @@
 #include <iostream>
 
 AudioManager::AudioManager()
-= default;
+{
+    //Subscribes to the event system! 
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop);
+}
 
 AudioManager::~AudioManager()
-= default;
+{
+    AL::NewEventManager::RemoveEventReceiver(this);
+}
 
 /// <summary>
 /// Generating Audio Engine within initialisation
@@ -21,10 +26,6 @@ bool AudioManager::init()
     audEngine = std::make_unique<AudioEngine>(eflags);
     ShuffleMusic();
     PlayMusic(music_index_array[current_music_index]);
-
-    //Subscribes to the event system! 
-    AL::NewEventManager::AddEventReceiver(this);
-    
     return true;
 }
 

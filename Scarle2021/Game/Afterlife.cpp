@@ -140,7 +140,7 @@ void Afterlife::Tick()
     timer.Tick([&]()
     {
         MainUpdate(timer);
-        event_manager->BroadcastData();
+        event_manager->DispatchEvents();
         ReadInput();
     });
     Render();

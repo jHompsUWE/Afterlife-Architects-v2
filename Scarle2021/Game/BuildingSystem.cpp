@@ -31,11 +31,13 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
 
     timer = 0;
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_input, AL::EventType::event_cursor_interact,
+        AL::EventType::event_build_sys);
 }
 
 BuildingSystem::~BuildingSystem()
 {
+    AL::NewEventManager::RemoveEventReceiver(this);
 }
 
 void BuildingSystem::Tick(GameData* game_data)

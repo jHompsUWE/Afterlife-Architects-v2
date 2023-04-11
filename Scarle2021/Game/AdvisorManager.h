@@ -19,7 +19,7 @@ enum HeavenOrHell
     Adv_Heaven, Adv_Hell, Both, Neither
 };
 
-class AdvisorManager : public IEventReceiver
+class AdvisorManager : public AL::EventReceiver
 {
 public:
     AdvisorManager();

@@ -1,7 +1,7 @@
 #pragma once
 #include "UIWindow.h"
 
-class SoulViewWindow : public IEventReceiver
+class SoulViewWindow : public AL::EventReceiver
 {
 public:
 

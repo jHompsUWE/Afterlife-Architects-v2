@@ -170,7 +170,6 @@
     <ClInclude Include="ActionListGame.h" />
     <ClInclude Include="ActionListInput.h" />
     <ClInclude Include="ActionListInterface.h" />
-    <ClInclude Include="ActionListPacket.h" />
     <ClInclude Include="AdvisorManager.h" />
     <ClInclude Include="AdvisorWindow.h" />
     <ClInclude Include="Afterlife.h" />
@@ -188,8 +187,8 @@
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Observable.h" />
-    <ClInclude Include="Observer.h" />
+    <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="EventReceiver.h" />
     <ClInclude Include="fileVBGO.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FSM.h" />

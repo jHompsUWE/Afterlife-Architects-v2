@@ -11,7 +11,7 @@
 #include "GameplaySingletons.h"
 
 
-class UIPanel : public IEventReceiver
+class UIPanel : public AL::EventReceiver
 {
 public:
     UIPanel(Vector2 _panelPosition, ID3D11Device* _d3dDevice,std::string

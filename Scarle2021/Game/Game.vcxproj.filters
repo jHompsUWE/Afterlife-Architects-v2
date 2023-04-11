@@ -76,12 +76,6 @@
     <Filter Include="Afterlife\AStar Pathfinding">
       <UniqueIdentifier>{42540fc4-1d6d-4ed8-b1c3-6aede6b9032a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Afterlife\Design Patterns">
-      <UniqueIdentifier>{abf780c9-c19a-46a4-a9e9-4041b6da116a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Afterlife\Design Patterns\Observer Pattern">
-      <UniqueIdentifier>{c4b3dfc8-0f70-4f3b-b161-b6d9e72a6d2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Afterlife\WorldGen">
       <UniqueIdentifier>{f2e63d2e-da66-4198-9fc6-b866dc5b5a87}</UniqueIdentifier>
     </Filter>
@@ -136,7 +130,10 @@
     <Filter Include="Afterlife\User Interface\UIWindow">
       <UniqueIdentifier>{4bbe157e-0adb-4290-a984-36c803e7d3bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Afterlife\Managers\Events\Input">
+    <Filter Include="Afterlife\Managers\Events\Observer Pattern">
+      <UniqueIdentifier>{c4b3dfc8-0f70-4f3b-b161-b6d9e72a6d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Afterlife\Managers\Events\Input Manager">
       <UniqueIdentifier>{38a97d79-688f-4a97-9d23-5cd00ac8c6bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -324,23 +321,17 @@
     <ClInclude Include="ActionListInterface.h">
       <Filter>Afterlife\Managers\Events\Action Lists</Filter>
     </ClInclude>
-    <ClInclude Include="ActionListPacket.h">
-      <Filter>Afterlife\Managers\Events\Action Lists</Filter>
-    </ClInclude>
     <ClInclude Include="Event.hpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClInclude>
     <ClInclude Include="NewEventManager.h">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Packet.hpp">
-      <Filter>Afterlife\Managers\Events\Event Manager</Filter>
+    <ClInclude Include="EventReceiver.h">
+      <Filter>Afterlife\Managers\Events\Observer Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Afterlife\Design Patterns\Observer Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Observable.h">
-      <Filter>Afterlife\Design Patterns\Observer Pattern</Filter>
+    <ClInclude Include="EventDispatcher.h">
+      <Filter>Afterlife\Managers\Events\Observer Pattern</Filter>
     </ClInclude>
     <ClInclude Include="ActionListBuildSys.h">
       <Filter>Afterlife\Managers\Events\Action Lists</Filter>
@@ -427,7 +418,10 @@
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Afterlife\Managers\Events\Input</Filter>
+      <Filter>Afterlife\Managers\Events\Input Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.hpp">
+      <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -618,7 +612,7 @@
       <Filter>Afterlife\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Afterlife\Managers\Events\Input</Filter>
+      <Filter>Afterlife\Managers\Events\Input Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

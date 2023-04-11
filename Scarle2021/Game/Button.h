@@ -6,7 +6,7 @@
 #include "UIButtonInterFace.h"
 
 template<typename Action1, typename Action2>
-class Button : public UIButtonInterFace, public IEventReceiver
+class Button : public UIButtonInterFace, public AL::EventReceiver
 {
 public:
 	Button(Vector2 _buttonPosition, ID3D11Device* _d3dDevice,std::string
@@ -32,7 +32,7 @@ public:
 		buttonText->SetPos(Vector2(button_pos.x,button_pos.y));
 		buttonText->SetScale(Vector2(_setScale));
 
-		AL::NewEventManager::AddEventReceiver(this);
+		AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	};
 	
 	Button(Vector2 _buttonPosition, ID3D11Device* _d3dDevice,std::string
@@ -51,7 +51,7 @@ public:
 		button_pos = _buttonPosition - button_res/2;
 		buttonBackGround->SetPos(button_pos);
 
-		AL::NewEventManager::AddEventReceiver(this);
+		AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	}
 	
 	~Button() override

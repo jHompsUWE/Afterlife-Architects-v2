@@ -24,6 +24,16 @@ namespace AL
 	
 	// Static ----------------------------------------------------------------------------------------------------------
 	
+	void NewEventManager::AddEventReceiver(EventReceiver* receiver)
+	{
+		Get().AddReceiver(receiver);
+	}
+	
+	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver)
+	{
+		Get().RemoveReceiver(receiver);
+	}
+
 	std::vector<Event>& NewEventManager::GetEventListSt()
 	{
 		return Get().GetEventList();
@@ -32,16 +42,6 @@ namespace AL
 	void NewEventManager::FlushEventListSt()
 	{
 		Get().FlushEventList();
-	}
-	
-	void NewEventManager::AddEventReceiver(IEventReceiver* observer)
-	{
-		Get().AddObserver(observer);
-	}
-	
-	void NewEventManager::RemoveEventReceiver(IEventReceiver* observer)
-	{
-		Get().RemoveObserver(observer);
 	}
 
 	// Event List ------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ namespace AL
 
 	// Data Sharing ----------------------------------------------------------------------------------------------------
 	
-	void NewEventManager::BroadcastData()
+	void NewEventManager::DispatchEvents()
 	{
 		//Empties the event list inside the dispatch list
 		std::vector<Event> dispatch_list = std::move(event_list);
@@ -72,9 +72,13 @@ namespace AL
 			if (current_ev.delay <= 0)
 			{
 				//Event is dispatched to each observer
-				for (const auto& observer : observers)
+				for (const auto& receiver : receiver_list)
 				{
-					observer->ReceiveEvents(current_ev);
+					//Fires the event only if the receiver matches the type it is listening for 
+					if(receiver.first == current_ev.type)
+					{
+						receiver.second->ReceiveEvents(current_ev);
+					}
 				}
 
 				//After dispatch the event is erased

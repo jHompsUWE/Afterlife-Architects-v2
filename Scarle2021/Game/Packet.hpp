@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include <vector>
-#include "ActionListPacket.h"
 
 namespace AL
 {

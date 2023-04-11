@@ -76,7 +76,8 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         DataManager::GetD3DDevice(),"Gate_T3_Heaven_4x4",
         AL::EventType::event_build_sys,AL::BuildSys::structure, Gate_T3,Vector2(0.5,0.5)));
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
+
 }
 
 UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -96,12 +97,13 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
     window_pos = _windowPosition - window_res/2;
     windowBackGround->SetPos(window_pos);
     
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this,AL::EventType::event_cursor_interact);
+
 }
 
 UIWindow::UIWindow()
 {
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
 }
 
 UIWindow::~UIWindow()
@@ -200,21 +202,10 @@ void UIWindow::render(DrawData2D* _drawData)
 
 void UIWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    //Saves the state of the action
+    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
-        case AL::event_input:
-            break;
-
-    case AL::event_cursor_interact:
-            //Saves the state of the action
-            if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-            {
-                toggle_click = al_event.cursor_interact.active;
-            }
-            break;
-
-        default:
-            break;
+        toggle_click = al_event.cursor_interact.active;
     }
 }
 

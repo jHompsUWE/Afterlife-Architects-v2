@@ -18,6 +18,18 @@ namespace AL
     	Get().GenerateEventWithDelay(type, delay, args...);
     }
 
+	template <typename... Payload>
+	void NewEventManager::AddEventReceiver(EventReceiver* receiver, const Payload&... types)
+    {
+    	Get().AddReceiver(receiver, types...);
+    }
+
+	template <typename... Payload>
+	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver, const Payload&... types)
+    {
+    	Get().AddReceiver(receiver, types...);
+    }
+
     // Event Generation ------------------------------------------------------------------------------------------------
 	
     template <typename ... Payload>

@@ -3,10 +3,14 @@
 #include <iostream>
 
 AdvisorManager::AdvisorManager()
-= default;
+{
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
+}
 
 AdvisorManager::~AdvisorManager()
-= default;
+{
+    AL::NewEventManager::RemoveEventReceiver(this);
+}
 
 /// <summary>
 /// Initialise advisors with UI ref
@@ -16,8 +20,7 @@ bool AdvisorManager::init(AdvisorWindow* adv_wind)
 {
     srand(time(0));
     advisor_window = adv_wind;
-
-    AL::NewEventManager::AddEventReceiver(this);
+    
     UpdateButtons();
     return 0;
 }

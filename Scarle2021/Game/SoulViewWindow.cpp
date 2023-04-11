@@ -36,7 +36,7 @@ SoulViewWindow::SoulViewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice
     text_vec[3]->SetPos(Vector2(window_pos.x + 17, window_pos.y+234));
     text_vec[3]->SetScale(Vector2(_setScale * 0.2));
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
 }
 
 SoulViewWindow::~SoulViewWindow()
@@ -145,21 +145,10 @@ void SoulViewWindow::render(DrawData2D* _drawData)
 
 void SoulViewWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    //Saves the state of the action
+    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
-    case AL::event_input:
-        break;
-
-    case AL::event_cursor_interact:
-        //Saves the state of the action
-        if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-        {
-            toggle_click = al_event.cursor_interact.active;
-        }
-        break;
-
-    default:
-        break;
+        toggle_click = al_event.cursor_interact.active;
     }
 }
 

@@ -140,7 +140,7 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     text[2]->SetColour(Color((float*)&Colors::Green));
 
     //Subscribe for events
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
 }
 
 UIPanel::~UIPanel()
@@ -248,21 +248,9 @@ void UIPanel::render(DrawData2D* _drawData)
 
 void UIPanel::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
-    case AL::event_input:
-        break;
-
-    case AL::event_cursor_interact:
-        //Saves the state of the action
-        if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-        {
-            toggle_click_panel = al_event.cursor_interact.active;
-        }
-        break;
-
-    default:
-        break;
+        toggle_click_panel = al_event.cursor_interact.active;
     }
 }
 

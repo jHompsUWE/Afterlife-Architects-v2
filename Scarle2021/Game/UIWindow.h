@@ -8,7 +8,7 @@
 #include "BuildingManager.h"
 
 
-class UIWindow : public IEventReceiver
+class UIWindow : public AL::EventReceiver
 {
 public:
     UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,

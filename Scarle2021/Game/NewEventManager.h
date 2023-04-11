@@ -2,8 +2,8 @@
 
 #include "gamedata.h"
 #include "Event.hpp"
-#include "Observable.h"
-#include "Observer.h"
+#include "EventDispatcher.h"
+#include "EventReceiver.h"
 #include "Packet.hpp"
 #include "Vector2Int.h"
 
@@ -12,7 +12,7 @@
 
 namespace AL
 {
-	class NewEventManager : public IObservable<IEventReceiver>
+	class NewEventManager : public EventDispatcher
 	{
 	public:
 		//Deleted copy constructor and assignment operator
@@ -44,6 +44,34 @@ namespace AL
 		static void GenerateEventWithDelaySt(const EventType& type, const float& delay, const Payload&... args);
 
 		/**
+		 * \brief Subscribe a receiver to listen for specific events
+		 * \tparam Payload Event Typs to listen to
+		 * \param receiver ptr to the receiver 
+		 * \param types list of types
+		*/
+		template <typename... Payload>
+		static void AddEventReceiver(EventReceiver* receiver, const Payload&... types);
+
+		/**
+		 * \brief Unsubscribes a receiver from listening to specific events
+		 * \tparam Payload Event Typs to unsubscribe from
+		 * \param receiver ptr to the receiver 
+		 * \param types list of types
+		 */
+		template <typename... Payload>
+		static void RemoveEventReceiver(EventReceiver* receiver, const Payload&... types);
+		
+		/**
+		 * \param receiver to be subscribed to receive events
+		 */
+		static void AddEventReceiver(EventReceiver* receiver);
+
+		/**
+	     * \param receiver to be unsubscribed from receiving events
+	     */
+		static void RemoveEventReceiver(EventReceiver* receiver);
+		
+		/**
 		 * \return static func to return the event list
 		 */
 		static std::vector<Event>& GetEventListSt();
@@ -52,16 +80,6 @@ namespace AL
 		 * \brief Flushes the event list
 		 */
 		static void FlushEventListSt();
-
-		/**
-		 * \param observer to be subscribed to receive events
-		 */
-		static void AddEventReceiver(IEventReceiver* observer);
-
-		/**
-	     * \param observer to be unsubscribed from receiving events
-	     */
-		static void RemoveEventReceiver(IEventReceiver* observer);
 
 		// Public ------------------------------------------------------------------------------------------------------
 
@@ -78,9 +96,10 @@ namespace AL
 		//Data sharing -------------------------------------------------------------------------------------------------
 
 		/**
-		 * \brief Routes the events to each of the observers
+		 * \brief Routes the events to each of the receivers
+		 * Type check is done to provide the events receivers have only subscribed for 
 		 */
-		void BroadcastData() override;
+		void DispatchEvents() override;
 
 		//Input polling ------------------------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@
 #include "UIWindow.h"
 #include "NewEventManager.h"
 
-class AdvisorWindow : public IEventReceiver
+class AdvisorWindow : public AL::EventReceiver
 {
 public:
 

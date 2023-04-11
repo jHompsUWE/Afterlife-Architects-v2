@@ -13,7 +13,7 @@
 
 #include "GameplaySingletons.h"
 
-class BuildingSystem : public IEventReceiver
+class BuildingSystem : public AL::EventReceiver
 {
 public:
 	BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device* GD);

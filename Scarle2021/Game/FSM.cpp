@@ -13,12 +13,18 @@ FSM::FSM(GameState& _current_state) : current_state(_current_state)
     state_array[gs_level_select] = std::make_unique<LevelSelect>();
     state_array[gs_gameplay] = std::make_unique<GamePlay>();
     state_array[gs_game_over] = std::make_unique<GameOver>();
+
+    //Subscribe for all events as they are passed to gamestates
+    AL::NewEventManager::AddEventReceiver(this);
+}
+
+FSM::~FSM()
+{
+    AL::NewEventManager::RemoveEventReceiver(this);
 }
 
 bool FSM::init()
 {
-    AL::NewEventManager::AddEventReceiver(this);
-    
     //Runs each state and its init function
     for (auto& state : state_array)
     {

@@ -11,7 +11,7 @@
  * \brief This is the main game Audio Manager, controlling all sound events/calls.
  */
 
-class AudioManager : public IEventReceiver
+class AudioManager : public AL::EventReceiver
 {
 public:
     AudioManager();
