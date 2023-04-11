@@ -169,7 +169,6 @@ void Afterlife::ReadInput()
     const auto _mouse = mouse->GetState();
     
     //Sends input to the event manager
-    event_manager->FlushEventList();
     event_manager->PollKeyboard(_keyboard);
     event_manager->PollMouse(_mouse);
     event_manager->PollGamepad(_gamepad, game_data->delta_time);
@@ -296,7 +295,7 @@ void Afterlife::OnWindowSizeChanged(int _width, int _height)
     CreateResources();
 
     // TODO: Game main_window is being resized.
-    event_manager->GenerateInterfaceEvent(AL::UI::Action::resize_ui);
+    event_manager->GenerateEvent(AL::EventType::event_ui, AL::UI::Action::resize_ui);
     event_manager->SetSpriteSpeed(cursor_sprite->ReSize((int)output_width, (int)output_height));
 }
 

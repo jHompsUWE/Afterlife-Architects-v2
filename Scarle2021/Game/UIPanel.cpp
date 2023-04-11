@@ -21,8 +21,7 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     economy_manager = GameplaySingletons::GetEconomyManager();
     
     // UI game play buttons
-
-    //TODO:: THIS TO FICS TOO
+    
     //row 1...................
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 51,panel_pos.y + 84),DataManager::GetD3DDevice()
         ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Green ,Vector2(0.8,0.7)));

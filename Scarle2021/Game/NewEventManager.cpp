@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "DataManager.h"
+
 namespace AL
 {
 	//Default private constructor, no need to initialize inherited class
@@ -58,30 +60,35 @@ namespace AL
 	
 	void NewEventManager::BroadcastData()
 	{
-		//Gets a copy to prevent messing with the loop
-		const auto event_list_copy = event_list;
-		
-		FlushEventList();
+		//Empties the event list inside the dispatch list
+		std::vector<Event> dispatch_list = std::move(event_list);
 
-		//Batch of events N1
-		for (const auto& al_event : event_list_copy)
+		//Iterates through the events but backwards
+		for (int i = dispatch_list.size() - 1; i >= 0; --i)
 		{
-			for (const auto& observer : observers)
+			auto& current_ev = dispatch_list[i];
+
+			//Fires the event if the delay is minus equals 0
+			if (current_ev.delay <= 0)
 			{
-				observer->ReceiveEvents(al_event);
+				//Event is dispatched to each observer
+				for (const auto& observer : observers)
+				{
+					observer->ReceiveEvents(current_ev);
+				}
+
+				//After dispatch the event is erased
+				dispatch_list.erase(dispatch_list.begin() + i);
+			}
+			else
+			{
+				//Decreases delay
+				current_ev.delay -= DataManager::GetGD()->delta_time;
 			}
 		}
 
-		//Batch of events n2
-		for (const auto& al_event : event_list)
-		{
-			for (const auto& observer : observers)
-			{
-				observer->ReceiveEvents(al_event);
-			}
-		}
-		
-		FlushEventList();
+		//Merges the unfired events in the dispatch list with the newly generated and going to be generated events
+		event_list.insert(event_list.end(), dispatch_list.begin(), dispatch_list.end());
 	}
 
 	// Input Polling ---------------------------------------------------------------------------------------------------
@@ -218,35 +225,6 @@ namespace AL
 			//Generate Event accordingly
 			GenerateEvent(event_cursor_move, cursor_pos.x, cursor_pos.y);
 		}
-	}
-	
-	// BUTTON WORK AROUND ----------------------------------------------------------------------------------------------
-	
-	// TODO::IMPLEMENT THIS PROPERLY
-	void NewEventManager::GenerateEventSoundStart(const char filename[32], const float& volume, const bool& loop)
-	{
-		GenerateEvent(event_sound_start, filename, volume, loop);
-	}
-
-	void NewEventManager::GenerateEventSoundStop(const char filename[32])
-	{
-		GenerateEvent(event_sound_stop, filename);
-	}
-
-	void NewEventManager::GenerateInterfaceEvent(const UI::Action& action)
-	{
-		GenerateEvent(event_ui, action);
-	}
-
-	void NewEventManager::GenerateBuildSysEvent(const BuildSys::Section& section, const StructureType& structure,
-		const ZoneType& zone)
-	{
-		GenerateEvent(event_build_sys, section, structure, zone);
-	}
-
-	void NewEventManager::GenerateGameEvent(const Game::Action& action)
-	{
-		GenerateEvent(event_game, action);
 	}
 
 	// Key Mapping Handlers --------------------------------------------------------------------------------------------

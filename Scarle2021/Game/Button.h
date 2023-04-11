@@ -65,6 +65,7 @@ public:
 	void ReceiveEvents(const AL::Event& al_event) override
 	{
 		if(!interactable) return;
+		
 		switch (al_event.type)
 		{
 		case AL::event_cursor_move:
@@ -84,53 +85,24 @@ public:
 					if(isInside(mouse_pos))
 					{
 						close_window = true;
-						//Specific behaviour for specific events
-						switch (saved_event)
+
+						//Evaluates the correct event to generate, if the second value is int, it means it has to be
+						//scrapped and the event will be generated with a single value
+						if constexpr (std::is_same<Action2, int>::value)
 						{
-						case AL::event_sound_start:
-							//AL::NewEventManager::Get().GenerateEventSoundStart(action_1, action_2, false);
-							break;
-					
-						case AL::event_sound_stop:
-							//AL::NewEventManager::Get().GenerateEventSoundStop(action_1);
-							break;
-					
-						case AL::event_ui:
-							std::cout << "diomerda" << std::endl;
-							AL::NewEventManager::Get().GenerateInterfaceEvent((AL::UI::Action)action_1);
-							break;
-					
-						case AL::event_build_sys:
-
-							switch ((AL::BuildSys::Section)action_1)
-							{
-								case AL::BuildSys::unknown:
-									break;
-
-								case AL::BuildSys::structure:
-									
-									AL::NewEventManager::Get().GenerateBuildSysEvent(AL::BuildSys::Section::structure,
-									(StructureType)action_2, (ZoneType)action_2);
-									break;
-
-								case AL::BuildSys::zone:
-									
-									AL::NewEventManager::Get().GenerateBuildSysEvent(AL::BuildSys::Section::zone,
-									(StructureType)action_2, (ZoneType)action_2);
-									break;
-
-						default:
-							break;
-							}
-					
-						case AL::event_game:
-							AL::NewEventManager::Get().GenerateGameEvent((AL::Game::Action)action_1);
-							break;
-					
-						default:
-							break;
+							AL::NewEventManager::GenerateEventSt(saved_event, action_1);
 						}
-			
+						//If the first action is from the building system, generate a building event
+						else if constexpr (std::is_same<Action1, AL::BuildSys::Section>::value)
+						{
+							AL::NewEventManager::GenerateEventSt(saved_event, (AL::BuildSys::Section)action_1,
+								(StructureType)action_2, (ZoneType)action_2);
+						}
+						//For any other iteration generate a normal event
+						else
+						{
+							AL::NewEventManager::GenerateEventSt(saved_event, action_1, action_2);
+						}
 					}
 				}
 			}

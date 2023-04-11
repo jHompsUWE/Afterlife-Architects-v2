@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "gamedata.h"
 #include "Event.hpp"
@@ -107,15 +107,6 @@ namespace AL
 		 * Based on the last input registered, the input will be automatically set to controller or m&k
 		 */
 		void UpdateCursorPos(const int& window_width, const int& window_height);
-
-		// Button Work Around ------------------------------------------------------------------------------------------
-		
-		// TODO::IMPLEMENT THIS PROPERLY
-		void GenerateEventSoundStart(const char filename[32], const float& volume, const bool& loop);
-		void GenerateEventSoundStop(const char filename[32]);
-		void GenerateInterfaceEvent(const UI::Action& action);
-		void GenerateBuildSysEvent(const BuildSys::Section& section, const StructureType& structure, const ZoneType& zone);
-		void GenerateGameEvent(const Game::Action& action);
 
 		// Event Generation --------------------------------------------------------------------------------------------
 
