@@ -78,7 +78,6 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 			default:
 				break;
 		}
-
 		break;
 
 	case AL::event_cursor_move:
@@ -119,6 +118,7 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 			ZoomOut(10);
 			break;
 		}
+		break;
 
 	case AL::event_camera:
 		//Calles the move functions with a scalar to have a scaled controller movement
