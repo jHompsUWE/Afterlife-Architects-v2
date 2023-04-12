@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Gameobject.h"
-#include "EventReceiver.h"
+#include "EventReceiver.hpp"
 
 class OrthographicCamera : public GameObject, public AL::EventReceiver
 {

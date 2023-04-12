@@ -13,6 +13,7 @@
 
 //Player for debug purposes
 #include "NewEventManager.h"
+#include "InputManager.h"
 #include "Player.h"
 
 //Json file manager
@@ -58,6 +59,7 @@ private:
     // Game Loop
     void MainUpdate(DX::StepTimer const& timer);
     void Render();
+    void ReadInput(); //Get current Mouse and Keyboard states
     
     // Device Manager
     void Clear();
@@ -96,7 +98,7 @@ private:
     IEffectFactory* effect_factory = NULL;
 
     // basic keyboard and mouse input system
-    void ReadInput(); //Get current Mouse and Keyboard states
+    
     std::unique_ptr<Keyboard> keyboard{};
     std::unique_ptr<Mouse> mouse{};
     std::unique_ptr<GamePad> gamepad{};
@@ -105,12 +107,9 @@ private:
     //Instance of the FSM
     std::unique_ptr<FSM> finite_state_machine = nullptr;
     std::unique_ptr<AudioManager> audio_manager = nullptr;
+    std::unique_ptr<AL::InputManager> input_manager = nullptr;
 
     //Pointer to the Event Manager
     AL::NewEventManager* event_manager = nullptr;
-
-    //Out mouse pointer! Yippie!
-    ImageGO2D* cursor_sprite = nullptr;
-    Vector2 cursor_offset {0,0};
 };
 

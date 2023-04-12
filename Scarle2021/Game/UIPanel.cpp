@@ -230,20 +230,18 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIPanel::render(DrawData2D* _drawData)
 {
-        
     //renders buttons
     for (auto& button : buttons)
     {
         button->render(_drawData);
-    }
-    
+    }  
+   
     panel_back_ground->Draw(_drawData);
     // updates texts
     for (auto& text : text)
     {
         text->Draw(_drawData);
     }
-   
 }
 
 void UIPanel::ReceiveEvents(const AL::Event& al_event)
@@ -256,7 +254,16 @@ void UIPanel::ReceiveEvents(const AL::Event& al_event)
 
 void UIPanel::setPostion(Vector2 _panelPosition)
 {
-   panel_pos = _panelPosition;
+    //Updates the position of the panel with a 
+    const Vector2 offset = _panelPosition - panel_pos;
+    panel_back_ground->SetPos(_panelPosition);
+
+    for (auto& button : buttons)
+    {
+        button->setPostion(button->getPosition() + offset);
+    }
+
+    panel_pos = _panelPosition;
 }
 
 void UIPanel::setScale(Vector2& _newScale)

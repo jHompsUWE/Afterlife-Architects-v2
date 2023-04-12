@@ -22,7 +22,7 @@ bool GamePlay::init()
         .second*0.5),DataManager::GetD3DDevice(),"","Window",Vector2(0.5,0.5));
     
     //build panel
-    main_panel = new UIPanel(Vector2(0,30),DataManager::GetD3DDevice(),"UIPanel",Vector2(1,1));
+    main_panel = new UIPanel(Vector2(1000,30),DataManager::GetD3DDevice(),"UIPanel",Vector2(1,1));
     
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
@@ -74,6 +74,7 @@ void GamePlay::Update(GameData* game_data)
 {   
     if (do_once)
     {
+        main_panel->setPostion(Vector2(0, 30));
         ResizeUI();
         do_once = false;
     }

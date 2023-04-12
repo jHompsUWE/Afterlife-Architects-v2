@@ -187,8 +187,7 @@
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="EventDispatcher.h" />
-    <ClInclude Include="EventReceiver.h" />
+    <ClInclude Include="EventReceiver.hpp" />
     <ClInclude Include="fileVBGO.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FSM.h" />

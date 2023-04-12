@@ -1,18 +1,13 @@
 #pragma once
 
-#include "gamedata.h"
 #include "Event.hpp"
-#include "EventDispatcher.h"
-#include "EventReceiver.h"
-#include "Packet.hpp"
-#include "Vector2Int.h"
+#include "EventReceiver.hpp"
 
 #include <unordered_map>
-#include <SimpleMath.h>
 
 namespace AL
 {
-	class NewEventManager : public EventDispatcher
+	class NewEventManager
 	{
 	public:
 		//Deleted copy constructor and assignment operator
@@ -92,40 +87,52 @@ namespace AL
 		 * \brief Clear all data from the event list
 		 */
 		void FlushEventList();
+
+		// Unfiltered Subscription Handlers ----------------------------------------------------------------------------
+	
+		/**
+		 * \brief Subscribes the provided receiver to every event type available
+		 * \param receiver Pointer to the receiver to subscribe
+		 */
+		void AddReceiver(EventReceiver* receiver);
+
+		/**
+		 * \brief Fully unsubscribes a receiver from listening to any event
+		 * \param receiver Pointer to the receiver to unsubscribe
+		 */
+		void RemoveReceiver(EventReceiver* receiver);
+
+		// Filtered Subscription Handlers ------------------------------------------------------------------------------
+
+		/**
+		 * \brief 
+		 * \tparam T first type to subscribe the current receiver to
+		 * \tparam Payload Rest of types to subscribe the current receiver to
+		 * \param receiver prt to the receiver to add
+		 * \param type first type 
+		 * \param types rest of types
+		 */
+		template <typename T, typename... Payload>
+		void AddReceiver(EventReceiver* receiver, const T& type, const Payload&... types);
+	
+		/**
+		 * \brief 
+		 * \tparam T first type to unsubscribe the current receiver from
+		 * \tparam Payload Rest of types to unsubscribe the current receiver from
+		 * \param receiver prt to the receiver to unsubscribe
+		 * \param type first type 
+		 * \param types rest of types
+		 */
+		template <typename T, typename... Payload>
+		void RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types);
 		
-		//Data sharing -------------------------------------------------------------------------------------------------
+		// Event Dispatching -------------------------------------------------------------------------------------------
 
 		/**
 		 * \brief Routes the events to each of the receivers
 		 * Type check is done to provide the events receivers have only subscribed for 
 		 */
-		void DispatchEvents() override;
-
-		//Input polling ------------------------------------------------------------------------------------------------
-
-		/**
-		 * \brief To map keyboard entries to events
-		 * \param keyboard state in this current frame
-		 */
-		void PollKeyboard(Keyboard::State keyboard);
-
-		/**
-		 * \brief to map mouse entries to events
-		 * \param mouse state in this current frame
-		 */
-		void PollMouse(Mouse::State mouse);
-
-		/**
-		 * \brief to map gamepad entries to events
-		 * \param gamepad state in this current frame
-		 */
-		void PollGamepad(GamePad::State gamepad, const float& dt);
-
-		/**
-		 * @brief Checks the position of the various pointing devices and generates an event accordingly
-		 * Based on the last input registered, the input will be automatically set to controller or m&k
-		 */
-		void UpdateCursorPos(const int& window_width, const int& window_height);
+		void DispatchEvents();
 
 		// Event Generation --------------------------------------------------------------------------------------------
 
@@ -145,50 +152,12 @@ namespace AL
 		 */
 		template <typename... Payload>
 		void GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args);
-
-		//Cursor Getters -----------------------------------------------------------------------------------------------
-
-		/**
-		 * \brief Access the Event Manager to retrieve cursor data
-		 * \return Cursor position in pixels
-		 */
-		SimpleMath::Vector2 GetCursorPos() const;
-
-		/**
-		 * \brief Updates the cursor speed with the one provided
-		 * \param new_speed Speed on X and Y axis as vector2
-		 */
-		void SetSpriteSpeed(const SimpleMath::Vector2& new_speed);
 		
 	private:
 		//Private constructor and de-constructor
 		NewEventManager();
-		~NewEventManager() override;
-
-		// Key Mapping Handlers ----------------------------------------------------------------------------------------
-
-		/**
-		 * \brief Generates appropriate event when mouse wheel is scrolled
-		 * \param mouse reference to the directX mouse state in use
-		 */
-		void MouseScrollToEvent(const Mouse::State& mouse);
-
-		/**
-		 * \brief Maps a Input State to an action
-		 * \param state If the action is happening
-		 * \param action What action is happening
-		 * \param repeat Should the action be repeated every frame
-		 */
-		void MapEntryToEvent(bool state, Input::Action action, bool repeat = false);
+		~NewEventManager();
 		
-		/**
-		 * \brief Maps a Cursor State to an action
-		 * \param state If the action is happening
-		 * \param action What action is happening
-		 * \param repeat Should the action be repeated every frame
-		 */
-		void MapEntryToEvent(bool state, Cursor::Action action, bool repeat = false);
-
 		// Event Data Insertion ----------------------------------------------------------------------------------------
 		
 		/**
@@ -212,33 +181,8 @@ namespace AL
 
 		// Data --------------------------------------------------------------------------------------------------------
 		
-		//Key mapping data
-		std::unordered_map<Input::Action, bool> input_to_action_map{};
-		std::unordered_map<Cursor::Action, bool> cursor_to_action_map{};
-
-		//events
+		std::vector<std::pair<EventType, EventReceiver*>> receiver_list{};
 		std::vector<Event> event_list{};
-
-		//Input data
-		float cursor_speed = 0.15f;
-		int mouse_scroll = 0;
-		
-		//Position of the cursor on the screen
-		Vector2Int prev_cursor_pos {0,0};
-		Vector2Int cursor_pos {540,360};
-
-		//Mouse position handling
-		Vector2Int prev_mouse_pos {0,0};
-		Vector2Int mouse_pos {0,0};
-
-		//Controller position handling
-		Vector2Int prev_controller_pos {0,0};
-		SimpleMath::Vector2 controller_pos_float {0,0};
-		Vector2Int controller_pos {0,0};
-
-		//Keeping track of controller usage
-		bool controller_active = false;
-		int dead_zone = 0;
 	};
 }
 

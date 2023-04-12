@@ -327,10 +327,7 @@
     <ClInclude Include="NewEventManager.h">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="EventReceiver.h">
-      <Filter>Afterlife\Managers\Events\Observer Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="EventDispatcher.h">
+    <ClInclude Include="EventReceiver.hpp">
       <Filter>Afterlife\Managers\Events\Observer Pattern</Filter>
     </ClInclude>
     <ClInclude Include="ActionListBuildSys.h">
