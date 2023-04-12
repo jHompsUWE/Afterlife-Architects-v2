@@ -366,6 +366,9 @@
   <ItemGroup>
     <ImageContentTask Include="Cursor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Window_file.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

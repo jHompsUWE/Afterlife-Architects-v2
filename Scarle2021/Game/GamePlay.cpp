@@ -7,12 +7,13 @@ GamePlay::GamePlay()
 
 GamePlay::~GamePlay()
 {
-    delete ui_frame;
+    delete window_boarder;
     delete window_one_gate;
     delete advisor_window;
     delete window_two_karma_station;
     delete window_three_topias;
     delete window_four_training_centers_window;
+    delete window_file;
 }
 
 bool GamePlay::init()
@@ -31,7 +32,8 @@ bool GamePlay::init()
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
     //karma station
-    window_two_karma_station = new KarmaStationWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+    window_two_karma_station = new KarmaStationWindow
+    (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
     //topias
@@ -39,14 +41,18 @@ bool GamePlay::init()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
     //training center
-    window_four_training_centers_window = new TrainingCentersWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+    window_four_training_centers_window = new TrainingCentersWindow
+    (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+
+    //window border file button
+    window_file = new Window_file(Vector2(0,35),DataManager::
+        GetD3DDevice(),"","Window_file",Vector2(1,1));
     
     // ui frame init
-    ui_frame = new ImageGO2D("UIFrame",DataManager::GetD3DDevice());
-    ui_frame->SetOrigin(Vector2(0,0));
-    ui_frame->SetScale(Vector2(1,1));
+    window_boarder = new WindowBoarder(Vector2(0,0),
+        DataManager::GetD3DDevice(),"","UIFrame",Vector2(1,1));
     
     // Mouse
     mouse_screen_pos.z = 0;
@@ -58,15 +64,17 @@ bool GamePlay::init()
     // Building System
     building_system = std::make_unique<BuildingSystem>(mouse_world_pos, DataManager::GetD3DDevice());
     do_once = true;
-
+    
     adv_man = std::make_unique<AdvisorManager>();
     adv_man->init(advisor_window);
-
+    
+    //window visability
     window_one_gate->setVisibility(false);
     window_two_karma_station->setVisibility(false);
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
-    
+    window_boarder->setVisibility(true);
+    //window_file->setVisibility(true);
     return true;
 }
 
@@ -93,6 +101,8 @@ void GamePlay::Update(GameData* game_data)
     window_three_topias->update(game_data,mouse_pos);
     //training centre
     window_four_training_centers_window->update(game_data,mouse_pos);
+    //window_file
+    window_file->update(game_data,mouse_pos);
 
     // Economy
     economy_manager->Tick(game_data);
@@ -170,6 +180,13 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 soul_view->generateRandSoul();
                 soul_view->is_visible = !soul_view->is_visible;
                 break;
+            case AL::UI::window_file:
+                window_file->setVisibility(!window_file->getVisibility());
+                break;
+            case AL::UI::file_exit_game:
+                PostQuitMessage(0);
+                std::cout<<"Help"<<std::endl;
+                 break;
             
             default:
                 break;
@@ -189,7 +206,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
 
 void GamePlay::Render2D(DrawData2D* draw_data2D)
 {
-    ui_frame->Draw(draw_data2D);
+    
     
     //render advisor
     advisor_window->render(draw_data2D);
@@ -204,13 +221,21 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
     
     //karma station
     window_two_karma_station->render(draw_data2D);
+    
     //Topias
     window_three_topias->render(draw_data2D);
+    
     //training centre
     window_four_training_centers_window->render(draw_data2D);
-    
+        
     //renders panel
     main_panel->render(draw_data2D);
+    
+    //window_file
+    window_file->render(draw_data2D);
+
+    //UI boarder
+    window_boarder->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)
@@ -225,7 +250,8 @@ void GamePlay::UpdateMousePos(DrawData* draw_data)
 {
     // Translate screen pos to world pos
     // TODO: update the screen width and height
-    Vector3 temp_world_pos = XMVector3Unproject(mouse_screen_pos, 0, 0, screen_size.x, screen_size.y,
+    Vector3 temp_world_pos = XMVector3Unproject(mouse_screen_pos,
+        0, 0, screen_size.x, screen_size.y,
         draw_data->main_camera->GetNearZ(),
         draw_data->main_camera->GetFarZ(),
         draw_data->main_camera->GetProj(),
@@ -244,8 +270,9 @@ void GamePlay::UpdateMousePos(DrawData* draw_data)
 
 void GamePlay::ResizeUI()
 {
+    //resize UI based on window resolution 
     screen_size = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
-    ui_frame->ReSize(screen_size.x, screen_size.y);
+    window_boarder->reSize(screen_size);
     window_one_gate->reSize(screen_size);
     main_panel->reSize(screen_size);
     advisor_window->reSize(screen_size);
@@ -253,5 +280,6 @@ void GamePlay::ResizeUI()
     window_two_karma_station->reSize(screen_size);
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);
+    window_file->reSize(screen_size);
 }
 

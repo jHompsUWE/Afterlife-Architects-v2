@@ -7,7 +7,11 @@ namespace AL
 		enum Action
 		{
 			unknown = 0, //Not handled
+
+			//resize all UI
 			resize_ui,
+			
+			//UI windows
 			window_gate,
 			window_karma_station,
 			window_topias,
@@ -20,8 +24,26 @@ namespace AL
 			window_delete_structures,
 			window_advisors,
 			window_soulview,
+
+			//ui boarder UI
+			window_file,
+			window_global,
+			window_window,
+			window_tutorial,
+			
+			//file window
+			file_Save,
+			file_load,
+			file_load_scenario,
+			file_delete_game,
+			file_new_game,
+			file_exit_game,
+			
+			//zoom buttons
 			button_zoom_in,
 			button_zoom_out,
+			
+			//adviser buttons
 			adv_option1,
 			adv_option2,
 			adv_option3,

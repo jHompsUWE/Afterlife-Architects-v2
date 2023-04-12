@@ -258,6 +258,8 @@
     <ClInclude Include="vertex.h" />
     <ClInclude Include="VibeTilemap.h" />
     <ClInclude Include="VibeTile.h" />
+    <ClInclude Include="WindowBoarder.h" />
+    <ClInclude Include="Window_file.h" />
     <ClInclude Include="ZoneType.h" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +331,8 @@
     <ClCompile Include="VBSnail.cpp" />
     <ClCompile Include="VibeTilemap.cpp" />
     <ClCompile Include="VibeTile.cpp" />
+    <ClCompile Include="WindowBoarder.cpp" />
+    <ClCompile Include="Window_file.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NewEventManager.tpp" />

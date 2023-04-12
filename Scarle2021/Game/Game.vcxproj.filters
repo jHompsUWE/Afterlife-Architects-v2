@@ -411,6 +411,12 @@
     <ClInclude Include="GameplaySingletons.h">
       <Filter>Afterlife\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="WindowBoarder.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_file.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
     <ClInclude Include="Vector2Int.h">
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
@@ -607,6 +613,12 @@
     </ClCompile>
     <ClCompile Include="GameplaySingletons.cpp">
       <Filter>Afterlife\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBoarder.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_file.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Afterlife\Managers\Events\Input Manager</Filter>
