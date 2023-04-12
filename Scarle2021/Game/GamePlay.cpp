@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "GamePlay.h"
 
+#include "UIWindowEvent.h"
+
 
 GamePlay::GamePlay()
 = default;
@@ -18,6 +20,7 @@ GamePlay::~GamePlay()
 
 bool GamePlay::init()
 {
+    
     // window init
     window_one_gate = new UIWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::GetD3DDevice(),"","Window",Vector2(0.5,0.5));
@@ -45,6 +48,10 @@ bool GamePlay::init()
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
+    //ingame event window
+    ui_window_event = new UIWindowEvent(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+        .second*0.5),DataManager::GetD3DDevice(),"","Event",Vector2(1,1));
 
     //window border file button
     window_file = new Window_file(Vector2(0,35),DataManager::
@@ -74,6 +81,7 @@ bool GamePlay::init()
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
     window_boarder->setVisibility(true);
+    ui_window_event->setVisibility(true);
     //window_file->setVisibility(true);
     return true;
 }
@@ -103,6 +111,8 @@ void GamePlay::Update(GameData* game_data)
     window_four_training_centers_window->update(game_data,mouse_pos);
     //window_file
     window_file->update(game_data,mouse_pos);
+    //event_window
+    ui_window_event->update(game_data,mouse_pos);
 
     // Economy
     economy_manager->Tick(game_data);
@@ -236,6 +246,9 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
 
     //UI boarder
     window_boarder->render(draw_data2D);
+
+    //event window
+    ui_window_event->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)
@@ -281,5 +294,6 @@ void GamePlay::ResizeUI()
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);
     window_file->reSize(screen_size);
+    ui_window_event->reSize(screen_size);
 }
 

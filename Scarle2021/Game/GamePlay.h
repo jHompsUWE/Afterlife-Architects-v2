@@ -5,12 +5,16 @@
 #include "AdvisorManager.h"
 #include "TextGO2D.h"
 #include "GPGO.h"
+
 //UI systems
 #include "UIPanel.h"
 #include "UIWindow.h"
 #include "SoulViewWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
+#include "UIWindowEvent.h"
+#include "WindowBoarder.h"
+
 // Economy and Population
 #include "GameplaySingletons.h"
 
@@ -19,7 +23,6 @@
 #include "Raycast.h"
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
-#include "WindowBoarder.h"
 #include "Window_file.h"
 
 class GPGO;
@@ -74,6 +77,7 @@ private:
     SoulViewWindow* soul_view;
     WindowBoarder* window_boarder;
     Window_file* window_file;
+    UIWindowEvent* ui_window_event;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
