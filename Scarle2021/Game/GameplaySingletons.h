@@ -2,6 +2,8 @@
 #include <memory>
 #include "PopulationManager.h"
 #include "EconomyManager.h"
+#include <fstream>
+#include "../json/single_include/nlohmann/json.hpp"
 
 class GameplaySingletons
 {
@@ -12,6 +14,7 @@ public:
 
 	static std::shared_ptr<PopulationManager> GetPopulationManager() { return Get().population_manager; }
 	static std::shared_ptr<EconomyManager> GetEconomyManager() { return Get().economy_manager; }
+	static const nlohmann::json& GetStructureValues() { return Get().structure_values; }
 
 protected:
 
@@ -23,5 +26,6 @@ private:
 
 	std::shared_ptr<PopulationManager> population_manager;
 	std::shared_ptr<EconomyManager> economy_manager;
+	nlohmann::json structure_values;
 };
 

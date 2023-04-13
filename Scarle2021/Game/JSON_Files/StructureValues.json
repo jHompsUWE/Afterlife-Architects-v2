@@ -1,0 +1,250 @@
+{
+  "structureValues": [
+    {
+      "structureType": "Building_Green_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Green_Heaven_1x1",
+      "textureHell": "Building_Green_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Green_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Green_Heaven_2x2",
+      "textureHell": "Building_Green_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Yellow_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Yellow_Heaven_1x1",
+      "textureHell": "Building_Yellow_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Yellow_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Yellow_Heaven_2x2",
+      "textureHell": "Building_Yellow_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Orange_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Orange_Heaven_1x1",
+      "textureHell": "Building_Orange_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Orange_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Orange_Heaven_2x2",
+      "textureHell": "Building_Orange_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Brown_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Brown_Heaven_1x1",
+      "textureHell": "Building_Brown_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Brown_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Brown_Heaven_2x2",
+      "textureHell": "Building_Brown_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Purple_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Purple_Heaven_1x1",
+      "textureHell": "Building_Purple_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Purple_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Purple_Heaven_2x2",
+      "textureHell": "Building_Purple_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Red_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Red_Heaven_1x1",
+      "textureHell": "Building_Red_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Red_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Red_Heaven_2x2",
+      "textureHell": "Building_Red_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Building_Blue_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Building_Blue_Heaven_1x1",
+      "textureHell": "Building_Blue_Hell_1x1",
+      "soulCapacity": 100
+    },
+    {
+      "structureType": "Building_Blue_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Building_Blue_Heaven_2x2",
+      "textureHell": "Building_Blue_Hell_2x2",
+      "soulCapacity": 200
+    },
+    {
+      "structureType": "Bank_T1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Bank_T1_Heaven_1x1",
+      "textureHell": "Bank_T1_Hell_1x1"
+    },
+    {
+      "structureType": "Bank_T2",
+      "cost": 200,
+      "tileSize": 2,
+      "textureHeaven": "Bank_T2_Heaven_2x2",
+      "textureHell": "Bank_T2_Hell_2x2"
+    },
+    {
+      "structureType": "Gate_T1",
+      "cost": 300,
+      "tileSize": 3,
+      "textureHeaven": "Gate_T1_Heaven_3x3",
+      "textureHell": "Gate_T1_Hell_3x3",
+      "soulRate": 10
+    },
+    {
+      "structureType": "Gate_T2",
+      "cost": 900,
+      "tileSize": 3,
+      "textureHeaven": "Gate_T2_Heaven_3x3",
+      "textureHell": "Gate_T2_Hell_3x3",
+      "soulRate": 50
+    },
+    {
+      "structureType": "Gate_T3",
+      "cost": 2000,
+      "tileSize": 4,
+      "textureHeaven": "Gate_T3_Heaven_4x4",
+      "textureHell": "Gate_T3_Hell_4x4",
+      "soulRate": 100
+    },
+    {
+      "structureType": "KarmaAnchor",
+      "cost": 300,
+      "tileSize": 3,
+      "textureHeaven": "KA_Heaven_3x3",
+      "textureHell": "KA_Hell_3x3"
+    },
+    {
+      "structureType": "KarmaPortal",
+      "cost": 400,
+      "tileSize": 4,
+      "textureHeaven": "KarmaPortal",
+      "textureHell": "KarmaPortal"
+    },
+    {
+      "structureType": "KarmaStation_T1",
+      "cost": 300,
+      "tileSize": 3,
+      "textureHeaven": "KS_Heaven_3x3",
+      "textureHell": "KS_Hell_3x3"
+    },
+    {
+      "structureType": "KarmaStation_T2",
+      "cost": 900,
+      "tileSize": 3,
+      "textureHeaven": "KS_Heaven_3x3",
+      "textureHell": "KS_Hell_3x3"
+    },
+    {
+      "structureType": "KarmaTrack",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "KT_Heaven_1x1",
+      "textureHell": "KT_Hell_1x1"
+    },
+    {
+      "structureType": "Rock_1",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Rock_1",
+      "textureHell": "Rock_1"
+    },
+    {
+      "structureType": "Rock_2",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Rock_1",
+      "textureHell": "Rock_1"
+    },
+    {
+      "structureType": "Rock_3",
+      "cost": 100,
+      "tileSize": 1,
+      "textureHeaven": "Rock_1",
+      "textureHell": "Rock_1"
+    },
+    {
+      "structureType": "Topia_T1",
+      "cost": 400,
+      "tileSize": 4,
+      "textureHeaven": "Topias_T1_Heaven_4x4",
+      "textureHell": "Topias_T1_Hell_4x4",
+      "ADCapacity": 100
+    },
+    {
+      "structureType": "Topia_T2",
+      "cost": 1000,
+      "tileSize": 4,
+      "textureHeaven": "Topias_T2_Heaven_4x4",
+      "textureHell": "Topias_T2_Hell_4x4",
+      "ADCapacity": 200
+    },
+    {
+      "structureType": "TrainingCenter_T1",
+      "cost": 300,
+      "tileSize": 3,
+      "textureHeaven": "TC_T1_Heaven_3x3",
+      "textureHell": "TC_T1_Hell_3x3",
+      "conversionRate": 10
+    },
+    {
+      "structureType": "TrainingCenter_T2",
+      "cost": 900,
+      "tileSize": 3,
+      "textureHeaven": "TC_T2_Heaven_3x3",
+      "textureHell": "TC_T2_Hell_3x3",
+      "conversionRate": 20
+    },
+    {
+      "structureType": "TrainingCenter_T3",
+      "cost": 2000,
+      "tileSize": 3,
+      "textureHeaven": "TC_T3_Heaven_3x3",
+      "textureHell": "TC_T3_Hell_3x3",
+      "conversionRate": 30
+    }
+  ]
+}
