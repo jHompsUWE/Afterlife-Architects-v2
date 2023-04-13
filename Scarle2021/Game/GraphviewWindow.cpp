@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GraphviewWindow.h"
+#include <cmath>
 
 #include <iostream>
 
@@ -31,27 +32,32 @@ GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevi
     image_vec[1]->SetPos(Vector2(window_pos.x + window_res.x / 2, window_pos.y + window_res.y / 2));
     image_vec[1]->SetScale(Vector2(1, 1));
 
+    image_vec.push_back(new ImageGO2D("graphview_religion", DataManager::GetD3DDevice()));
+    image_vec[2]->SetPos(Vector2(window_pos.x + window_res.x / 2, window_pos.y + window_res.y / 2));
+    image_vec[2]->SetScale(Vector2(1, 1));
+
     for (int i = 0; i < 16; i++)
     {
         belief_bars_vec.push_back(new ImageGO2D("green", DataManager::GetD3DDevice()));
-        belief_bars_vec[i]->SetPos(Vector2(window_pos.x + 95, window_pos.y + 45 + 11 * i));
-        belief_bars_vec[i]->SetScale(Vector2(0.2, 0.2));
     }
 
     for (int i = 0; i < 14; i++)
     {
         population_bars_vec.push_back(new ImageGO2D("green", DataManager::GetD3DDevice()));
-        population_bars_vec[i]->SetPos(Vector2(window_pos.x + 85, window_pos.y + 67 + 11 * i));
-        population_bars_vec[i]->SetScale(Vector2(0.275, 0.275));
+    }
+    
+    for (int i = 0; i < 8; i++)
+    {
+        religion_bars_vec.push_back(new ImageGO2D("green", DataManager::GetD3DDevice()));
     }
 
     //button vector
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 327, window_pos.y + 36),
         DataManager::GetD3DDevice(), "green",
-        AL::EventType::event_ui, AL::UI::graphview_bel, 0, Vector2(0.6, 0.6)));
+        AL::EventType::event_ui, AL::UI::graphview_rel, 0, Vector2(0.6, 0.6)));
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 327, window_pos.y + 64),
         DataManager::GetD3DDevice(), "green",
-        AL::EventType::event_ui, AL::UI::graphview_rel, 0, Vector2(0.6, 0.6)));
+        AL::EventType::event_ui, AL::UI::graphview_bel, 0, Vector2(0.6, 0.6)));
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 327, window_pos.y + 175),
         DataManager::GetD3DDevice(), "green",
         AL::EventType::event_ui, AL::UI::graphview_pop, 0, Vector2(0.6, 0.6)));
@@ -110,6 +116,8 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
     switch (cur_graph)
     {
     case Religion:
+        updateBeliefSpread();
+        updateReligionVisual();
         break;
     case Belief:
         updateBeliefSpread();
@@ -142,6 +150,16 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
             image->SetPos(button_pos - offset);
         }
         for (auto& image : belief_bars_vec)
+        {
+            Vector2 const button_pos = image->GetPos();
+            image->SetPos(button_pos - offset);
+        }
+        for (auto& image : population_bars_vec)
+        {
+            Vector2 const button_pos = image->GetPos();
+            image->SetPos(button_pos - offset);
+        }
+        for (auto& image : religion_bars_vec)
         {
             Vector2 const button_pos = image->GetPos();
             image->SetPos(button_pos - offset);
@@ -180,7 +198,11 @@ void GraphviewWindow::render(DrawData2D* _drawData)
         }
         break;
     case Religion:
-        //image_vec[2]->Draw(_drawData);
+        image_vec[2]->Draw(_drawData);
+        for (const auto& img : religion_bars_vec)
+        {
+            img->Draw(_drawData);
+        }
         break;
     case Belief:
         image_vec[0]->Draw(_drawData);
@@ -292,37 +314,30 @@ void GraphviewWindow::updateBeliefSpread()
     float SUMA = (population_manager->GetReligiousSpread(Heaven, 6) + population_manager->GetReligiousSpread(Hell, 6)) / total_souls;
     float SUSA = (population_manager->GetReligiousSpread(Heaven, 7) + population_manager->GetReligiousSpread(Hell, 7)) / total_souls;
 
-    // HAHAALFSUMA
+    individual_spreads[0] = HAHA;
+    individual_spreads[1] = HOHO;
+    individual_spreads[2] = OPRA;
+    individual_spreads[3] = OCRA;
+    individual_spreads[4] = ALF;
+    individual_spreads[5] = RALF;
+    individual_spreads[6] = SUMA;
+    individual_spreads[7] = SUSA;
+
     belief_amounts[0] = HAHA * ALF * SUMA;
-    // HOHOALFSUMA
     belief_amounts[1] = HOHO * ALF * SUMA;
-    // OPRAALFSUMA
     belief_amounts[2] = OPRA * ALF * SUMA;
-    // OCRAALFSUMA
     belief_amounts[3] = OCRA * ALF * SUMA;
-    // HAHARALFSUMA
     belief_amounts[4] = HAHA * RALF * SUMA;
-    // HOHORALFSUMA
     belief_amounts[5] = HOHO * RALF * SUMA;
-    // OPRARALFSUMA
     belief_amounts[6] = OPRA * RALF * SUMA;
-    // OCRARALFSUMA
     belief_amounts[7] = OCRA * RALF * SUMA;
-    // HAHAALFSUSA
     belief_amounts[8] = HAHA * ALF * SUSA;
-    // HOHOALFSUSA
     belief_amounts[9] = HOHO * ALF * SUSA;
-    // OPRAALFSUSA
     belief_amounts[10] = OPRA * ALF * SUSA;
-    // OCRAALFSUSA
     belief_amounts[11] = OCRA * ALF * SUSA;
-    // HAHARALFSUSA
     belief_amounts[12] = HAHA * RALF * SUSA;
-    // HOHORALFSUSA
     belief_amounts[13] = HOHO * RALF * SUSA;
-    // OPRARALFSUSA
     belief_amounts[14] = OPRA * RALF * SUSA;
-    // OCRARALFSUSA
     belief_amounts[15] = OCRA * RALF * SUSA;
 }
 
@@ -342,5 +357,15 @@ void GraphviewWindow::updatePopulationVisual()
         float percent_val = population_manager->GetZonePopulation(PlaneType(i % 2), ZoneType(1 + (int)i / 2)) / (float)population_manager->GetTotalSouls();
         population_bars_vec[i]->SetPos(Vector2(window_pos.x + (85 + (103.5 * percent_val)) * window_res.x / 352, window_pos.y + (67 + 11 * i) * window_res.y / 316));
         population_bars_vec[i]->SetScale(Vector2(percent_val * 4.2 * window_res.x / 352, 0.275 * window_res.y / 316));
+    }
+}
+
+void GraphviewWindow::updateReligionVisual()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        float percent_val = individual_spreads[i];
+        religion_bars_vec[i]->SetPos(Vector2(window_pos.x + (religion_bars_x[i]) * window_res.x / 352, window_pos.y + (125 - percent_val * 35) * window_res.y / 316));
+        religion_bars_vec[i]->SetScale(Vector2(0.25 * window_res.x / 352, percent_val * 1.925 * window_res.y / 316));
     }
 }

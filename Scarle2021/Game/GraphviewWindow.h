@@ -32,6 +32,7 @@ private:
     void updateBeliefSpread();
     void updateBeliefVisual();
     void updatePopulationVisual();
+    void updateReligionVisual();
     //mouse pointer inside window
     bool isInside(Vector2& point) const;
     bool toggle_click = false;
@@ -48,11 +49,14 @@ private:
 
     std::vector<ImageGO2D*> belief_bars_vec;
     std::vector<ImageGO2D*> population_bars_vec;
+    std::vector<ImageGO2D*> religion_bars_vec;
+    float religion_bars_x[8] = { 53.5, 67.5, 81.5, 95.5, 158.5, 172.5, 250.5, 264.5 };
 
     GraphShown cur_graph = No_Graph;
 
 
     float belief_amounts[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    float individual_spreads[8] = {0,0,0,0,0,0,0,0};
 
     //vectors
     Vector2 window_res{ 0,0 };

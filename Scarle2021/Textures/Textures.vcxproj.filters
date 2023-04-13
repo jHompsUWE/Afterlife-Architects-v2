@@ -467,6 +467,9 @@
     <ImageContentTask Include="Afterlife\GraphView\graphview_population.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_religion.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tiles">
