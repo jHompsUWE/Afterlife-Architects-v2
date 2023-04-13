@@ -143,13 +143,14 @@ void SoulViewWindow::render(DrawData2D* _drawData)
     }
 }
 
-void SoulViewWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& SoulViewWindow::ReceiveEvents(const AL::Event& al_event)
 {
     //Saves the state of the action
     if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
         toggle_click = al_event.cursor_interact.active;
     }
+    return false;
 }
 
 void SoulViewWindow::set_postion(Vector2& _new_pos)

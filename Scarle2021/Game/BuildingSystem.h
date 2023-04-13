@@ -20,7 +20,7 @@ public:
 	~BuildingSystem() override;
 
 	void Tick(GameData* game_data);
-	void ReceiveEvents(const AL::Event& al_event) override;
+	const bool& ReceiveEvents(const AL::Event& al_event) override;
 	void Render3D(DrawData* draw_data);
 
 	PlaneType GetPositionPlane(Vector3 position);

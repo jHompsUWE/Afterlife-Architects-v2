@@ -15,7 +15,7 @@ namespace AL
 		/**
 		 * \brief Connection function to the Event Manager
 		 */
-		virtual void ReceiveEvents(const AL::Event& al_event) = 0;
+		virtual const bool& ReceiveEvents(const AL::Event& al_event) = 0;
 	};
 }
 

@@ -64,7 +64,7 @@ void AdvisorManager::Update(GameData* game_data)
 /// Get advise event from Event Manager
 /// </summary>
 /// <param name="al_event"></param>
-void AdvisorManager::ReceiveEvents(const AL::Event& al_event)
+const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
 {
     switch (al_event.type)
     {
@@ -120,6 +120,7 @@ void AdvisorManager::ReceiveEvents(const AL::Event& al_event)
         AddFault(al_event.advisor.fault_index);
         break;
     }
+    return false;
 }
 
 /// <summary>

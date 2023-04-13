@@ -243,12 +243,13 @@ void UIPanel::render(DrawData2D* _drawData)
     }
 }
 
-void UIPanel::ReceiveEvents(const AL::Event& al_event)
+const bool& UIPanel::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
         toggle_click_panel = al_event.cursor_interact.active;
     }
+    return false;
 }
 
 void UIPanel::setPostion(Vector2 _panelPosition)

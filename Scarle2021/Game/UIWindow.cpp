@@ -200,13 +200,14 @@ void UIWindow::render(DrawData2D* _drawData)
     }
 }
 
-void UIWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
 {
     //Saves the state of the action
     if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
         toggle_click = al_event.cursor_interact.active;
     }
+    return false;
 }
 
 
@@ -264,7 +265,6 @@ const bool& UIWindow::getVisibility()
 
 bool UIWindow::isInside(Vector2& point) const
 {
-
     //checks bounding box of UI window
     if(point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
        point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))

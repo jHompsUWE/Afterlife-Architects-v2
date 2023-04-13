@@ -23,7 +23,7 @@ public:
     void Update(GameData* game_data);
 
     //Events
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
 
 private:
     void PlaySound(string filename);

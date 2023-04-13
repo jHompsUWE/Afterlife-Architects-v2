@@ -71,9 +71,10 @@ void FSM::Update(GameData* game_data)
     state_array[current_state]->LateUpdate(game_data);
 }
 
-void FSM::ReceiveEvents(const AL::Event& al_event)
+const bool& FSM::ReceiveEvents(const AL::Event& al_event)
 {
     state_array[current_state]->GetEvents(al_event);
+    return false;
 }
 
 //Rendering ------------------------------------------------------------------------------------------------------------

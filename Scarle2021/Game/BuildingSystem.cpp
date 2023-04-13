@@ -77,7 +77,7 @@ void BuildingSystem::Tick(GameData* game_data)
     CursorIntegration();
 }
 
-void BuildingSystem::ReceiveEvents(const AL::Event& al_event)
+const bool& BuildingSystem::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::event_input)
     {
@@ -121,7 +121,7 @@ void BuildingSystem::ReceiveEvents(const AL::Event& al_event)
         }
     }
     
-    if(al_event.type != AL::event_build_sys) return;
+    if(al_event.type != AL::event_build_sys) return false;
     
     switch (al_event.build_sys.section)
         {
@@ -137,6 +137,8 @@ void BuildingSystem::ReceiveEvents(const AL::Event& al_event)
         default:
             break;
         }
+
+    return false;
 }
 
 void BuildingSystem::Render3D(DrawData* draw_data)

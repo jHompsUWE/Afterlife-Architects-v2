@@ -62,9 +62,9 @@ public:
 		delete buttonText;
 	}
 
-	void ReceiveEvents(const AL::Event& al_event) override
+	const bool& ReceiveEvents(const AL::Event& al_event) override
 	{
-		if(!interactable) return;
+		if(!interactable) return false;
 		
 		switch (al_event.type)
 		{
@@ -78,14 +78,12 @@ public:
 			//Checks if the button specified is being pressed
 			if(al_event.cursor_interact.action == AL::Cursor::button_input1)
 			{
-				//If the button has been released, continue
-				if(al_event.cursor_interact.active == false)
+				//If the button has been pressed, continue
+				if(al_event.cursor_interact.active == true)
 				{
 					//Mouse pos is inside button? carry our action
 					if(isInside(mouse_pos))
 					{
-						std::cout << "fired" << std::endl;
-						
 						close_window = true;
 
 						//Evaluates the correct event to generate, if the second value is int, it means it has to be
@@ -105,6 +103,8 @@ public:
 						{
 							AL::NewEventManager::GenerateEventSt(saved_event, action_1, action_2);
 						}
+
+						return true;
 					}
 				}
 			}
@@ -114,6 +114,8 @@ public:
 		default:
 			break;
 		}
+
+		return false;
 	}
 
 	void update(GameData* _gameData) override

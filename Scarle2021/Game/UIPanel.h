@@ -21,7 +21,7 @@ public:
 
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
 
     void setPostion(Vector2 _new_pos);
     void setScale(Vector2& _newScale);
