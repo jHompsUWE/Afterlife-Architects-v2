@@ -21,7 +21,6 @@ GamePlay::~GamePlay()
 
 bool GamePlay::init()
 {
-    
     // window init
     window_one_gate = new UIWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::GetD3DDevice(),"","Window",Vector2(0.5,0.5));
@@ -70,7 +69,8 @@ bool GamePlay::init()
         GetD3DDevice(),"","Global",Vector2(1.5,1.5));
 
     //window event warning button 
-    ui_window_event_warning = new UIWindowEventWarning(Vector2(90,35),DataManager::
+    ui_window_event_warning = new UIWindowEventWarning(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+        .second*0.5),DataManager::
         GetD3DDevice(),"","EventWarning",Vector2(1.5,1.5));
     
     // ui frame init
@@ -99,11 +99,10 @@ bool GamePlay::init()
     window_boarder->setVisibility(true);
     
     ui_window_event->setVisibility(true);
-    ui_window_event_warning->setVisibility(true);
+    //ui_window_event_warning->setVisibility(true);
     //window_file->setVisibility(true);
     return true;
 }
-
 void GamePlay::Update(GameData* game_data)
 {   
     if (do_once)
@@ -229,6 +228,50 @@ void GamePlay::GetEvents(const AL::Event& al_event)
              case AL::UI::global_bad_things_window:
                 ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
                 break;
+
+            case AL::UI::no_bad_things:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("OMG such a cheat");
+                    break;
+            
+            case AL::UI::birds_of_paradise:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                ui_window_event_warning->setString("birds are pooping every where");
+                break;
+            case AL::UI::rats_out_of_hell:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                ui_window_event_warning->setString("rats are biting everyone");
+                break;
+            
+            case AL::UI::my_blue_heaven:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("me soo sad !!");
+                    break;
+            
+            case AL::UI::hell_freezes_over:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("dam that is cold");
+                    break;
+            
+            case AL::UI::heaven_nose:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("that is a big nose");
+                    break;
+            
+            case AL::UI::hell_in_a_hand_basket:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("where did my sandwich go");
+                    break;
+            
+            case AL::UI::paradise_pair_of_dice:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("Snake eyes, you lose ");
+                    break;
+            
+            case AL::UI::disco_infernal:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("night fever, night fever");
+                    break;
             
             case AL::UI::file_exit_game:
                 PostQuitMessage(0);

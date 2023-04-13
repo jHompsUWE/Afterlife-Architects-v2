@@ -69,9 +69,9 @@ void UIWindowEventWarning::setScale(Vector2& _newScale)
     UIWindow::setScale(_newScale);
 }
 
-void UIWindowEventWarning::setString(std::string text_x,text_index index)
+void UIWindowEventWarning::setString(std::string text_x)
 {
-    text_vec[(int)index]->ChangeString(text_x);
+    text_vec[0]->ChangeString(text_x);
 }
 
 Vector2& UIWindowEventWarning::getPosition()

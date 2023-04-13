@@ -1,11 +1,6 @@
 #pragma once
 #include "UIWindow.h"
 
-enum class text_index :int
-    {
-        HEADER,
-    };
-
 class UIWindowEventWarning :
     public UIWindow
 {
@@ -21,7 +16,7 @@ public:
     void set_postion(Vector2& _new_pos) ;
     void setScale(Vector2& _newScale) ;
 
-    void setString(std::string text_x,text_index index);
+    void setString(std::string text_x);
 	
     Vector2& getPosition() ;
     Vector2& getButtonRes() ;
