@@ -84,6 +84,8 @@ public:
 					//Mouse pos is inside button? carry our action
 					if(isInside(mouse_pos))
 					{
+						std::cout << "fired" << std::endl;
+						
 						close_window = true;
 
 						//Evaluates the correct event to generate, if the second value is int, it means it has to be

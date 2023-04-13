@@ -139,6 +139,8 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     text[2]->SetScale(Vector2(0.4,0.4));
     text[2]->SetColour(Color((float*)&Colors::Green));
 
+    setPostion(Vector2(1000, 30));
+    
     //Subscribe for events
     AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
 }
@@ -172,8 +174,7 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text[1]->ChangeString("Credit: " + std::to_string((int)economy_manager->GetMoney()));
     }
-
-
+    
     else if (economy_manager->GetMoney() < 1000000)
     {
         text[1]->ChangeString("Credit: " + (std::to_string((int)economy_manager->GetMoney()/1000) + " K"));
@@ -187,8 +188,6 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     //converts float to string to int
     text[0]->ChangeString("Year: " +std::to_string((int)economy_manager->GetYear()));
     text[2]->ChangeString(std::to_string((int)population_manager->GetTotalSouls()));
-    
-   
 
     for (auto& button : buttons)
     {
@@ -254,6 +253,8 @@ void UIPanel::ReceiveEvents(const AL::Event& al_event)
 
 void UIPanel::setPostion(Vector2 _panelPosition)
 {
+    if(_panelPosition == panel_pos) return;
+    
     //Updates the position of the panel with a 
     const Vector2 offset = _panelPosition - panel_pos;
     panel_back_ground->SetPos(_panelPosition);
@@ -263,6 +264,11 @@ void UIPanel::setPostion(Vector2 _panelPosition)
         button->setPostion(button->getPosition() + offset);
     }
 
+    for(auto& t : text)
+    {
+        t->SetPos(t->GetPos() + offset);
+    }
+    
     panel_pos = _panelPosition;
 }
 

@@ -25,11 +25,14 @@ public:
     private:
     void ResizeUI();
 
+    void MoveOffScreen();
+    void MoveOnScreen() const;
+    
     //init
     bool do_once = true;
 
     //Button vector
-    std::vector<UIButtonInterFace*> buttons;
+    std::vector<UIButtonInterFace*> buttons{};
 	
     ImageGO2D* main_menu_bg = nullptr;
 };

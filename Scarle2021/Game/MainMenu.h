@@ -25,6 +25,9 @@ public:
 private:
 	void ResizeUI() const;
 
+	void MoveOffScreen();
+	void MoveOnScreen() const;
+
 	//Button vector
 	std::vector<UIButtonInterFace*> buttons;
 
