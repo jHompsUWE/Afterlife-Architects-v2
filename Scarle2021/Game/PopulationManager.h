@@ -21,6 +21,7 @@ public:
 	int GetZonePopulation(PlaneType plane, ZoneType zone);
 	int GetZoneCapacity(PlaneType plane, ZoneType zone);
 	int GetTotalSouls();
+	int GetTotalSoulsForPlane(PlaneType plane);
 	int GetTotalCapacity();
 
 	int GetADPopulation(PlaneType plane);
@@ -45,7 +46,7 @@ private:
 
 	// Religion Heaven
 	// HAHA, HOHO, OPRA, OCRA, ALF, RALF, SUMA, SUSA
-	int heaven_religion_spread[8] = {0,0,0,0,0,0,0,0};
+	int heaven_religion_spread[8] = { 0,0,0,0,0,0,0,0 };
 
 
 	// Hell
@@ -57,6 +58,6 @@ private:
 
 	// Religion Hell
 	// HAHA, HOHO, OPRA, OCRA, ALF, RALF, SUMA, SUSA
-	int hell_religion_spread[8] = {0,0,0,0,0,0,0,0};
+	int hell_religion_spread[8] = { 0,0,0,0,0,0,0,0 };
 };
 

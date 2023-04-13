@@ -31,14 +31,14 @@ bool GamePlay::init()
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
         GetD3DDevice(),"","AdvisorBackground",Vector2(0.5,0.5));
     //soul view
-    soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
-        GetD3DDevice(),"","SoulView",Vector2(1,1));
+    soul_view = new SoulViewWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "SoulView", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
     //micro manager
-    micro_manager= new MicromanagerWindow(Vector2(400,120),DataManager::
-        GetD3DDevice(),"","micro_window",Vector2(1,1), economy_manager);
+    micro_manager = new MicromanagerWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "micro_window", Vector2(1, 1), GameplaySingletons::GetEconomyManager());
     //graphview
-    graphview = new GraphviewWindow(Vector2(400,120),DataManager::
-        GetD3DDevice(),"","graphview_back",Vector2(1,1), GameplaySingletons::GetPopulationManager());
+    graphview = new GraphviewWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "graphview_back", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
     //karma station
     window_two_karma_station = new KarmaStationWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::

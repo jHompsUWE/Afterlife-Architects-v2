@@ -21,7 +21,7 @@ PopulationManager::~PopulationManager()
 }
 
 void PopulationManager::IncrementZonePopulation(PlaneType plane, ZoneType zone, int population_increase)
-{		
+{
 	switch (plane)
 	{
 	case Heaven:
@@ -123,7 +123,7 @@ int PopulationManager::GetTotalSouls()
 {
 	int total = 0;
 
-	for (auto& soul: heaven_population)
+	for (auto& soul : heaven_population)
 	{
 		total += soul;
 	}
@@ -136,11 +136,34 @@ int PopulationManager::GetTotalSouls()
 	return total;
 }
 
+int PopulationManager::GetTotalSoulsForPlane(PlaneType plane)
+{
+	int total = 0;
+
+	switch (plane)
+	{
+	case Heaven:
+		for (auto& soul : heaven_population)
+		{
+			total += soul;
+		}
+		break;
+
+	case Hell:
+		for (auto& soul : hell_population)
+		{
+			total += soul;
+		}
+		break;
+	}
+	return total;
+}
+
 int PopulationManager::GetTotalCapacity()
 {
 	int total = 0;
 
-	for (auto& soul: heaven_capacity)
+	for (auto& soul : heaven_capacity)
 	{
 		total += soul;
 	}

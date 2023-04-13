@@ -34,14 +34,14 @@ GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevi
     for (int i = 0; i < 16; i++)
     {
         belief_bars_vec.push_back(new ImageGO2D("green", DataManager::GetD3DDevice()));
-        belief_bars_vec[i]->SetPos(Vector2(window_pos.x +95, window_pos.y + 45 + 11 * i));
+        belief_bars_vec[i]->SetPos(Vector2(window_pos.x + 95, window_pos.y + 45 + 11 * i));
         belief_bars_vec[i]->SetScale(Vector2(0.2, 0.2));
     }
 
     for (int i = 0; i < 14; i++)
     {
         population_bars_vec.push_back(new ImageGO2D("green", DataManager::GetD3DDevice()));
-        population_bars_vec[i]->SetPos(Vector2(window_pos.x +85, window_pos.y + 67 + 11 * i));
+        population_bars_vec[i]->SetPos(Vector2(window_pos.x + 85, window_pos.y + 67 + 11 * i));
         population_bars_vec[i]->SetScale(Vector2(0.275, 0.275));
     }
 
@@ -280,15 +280,17 @@ bool GraphviewWindow::isInside(Vector2& point) const
 
 void GraphviewWindow::updateBeliefSpread()
 {
-    if (population_manager->GetTotalSouls() == 0)    {        return;    }
-    float HAHA = (population_manager->GetReligiousSpread(Heaven, 0) + population_manager->GetReligiousSpread(Hell, 0)) / (float)population_manager->GetTotalSouls();
-    float HOHO = (population_manager->GetReligiousSpread(Heaven, 1) + population_manager->GetReligiousSpread(Hell, 1)) / (float)population_manager->GetTotalSouls();
-    float OPRA = (population_manager->GetReligiousSpread(Hell, 2)) / (float)population_manager->GetTotalSouls();
-    float OCRA = (population_manager->GetReligiousSpread(Heaven, 3)) / (float)population_manager->GetTotalSouls();
-    float ALF = (population_manager->GetReligiousSpread(Heaven, 4) + population_manager->GetReligiousSpread(Hell, 4)) / (float)population_manager->GetTotalSouls();
-    float RALF = (population_manager->GetReligiousSpread(Heaven, 5) + population_manager->GetReligiousSpread(Hell, 5)) / (float)population_manager->GetTotalSouls();
-    float SUMA = (population_manager->GetReligiousSpread(Heaven, 6) + population_manager->GetReligiousSpread(Hell, 6)) / (float)population_manager->GetTotalSouls();
-    float SUSA = (population_manager->GetReligiousSpread(Heaven, 7) + population_manager->GetReligiousSpread(Hell, 7)) / (float)population_manager->GetTotalSouls();
+    if (population_manager->GetTotalSouls() == 0) { return; }
+    float total_souls = (float)population_manager->GetTotalSouls();
+
+    float HAHA = (population_manager->GetReligiousSpread(Heaven, 0) + population_manager->GetReligiousSpread(Hell, 0)) / total_souls;
+    float HOHO = (population_manager->GetReligiousSpread(Heaven, 1) + population_manager->GetReligiousSpread(Hell, 1)) / total_souls;
+    float OPRA = (population_manager->GetReligiousSpread(Hell, 2)) / total_souls;
+    float OCRA = (population_manager->GetReligiousSpread(Heaven, 3)) / total_souls;
+    float ALF = (population_manager->GetReligiousSpread(Heaven, 4) + population_manager->GetReligiousSpread(Hell, 4)) / total_souls;
+    float RALF = (population_manager->GetReligiousSpread(Heaven, 5) + population_manager->GetReligiousSpread(Hell, 5)) / total_souls;
+    float SUMA = (population_manager->GetReligiousSpread(Heaven, 6) + population_manager->GetReligiousSpread(Hell, 6)) / total_souls;
+    float SUSA = (population_manager->GetReligiousSpread(Heaven, 7) + population_manager->GetReligiousSpread(Hell, 7)) / total_souls;
 
     // HAHAALFSUMA
     belief_amounts[0] = HAHA * ALF * SUMA;
@@ -324,16 +326,16 @@ void GraphviewWindow::updateBeliefSpread()
     belief_amounts[15] = OCRA * RALF * SUSA;
 }
 
-void GraphviewWindow::updateBeliefVisual() 
+void GraphviewWindow::updateBeliefVisual()
 {
     for (int i = 0; i < 16; i++)
     {
-        belief_bars_vec[i]->SetPos(Vector2(window_pos.x + (95 + ((belief_amounts[i]*2) * 98.5)) * window_res.x / 352, window_pos.y + (45 + 11 * i) * window_res.y / 316));
-        belief_bars_vec[i]->SetScale(Vector2((belief_amounts[i]*2) * 4.2 * window_res.x / 352, 0.2 * window_res.y / 316));
+        belief_bars_vec[i]->SetPos(Vector2(window_pos.x + (95 + ((belief_amounts[i] * 2) * 98.5)) * window_res.x / 352, window_pos.y + (45 + 11 * i) * window_res.y / 316));
+        belief_bars_vec[i]->SetScale(Vector2((belief_amounts[i] * 2) * 4.2 * window_res.x / 352, 0.2 * window_res.y / 316));
     }
 }
 
-void GraphviewWindow::updatePopulationVisual() 
+void GraphviewWindow::updatePopulationVisual()
 {
     for (int i = 0; i < 14; i++)
     {
