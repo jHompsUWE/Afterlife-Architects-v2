@@ -372,6 +372,15 @@
   <ItemGroup>
     <ImageContentTask Include="Event.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Global.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="bad_things.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="EventWarning.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

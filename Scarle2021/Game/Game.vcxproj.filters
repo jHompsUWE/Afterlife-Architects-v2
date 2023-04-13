@@ -429,6 +429,15 @@
     <ClInclude Include="UIWindowEvent.h">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="Window_Global.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowBadThings.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowEventWarning.h">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -627,6 +636,15 @@
       <Filter>Afterlife\Managers\Events\Input Manager</Filter>
     </ClCompile>
     <ClCompile Include="UIWindowEvent.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_Global.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowBadThings.cpp">
+      <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowEventWarning.cpp">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
   </ItemGroup>

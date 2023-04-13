@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "GamePlay.h"
 
-#include "UIWindowEvent.h"
-
-
 GamePlay::GamePlay()
 = default;
 
@@ -16,6 +13,10 @@ GamePlay::~GamePlay()
     delete window_three_topias;
     delete window_four_training_centers_window;
     delete window_file;
+    delete window_global;
+    delete ui_window_event;
+    delete ui_window_bad_things;
+    delete ui_window_event_warning;
 }
 
 bool GamePlay::init()
@@ -34,15 +35,18 @@ bool GamePlay::init()
     //advisor
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
+    
     //karma station
     window_two_karma_station = new KarmaStationWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
     //topias
     window_three_topias = new TopiasWindowUI(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
     //training center
     window_four_training_centers_window = new TrainingCentersWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
@@ -51,11 +55,23 @@ bool GamePlay::init()
     
     //ingame event window
     ui_window_event = new UIWindowEvent(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
-        .second*0.5),DataManager::GetD3DDevice(),"","Event",Vector2(1,1));
+        .second*0.5),DataManager::GetD3DDevice(),"","Event",Vector2(1.5,1.5));
 
     //window border file button
     window_file = new Window_file(Vector2(0,35),DataManager::
         GetD3DDevice(),"","Window_file",Vector2(1,1));
+
+    //window bad things button
+    ui_window_bad_things = new UIWindowBadThings(Vector2(250,35),DataManager::
+        GetD3DDevice(),"","bad_things",Vector2(1.5,1.5));
+    
+    //window border global button
+    window_global = new Window_Global(Vector2(90,35),DataManager::
+        GetD3DDevice(),"","Global",Vector2(1.5,1.5));
+
+    //window event warning button 
+    ui_window_event_warning = new UIWindowEventWarning(Vector2(90,35),DataManager::
+        GetD3DDevice(),"","EventWarning",Vector2(1.5,1.5));
     
     // ui frame init
     window_boarder = new WindowBoarder(Vector2(0,0),
@@ -81,7 +97,9 @@ bool GamePlay::init()
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
     window_boarder->setVisibility(true);
+    
     ui_window_event->setVisibility(true);
+    ui_window_event_warning->setVisibility(true);
     //window_file->setVisibility(true);
     return true;
 }
@@ -109,8 +127,18 @@ void GamePlay::Update(GameData* game_data)
     window_three_topias->update(game_data,mouse_pos);
     //training centre
     window_four_training_centers_window->update(game_data,mouse_pos);
-    //window_file
+    //window file
     window_file->update(game_data,mouse_pos);
+    
+    //UI window event warning
+    ui_window_event_warning->update(game_data,mouse_pos);
+
+    //window bad things
+    ui_window_bad_things->update(game_data,mouse_pos);
+    
+    //window global
+    window_global->update(game_data,mouse_pos);
+    
     //event_window
     ui_window_event->update(game_data,mouse_pos);
 
@@ -190,9 +218,18 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 soul_view->generateRandSoul();
                 soul_view->is_visible = !soul_view->is_visible;
                 break;
+            
             case AL::UI::window_file:
                 window_file->setVisibility(!window_file->getVisibility());
                 break;
+            
+            case AL::UI::window_global:
+                window_global->setVisibility(!window_global->getVisibility());
+                break;
+             case AL::UI::global_bad_things_window:
+                ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
+                break;
+            
             case AL::UI::file_exit_game:
                 PostQuitMessage(0);
                 std::cout<<"Help"<<std::endl;
@@ -244,11 +281,20 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
     //window_file
     window_file->render(draw_data2D);
 
+    //window_global
+    window_global->render(draw_data2D);
+
     //UI boarder
     window_boarder->render(draw_data2D);
 
     //event window
     ui_window_event->render(draw_data2D);
+
+    //ui window bad things
+    ui_window_bad_things->render(draw_data2D);
+
+    //ui window event warning
+    ui_window_event_warning->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)
@@ -294,6 +340,9 @@ void GamePlay::ResizeUI()
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);
     window_file->reSize(screen_size);
+    window_global->reSize(screen_size);
     ui_window_event->reSize(screen_size);
+    ui_window_bad_things->reSize(screen_size);
+    ui_window_event_warning->reSize(screen_size);
 }
 

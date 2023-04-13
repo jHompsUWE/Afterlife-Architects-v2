@@ -23,7 +23,10 @@
 #include "Raycast.h"
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
+#include "UIWindowBadThings.h"
+#include "UIWindowEventWarning.h"
 #include "Window_file.h"
+#include "Window_Global.h"
 
 class GPGO;
 
@@ -78,6 +81,9 @@ private:
     WindowBoarder* window_boarder;
     Window_file* window_file;
     UIWindowEvent* ui_window_event;
+    Window_Global* window_global;
+    UIWindowBadThings* ui_window_bad_things;
+    UIWindowEventWarning* ui_window_event_warning;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
