@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "GamePlay.h"
 
-
 GamePlay::GamePlay()
 = default;
 
@@ -13,7 +12,11 @@ GamePlay::~GamePlay()
     delete window_two_karma_station;
     delete window_three_topias;
     delete window_four_training_centers_window;
-    //delete window_file;
+    delete window_file;
+    delete window_global;
+    delete ui_window_event;
+    delete ui_window_bad_things;
+    delete ui_window_event_warning;
 }
 
 bool GamePlay::init()
@@ -32,24 +35,44 @@ bool GamePlay::init()
     //advisor
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
+    
     //karma station
     window_two_karma_station = new KarmaStationWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
     //topias
     window_three_topias = new TopiasWindowUI(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
     //training center
     window_four_training_centers_window = new TrainingCentersWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    
+    //ingame event window
+    ui_window_event = new UIWindowEvent(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+        .second*0.5),DataManager::GetD3DDevice(),"","Event",Vector2(1.5,1.5));
 
     //window border file button
-    //window_file = new Window_file(Vector2(0,35),DataManager::
-    //    GetD3DDevice(),"","Window_file",Vector2(1,1));
+    window_file = new Window_file(Vector2(0,35),DataManager::
+        GetD3DDevice(),"","Window_file",Vector2(1,1));
+
+    //window bad things button
+    ui_window_bad_things = new UIWindowBadThings(Vector2(250,35),DataManager::
+        GetD3DDevice(),"","bad_things",Vector2(1.5,1.5));
+    
+    //window border global button
+    window_global = new Window_Global(Vector2(90,35),DataManager::
+        GetD3DDevice(),"","Global",Vector2(1.5,1.5));
+
+    //window event warning button 
+    ui_window_event_warning = new UIWindowEventWarning(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+        .second*0.5),DataManager::
+        GetD3DDevice(),"","EventWarning",Vector2(1.5,1.5));
     
     // ui frame init
     window_boarder = new WindowBoarder(Vector2(0,0),
@@ -74,13 +97,14 @@ bool GamePlay::init()
     advisor_window->is_visible = false;
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
-    soul_view->is_visible = false;
-    window_boarder->setVisibility(false);
+    window_boarder->setVisibility(true);
+    
+    ui_window_event->setVisibility(true);
+    //ui_window_event_warning->setVisibility(true);
     //window_file->setVisibility(true);
     do_once = true;
     return true;
 }
-
 void GamePlay::Update(GameData* game_data)
 {   
     if (do_once)
@@ -104,8 +128,20 @@ void GamePlay::Update(GameData* game_data)
     window_three_topias->update(game_data,mouse_pos);
     //training centre
     window_four_training_centers_window->update(game_data,mouse_pos);
-    //window_file
-    //window_file->update(game_data,mouse_pos);
+    //window file
+    window_file->update(game_data,mouse_pos);
+    
+    //UI window event warning
+    ui_window_event_warning->update(game_data,mouse_pos);
+
+    //window bad things
+    ui_window_bad_things->update(game_data,mouse_pos);
+    
+    //window global
+    window_global->update(game_data,mouse_pos);
+    
+    //event_window
+    ui_window_event->update(game_data,mouse_pos);
 
     // Economy
     economy_manager->Tick(game_data);
@@ -183,9 +219,62 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 soul_view->generateRandSoul();
                 soul_view->is_visible = !soul_view->is_visible;
                 break;
+            
             case AL::UI::window_file:
                 //window_file->setVisibility(!window_file->getVisibility());
                 break;
+            
+            case AL::UI::window_global:
+                window_global->setVisibility(!window_global->getVisibility());
+                break;
+             case AL::UI::global_bad_things_window:
+                ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
+                break;
+
+            case AL::UI::no_bad_things:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("OMG such a cheat");
+                    break;
+            
+            case AL::UI::birds_of_paradise:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                ui_window_event_warning->setString("birds are pooping every where");
+                break;
+            case AL::UI::rats_out_of_hell:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                ui_window_event_warning->setString("rats are biting everyone");
+                break;
+            
+            case AL::UI::my_blue_heaven:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("me soo sad !!");
+                    break;
+            
+            case AL::UI::hell_freezes_over:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("dam that is cold");
+                    break;
+            
+            case AL::UI::heaven_nose:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("that is a big nose");
+                    break;
+            
+            case AL::UI::hell_in_a_hand_basket:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("where did my sandwich go");
+                    break;
+            
+            case AL::UI::paradise_pair_of_dice:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("Snake eyes, you lose ");
+                    break;
+            
+            case AL::UI::disco_infernal:
+                ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+                    ui_window_event_warning->setString("night fever, night fever");
+                    break;
+            
             case AL::UI::file_exit_game:
                 PostQuitMessage(0);
                 break;
@@ -251,8 +340,20 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
     //window_file
     //window_file->render(draw_data2D);
 
+    //window_global
+    window_global->render(draw_data2D);
+
     //UI boarder
     window_boarder->render(draw_data2D);
+
+    //event window
+    ui_window_event->render(draw_data2D);
+
+    //ui window bad things
+    ui_window_bad_things->render(draw_data2D);
+
+    //ui window event warning
+    ui_window_event_warning->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)
@@ -297,6 +398,10 @@ void GamePlay::ResizeUI()
     window_two_karma_station->reSize(screen_size);
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);
-    //window_file->reSize(screen_size);
+    window_file->reSize(screen_size);
+    window_global->reSize(screen_size);
+    ui_window_event->reSize(screen_size);
+    ui_window_bad_things->reSize(screen_size);
+    ui_window_event_warning->reSize(screen_size);
 }
 

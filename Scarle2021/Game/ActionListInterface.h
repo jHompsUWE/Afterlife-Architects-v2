@@ -38,6 +38,27 @@ namespace AL
 			file_delete_game,
 			file_new_game,
 			file_exit_game,
+
+			//global window
+			global_audio_settings_window,
+			global_tempo_window,
+			global_bad_things_window,
+			global_misc_options_window,
+
+			//bad things window
+			no_bad_things,
+			birds_of_paradise,
+			rats_out_of_hell,
+			my_blue_heaven,
+			hell_freezes_over,
+			heaven_nose,
+			hell_in_a_hand_basket,
+			paradise_pair_of_dice,
+			disco_infernal,
+
+			//bad thing trigger
+			event_activated,
+			event_canceled,
 			
 			//zoom buttons
 			button_zoom_in,

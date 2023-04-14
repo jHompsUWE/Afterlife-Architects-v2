@@ -14,6 +14,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2b8328b1-bf6f-49f8-981b-3c7317042b6a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/GamePlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIWindowEventWarning.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEventWarning.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIWindowEventWarning.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEventWarning.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/ActionListInput.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/ActionListInput.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/AdvisorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/AdvisorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorWindow.h" afterDir="false" />
@@ -39,6 +42,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.22000.0/ucrt/complex.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -247,6 +251,9 @@
       <workItem from="1679429077541" duration="12321000" />
       <workItem from="1681167343034" duration="19020000" />
       <workItem from="1681234633750" duration="6460000" />
+      <workItem from="1681335490957" duration="115000" />
+      <workItem from="1681335644718" duration="4241000" />
+      <workItem from="1681379143370" duration="13556000" />
       <workItem from="1681354152842" duration="15795000" />
       <workItem from="1681427115907" duration="518000" />
     </task>

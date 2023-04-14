@@ -248,6 +248,9 @@
     <ClInclude Include="UIButtonInterFace.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIWindow.h" />
+    <ClInclude Include="UIWindowBadThings.h" />
+    <ClInclude Include="UIWindowEvent.h" />
+    <ClInclude Include="UIWindowEventWarning.h" />
     <ClInclude Include="VBCube.h" />
     <ClInclude Include="VBGO.h" />
     <ClInclude Include="VBPillow.h" />
@@ -260,6 +263,7 @@
     <ClInclude Include="VibeTile.h" />
     <ClInclude Include="WindowBoarder.h" />
     <ClInclude Include="Window_file.h" />
+    <ClInclude Include="Window_Global.h" />
     <ClInclude Include="ZoneType.h" />
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +329,9 @@
     <ClCompile Include="treebit.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIWindow.cpp" />
+    <ClCompile Include="UIWindowBadThings.cpp" />
+    <ClCompile Include="UIWindowEvent.cpp" />
+    <ClCompile Include="UIWindowEventWarning.cpp" />
     <ClCompile Include="VBCube.cpp" />
     <ClCompile Include="VBGO.cpp" />
     <ClCompile Include="VBQuad.cpp" />
@@ -333,6 +340,7 @@
     <ClCompile Include="VibeTile.cpp" />
     <ClCompile Include="WindowBoarder.cpp" />
     <ClCompile Include="Window_file.cpp" />
+    <ClCompile Include="Window_Global.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NewEventManager.tpp" />
