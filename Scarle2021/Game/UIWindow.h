@@ -22,7 +22,8 @@ public:
     virtual void update(GameData* _gameData, Vector2& _mousePosition);
     virtual void render(DrawData2D* _drawData);
     const bool& ReceiveEvents(const AL::Event& al_event) override;
-
+    const bool& IsCursorInsideWindow() override;
+    
     void setPostion(Vector2& _new_pos) ;
     virtual void setScale(Vector2& _newScale) ;
 
@@ -62,5 +63,6 @@ protected:
     };
     // makes window render or update 
     bool is_visible = false;
+    bool inside = false;
 };
 

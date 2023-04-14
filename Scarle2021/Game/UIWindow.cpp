@@ -151,9 +151,11 @@ void UIWindow::update(GameData* _gameData, Vector2& _mousePosition)
             text->Tick(_gameData);
         }
     }
+
+    inside = isInside(mouse_pos);
     
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -181,7 +183,11 @@ void UIWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIWindow::render(DrawData2D* _drawData)
 {
-    if(!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
     
     windowBackGround->Draw(_drawData);
     
@@ -210,6 +216,10 @@ const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
     return false;
 }
 
+const bool& UIWindow::IsCursorInsideWindow()
+{
+    return inside;
+}
 
 void UIWindow::setPostion(Vector2& _new_pos)
 {

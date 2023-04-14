@@ -22,6 +22,7 @@ public:
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
     const bool& ReceiveEvents(const AL::Event& al_event) override;
+    const bool& IsCursorInsideWindow() override;
 
     void setPostion(Vector2 _new_pos);
     void setScale(Vector2& _newScale);
@@ -51,6 +52,7 @@ private:
     Vector2 old_mouse_pos_panel {0,0};
 
     bool toggle_click_panel = false;
+    bool inside = false;
     //float year = 0;
     //int credits = 0;
 

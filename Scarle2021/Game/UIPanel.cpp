@@ -200,8 +200,10 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
         text->Tick(_gameData);
     }
 
+    inside = isInsidePanel(mouse_pos);
+    
     //if clicked updates pos and scale for window drag  
-    if (toggle_click_panel && isInsidePanel(mouse_pos))
+    if (toggle_click_panel && inside)
     {
 
         //new pos on click and drag 
@@ -250,6 +252,11 @@ const bool& UIPanel::ReceiveEvents(const AL::Event& al_event)
         toggle_click_panel = al_event.cursor_interact.active;
     }
     return false;
+}
+
+const bool& UIPanel::IsCursorInsideWindow()
+{
+    return inside;
 }
 
 void UIPanel::setPostion(Vector2 _panelPosition)

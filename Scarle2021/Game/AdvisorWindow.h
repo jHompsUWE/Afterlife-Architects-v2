@@ -14,6 +14,7 @@ public:
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
     const bool& ReceiveEvents(const AL::Event& al_event) override;
+    const bool& IsCursorInsideWindow() override;
 
     void set_postion(Vector2& _new_pos);
     void set_scale(Vector2& _newScale);
@@ -48,6 +49,7 @@ private:
     std::vector<ImageGO2D*> indicators_ja;
     bool show_ind_ar[5];
     bool show_ind_ja[5];
+    bool inside = false;
  
     //vectors
     Vector2 window_res {0,0};

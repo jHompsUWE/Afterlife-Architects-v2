@@ -83,11 +83,6 @@ const bool& BuildingSystem::ReceiveEvents(const AL::Event& al_event)
     {
         switch (al_event.input.action)
         {
-        case AL::Input::build_houses:
-            TryCreateHouse(tilemap_heaven, vibe_tilemap_heaven, building_manager_heaven, selected_zone);
-            TryCreateHouse(tilemap_hell, vibe_tilemap_hell, building_manager_hell, selected_zone);
-            break;
-            
         case AL::Input::show_vibes:
             if(al_event.input.active)
             {
@@ -99,7 +94,42 @@ const bool& BuildingSystem::ReceiveEvents(const AL::Event& al_event)
             selected_zone = Green;
             preview_quad->ChangePreviewQuadColor(selected_zone);
             break;
+
+        case AL::Input::place_zone_yellow:
+            selected_zone = Yellow;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+
+        case AL::Input::place_zone_orange:
+            selected_zone = Orange;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+
+        case AL::Input::place_zone_brown:
+            selected_zone = Brown;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
             
+        case AL::Input::place_zone_purple:
+            selected_zone = Purple;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+
+        case AL::Input::place_zone_red:
+            selected_zone = Red;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+
+        case AL::Input::place_zone_blue:
+            selected_zone = Blue;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+
+        case AL::Input::delete_zone:
+            selected_zone = Void;
+            preview_quad->ChangePreviewQuadColor(selected_zone);
+            break;
+        
         default:
             break;
         }
@@ -107,18 +137,17 @@ const bool& BuildingSystem::ReceiveEvents(const AL::Event& al_event)
 
     if(al_event.type == AL::event_cursor_interact)
     {
-        if(al_event.cursor_interact.action == AL::Cursor::Action::button_input1)
+        //Does not interact with the building manager if the cursor is inside the UI
+        if(!AL::NewEventManager::IsCursorInsideUi())
         {
-            if(al_event.cursor_interact.active)
+            if(al_event.cursor_interact.action == AL::Cursor::Action::button_input1)
             {
-                mouse_state = true;
+                mouse_state = al_event.cursor_interact.active;
+                
+                CursorIntegration();
             }
-            else
-            {
-                mouse_state = false;
-            }
-            CursorIntegration();
         }
+        
     }
     
     if(al_event.type != AL::event_build_sys) return false;

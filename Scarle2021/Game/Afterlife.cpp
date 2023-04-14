@@ -138,6 +138,7 @@ void Afterlife::Tick()
         MainUpdate(timer);
         event_manager->DispatchEvents();
         ReadInput();
+        event_manager->LateUpdate();
     });
     Render();
 }

@@ -148,9 +148,11 @@ void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text->Tick(_gameData);
     }
+
+    inside = isInside(mouse_pos);
     
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -198,7 +200,11 @@ void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void AdvisorWindow::render(DrawData2D* _drawData)
 {
-    if (!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
     
     windowBackGround->Draw(_drawData);
     
@@ -249,6 +255,11 @@ const bool& AdvisorWindow::ReceiveEvents(const AL::Event& al_event)
         toggle_click = al_event.cursor_interact.active;
     }
     return false;
+}
+
+const bool& AdvisorWindow::IsCursorInsideWindow()
+{
+    return inside;
 }
 
 void AdvisorWindow::set_postion(Vector2& _new_pos)

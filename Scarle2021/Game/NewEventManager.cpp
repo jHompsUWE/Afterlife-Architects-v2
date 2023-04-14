@@ -44,6 +44,27 @@ namespace AL
 		Get().FlushEventList();
 	}
 
+	const bool& NewEventManager::IsCursorInsideUi()
+	{
+		return Get().inside_ui;
+	}
+
+	// Update ----------------------------------------------------------------------------------------------------------
+
+	void NewEventManager::LateUpdate()
+	{
+		//Every update checks if the cursor is present inside any UI element, except buttons
+		inside_ui = false;
+		for (const auto& receiver : receiver_list)
+		{
+			if(receiver.second->IsCursorInsideWindow())
+			{
+				inside_ui = true;
+				break;
+			}
+		}
+	}
+
 	// Event List ------------------------------------------------------------------------------------------------------
 	
 	std::vector<Event>& NewEventManager::GetEventList()
@@ -100,7 +121,7 @@ namespace AL
 					//Fires the event only if the receiver matches the type it is listening for 
 					if(receiver.first == current_ev.type)
 					{
-						receiver.second->ReceiveEvents(current_ev);
+						if(receiver.second->ReceiveEvents(current_ev)) break;
 					}
 				}
 

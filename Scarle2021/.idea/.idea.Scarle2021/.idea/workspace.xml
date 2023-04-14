@@ -14,21 +14,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2b8328b1-bf6f-49f8-981b-3c7317042b6a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/AdvisorManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/AdvisorManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/ActionListInput.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/ActionListInput.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/AdvisorWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/AdvisorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/AudioManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AudioManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/AudioManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AudioManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Afterlife.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Afterlife.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/BuildingSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/BuildingSystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/BuildingSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/BuildingSystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/EventReceiver.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/EventReceiver.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/FSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/FSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/FSM.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/FSM.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/GameplaySingletons.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameplaySingletons.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/NewEventManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/NewEventManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/OrthographicCamera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/OrthographicCamera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/OrthographicCamera.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/OrthographicCamera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/NewEventManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/NewEventManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/SoulViewWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SoulViewWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/SoulViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SoulViewWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIPanel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIPanel.cpp" afterDir="false" />
@@ -254,6 +248,7 @@
       <workItem from="1681167343034" duration="19020000" />
       <workItem from="1681234633750" duration="6460000" />
       <workItem from="1681354152842" duration="15795000" />
+      <workItem from="1681427115907" duration="518000" />
     </task>
     <servers />
   </component>

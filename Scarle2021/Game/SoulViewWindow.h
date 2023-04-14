@@ -13,6 +13,7 @@ public:
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
     const bool& ReceiveEvents(const AL::Event& al_event) override;
+    const bool& IsCursorInsideWindow() override;
 
     void set_postion(Vector2& _new_pos);
     void set_scale(Vector2& _newScale);
@@ -32,6 +33,7 @@ private:
     //mouse pointer inside window
     bool isInside(Vector2& point) const;
     bool toggle_click = false;
+    bool inside = false;
     Vector2 mouse_pos = {0,0};
     Vector2 old_mouse_pos{ 0,0 };
 

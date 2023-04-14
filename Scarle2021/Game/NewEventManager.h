@@ -76,8 +76,18 @@ namespace AL
 		 */
 		static void FlushEventListSt();
 
+		/**
+		 * \return true if the cursor is inside a UI window
+		 */
+		static const bool& IsCursorInsideUi();
+
 		// Public ------------------------------------------------------------------------------------------------------
 
+		/**
+		 * \brief Runs the update function of the EV
+		 */
+		void LateUpdate();
+		
 		/**
 		 * \return returns the event list.
 		 */
@@ -183,6 +193,8 @@ namespace AL
 		
 		std::vector<std::pair<EventType, EventReceiver*>> receiver_list{};
 		std::vector<Event> event_list{};
+
+		bool inside_ui = false;
 	};
 }
 
