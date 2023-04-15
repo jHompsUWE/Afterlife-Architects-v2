@@ -42,7 +42,7 @@ MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d
     image_vec[0]->SetPos(Vector2(window_pos.x + 177.5, window_pos.y + 33));
     image_vec[0]->SetScale(Vector2(1, 1));
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact, AL::EventType::event_ui);
     economy_manager = _economy_manager;
 }
 
@@ -146,13 +146,10 @@ void MicromanagerWindow::render(DrawData2D* _drawData)
     }
 }
 
-void MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
 {
     switch (al_event.type)
     {
-    case AL::event_input:
-        break;
-
     case AL::event_cursor_interact:
         //Saves the state of the action
         if (al_event.cursor_interact.action == AL::Cursor::button_input1)
@@ -185,6 +182,8 @@ void MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
     default:
         break;
     }
+    
+    return false;
 }
 
 void MicromanagerWindow::updateSlider()

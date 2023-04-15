@@ -62,7 +62,7 @@ GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevi
         DataManager::GetD3DDevice(), "green",
         AL::EventType::event_ui, AL::UI::graphview_pop, 0, Vector2(0.6, 0.6)));
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact, AL::EventType::event_ui);
 }
 
 GraphviewWindow::~GraphviewWindow()
@@ -214,13 +214,10 @@ void GraphviewWindow::render(DrawData2D* _drawData)
     }
 }
 
-void GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
 {
     switch (al_event.type)
     {
-    case AL::event_input:
-        break;
-
     case AL::event_ui:
         if (al_event.ui.action == AL::UI::graphview_bel)
         {
@@ -247,6 +244,8 @@ void GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
     default:
         break;
     }
+
+    return false;
 }
 
 void GraphviewWindow::set_postion(Vector2& _new_pos)
