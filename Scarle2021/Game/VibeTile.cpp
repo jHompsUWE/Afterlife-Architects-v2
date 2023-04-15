@@ -46,3 +46,12 @@ void VibeTile::ChangeVibe(int vibe_diff)
 	quad->SetColor(new_color);
 }
 
+int VibeTile::GetVibe()
+{
+	if (vibe_value > 16)
+	{
+		return 16;
+	}
+	return vibe_value;
+}
+

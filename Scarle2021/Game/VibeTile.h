@@ -8,6 +8,7 @@ public:
 	~VibeTile();
 
 	void ChangeVibe(int vibe_diff);
+	int GetVibe();
 
 protected:
 	int vibe_value = 0;

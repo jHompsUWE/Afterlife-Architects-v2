@@ -446,6 +446,30 @@
     <ImageContentTask Include="Cursor.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Afterlife\MicroManager\micro_window.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\Slider\arrow_left.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\Slider\arrow_right.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\Slider\slider_handle.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_back.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_belief.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_population.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_religion.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
     <ImageContentTask Include="Window_file.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>

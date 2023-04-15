@@ -3,7 +3,7 @@
 
 Tilemap::Tilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager,
 	int _size, Vector3 _start, PlaneType _plane, std::shared_ptr<EconomyManager> _economy_manager) :
-	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane), economy_manager(_economy_manager)
+	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane), economy_manager(_economy_manager), total_roads(0)
 {
 	for (int x = 0; x < size; x++)
 	{
@@ -157,6 +157,8 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 		tilemap[tile_pos.x][tile_pos.z]->SetTexture(texture_manager->GetTextureZone(zone_type));
 		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
 		ActivateNearbyTile(tile_pos);
+		total_roads++;
+		economy_manager->SetTotalRoads(total_roads);
 		return true;
 
 	case Karma_Tracks:
@@ -173,6 +175,8 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 		tilemap[tile_pos.x][tile_pos.z]->SetTexture(texture_manager->GetTextureZone(zone_type));
 		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
 		DeactivateNearbyTile(tile_pos);
+		total_roads--;
+		economy_manager->SetTotalRoads(total_roads);
 		return true;
 	}
 

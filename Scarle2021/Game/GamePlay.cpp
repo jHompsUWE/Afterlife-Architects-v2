@@ -21,6 +21,9 @@ GamePlay::~GamePlay()
 
 bool GamePlay::init()
 {
+    // Economy
+    economy_manager = GameplaySingletons::GetEconomyManager();
+
     // Hierarchy
     hierarchy_manager = std::make_unique<HierarchyManager>();
     
@@ -36,13 +39,15 @@ bool GamePlay::init()
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
         GetD3DDevice(),"","AdvisorBackground",Vector2(0.5,0.5));
-    //hierarchy_manager->AddToHierarchy(advisor_window);
-    
-    //advisor
-    soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
-        GetD3DDevice(),"","SoulView",Vector2(1,1));
-    //hierarchy_manager->AddToHierarchy(soul_view);
-    
+    //soul view
+    soul_view = new SoulViewWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "SoulView", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
+    //micro manager
+    micro_manager = new MicromanagerWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "micro_window", Vector2(1, 1), GameplaySingletons::GetEconomyManager());
+    //graphview
+    graphview = new GraphviewWindow(Vector2(400, 120), DataManager::
+        GetD3DDevice(), "", "graphview_back", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
     //karma station
     window_two_karma_station = new KarmaStationWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
@@ -94,8 +99,6 @@ bool GamePlay::init()
     mouse_screen_pos.z = 0;
     mouse_world_pos = std::make_shared<Vector3>(0, 0, 0);
 
-    // Economy
-    economy_manager = GameplaySingletons::GetEconomyManager();
 
     // Building System
     building_system = std::make_unique<BuildingSystem>(mouse_world_pos, DataManager::GetD3DDevice());
@@ -147,6 +150,10 @@ void GamePlay::Update(GameData* game_data)
     
     //updates panel
     main_panel->update(game_data,mouse_pos);
+    micro_manager->update(game_data,mouse_pos);
+    graphview->update(game_data,mouse_pos);
+    //update graphview
+    //update micro manager
 
     //All other windows
     hierarchy_manager->Update(game_data, mouse_pos);
@@ -226,6 +233,14 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             case AL::UI::window_soulview:
                 soul_view->generateRandSoul();
                 soul_view->is_visible = !soul_view->is_visible;
+                break;
+
+            case AL::UI::window_micro_manager:
+                micro_manager->is_visible = !micro_manager->is_visible;
+                break;
+
+            case AL::UI::window_graphview:
+                graphview->is_visible = !graphview->is_visible;
                 break;
             
             case AL::UI::window_file:
@@ -325,6 +340,12 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
 {
     hierarchy_manager->Render(draw_data2D);
     
+    micro_manager->render(draw_data2D);
+    graphview->render(draw_data2D);
+    //render micro manager
+
+    //render micro manager
+
     //renders panel
     main_panel->render(draw_data2D);
     //UI boarder
@@ -376,6 +397,8 @@ void GamePlay::ResizeUI()
     main_panel->reSize(screen_size);
     advisor_window->reSize(screen_size);
     soul_view->reSize(screen_size);
+    micro_manager->reSize(screen_size);
+    graphview->reSize(screen_size);
     window_two_karma_station->reSize(screen_size);
     window_three_topias->reSize(screen_size);
     window_four_training_centers_window->reSize(screen_size);

@@ -2,7 +2,7 @@
 #include "Loop.h"
 
 
-Loop::Loop(AudioEngine* _audEngine, string _filename) :Sound(_audEngine, _filename)
+Loop::Loop(AudioEngine* _audEngine, string _filename, float _volume) :Sound(_audEngine, _filename, _volume)
 {
 	if (m_sfx)
 	{

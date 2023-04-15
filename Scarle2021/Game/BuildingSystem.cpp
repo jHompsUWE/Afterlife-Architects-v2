@@ -13,11 +13,13 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
 
     tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven, economy_manager);
     vibe_tilemap_heaven = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_heaven);
-    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_heaven, Heaven);
+    rad_tilemap_heaven = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_heaven);
+    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_heaven, rad_tilemap_heaven, economy_manager, 100, start_heaven, Heaven);
 
     tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell, economy_manager);
     vibe_tilemap_hell = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_hell);
-    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, economy_manager, 100, start_hell, Hell);
+    rad_tilemap_hell = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_hell);
+    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_hell, rad_tilemap_hell, economy_manager, 100, start_hell, Hell);
 
     PlaneAssembler::RefreshResSeed();
     GenerateTerrain(tilemap_heaven, vibe_tilemap_heaven, building_manager_heaven, Heaven);
@@ -224,7 +226,6 @@ void BuildingSystem::GenerateTerrain(std::unique_ptr<Tilemap>& tilemap, std::uni
 
             tilemap->BoxFill(building_manager, vibe, Rock, Vector3(tile.x, 0, tile.y), Vector3(tile.x, 0, tile.y));
             tilemap->OccupyTile(Vector3(tile.x, 0, tile.y), 1);
-            //vibe->VibeChange(Vector3(tile.x, 0, tile.y), -5, 1, 3);
 
             switch (rand() % 2)
             {
@@ -244,6 +245,7 @@ void BuildingSystem::GenerateTerrain(std::unique_ptr<Tilemap>& tilemap, std::uni
 
         case 2:
             // Create River
+            tilemap->OccupyTile(Vector3(tile.x, 0, tile.y), 1);
 
             switch (plane)
             {
@@ -311,8 +313,6 @@ bool BuildingSystem::TryCreateHouse(std::unique_ptr<Tilemap>& tilemap, std::uniq
     {
         tilemap->OccupyTile(empty_tile, 2);
 
-        vibe->VibeChange(empty_tile, 5, 2, 1);
-
         switch (zone)
         {
         case Green:
@@ -355,8 +355,6 @@ bool BuildingSystem::TryCreateHouse(std::unique_ptr<Tilemap>& tilemap, std::uniq
     if (empty_tile.y == 0)
     {
         tilemap->OccupyTile(empty_tile, 1);
-
-        vibe->VibeChange(empty_tile, 5, 1, 1);
 
         switch (zone)
         {
@@ -436,9 +434,6 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
 
             // Create a structure
             building_manager_heaven->CreateStructure(selected_structure, mouse_released_heaven_pos);
-
-            // Change the vibe of the tiles around the structure
-            vibe_tilemap_heaven->VibeChange(mouse_released_heaven_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure), BuildingManager::GetSizeOfStructure(selected_structure));
         }
         break;
 
@@ -454,9 +449,6 @@ void BuildingSystem::PlaceSelectedStructure(PlaneType plane)
 
             // Create a structure
             building_manager_hell->CreateStructure(selected_structure, mouse_released_hell_pos);
-
-            // Change the vibe of the tiles around the structure
-            vibe_tilemap_hell->VibeChange(mouse_released_hell_pos, 5, BuildingManager::GetSizeOfStructure(selected_structure), BuildingManager::GetSizeOfStructure(selected_structure));
         }
         break;
     }

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 namespace AL
 {
@@ -24,6 +24,8 @@ namespace AL
 			window_delete_structures,
 			window_advisors,
 			window_soulview,
+            window_micro_manager,
+			window_graphview,
 
 			//ui boarder UI
 			window_file,
@@ -69,7 +71,12 @@ namespace AL
 			adv_option2,
 			adv_option3,
 			adv_option4,
-			adv_option5
+			adv_option5,
+			micro_manager_arrow_l,
+			micro_manager_arrow_r,
+			graphview_bel,
+			graphview_rel,
+			graphview_pop
 		};
 	};
 }

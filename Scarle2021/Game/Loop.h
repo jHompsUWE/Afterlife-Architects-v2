@@ -9,7 +9,7 @@ class Loop :
 	public Sound
 {
 public:
-	Loop(AudioEngine* _audEngine, string _filename);
+	Loop(AudioEngine* _audEngine, string _filename, float _volume);
 	~Loop();
 
 	virtual void Tick(GameData* _GSD);

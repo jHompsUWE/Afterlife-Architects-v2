@@ -367,6 +367,24 @@
     <ImageContentTask Include="Cursor.png" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="Afterlife\MicroManager\micro_window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\arrow_left.png" />
+    <ImageContentTask Include="Afterlife\Slider\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\slider_handle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_back.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_belief.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_population.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_religion.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ImageContentTask Include="Window_file.png" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ using namespace std;
 class Sound
 {
 public:
-	Sound(AudioEngine* _audEngine, string _filename);
+	Sound(AudioEngine* _audEngine, string _filename, float _volume);
 	virtual ~Sound();
 
 	virtual void Tick(GameData* _GD) { _GD; };

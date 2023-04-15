@@ -230,12 +230,12 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_GameObjects2D.push_back(text);
 
     //Test Sounds
-    Loop* loop = new Loop(m_audioEngine.get(), "NightAmbienceSimple_02");
+    Loop* loop = new Loop(m_audioEngine.get(), "NightAmbienceSimple_02", 1);
     loop->SetVolume(0.1f);
     loop->Play();
     m_Sounds.push_back(loop);
 
-    TestSound* TS = new TestSound(m_audioEngine.get(), "Explo1");
+    TestSound* TS = new TestSound(m_audioEngine.get(), "Explo1", 1);
     m_Sounds.push_back(TS);
 }
 

@@ -10,11 +10,13 @@
 #include "UIPanel.h"
 #include "UIWindow.h"
 #include "SoulViewWindow.h"
+#include "MicromanagerWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
 #include "UIWindowEvent.h"
 #include "WindowBoarder.h"
 
+#include "GraphviewWindow.h"
 // Economy and Population
 #include "GameplaySingletons.h"
 
@@ -85,6 +87,8 @@ private:
     Window_Global* window_global;
     UIWindowBadThings* ui_window_bad_things;
     UIWindowEventWarning* ui_window_event_warning;
+    MicromanagerWindow* micro_manager;
+    GraphviewWindow* graphview;
 
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
