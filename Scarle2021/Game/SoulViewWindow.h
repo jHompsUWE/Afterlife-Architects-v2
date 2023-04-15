@@ -2,7 +2,7 @@
 #include "UIWindow.h"
 #include "PopulationManager.h"
 
-class SoulViewWindow : public AL::EventReceiver
+class SoulViewWindow : public UIWindow
 {
 public:
 
@@ -11,43 +11,21 @@ public:
 
     ~SoulViewWindow() override;
 
-    void update(GameData* _gameData, Vector2& _mousePosition);
-    void render(DrawData2D* _drawData);
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
-    const bool& IsCursorInsideWindow() override;
-
-    void set_postion(Vector2& _new_pos);
-    void set_scale(Vector2& _newScale);
-
+    void update(GameData* _gameData, Vector2& _mousePosition) override;
+    void render(DrawData2D* _drawData) override;
+    void reSize(Vector2 game_res) override;
+    
     void generateRandSoul();
-
-    Vector2& getPosition();
-    Vector2& getButtonRes();
-
-    void reSize(Vector2 game_res);
-    bool is_visible = false;
-
+    
 private:
-
     string generateZone(PlaneType plane);
     string generateBelief(PlaneType plane);
-
-    //mouse pointer inside window
-    bool isInside(Vector2& point) const;
-    bool toggle_click = false;
-    bool inside = false;
-    Vector2 mouse_pos = {0,0};
-    Vector2 old_mouse_pos{ 0,0 };
-
-    ImageGO2D* windowBackGround = nullptr;
     std::shared_ptr<PopulationManager> population_manager;
 
-    //vector of buttons 
-    std::vector<UIButtonInterFace*> buttons;
-    std::vector<TextGO2D*> text_vec;
+    //Images
     std::vector<ImageGO2D*> image_vec;
 
-    string random_names[6] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli","Awse Noori", "Seb LLewellyn" };
+    string random_names[6] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli","Awse Noori", "Seb LLewellyn" }; 
     string available_punishments[14] = { "Envy","Avarice","Gluttony","Sloth","Pride","Wrath","Lust","Contentment","Charity","Temperance","Diligence","Humility","Peacefulness","Chastity" };
 
     // NAAA does not show in afterlife
@@ -64,10 +42,6 @@ private:
     string beliefThree[2] = { "SUMA", "SUSA" };
     // SUMA serve all sins and virtues (multiple)
     // SUSA serve one sin or virtue (single)
-
-    //vectors
-    Vector2 window_res{ 0,0 };
-    Vector2 window_pos{ 0,0 };
 };
 
 

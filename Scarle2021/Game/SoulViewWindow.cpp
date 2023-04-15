@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "SoulViewWindow.h"
-#include <iostream>
 
 #include "DataManager.h"
 
-
 SoulViewWindow::SoulViewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
-    std::string _filepath, Vector2 _setScale, std::shared_ptr<PopulationManager> pop_manager) : population_manager(pop_manager)
+    std::string _filepath, Vector2 _setScale, std::shared_ptr<PopulationManager> pop_manager)
+    : UIWindow(), population_manager(pop_manager)
 {
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
@@ -35,40 +34,19 @@ SoulViewWindow::SoulViewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice
     text_vec.push_back(new TextGO2D(""));
     text_vec[3]->SetPos(Vector2(window_pos.x + 17, window_pos.y + 234));
     text_vec[3]->SetScale(Vector2(_setScale * 0.2));
-
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
 }
 
 SoulViewWindow::~SoulViewWindow()
 {
-    //deletes pointers
-    for (auto button : buttons)
-    {
-        delete button;
-    }
-
-    delete windowBackGround;
-
-    for (auto text : text_vec)
-    {
-        delete text;
-    }
-
     for (auto image : image_vec)
     {
         delete image;
     }
-
-    AL::NewEventManager::RemoveEventReceiver(this);
 }
 
 void SoulViewWindow::update(GameData* _gameData, Vector2& _mousePosition)
 {
-    if (!is_visible)
-    {
-        inside = false;
-        return;
-    }
+    if (!is_visible) return;
 
     mouse_pos = _mousePosition;
 
@@ -128,7 +106,11 @@ void SoulViewWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void SoulViewWindow::render(DrawData2D* _drawData)
 {
-    if (!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
 
     windowBackGround->Draw(_drawData);
 
@@ -147,40 +129,6 @@ void SoulViewWindow::render(DrawData2D* _drawData)
     {
         image->Draw(_drawData);
     }
-}
-
-const bool& SoulViewWindow::ReceiveEvents(const AL::Event& al_event)
-{
-    //Saves the state of the action
-    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-    {
-        toggle_click = al_event.cursor_interact.active;
-    }
-    return false;
-}
-
-const bool& SoulViewWindow::IsCursorInsideWindow()
-{
-    return inside;
-}
-
-void SoulViewWindow::set_postion(Vector2& _new_pos)
-{
-    window_pos = _new_pos;
-}
-
-void SoulViewWindow::set_scale(Vector2& _newScale)
-{
-}
-
-Vector2& SoulViewWindow::getPosition()
-{
-    return window_pos;
-}
-
-Vector2& SoulViewWindow::getButtonRes()
-{
-    return window_res;
 }
 
 void SoulViewWindow::reSize(Vector2 game_res)
@@ -203,16 +151,6 @@ void SoulViewWindow::reSize(Vector2 game_res)
     {
         image->ReSize(game_res.x, game_res.y);
     }
-}
-
-bool SoulViewWindow::isInside(Vector2& point) const
-{
-    //checks bounding box of UI window
-    if (point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
-        point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))
-        return true;
-
-    return false;
 }
 
 void SoulViewWindow::generateRandSoul()

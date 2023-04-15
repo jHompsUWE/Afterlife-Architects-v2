@@ -1,6 +1,5 @@
 #pragma once
 #include "CMOGO.h"
-#include "fileVBGO.h"
 #include "StateTemplate.h"
 #include "AdvisorManager.h"
 #include "TextGO2D.h"
@@ -61,35 +60,42 @@ private:
     // Mouse
     void UpdateMousePos(DrawData* draw_data);
     Vector2 screen_size;
-    
+
     // Building System
     std::unique_ptr<BuildingSystem> building_system;
 
     TextGO2D* text = nullptr;
 
-    Vector2 mouse_pos {0,0};
+    Vector2 mouse_pos{ 0,0 };
     Vector3 mouse_screen_pos;
     std::shared_ptr<Vector3> mouse_world_pos;
-    
+
     //main build panel
     UIPanel* main_panel;
-    
-    // UI windows
-    UIWindow* window_one_gate;
-    KarmaStationWindow* window_two_karma_station;
-    AdvisorWindow* advisor_window;
-    TopiasWindowUI* window_three_topias;
-    TrainingCentersWindow* window_four_training_centers_window;
-    SoulViewWindow* soul_view;
+
+    /// UI windows -------------
+
+    //File Bar
     WindowBoarder* window_boarder;
     Window_file* window_file;
-    UIWindowEvent* ui_window_event;
     Window_Global* window_global;
     UIWindowBadThings* ui_window_bad_things;
+
+    // Pop up
+    UIWindow* window_one_gate;
+    KarmaStationWindow* window_two_karma_station;
+    TopiasWindowUI* window_three_topias;
+    TrainingCentersWindow* window_four_training_centers_window;
     UIWindowEventWarning* ui_window_event_warning;
+    UIWindowEvent* ui_window_event;
+
+    // Pop up info
+    SoulViewWindow* soul_view;
     MicromanagerWindow* micro_manager;
     GraphviewWindow* graphview;
+    AdvisorWindow* advisor_window;
 
+    // Adv manager
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
     // Economy

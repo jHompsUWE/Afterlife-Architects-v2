@@ -63,6 +63,7 @@ protected:
     {
         text1, text2, text3, text4,
     };
+    
     // makes window render or update 
     bool is_visible = false;
     bool inside = false;

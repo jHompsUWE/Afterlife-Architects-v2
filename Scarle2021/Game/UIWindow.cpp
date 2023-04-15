@@ -77,7 +77,6 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         AL::EventType::event_build_sys,AL::BuildSys::structure, Gate_T3,Vector2(0.5,0.5)));
 
     AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
-
 }
 
 UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -112,6 +111,7 @@ UIWindow::~UIWindow()
     {
         delete button;        
     }
+    
     delete windowBackGround;
 
     for (auto text : text_vec)
@@ -207,10 +207,13 @@ void UIWindow::render(DrawData2D* _drawData)
 
 const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    //Saves the state of the action
-    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
+    if(al_event.type == AL::EventType::event_cursor_interact)
     {
-        toggle_click = al_event.cursor_interact.active;
+        //Saves the state of the action
+        if(al_event.cursor_interact.action == AL::Cursor::button_input1)
+        {
+            toggle_click = al_event.cursor_interact.active;
+        }
     }
     return false;
 }

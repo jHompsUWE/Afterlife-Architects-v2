@@ -417,12 +417,6 @@
     <ClInclude Include="RaDTilemap.h">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClInclude>
-    <ClInclude Include="MicromanagerWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphviewWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2Int.h">
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
@@ -470,6 +464,12 @@
     </ClInclude>
     <ClInclude Include="UIWindowEventWarning.h">
       <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphviewWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="MicromanagerWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -677,17 +677,17 @@
     <ClCompile Include="RaDTilemap.cpp">
       <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
     </ClCompile>
-    <ClCompile Include="MicromanagerWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphviewWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
     <ClCompile Include="UIWindowEvent.cpp">
       <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
     </ClCompile>
     <ClCompile Include="UIWindowEventWarning.cpp">
       <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphviewWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="MicromanagerWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

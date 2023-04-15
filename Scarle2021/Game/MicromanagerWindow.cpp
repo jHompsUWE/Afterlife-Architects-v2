@@ -6,7 +6,7 @@
 
 
 MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
-    std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager)
+    std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager) : UIWindow()
 {
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
@@ -41,32 +41,18 @@ MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d
     image_vec.push_back(new ImageGO2D("slider_handle", DataManager::GetD3DDevice()));
     image_vec[0]->SetPos(Vector2(window_pos.x + 177.5, window_pos.y + 33));
     image_vec[0]->SetScale(Vector2(1, 1));
-
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact, AL::EventType::event_ui);
+    
     economy_manager = _economy_manager;
+
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_ui);
 }
 
 MicromanagerWindow::~MicromanagerWindow()
 {
-    //deletes pointers
-    for (auto button : buttons)
-    {
-        delete button;
-    }
-
-    delete windowBackGround;
-
-    for (auto text : text_vec)
-    {
-        delete text;
-    }
-
     for (auto image : image_vec)
     {
         delete image;
     }
-
-    AL::NewEventManager::RemoveEventReceiver(this);
 }
 
 void MicromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
@@ -95,8 +81,10 @@ void MicromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
         text->Tick(_gameData);
     }
 
+    inside = isInside(mouse_pos);
+
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -129,11 +117,16 @@ void MicromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void MicromanagerWindow::render(DrawData2D* _drawData)
 {
-    if (!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
 
     windowBackGround->Draw(_drawData);
     buttons[0]->render(_drawData);
     buttons[1]->render(_drawData);
+    
     // renders texts
     for (const auto& text : text_vec)
     {
@@ -148,17 +141,8 @@ void MicromanagerWindow::render(DrawData2D* _drawData)
 
 const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    if(al_event.type == AL::event_ui)
     {
-    case AL::event_cursor_interact:
-        //Saves the state of the action
-        if (al_event.cursor_interact.action == AL::Cursor::button_input1)
-        {
-            toggle_click = al_event.cursor_interact.active;
-        }
-        break;
-        
-    case AL::event_ui:
         if (al_event.input.action == AL::UI::micro_manager_arrow_l)
         {
             if (slider_percent >= 5)
@@ -177,13 +161,9 @@ const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
             }
             updateSlider();
         }
-        break;
-
-    default:
-        break;
     }
     
-    return false;
+    return UIWindow::ReceiveEvents(al_event);
 }
 
 void MicromanagerWindow::updateSlider()
@@ -196,25 +176,6 @@ void MicromanagerWindow::updateSlider()
     text_vec[1]->ChangeString(std::to_string(slider_percent) + "%");
 
     prev_slider_percent = slider_percent;
-}
-
-void MicromanagerWindow::set_postion(Vector2& _new_pos)
-{
-    window_pos = _new_pos;
-}
-
-void MicromanagerWindow::set_scale(Vector2& _newScale)
-{
-}
-
-Vector2& MicromanagerWindow::getPosition()
-{
-    return window_pos;
-}
-
-Vector2& MicromanagerWindow::getButtonRes()
-{
-    return window_res;
 }
 
 void MicromanagerWindow::reSize(Vector2 game_res)
@@ -239,12 +200,3 @@ void MicromanagerWindow::reSize(Vector2 game_res)
     }
 }
 
-bool MicromanagerWindow::isInside(Vector2& point) const
-{
-    //checks bounding box of UI window
-    if (point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
-        point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))
-        return true;
-
-    return false;
-}

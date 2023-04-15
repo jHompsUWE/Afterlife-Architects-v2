@@ -8,7 +8,8 @@
 
 
 GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
-    std::string _filepath, Vector2 _setScale, std::shared_ptr<PopulationManager> pop_manager) : population_manager(pop_manager)
+    std::string _filepath, Vector2 _setScale, std::shared_ptr<PopulationManager> pop_manager)
+        : UIWindow(), population_manager(pop_manager)
 {
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
@@ -62,30 +63,15 @@ GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevi
         DataManager::GetD3DDevice(), "green",
         AL::EventType::event_ui, AL::UI::graphview_pop, 0, Vector2(0.6, 0.6)));
 
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact, AL::EventType::event_ui);
+    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_ui);
 }
 
 GraphviewWindow::~GraphviewWindow()
 {
-    //deletes pointers
-    for (auto button : buttons)
-    {
-        delete button;
-    }
-
-    delete windowBackGround;
-
-    for (auto text : text_vec)
-    {
-        delete text;
-    }
-
     for (auto image : image_vec)
     {
         delete image;
     }
-
-    AL::NewEventManager::RemoveEventReceiver(this);
 }
 
 void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
@@ -127,8 +113,11 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
         updatePopulationVisual();
         break;
     }
+
+    inside = isInside(mouse_pos);
+    
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -176,7 +165,11 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void GraphviewWindow::render(DrawData2D* _drawData)
 {
-    if (!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
 
     //renders buttons
     for (const auto& button : buttons)
@@ -216,9 +209,8 @@ void GraphviewWindow::render(DrawData2D* _drawData)
 
 const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    if(al_event.type == AL::EventType::event_ui)
     {
-    case AL::event_ui:
         if (al_event.ui.action == AL::UI::graphview_bel)
         {
             cur_graph = Belief;
@@ -231,41 +223,11 @@ const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
         {
             cur_graph = Religion;
         }
-        break;
-
-    case AL::event_cursor_interact:
-        //Saves the state of the action
-        if (al_event.cursor_interact.action == AL::Cursor::button_input1)
-        {
-            toggle_click = al_event.cursor_interact.active;
-        }
-        break;
-
-    default:
-        break;
     }
-
-    return false;
+    
+    return UIWindow::ReceiveEvents(al_event);
 }
 
-void GraphviewWindow::set_postion(Vector2& _new_pos)
-{
-    window_pos = _new_pos;
-}
-
-void GraphviewWindow::set_scale(Vector2& _newScale)
-{
-}
-
-Vector2& GraphviewWindow::getPosition()
-{
-    return window_pos;
-}
-
-Vector2& GraphviewWindow::getButtonRes()
-{
-    return window_res;
-}
 
 void GraphviewWindow::reSize(Vector2 game_res)
 {
@@ -287,16 +249,6 @@ void GraphviewWindow::reSize(Vector2 game_res)
     {
         image->ReSize(game_res.x, game_res.y);
     }
-}
-
-bool GraphviewWindow::isInside(Vector2& point) const
-{
-    //checks bounding box of UI window
-    if (point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
-        point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))
-        return true;
-
-    return false;
 }
 
 void GraphviewWindow::updateBeliefSpread()
