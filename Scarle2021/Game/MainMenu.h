@@ -1,6 +1,6 @@
 #pragma once
 #include "StateTemplate.h"
-#include "Button.h"
+#include "Button.hpp"
 
 class MainMenu : public StateTemplate
 {

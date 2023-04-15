@@ -5,7 +5,7 @@
 #include "TextGO2D.h"
 #include "NewEventManager.h"
 #include "UIButtonInterFace.h"
-#include "Button.h"
+#include "Button.hpp"
 #include "DataManager.h"
 
 #include "GameplaySingletons.h"

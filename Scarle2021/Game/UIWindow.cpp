@@ -274,6 +274,7 @@ const bool& UIWindow::getVisibility()
 
 void UIWindow::MoveInFront()
 {
+    //Sets the current window and its buttons to the front of the receivers queue
     for (auto& button : buttons)
     {
         button->MoveInFront();
@@ -284,6 +285,7 @@ void UIWindow::MoveInFront()
 
 void UIWindow::MoveToBack()
 {
+    //Sets the current window and its buttons to the Back of the receivers queue
     for (auto& button : buttons)
     {
         button->MoveToBack();
@@ -300,4 +302,9 @@ bool UIWindow::isInside(Vector2& point) const
            return true;
     
     return false;
+}
+
+Vector2 UIWindow::getWindowRes()
+{
+	return window_res;
 }

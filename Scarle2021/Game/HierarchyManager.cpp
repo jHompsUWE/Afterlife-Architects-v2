@@ -21,8 +21,7 @@ void HierarchyManager::Render(DrawData2D* draw_data)
     }
 }
 
-void HierarchyManager::AddToHierarchy(HierarchyInterface* window)
+void HierarchyManager::AddToHierarchy(UIWindow* window)
 {
-    windows.push_back(window);
+    windows.emplace_back(window);
 }
-

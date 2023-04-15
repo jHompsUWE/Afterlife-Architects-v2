@@ -13,28 +13,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b8328b1-bf6f-49f8-981b-3c7317042b6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Game/HierarchyInterface.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/HierarchyManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/HierarchyManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Game/Button.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/AdvisorWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/AdvisorWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Button.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Button.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Button.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj.filters" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/GamePlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/GamePlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/NewEventManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/NewEventManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/NewEventManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/NewEventManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/NewEventManager.tpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/NewEventManager.tpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/HierarchyInterface.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/HierarchyManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/HierarchyManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/HierarchyManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/HierarchyManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/KarmaStationWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/KarmaStationWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/KarmaStationWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/KarmaStationWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/LevelSelect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/LevelSelect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/MainMenu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/SoulViewWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SoulViewWindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/UIButtonInterFace.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIButtonInterFace.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/TopiasWindowUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/TopiasWindowUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/TrainingCentersWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/TrainingCentersWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIPanel.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIPanel.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindow.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindow.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIWindowBadThings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowBadThings.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIWindowBadThings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowBadThings.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIWindowEvent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEvent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIWindowEvent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEvent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/UIWindowEventWarning.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEventWarning.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/WindowBoarder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/WindowBoarder.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/UIWindowEventWarning.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowEventWarning.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/WindowBoarder.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/WindowBoarder.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Window_Global.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_Global.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Window_Global.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_Global.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Window_file.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_file.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Window_file.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Window_file.h" afterDir="false" />
     </list>
@@ -47,26 +55,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/DirectXColors.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/WinUser.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/combaseapi.h" root0="SKIP_HIGHLIGHTING" />
@@ -74,7 +62,6 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/include/vector" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/AudioManager.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/AudioManager.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Game/Button.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/TopiasWindowUI.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/UIButtonInterFace.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -259,7 +246,8 @@
       <workItem from="1681354152842" duration="15795000" />
       <workItem from="1681427115907" duration="518000" />
       <workItem from="1681493324350" duration="5539000" />
-      <workItem from="1681579357906" duration="7257000" />
+      <workItem from="1681579357906" duration="8725000" />
+      <workItem from="1681590134777" duration="458000" />
     </task>
     <servers />
   </component>

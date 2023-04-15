@@ -86,6 +86,7 @@ void UIWindowBadThings::render(DrawData2D* _drawData)
 
 void UIWindowBadThings::set_postion(Vector2& _new_pos)
 {
+    UIWindow::setPostion(_new_pos);
 }
 
 void UIWindowBadThings::setScale(Vector2& _newScale)

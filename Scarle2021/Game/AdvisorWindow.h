@@ -2,7 +2,7 @@
 #include "UIWindow.h"
 #include "NewEventManager.h"
 
-class AdvisorWindow : public HierarchyInterface, AL::EventReceiver
+class AdvisorWindow : public AL::EventReceiver
 {
 public:
 
@@ -11,8 +11,8 @@ public:
     
     ~AdvisorWindow() override;
     
-    void update(GameData* _gameData, Vector2& _mousePosition) override;
-    void render(DrawData2D* _drawData) override;
+    void update(GameData* _gameData, Vector2& _mousePosition);
+    void render(DrawData2D* _drawData);
     const bool& ReceiveEvents(const AL::Event& al_event) override;
     const bool& IsCursorInsideWindow() override;
 

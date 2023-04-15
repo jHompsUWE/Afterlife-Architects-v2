@@ -177,9 +177,8 @@
     <ClInclude Include="BuildingManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BuildingSystem.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="camera.h" />
-    <ClInclude Include="HierarchyInterface.h" />
     <ClInclude Include="CMOGO.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DrawData.h" />
@@ -276,7 +275,6 @@
     <ClCompile Include="BuildingManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BuildingSystem.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CMOGO.cpp" />
     <ClCompile Include="EconomyManager.cpp" />

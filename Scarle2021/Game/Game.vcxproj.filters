@@ -139,6 +139,18 @@
     <Filter Include="Afterlife\User Interface\Hierarchy">
       <UniqueIdentifier>{b75fa6ab-52c8-416f-bb41-10ca5b7d679e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\User Interface\UIWindow\BaseWindow">
+      <UniqueIdentifier>{f9194eac-2feb-45b3-9b08-5ca9f6fe901c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Afterlife\User Interface\UIWindow\PopUpWindows">
+      <UniqueIdentifier>{578b7a37-df85-4f18-a18d-6af6cf9018f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Afterlife\User Interface\UIWindow\DropDownWindows">
+      <UniqueIdentifier>{9fa250cb-ac19-4e80-9701-2f413ea4e0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Afterlife\User Interface\UIWindow\InfoWindows">
+      <UniqueIdentifier>{4ead0902-6b90-4322-957e-765e26ed951c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -270,7 +282,7 @@
     <ClInclude Include="UIButtonInterFace.h">
       <Filter>Afterlife\User Interface\UIButton</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Button.hpp">
       <Filter>Afterlife\User Interface\UIButton</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -290,9 +302,6 @@
     </ClInclude>
     <ClInclude Include="TileNode.h">
       <Filter>Afterlife\AStar Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="UIWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
     <ClInclude Include="UIPanel.h">
       <Filter>Afterlife\User Interface\UIMainPanel</Filter>
@@ -336,9 +345,6 @@
     <ClInclude Include="ActionListBuildSys.h">
       <Filter>Afterlife\Managers\Events\Action Lists</Filter>
     </ClInclude>
-    <ClInclude Include="AdvisorWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
     <ClInclude Include="StructureType.h">
       <Filter>Afterlife\Managers\Building System</Filter>
     </ClInclude>
@@ -350,15 +356,6 @@
     </ClInclude>
     <ClInclude Include="VibeTile.h">
       <Filter>Afterlife\Managers\Vibe</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingCentersWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="SoulViewWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="TopiasWindowUI.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
     <ClInclude Include="StructureGate.h">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
@@ -408,17 +405,8 @@
     <ClInclude Include="EconomyManager.h">
       <Filter>Afterlife\Managers\Economy</Filter>
     </ClInclude>
-    <ClInclude Include="KarmaStationWindow.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
     <ClInclude Include="GameplaySingletons.h">
       <Filter>Afterlife\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowBoarder.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="Window_file.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
     <ClInclude Include="Vector2Int.h">
       <Filter>Afterlife\Core Components</Filter>
@@ -429,23 +417,44 @@
     <ClInclude Include="Packet.hpp">
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
-    <ClInclude Include="UIWindowEvent.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="Window_Global.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="UIWindowBadThings.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="UIWindowEventWarning.h">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClInclude>
-    <ClInclude Include="HierarchyInterface.h">
-      <Filter>Afterlife\User Interface\Hierarchy</Filter>
-    </ClInclude>
     <ClInclude Include="HierarchyManager.h">
       <Filter>Afterlife\User Interface\Hierarchy</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\BaseWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="AdvisorWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="SoulViewWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowBadThings.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_file.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_Global.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowBoarder.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="KarmaStationWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TopiasWindowUI.h">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingCentersWindow.h">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowEvent.h">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowEventWarning.h">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,9 +557,6 @@
     <ClCompile Include="AStarPathfinding.cpp">
       <Filter>Afterlife\AStar Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="UIWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
     <ClCompile Include="UIPanel.cpp">
       <Filter>Afterlife\User Interface\UIMainPanel</Filter>
     </ClCompile>
@@ -569,9 +575,6 @@
     <ClCompile Include="NewEventManager.cpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClCompile>
-    <ClCompile Include="AdvisorWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
     <ClCompile Include="BuildingSystem.cpp">
       <Filter>Afterlife\Managers\Building System</Filter>
     </ClCompile>
@@ -580,15 +583,6 @@
     </ClCompile>
     <ClCompile Include="VibeTile.cpp">
       <Filter>Afterlife\Managers\Vibe</Filter>
-    </ClCompile>
-    <ClCompile Include="TopiasWinowUI.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingCentersWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="SoulViewWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
     <ClCompile Include="StructureGate.cpp">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
@@ -626,38 +620,50 @@
     <ClCompile Include="EconomyManager.cpp">
       <Filter>Afterlife\Managers\Economy</Filter>
     </ClCompile>
-    <ClCompile Include="KarmaStationWindow.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Afterlife\User Interface\UIButton</Filter>
-    </ClCompile>
     <ClCompile Include="GameplaySingletons.cpp">
       <Filter>Afterlife\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowBoarder.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="Window_file.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Afterlife\Managers\Events\Input Manager</Filter>
     </ClCompile>
-    <ClCompile Include="UIWindowEvent.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="Window_Global.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="UIWindowBadThings.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
-    <ClCompile Include="UIWindowEventWarning.cpp">
-      <Filter>Afterlife\User Interface\UIWindow</Filter>
-    </ClCompile>
     <ClCompile Include="HierarchyManager.cpp">
       <Filter>Afterlife\User Interface\Hierarchy</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\BaseWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="AdvisorWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="SoulViewWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowBadThings.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_file.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_Global.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBoarder.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="KarmaStationWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TopiasWinowUI.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainingCentersWindow.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowEvent.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowEventWarning.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

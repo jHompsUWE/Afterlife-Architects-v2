@@ -20,7 +20,7 @@ public:
 	
     void reSize(Vector2 game_res);
 
-    Vector2 getwindowRes() { return window_res; }
+    Vector2 getWindowRes() { return window_res; }
     
 };
 

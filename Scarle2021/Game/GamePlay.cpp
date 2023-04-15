@@ -36,12 +36,12 @@ bool GamePlay::init()
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
         GetD3DDevice(),"","AdvisorBackground",Vector2(0.5,0.5));
-    hierarchy_manager->AddToHierarchy(advisor_window);
+    //hierarchy_manager->AddToHierarchy(advisor_window);
     
     //advisor
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
-    hierarchy_manager->AddToHierarchy(soul_view);
+    //hierarchy_manager->AddToHierarchy(soul_view);
     
     //karma station
     window_two_karma_station = new KarmaStationWindow

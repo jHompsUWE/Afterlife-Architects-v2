@@ -64,6 +64,7 @@ void UIWindowEventWarning::render(DrawData2D* _drawData)
 
 void UIWindowEventWarning::set_postion(Vector2& _new_pos)
 {
+    UIWindow::setPostion(_new_pos);
 }
 
 void UIWindowEventWarning::setScale(Vector2& _newScale)
