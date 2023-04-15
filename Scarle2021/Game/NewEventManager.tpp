@@ -4,7 +4,11 @@
 
 namespace AL
 {
-    // Static ----------------------------------------------------------------------------------------------------------
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// PUBLIC 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Static Event Generation -------------------------------------------------------------------------------------
 	
     template <typename... Payload>
     void NewEventManager::GenerateEventSt(const EventType& type, const Payload&... args)
@@ -18,6 +22,8 @@ namespace AL
     	Get().GenerateEventWithDelay(type, delay, args...);
     }
 
+	// Static Filtered Subscriptions handlers ----------------------------------------------------------------------
+
 	template <typename... Payload>
 	void NewEventManager::AddEventReceiver(EventReceiver* receiver, const Payload&... types)
     {
@@ -30,62 +36,24 @@ namespace AL
     	Get().AddReceiver(receiver, types...);
     }
 
-	// Filtered Subscription Handlers ----------------------------------------------------------------------------------
-
-	template <typename T, typename... Payload>
-	void NewEventManager::AddReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
-    {
-    	//Throws a compiler error if the wrong type is passed
-    	static_assert(std::is_same<T, EventType>::value, "Tried Subscribing invalid event type");
+	// Event Generation ------------------------------------------------------------------------------------------------
 	
-    	receiver_list.emplace_back(type, receiver);
-	
-    	//Keeps iterating until every type provided has been subscribed
-    	if constexpr (sizeof...(types) > 0)
-    	{
-    		AddReceiver(receiver, types...);
-    	}
-    }
-
-	template <typename T, typename... Payload>
-	void NewEventManager::RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
-    {
-    	// Cycles trough all receivers backwards
-    	for (int i = receiver_list.size() -1; i >= 0; --i)
-    	{
-    		// Removes the element that matches receiver and type provided
-    		if(receiver_list[i].second == receiver && receiver_list[i].first == type)
-    		{
-    			receiver_list.erase(std::remove(receiver_list.begin(), receiver_list.end(),
-					receiver_list[i]), receiver_list.end());
-    		}
-    	}
-		
-    	//Keeps iterating until every type provided has been subscribed
-    	if constexpr (sizeof...(types) > 0)
-    	{
-    		RemoveReceiver(receiver, types...);
-    	}
-    }
-
-    // Event Generation ------------------------------------------------------------------------------------------------
-	
-    template <typename ... Payload>
-    void NewEventManager::GenerateEvent(EventType type, const Payload&... args)
+	template <typename ... Payload>
+	void NewEventManager::GenerateEvent(EventType type, const Payload&... args)
     {
     	//Aborts event creation if wrong type is given
-		if(type == unknown || type == last_entry)
-		{
-			std::cout << "ERROR: Trying to generate invalid event, discarding." << std::endl;
-			return;
-		}
+    	if(type == unknown || type == last_entry)
+    	{
+    		std::cout << "ERROR: Trying to generate invalid event, discarding." << std::endl;
+    		return;
+    	}
     	
     	SetEventData(type, 0.f, args...);
     }
 	
 	template <typename... Payload>
 	void NewEventManager::GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args)
-	{
+    {
     	//Aborts event creation if wrong type is given
     	if(type == unknown || type == last_entry)
     	{
@@ -94,7 +62,60 @@ namespace AL
     	}
     	
     	SetEventData(type, delay, args...);
-	}
+    }
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// PRIVATE
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Filtered Subscription Handlers ----------------------------------------------------------------------------------
+
+	template <typename T, typename... Payload>
+	void NewEventManager::AddReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
+    {
+    	//Throws a compiler error if the wrong type is passed
+    	static_assert(std::is_same<T, EventType>::value, "Tried Subscribing invalid event type");
+	
+    	event_receiver_list.emplace_back(type, receiver);
+	
+    	//Keeps iterating until every type provided has been subscribed
+    	if constexpr (sizeof...(types) > 0)
+    	{
+    		AddReceiver(receiver, types...);
+    	}
+    	else
+    	{
+    		//When iteration ends adds a single instance to ui_receiver_list
+    		ui_receiver_list.emplace_back(receiver);
+    	}
+    }
+
+	template <typename T, typename... Payload>
+	void NewEventManager::RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
+    {
+    	// Cycles trough all receivers backwards
+    	for (int i = event_receiver_list.size() -1; i >= 0; --i)
+    	{
+    		// Removes the element that matches receiver and type provided
+    		if(event_receiver_list[i].second == receiver && event_receiver_list[i].first == type)
+    		{
+    			event_receiver_list.erase(std::remove(event_receiver_list.begin(), event_receiver_list.end(),
+					event_receiver_list[i]), event_receiver_list.end());
+    		}
+    	}
+		
+    	//Keeps iterating until every type provided has been subscribed
+    	if constexpr (sizeof...(types) > 0)
+    	{
+    		RemoveReceiver(receiver, types...);
+    	}
+    	else
+    	{
+    		//When iteration ends unsubscribes the receiver from the list of ui_receivers 
+    		ui_receiver_list.erase(std::remove(ui_receiver_list.begin(),
+				ui_receiver_list.end(), receiver), ui_receiver_list.end());
+    	}
+    }
 	
     // Event Data Insertion --------------------------------------------------------------------------------------------
 

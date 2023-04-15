@@ -50,19 +50,22 @@ Window_file::~Window_file()
 
 void Window_file::update(GameData* _gameData, Vector2& _mousePosition)
 {
+    UIWindow::update(_gameData, _mousePosition);
 }
 
 void Window_file::render(DrawData2D* _drawData)
 {
-    if(is_visible)
+    if (!is_visible)
     {
-        for (auto button : buttons)
-        {
-            button->render(_drawData);
-        }
-        windowBackGround->Draw(_drawData);
+        inside = false;
+        return;
     }
-   
+
+    for (auto button : buttons)
+    {
+        button->render(_drawData);
+    }
+    windowBackGround->Draw(_drawData);
 }
 
 void Window_file::set_postion(Vector2& _new_pos)

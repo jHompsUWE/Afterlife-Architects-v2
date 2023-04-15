@@ -98,7 +98,6 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
     windowBackGround->SetPos(window_pos);
     
     AL::NewEventManager::AddEventReceiver(this,AL::EventType::event_cursor_interact);
-
 }
 
 UIWindow::UIWindow()
@@ -271,6 +270,26 @@ void UIWindow::setVisibility(bool _vis)
 const bool& UIWindow::getVisibility()
 {
     return is_visible;
+}
+
+void UIWindow::MoveInFront()
+{
+    for (auto& button : buttons)
+    {
+        button->MoveInFront();
+    }
+    
+    AL::NewEventManager::IncreaseReceiverPrioritySt(this);
+}
+
+void UIWindow::MoveToBack()
+{
+    for (auto& button : buttons)
+    {
+        button->MoveToBack();
+    }
+    
+    AL::NewEventManager::DecreaseReceiverPrioritySt(this);
 }
 
 bool UIWindow::isInside(Vector2& point) const

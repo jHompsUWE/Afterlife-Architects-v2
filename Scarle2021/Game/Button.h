@@ -182,8 +182,18 @@ public:
 		button_res = button_res * resize_scale;
 		
 	}
-private:
 
+	void MoveInFront() override
+	{
+		AL::NewEventManager::IncreaseReceiverPrioritySt(this);
+	}
+
+	void MoveToBack() override
+	{
+		AL::NewEventManager::DecreaseReceiverPrioritySt(this);
+	}
+
+private:
 	//mouse pointer inside button
 	bool isInside(Vector2& point) const
 	{

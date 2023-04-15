@@ -62,18 +62,25 @@ UIWindowBadThings::~UIWindowBadThings()
 
 void UIWindowBadThings::update(GameData* _gameData, Vector2& _mousePosition)
 {
+    UIWindow::update(_gameData, _mousePosition);
 }
 
 void UIWindowBadThings::render(DrawData2D* _drawData)
 {
-    if(is_visible)
+    if (!is_visible)
     {
-        
-        for (auto button : buttons)
-        {
-            button->render(_drawData);
-        }
-        windowBackGround->Draw(_drawData);
+        inside = false;
+        return;
+    }
+
+    for (auto button : buttons)
+    {
+        button->render(_drawData);
+    }
+    windowBackGround->Draw(_drawData);
+    for (auto t : text_vec)
+    {
+        t->Draw(_drawData);
     }
 }
 

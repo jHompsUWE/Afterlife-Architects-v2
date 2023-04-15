@@ -52,18 +52,23 @@ void UIWindowEvent::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIWindowEvent::render(DrawData2D* _drawData)
 {
-    if(is_visible)
-    {
-        for (auto button : buttons)
-        {
-            button->render(_drawData);
-        }
-        windowBackGround->Draw(_drawData);
-        for (auto t : text_vec)
-        {
-            t->Draw(_drawData);
-        }
-    }
+    //TODO:: FIX BUTTON WHICH IS MISPLACED
+    // if (!is_visible)
+    // {
+    //     inside = false;
+    //     return;
+    // }
+    //
+    // for (auto button : buttons)
+    // {
+    //     button->render(_drawData);
+    // }
+    // windowBackGround->Draw(_drawData);
+    // for (auto t : text_vec)
+    // {
+    //     t->Draw(_drawData);
+    // }
+    UIWindow::render(_drawData);
 }
 
 void UIWindowEvent::set_postion(Vector2& _new_pos)

@@ -1,7 +1,7 @@
 #pragma once
 #include "UIWindow.h"
 
-class SoulViewWindow : public AL::EventReceiver
+class SoulViewWindow : public HierarchyInterface, AL::EventReceiver
 {
 public:
 
@@ -10,8 +10,8 @@ public:
 
     ~SoulViewWindow() override;
 
-    void update(GameData* _gameData, Vector2& _mousePosition);
-    void render(DrawData2D* _drawData);
+    void update(GameData* _gameData, Vector2& _mousePosition) override;
+    void render(DrawData2D* _drawData) override;
     const bool& ReceiveEvents(const AL::Event& al_event) override;
     const bool& IsCursorInsideWindow() override;
 

@@ -3,12 +3,11 @@
 #include "GameData.h"
 #include "ImageGO2D.h"
 #include "TextGO2D.h"
-#include "NewEventManager.h"
-#include "DataManager.h"
 #include "BuildingManager.h"
+#include "HierarchyInterface.h"
 
 
-class UIWindow : public AL::EventReceiver
+class UIWindow : public HierarchyInterface, public AL::EventReceiver
 {
 public:
     UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -19,12 +18,12 @@ public:
     UIWindow();
     ~UIWindow() override;
 
-    virtual void update(GameData* _gameData, Vector2& _mousePosition);
-    virtual void render(DrawData2D* _drawData);
+    void update(GameData* _gameData, Vector2& _mousePosition) override;
+    void render(DrawData2D* _drawData) override;
     const bool& ReceiveEvents(const AL::Event& al_event) override;
     const bool& IsCursorInsideWindow() override;
     
-    void setPostion(Vector2& _new_pos) ;
+    virtual void setPostion(Vector2& _new_pos) ;
     virtual void setScale(Vector2& _newScale) ;
 
     virtual Vector2& getPosition() ;
@@ -33,13 +32,17 @@ public:
     virtual void reSize(Vector2 game_res);
 
     //mouse pointer inside window
-    bool isInside(Vector2& point) const;
+    virtual bool isInside(Vector2& point) const;
 
     virtual Vector2 getwindowRes() { return window_res; }
     
-    void setVisibility(bool _vis);
-    const bool& getVisibility();
+    virtual void setVisibility(bool _vis);
+    virtual const bool& getVisibility();
 
+    virtual void MoveInFront();
+    virtual void MoveToBack();
+
+    
 protected:
     
     bool toggle_click = false;

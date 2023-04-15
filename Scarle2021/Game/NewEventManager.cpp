@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "NewEventManager.h"
-
-#include <iostream>
-
 #include "DataManager.h"
 
 namespace AL
 {
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// PUBLIC 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	//Default private constructor, no need to initialize inherited class
 	NewEventManager::NewEventManager() = default;
 	
@@ -33,15 +34,25 @@ namespace AL
 	{
 		Get().RemoveReceiver(receiver);
 	}
+	
+	void NewEventManager::IncreaseReceiverPrioritySt(EventReceiver* receiver)
+	{
+		Get().IncreaseReceiverPriority(receiver);
+	}
+
+	void NewEventManager::DecreaseReceiverPrioritySt(EventReceiver* receiver)
+	{
+		Get().DecreaseReceiverPriority(receiver);
+	}
 
 	std::vector<Event>& NewEventManager::GetEventListSt()
 	{
-		return Get().GetEventList();
+		return Get().event_list;
 	}
 	
 	void NewEventManager::FlushEventListSt()
 	{
-		Get().FlushEventList();
+		Get().event_list.clear();
 	}
 
 	const bool& NewEventManager::IsCursorInsideUi()
@@ -53,54 +64,20 @@ namespace AL
 
 	void NewEventManager::LateUpdate()
 	{
-		//Every update checks if the cursor is present inside any UI element, except buttons
+		//Every update checks if the cursor is present inside any UI element
 		inside_ui = false;
-		for (const auto& receiver : receiver_list)
+		for (const auto& receiver : ui_receiver_list)
 		{
-			if(receiver.second->IsCursorInsideWindow())
+			//Stop iteration if cursor is inside of even a single one as there is no need to contiue
+			if(receiver->IsCursorInsideWindow())
 			{
 				inside_ui = true;
 				break;
 			}
 		}
 	}
-
-	// Event List ------------------------------------------------------------------------------------------------------
 	
-	std::vector<Event>& NewEventManager::GetEventList()
-	{
-		return event_list;
-	}
-	
-	void NewEventManager::FlushEventList()
-	{
-		event_list.clear();
-	}
-
-	// Unfiltered Subscription Handlers --------------------------------------------------------------------------------
-	
-	void NewEventManager::AddReceiver(EventReceiver* receiver)
-	{
-		for (int i = last_entry; i > 0; --i)
-		{
-			receiver_list.emplace_back(static_cast<EventType>(i), receiver);
-		}
-	}
-
-	void NewEventManager::RemoveReceiver(EventReceiver* receiver)
-	{
-		for (int i = receiver_list.size() -1; i >= 0; --i)
-		{
-			// Checks each entry to match the receiver ptr, if true removes that specific entry
-			if(receiver_list[i].second == receiver)
-			{
-				receiver_list.erase(std::remove(receiver_list.begin(),
-					receiver_list.end(), receiver_list[i]), receiver_list.end());
-			}
-		}
-	}
-
-	// Data Sharing ----------------------------------------------------------------------------------------------------
+	// Event Dispatching -----------------------------------------------------------------------------------------------
 	
 	void NewEventManager::DispatchEvents()
 	{
@@ -116,7 +93,7 @@ namespace AL
 			if (current_ev.delay <= 0)
 			{
 				//Event is dispatched to each observer
-				for (const auto& receiver : receiver_list)
+				for (const auto& receiver : event_receiver_list)
 				{
 					//Fires the event only if the receiver matches the type it is listening for 
 					if(receiver.first == current_ev.type)
@@ -137,5 +114,89 @@ namespace AL
 
 		//Merges the unfired events in the dispatch list with the newly generated and going to be generated events
 		event_list.insert(event_list.end(), dispatch_list.begin(), dispatch_list.end());
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// PRIVATE
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// Unfiltered Subscription Handlers --------------------------------------------------------------------------------
+	
+	void NewEventManager::AddReceiver(EventReceiver* receiver)
+	{
+		//Subscribe a receiver to every event type
+		for (int i = last_entry; i > 0; --i)
+		{
+			event_receiver_list.emplace_back(static_cast<EventType>(i), receiver);
+		}
+
+		//Subscribe only one instance of a receiver to a UI type
+		ui_receiver_list.emplace_back(receiver);
+	}
+
+	void NewEventManager::RemoveReceiver(EventReceiver* receiver)
+	{
+		//Unsubscribes every entry of receiver from both vectors
+
+		//Event receiver list
+		for (int i = event_receiver_list.size() -1; i >= 0; --i)
+		{
+			// Checks each entry to match the receiver ptr, if true removes that specific entry
+			if(event_receiver_list[i].second == receiver)
+			{
+				event_receiver_list.erase(std::remove(event_receiver_list.begin(),
+					event_receiver_list.end(), event_receiver_list[i]), event_receiver_list.end());
+			}
+		}
+
+		//UI receiver list
+		ui_receiver_list.erase(std::remove(ui_receiver_list.begin(),
+			ui_receiver_list.end(), receiver), ui_receiver_list.end());
+	}
+
+	// Receiver Priority Handlers --------------------------------------------------------------------------------------
+	
+	void NewEventManager::IncreaseReceiverPriority(EventReceiver* receiver)
+	{
+		//Moves all receivers matching the current receiver to the front of both vectors
+		//Uses stable partition to move all elements back by one and replacing the desired at the front
+
+		//All receivers
+		auto partition_point_ev =
+			std::stable_partition(event_receiver_list.begin(), event_receiver_list.end(),
+			[receiver](const std::pair<EventType, EventReceiver*>& element)
+			{
+				return element.second == receiver;
+			});
+
+		//Ui receivers
+		auto partition_point_ui =
+			std::stable_partition(ui_receiver_list.begin(), ui_receiver_list.end(),
+			[receiver](const EventReceiver* element)
+			{
+				return element == receiver;
+			});
+	}
+	
+	void NewEventManager::DecreaseReceiverPriority(EventReceiver* receiver)
+	{
+		//Moves all receivers matching the current receiver to the back of both vectors
+		//Uses stable partition to move all elements forward by one and replacing the desired at the back
+
+		//All receivers
+		auto partition_point_ev =
+			std::stable_partition(event_receiver_list.begin(), event_receiver_list.end(),
+			[receiver](const std::pair<EventType, EventReceiver*>& element)
+			{
+				return element.second != receiver;
+			});
+
+		//Ui receivers
+		auto partition_point_ui =
+			std::stable_partition(ui_receiver_list.begin(), ui_receiver_list.end(),
+			[receiver](const EventReceiver* element)
+			{
+				return element != receiver;
+			});
 	}
 }

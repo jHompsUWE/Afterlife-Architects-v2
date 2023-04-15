@@ -42,12 +42,10 @@ WindowBoarder::~WindowBoarder()
 
 void WindowBoarder::update(GameData* _gameData, Vector2& _mousePosition)
 {
-    UIWindow::update(_gameData, _mousePosition);
 }
 
 void WindowBoarder::render(DrawData2D* _drawData)
 {
-    
     for (auto button : buttons)
     {
         button->render(_drawData);

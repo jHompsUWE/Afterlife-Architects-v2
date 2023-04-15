@@ -136,6 +136,9 @@
     <Filter Include="Afterlife\Managers\Events\Input Manager">
       <UniqueIdentifier>{38a97d79-688f-4a97-9d23-5cd00ac8c6bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\User Interface\Hierarchy">
+      <UniqueIdentifier>{b75fa6ab-52c8-416f-bb41-10ca5b7d679e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -438,6 +441,12 @@
     <ClInclude Include="UIWindowEventWarning.h">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="HierarchyInterface.h">
+      <Filter>Afterlife\User Interface\Hierarchy</Filter>
+    </ClInclude>
+    <ClInclude Include="HierarchyManager.h">
+      <Filter>Afterlife\User Interface\Hierarchy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -646,6 +655,9 @@
     </ClCompile>
     <ClCompile Include="UIWindowEventWarning.cpp">
       <Filter>Afterlife\User Interface\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="HierarchyManager.cpp">
+      <Filter>Afterlife\User Interface\Hierarchy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

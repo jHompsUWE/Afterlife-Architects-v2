@@ -19,7 +19,7 @@ namespace AL
 		 */
 		static NewEventManager& Get();
 
-		// Static ------------------------------------------------------------------------------------------------------
+		// Static Event Generation -------------------------------------------------------------------------------------
 		
 		/**
 		 * \brief Static function to generate an event
@@ -38,6 +38,8 @@ namespace AL
 		template <typename... Payload>
 		static void GenerateEventWithDelaySt(const EventType& type, const float& delay, const Payload&... args);
 
+		// Static Filtered Subscriptions handlers ----------------------------------------------------------------------
+		
 		/**
 		 * \brief Subscribe a receiver to listen for specific events
 		 * \tparam Payload Event Typs to listen to
@@ -55,6 +57,8 @@ namespace AL
 		 */
 		template <typename... Payload>
 		static void RemoveEventReceiver(EventReceiver* receiver, const Payload&... types);
+
+		// Static Unfiltered Subscriptions handlers --------------------------------------------------------------------
 		
 		/**
 		 * \param receiver to be subscribed to receive events
@@ -65,6 +69,22 @@ namespace AL
 	     * \param receiver to be unsubscribed from receiving events
 	     */
 		static void RemoveEventReceiver(EventReceiver* receiver);
+
+		// Static priority system --------------------------------------------------------------------------------------
+		
+		/**
+		 * \brief Increases the priority of which events are dispatched to this current receiver
+		 * \param receiver Pointer to the receiver
+		 */
+		static void IncreaseReceiverPrioritySt(EventReceiver* receiver);
+
+		/**
+		 * \brief Decreases the priority of which events are dispatched to this current receiver
+		 * \param receiver Pointer to the receiver
+		 */
+		static void DecreaseReceiverPrioritySt(EventReceiver* receiver);
+
+		// Static Getters/Setters --------------------------------------------------------------------------------------
 		
 		/**
 		 * \return static func to return the event list
@@ -88,15 +108,37 @@ namespace AL
 		 */
 		void LateUpdate();
 		
-		/**
-		 * \return returns the event list.
-		 */
-		std::vector<Event>& GetEventList();
+		// Event Dispatching -------------------------------------------------------------------------------------------
 
 		/**
-		 * \brief Clear all data from the event list
+		 * \brief Routes the events to each of the receivers
+		 * Type check is done to provide the events receivers have only subscribed for 
 		 */
-		void FlushEventList();
+		void DispatchEvents();
+
+		// Event Generation --------------------------------------------------------------------------------------------
+
+		/**
+    	 * \brief Generates an event form the data given, no delay before is fired
+    	 * \tparam Payload Data to be inserted in the event
+     	 * \param type which type of even this is gonna be
+    	 */
+		template <typename... Payload>
+		void GenerateEvent(EventType type, const Payload&... args);
+
+		/**
+		 * \brief Generates an event form the data given, delay is applied
+		 * \tparam Payload Data to be inserted in the event
+		  * \param type which type of even this is gonna be
+		  * \param delay amount of delay before the event is fired, in seconds
+		 */
+		template <typename... Payload>
+		void GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args);
+		
+	private:
+		//Private constructor and de-constructor
+		NewEventManager();
+		~NewEventManager();
 
 		// Unfiltered Subscription Handlers ----------------------------------------------------------------------------
 	
@@ -135,38 +177,20 @@ namespace AL
 		 */
 		template <typename T, typename... Payload>
 		void RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types);
-		
-		// Event Dispatching -------------------------------------------------------------------------------------------
+
+		// Receiver Priority Handlers ----------------------------------------------------------------------------------
 
 		/**
-		 * \brief Routes the events to each of the receivers
-		 * Type check is done to provide the events receivers have only subscribed for 
+		 * \brief Moves the specified receiver at the front of the receivers queue
+		 * \param receiver Pointer to the receiver
 		 */
-		void DispatchEvents();
-
-		// Event Generation --------------------------------------------------------------------------------------------
+		void IncreaseReceiverPriority(EventReceiver* receiver);
 
 		/**
-    	 * \brief Generates an event form the data given, no delay before is fired
-    	 * \tparam Payload Data to be inserted in the event
-     	 * \param type which type of even this is gonna be
-    	 */
-		template <typename... Payload>
-		void GenerateEvent(EventType type, const Payload&... args);
-
-		/**
-		 * \brief Generates an event form the data given, delay is applied
-		 * \tparam Payload Data to be inserted in the event
-		  * \param type which type of even this is gonna be
-		  * \param delay amount of delay before the event is fired, in seconds
+		 * \brief Moves the specified receiver at the back of the receivers queue
+		 * \param receiver Pointer to the receiver
 		 */
-		template <typename... Payload>
-		void GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args);
-		
-	private:
-		//Private constructor and de-constructor
-		NewEventManager();
-		~NewEventManager();
+		void DecreaseReceiverPriority(EventReceiver* receiver);
 		
 		// Event Data Insertion ----------------------------------------------------------------------------------------
 		
@@ -191,7 +215,8 @@ namespace AL
 
 		// Data --------------------------------------------------------------------------------------------------------
 		
-		std::vector<std::pair<EventType, EventReceiver*>> receiver_list{};
+		std::vector<std::pair<EventType, EventReceiver*>> event_receiver_list{};
+		std::vector<EventReceiver*> ui_receiver_list{};
 		std::vector<Event> event_list{};
 
 		bool inside_ui = false;

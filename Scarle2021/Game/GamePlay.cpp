@@ -21,41 +21,58 @@ GamePlay::~GamePlay()
 
 bool GamePlay::init()
 {
+    // Hierarchy
+    hierarchy_manager = std::make_unique<HierarchyManager>();
+    
+    //build panel
+        main_panel = new UIPanel(Vector2(0,30),DataManager::GetD3DDevice(),"UIPanel",Vector2(1,1));
+        main_panel->setPostion(Vector2(10000,10000));
+    
     // window init
     window_one_gate = new UIWindow(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::GetD3DDevice(),"","Window",Vector2(0.5,0.5));
-    
-    //build panel
-    main_panel = new UIPanel(Vector2(0,30),DataManager::GetD3DDevice(),"UIPanel",Vector2(1,1));
-    main_panel->setPostion(Vector2(10000,10000));
+    hierarchy_manager->AddToHierarchy(window_one_gate);
     
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675,30),DataManager::
         GetD3DDevice(),"","AdvisorBackground",Vector2(0.5,0.5));
+    hierarchy_manager->AddToHierarchy(advisor_window);
+    
     //advisor
     soul_view = new SoulViewWindow(Vector2(400,120),DataManager::
         GetD3DDevice(),"","SoulView",Vector2(1,1));
+    hierarchy_manager->AddToHierarchy(soul_view);
     
     //karma station
     window_two_karma_station = new KarmaStationWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    hierarchy_manager->AddToHierarchy(window_two_karma_station);
     
     //topias
     window_three_topias = new TopiasWindowUI(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    hierarchy_manager->AddToHierarchy(window_three_topias);
     
     //training center
     window_four_training_centers_window = new TrainingCentersWindow
     (Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::
         GetD3DDevice(),"","Window",Vector2(0.5,0.5));
+    hierarchy_manager->AddToHierarchy(window_four_training_centers_window);
     
     //ingame event window
     ui_window_event = new UIWindowEvent(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
         .second*0.5),DataManager::GetD3DDevice(),"","Event",Vector2(1.5,1.5));
+    hierarchy_manager->AddToHierarchy(ui_window_event);
+    
+    //window event warning button 
+    ui_window_event_warning = new UIWindowEventWarning(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
+        .second*0.5),DataManager::
+        GetD3DDevice(),"","EventWarning",Vector2(1.5,1.5));
+    hierarchy_manager->AddToHierarchy(ui_window_event_warning);
 
     //window border file button
     window_file = new Window_file(Vector2(0,35),DataManager::
@@ -68,16 +85,11 @@ bool GamePlay::init()
     //window border global button
     window_global = new Window_Global(Vector2(90,35),DataManager::
         GetD3DDevice(),"","Global",Vector2(1.5,1.5));
-
-    //window event warning button 
-    ui_window_event_warning = new UIWindowEventWarning(Vector2(*DataManager::GetRES().first*0.5,*DataManager::GetRES()
-        .second*0.5),DataManager::
-        GetD3DDevice(),"","EventWarning",Vector2(1.5,1.5));
     
     // ui frame init
     window_boarder = new WindowBoarder(Vector2(0,0),
         DataManager::GetD3DDevice(),"","UIFrame",Vector2(1,1));
-    
+
     // Mouse
     mouse_screen_pos.z = 0;
     mouse_world_pos = std::make_shared<Vector3>(0, 0, 0);
@@ -87,7 +99,8 @@ bool GamePlay::init()
 
     // Building System
     building_system = std::make_unique<BuildingSystem>(mouse_world_pos, DataManager::GetD3DDevice());
-    
+
+    // Advisors 
     adv_man = std::make_unique<AdvisorManager>();
     adv_man->init(advisor_window);
     
@@ -97,11 +110,16 @@ bool GamePlay::init()
     advisor_window->is_visible = false;
     window_three_topias->setVisibility(false);
     window_four_training_centers_window->setVisibility(false);
+    
+    window_file->setVisibility(false);
     window_boarder->setVisibility(true);
     
-    ui_window_event->setVisibility(true);
-    //ui_window_event_warning->setVisibility(true);
-    //window_file->setVisibility(true);
+    ui_window_event->setVisibility(false);
+    ui_window_event_warning->setVisibility(false);
+    
+    window_global->setVisibility(false);
+    ui_window_bad_things->setVisibility(false);
+
     do_once = true;
     return true;
 }
@@ -109,40 +127,30 @@ void GamePlay::Update(GameData* game_data)
 {   
     if (do_once)
     {
+        //TODO::REMOVE AFTER. WIP
+        window_four_training_centers_window->MoveInFront();
+        window_three_topias->MoveInFront();
+        window_two_karma_station->MoveInFront();
+        window_one_gate->MoveInFront();
+        
         main_panel->setPostion(Vector2(0, 30));
         ResizeUI();
         do_once = false;
     }
     
-    //updates panel
-    main_panel->update(game_data,mouse_pos);
-    //gates
-    window_one_gate->update(game_data,mouse_pos);
-    //update advisor
-    advisor_window->update(game_data,mouse_pos);
-    //update soul view
-    soul_view->update(game_data,mouse_pos);
-    //karma station
-    window_two_karma_station->update(game_data,mouse_pos);
-    //Topais
-    window_three_topias->update(game_data,mouse_pos);
-    //training centre
-    window_four_training_centers_window->update(game_data,mouse_pos);
     //window file
     window_file->update(game_data,mouse_pos);
-    
-    //UI window event warning
-    ui_window_event_warning->update(game_data,mouse_pos);
-
+    //window global
+    window_global->update(game_data,mouse_pos);
     //window bad things
     ui_window_bad_things->update(game_data,mouse_pos);
     
-    //window global
-    window_global->update(game_data,mouse_pos);
-    
-    //event_window
-    ui_window_event->update(game_data,mouse_pos);
+    //updates panel
+    main_panel->update(game_data,mouse_pos);
 
+    //All other windows
+    hierarchy_manager->Update(game_data, mouse_pos);
+    
     // Economy
     economy_manager->Tick(game_data);
 
@@ -221,7 +229,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 break;
             
             case AL::UI::window_file:
-                //window_file->setVisibility(!window_file->getVisibility());
+                window_file->setVisibility(!window_file->getVisibility());
                 break;
             
             case AL::UI::window_global:
@@ -290,8 +298,9 @@ void GamePlay::GetEvents(const AL::Event& al_event)
                 window_three_topias->setVisibility(false);
                 window_four_training_centers_window->setVisibility(false);
                 soul_view->is_visible = false;
-                window_boarder->setVisibility(false);
-                //window_file->setVisibility(true);
+                window_file->setVisibility(false);
+                ui_window_event->setVisibility(false);
+
             
                 DataManager::GetGD()->current_game_state = gs_main_menu;
                 break;
@@ -314,46 +323,18 @@ void GamePlay::GetEvents(const AL::Event& al_event)
 
 void GamePlay::Render2D(DrawData2D* draw_data2D)
 {
-    //render advisor
-    advisor_window->render(draw_data2D);
-
-    //render soul view
-    soul_view->render(draw_data2D);
+    hierarchy_manager->Render(draw_data2D);
     
-    // checks if window is open to render
-
-    //Render window
-    window_one_gate->render(draw_data2D);
-    
-    //karma station
-    window_two_karma_station->render(draw_data2D);
-    
-    //Topias
-    window_three_topias->render(draw_data2D);
-    
-    //training centre
-    window_four_training_centers_window->render(draw_data2D);
-        
     //renders panel
     main_panel->render(draw_data2D);
-    
-    //window_file
-    //window_file->render(draw_data2D);
-
-    //window_global
-    window_global->render(draw_data2D);
-
     //UI boarder
     window_boarder->render(draw_data2D);
-
-    //event window
-    ui_window_event->render(draw_data2D);
-
+    //window_file
+    window_file->render(draw_data2D);
+    //window_global
+    window_global->render(draw_data2D);
     //ui window bad things
     ui_window_bad_things->render(draw_data2D);
-
-    //ui window event warning
-    ui_window_event_warning->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)

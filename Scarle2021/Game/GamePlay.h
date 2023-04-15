@@ -20,6 +20,7 @@
 
 // Building System
 #include "BuildingSystem.h"
+#include "HierarchyManager.h"
 #include "Raycast.h"
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
@@ -88,6 +89,9 @@ private:
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
 
     // Economy
-    std::shared_ptr<EconomyManager> economy_manager;
+    std::shared_ptr<EconomyManager> economy_manager = nullptr;
+
+    // Window Hierarchy
+    std::unique_ptr<HierarchyManager> hierarchy_manager = nullptr;
 };
 

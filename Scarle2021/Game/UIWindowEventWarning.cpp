@@ -45,18 +45,20 @@ void UIWindowEventWarning::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIWindowEventWarning::render(DrawData2D* _drawData)
 {
-    if(is_visible)
+    if (!is_visible)
     {
-        
-        for (auto button : buttons)
-        {
-            button->render(_drawData);
-        }
-        windowBackGround->Draw(_drawData);
-        for (auto text : text_vec)
-        {
-            text->Draw(_drawData);
-        }
+        inside = false;
+        return;
+    }
+
+    for (auto button : buttons)
+    {
+        button->render(_drawData);
+    }
+    windowBackGround->Draw(_drawData);
+    for (auto t : text_vec)
+    {
+        t->Draw(_drawData);
     }
 }
 
