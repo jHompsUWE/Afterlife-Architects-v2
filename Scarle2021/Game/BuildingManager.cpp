@@ -243,7 +243,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
 				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
-				100);
+				100); // Number of souls that this building can hold
 		if (plane == Heaven)
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
@@ -258,7 +258,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size),
 				tile_position + start, size, texture_manager->GetTextureStructure(structure_type, plane), plane, population_manager,
-				200);
+				200); // Number of souls that this building can hold
 		if (plane == Heaven)
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);

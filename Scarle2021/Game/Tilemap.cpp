@@ -150,7 +150,6 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 			return false;
 		}
 		break;
-
 	case Road:
 		economy_manager->PurchaseStructure(5);
 		// Activate inactive tiles near road
@@ -399,6 +398,27 @@ bool Tilemap::IsRoadNearby(Vector3 tile_pos)
 			if (IsPosValid(Vector3(tile_pos.x + x, 0, tile_pos.z + z)))
 			{
 				if (tilemap[tile_pos.x + x][tile_pos.z + z]->GetZoneType() == Road)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+// Checks to see if there is a karma track in a 3 tile radius around the tilepos
+// Checks if the zone type is a karma track and will return true if it is 
+// False if this is not the case
+bool Tilemap::IsKarmaTracksNearby(Vector3 tile_pos)
+{
+	for (int x = -3; x <= 3; x++)
+	{
+		for (int z = -3; z <= 3; z++)
+		{
+			if (IsPosValid(Vector3(tile_pos.x + x, 0, tile_pos.z + z)))
+			{
+				if (tilemap[tile_pos.x + x][tile_pos.z + z]->GetZoneType() == KarmaTrack)
 				{
 					return true;
 				}

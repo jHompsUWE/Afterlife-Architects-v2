@@ -4,6 +4,8 @@
 
 #include "StructureSprite.h"
 #include "ZoneType.h"
+#include "Tilemap.h"
+#include "Tile.h"
 
 class StructureKarmaStation : public StructureSprite
 {
@@ -13,6 +15,7 @@ public:
 	~StructureKarmaStation();
 
 	void TickStructure(GameData* game_data) override;
+	
 
 protected:
 
@@ -20,5 +23,6 @@ private:
 	std::shared_ptr<PopulationManager> population_manager;
 	float station_capacity;
 	ZoneType zone;
+
 };
 

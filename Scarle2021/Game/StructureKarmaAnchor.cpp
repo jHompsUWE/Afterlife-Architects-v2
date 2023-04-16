@@ -5,19 +5,17 @@ StructureKarmaAnchor::StructureKarmaAnchor(ID3D11Device* GD, Vector2 width_heigh
 	PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, float _reincarnated_souls) :
 	StructureSprite(GD, width_height, tile_pos, _tile_size, texture, _plane), reincarnated_souls(_reincarnated_souls), population_manager(_population_manager), zone(_zone)
 {
-	population_manager->IncrementZonePopulation(plane, zone, reincarnated_souls);
 }
 
 StructureKarmaAnchor::~StructureKarmaAnchor()
 {
-	population_manager->IncrementZonePopulation(plane, zone, -reincarnated_souls);
 }
 
 void StructureKarmaAnchor::TickStructure(GameData* game_data)
 {
-	// Insert Functionality for Karma Anchor here
-	// This function is called every few seconds instead of per frame
-	// Reincarnate souls back to the planet
+	// The souls will reincarnate after passing through the anchor
+	// They will go back to the planet
+	// The soul population will decrease depending on the number of souls that pass through the anchor
 	ZoneType zone = ZoneType(rand() % 7 + 1);
 	switch (plane)
 	{

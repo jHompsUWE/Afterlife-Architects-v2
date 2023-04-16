@@ -4,6 +4,8 @@
 
 #include "StructureSprite.h"
 #include "ZoneType.h"
+#include "Tilemap.h"
+#include "Tile.h"
 
 class StructureKarmaAnchor : public StructureSprite
 {
@@ -19,5 +21,4 @@ protected:
 private:
 	std::shared_ptr<PopulationManager> population_manager;
 	float reincarnated_souls;
-	ZoneType zone;
 };
