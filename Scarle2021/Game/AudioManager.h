@@ -11,7 +11,7 @@
  * \brief This is the main game Audio Manager, controlling all sound events/calls.
  */
 
-class AudioManager : public IEventReceiver
+class AudioManager : public AL::EventReceiver
 {
 public:
     AudioManager();
@@ -23,7 +23,7 @@ public:
     void Update(GameData* game_data);
 
     //Events
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
 
 private:
     void PlaySound(string filename);
@@ -36,5 +36,7 @@ private:
     std::unique_ptr<AudioEngine> audEngine{};
     std::array<int,7> music_index_array = {1,2,3,4,5,6,7};
     int current_music_index = 0;
-    float global_volume = 0.5f;
+    float master_volume = 0.5f;
+    float sound_volume = 0.5f;
+    float music_volume = 0.1f;
 };

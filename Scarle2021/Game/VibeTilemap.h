@@ -22,6 +22,7 @@ public:
 	void Draw(DrawData* _DD);
 
 	void VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int range);
+	int GetVibe(Vector3 tile_pos);
 
 protected:
 	bool ValidTile(Vector3 tile_pos);

@@ -1,14 +1,11 @@
 #pragma once
-#include "Button.h"
+#include "Button.hpp"
 #include "GameData.h"
 #include "ImageGO2D.h"
 #include "TextGO2D.h"
-#include "NewEventManager.h"
-#include "DataManager.h"
 #include "BuildingManager.h"
 
-
-class UIWindow : public IEventReceiver
+class UIWindow : public AL::EventReceiver
 {
 public:
     UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -16,30 +13,35 @@ public:
     
     UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         std::string _filepath,Vector2 _setScale);
-    UIWindow();
+    
+    UIWindow(const bool& priority = false);
     ~UIWindow() override;
 
     virtual void update(GameData* _gameData, Vector2& _mousePosition);
     virtual void render(DrawData2D* _drawData);
-    void ReceiveEvents(const AL::Event& al_event) override;
 
-    void setPostion(Vector2& _new_pos) ;
-    virtual void setScale(Vector2& _newScale) ;
-
-    virtual Vector2& getPosition() ;
-    virtual Vector2& getButtonRes() ;
-
+    //Overriden From Event Manager
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
+    const bool& IsCursorInsideWindow() override;
+    
+    virtual void setPosition(Vector2& _new_pos);
+    virtual void setScale(Vector2& _newScale);
     virtual void reSize(Vector2 game_res);
 
-    //mouse pointer inside window
-    bool isInside(Vector2& point) const;
+    //Getters/Setters
+    virtual Vector2& getPosition();
+    virtual Vector2& getButtonRes();
+    virtual Vector2 getWindowRes();
+    virtual void setVisibility(bool _vis);
+    virtual const bool& getVisibility();
 
-    virtual Vector2 getwindowRes() { return window_res; }
+    //Layering funcs
+    virtual void MoveInFront();
+    virtual void MoveToBack();
     
-    void setVisibility(bool _vis);
-    const bool& getVisibility();
-
 protected:
+    //mouse pointer inside window
+    virtual bool isInside(Vector2& point) const;
     
     bool toggle_click = false;
     Vector2 mouse_pos {0,0};
@@ -60,7 +62,9 @@ protected:
     {
         text1, text2, text3, text4,
     };
+    
     // makes window render or update 
     bool is_visible = false;
+    bool inside = false;
 };
 

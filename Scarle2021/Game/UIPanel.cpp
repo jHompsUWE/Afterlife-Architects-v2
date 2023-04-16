@@ -21,106 +21,113 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     economy_manager = GameplaySingletons::GetEconomyManager();
     
     // UI game play buttons
-
-    //TODO:: THIS TO FICS TOO
+    
     //row 1...................
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 51,panel_pos.y + 84),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Green ,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Green ,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 94,panel_pos.y + 84),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Yellow,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Yellow,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 138,panel_pos.y + 84),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Orange,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Orange,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 180,panel_pos.y + 84),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Brown,Vector2(0.8,0.7)));
+    ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Brown,Vector2(0.8,0.7), true));
     
     //row 2......................
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 50,panel_pos.y + 113),DataManager::GetD3DDevice()
-            ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Purple,Vector2(0.8,0.7)));
+            ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Purple,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 93,panel_pos.y + 113),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Red,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Red,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 137,panel_pos.y + 113),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Blue,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Blue,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 180,panel_pos.y + 113),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Void,Vector2(0.8,0.7)));
+    ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Void,Vector2(0.8,0.7), true));
     
     //row 3 ..................
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 50,panel_pos.y + 143),DataManager::GetD3DDevice()
-            ,"green", AL::EventType::event_ui, AL::UI::window_gate, 0,Vector2(0.8,0.7)));
+            ,"green", AL::EventType::event_ui, AL::UI::window_gate, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 93,panel_pos.y + 143),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Road,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Road,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 137,panel_pos.y + 143),DataManager::GetD3DDevice()
-        ,"green", AL::EventType::event_ui, AL::UI::window_karma_station, 0,Vector2(0.8,0.7)));
+        ,"green", AL::EventType::event_ui, AL::UI::window_karma_station, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::BuildSys::Section, ZoneType>(Vector2(panel_pos.x + 180,panel_pos.y + 143),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Karma_Tracks,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_build_sys, AL::BuildSys::Section::zone, Karma_Tracks,Vector2(0.8,0.7), true));
     
     // //row 4 ..........................
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 50,panel_pos.y + 173),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_topias, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_topias, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 93,panel_pos.y + 173),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_training_centre, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_training_centre, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 137,panel_pos.y + 173),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_ports, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_ports, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 173),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_siphon, 0,Vector2(0.8,0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_siphon, 0,Vector2(0.8,0.7), true));
     
     // row 5...............................
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 50,panel_pos.y + 203),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_special_buildings, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_special_buildings, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 94,panel_pos.y + 203),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_omnibolges_love_domes, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_omnibolges_love_domes, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 137,panel_pos.y + 203),DataManager::GetD3DDevice()
-        ,"green",AL::EventType::event_ui, AL::UI::window_limbo_structures, 0,Vector2(0.8,0.7)));
+        ,"green",AL::EventType::event_ui, AL::UI::window_limbo_structures, 0,Vector2(0.8,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 203),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
     
     // //zoom button 
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 155,panel_pos.y + 235),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::button_zoom_in, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::button_zoom_in, 0,Vector2(0.8, 0.7), true));
         
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 280),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::button_zoom_out, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::button_zoom_out, 0,Vector2(0.8, 0.7), true));
     
     //direction buttons     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 80,panel_pos.y + 235),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
         
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 203),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
         
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 203),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
         
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 203),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
         
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 203),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_delete_structures, 0,Vector2(0.8, 0.7), true));
     
     //advisor button
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 83,panel_pos.y + 355),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_advisors, 0,Vector2(2.8, 1.5)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_advisors, 0,Vector2(2.8, 1.5), true));
 
+    //graphview button
+    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 51,panel_pos.y + 310),DataManager::GetD3DDevice()
+    ,"green",AL::EventType::event_ui, AL::UI::window_graphview, 0,Vector2(0.8, 0.7), true));
+    
     //soul view button
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 93,panel_pos.y + 310),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_ui, AL::UI::window_soulview, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_ui, AL::UI::window_soulview, 0,Vector2(0.8, 0.7), true));
+
+    //micro manager button
+    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(panel_pos.x + 135,panel_pos.y + 311),DataManager::GetD3DDevice()
+    ,"green",AL::EventType::event_ui, AL::UI::window_micro_manager, 0,Vector2(0.8, 0.7), true));
 
     buttons.push_back(new Button<AL::Input::Action, int>(Vector2(panel_pos.x + 180,panel_pos.y + 311),DataManager::GetD3DDevice()
-    ,"green",AL::EventType::event_input, AL::Input::show_vibes, 0,Vector2(0.8, 0.7)));
+    ,"green",AL::EventType::event_input, AL::Input::show_vibes, 0,Vector2(0.8, 0.7), true));
     //.............
     
     //UI Text Vector
@@ -140,8 +147,10 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     text[2]->SetScale(Vector2(0.4,0.4));
     text[2]->SetColour(Color((float*)&Colors::Green));
 
+    setPostion(Vector2(1000, 30));
+    
     //Subscribe for events
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 UIPanel::~UIPanel()
@@ -173,8 +182,7 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text[1]->ChangeString("Credit: " + std::to_string((int)economy_manager->GetMoney()));
     }
-
-
+    
     else if (economy_manager->GetMoney() < 1000000)
     {
         text[1]->ChangeString("Credit: " + (std::to_string((int)economy_manager->GetMoney()/1000) + " K"));
@@ -188,8 +196,6 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
     //converts float to string to int
     text[0]->ChangeString("Year: " +std::to_string((int)economy_manager->GetYear()));
     text[2]->ChangeString(std::to_string((int)population_manager->GetTotalSouls()));
-    
-   
 
     for (auto& button : buttons)
     {
@@ -202,10 +208,11 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
         text->Tick(_gameData);
     }
 
+    inside = isInsidePanel(mouse_pos);
+    
     //if clicked updates pos and scale for window drag  
-    if (toggle_click_panel && isInsidePanel(mouse_pos))
+    if (toggle_click_panel && inside)
     {
-
         //new pos on click and drag 
         Vector2 offset = old_mouse_pos_panel - mouse_pos;
         panel_back_ground->SetPos(panel_back_ground->GetPos()-offset);
@@ -231,45 +238,53 @@ void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIPanel::render(DrawData2D* _drawData)
 {
-        
     //renders buttons
     for (auto& button : buttons)
     {
         button->render(_drawData);
-    }
-    
+    }  
+   
     panel_back_ground->Draw(_drawData);
     // updates texts
     for (auto& text : text)
     {
         text->Draw(_drawData);
     }
-   
 }
 
-void UIPanel::ReceiveEvents(const AL::Event& al_event)
+const bool& UIPanel::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
-    case AL::event_input:
-        break;
-
-    case AL::event_cursor_interact:
-        //Saves the state of the action
-        if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-        {
-            toggle_click_panel = al_event.cursor_interact.active;
-        }
-        break;
-
-    default:
-        break;
+        toggle_click_panel = al_event.cursor_interact.active;
     }
+    return inside;
+}
+
+const bool& UIPanel::IsCursorInsideWindow()
+{
+    return inside;
 }
 
 void UIPanel::setPostion(Vector2 _panelPosition)
 {
-   panel_pos = _panelPosition;
+    if(_panelPosition == panel_pos) return;
+    
+    //Updates the position of the panel with a 
+    const Vector2 offset = _panelPosition - panel_pos;
+    panel_back_ground->SetPos(_panelPosition);
+
+    for (auto& button : buttons)
+    {
+        button->setPostion(button->getPosition() + offset);
+    }
+
+    for(auto& t : text)
+    {
+        t->SetPos(t->GetPos() + offset);
+    }
+    
+    panel_pos = _panelPosition;
 }
 
 void UIPanel::setScale(Vector2& _newScale)

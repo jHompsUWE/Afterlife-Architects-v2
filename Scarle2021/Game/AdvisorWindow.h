@@ -1,8 +1,7 @@
 #pragma once
 #include "UIWindow.h"
-#include "NewEventManager.h"
 
-class AdvisorWindow : public IEventReceiver
+class AdvisorWindow : public UIWindow
 {
 public:
 
@@ -11,47 +10,22 @@ public:
     
     ~AdvisorWindow() override;
     
-    void update(GameData* _gameData, Vector2& _mousePosition);
-    void render(DrawData2D* _drawData);
-    void ReceiveEvents(const AL::Event& al_event) override;
+    void update(GameData* _gameData, Vector2& _mousePosition) override;
+    void render(DrawData2D* _drawData) override;
+    void reSize(Vector2 game_res) override;
 
-    void set_postion(Vector2& _new_pos);
-    void set_scale(Vector2& _newScale);
-
-    void set_text(string new_string);
-    void set_aria_image(string filename);
-    void set_jasper_image(string filename);
-    void set_option_box(int box_num, int indicator, string title);
-	
-    Vector2& getPosition();
-    Vector2& getButtonRes();
-	
-    void reSize(Vector2 game_res);
-    bool is_visible = false;
+    void setText(string new_string);
+    void setAriaImage(string filename);
+    void setJasperImage(string filename);
+    void setOptionBox(int box_num, int indicator, string title);
     
 private:
-    
-    //mouse pointer inside window
-    bool isInside(Vector2& point) const;
-    bool toggle_click = false;
-    Vector2 mouse_pos {0,0};
-    Vector2 old_mouse_pos{0,0};
-    
-    ImageGO2D* windowBackGround = nullptr;
-  
-    //vector of buttons 
-    std::vector<UIButtonInterFace*> buttons;
-    std::vector<TextGO2D*> text_vec;
     std::vector<ImageGO2D*> image_vec_ar;
     std::vector<ImageGO2D*> image_vec_ja;
     std::vector<ImageGO2D*> indicators_ar;
     std::vector<ImageGO2D*> indicators_ja;
     bool show_ind_ar[5];
     bool show_ind_ja[5];
- 
-    //vectors
-    Vector2 window_res {0,0};
-    Vector2 window_pos {0,0};
 
     //filenames for adivsor images
     string advisor_filenames_ar[13] = { "ArA", "ArE", "ArL", "ArM", "ArO", "ArS", "ArBlink1", "ArBlink2", "ArBlink3", "ArTongue1", "ArTongue2", "ArTongue3", "ArIdle1"};

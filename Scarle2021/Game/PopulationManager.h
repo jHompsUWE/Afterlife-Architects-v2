@@ -1,6 +1,7 @@
 #pragma once
 #include "ZoneType.h"
 #include "PlaneType.h"
+#include <iostream>
 #include <vector>
 
 class PopulationManager
@@ -20,6 +21,8 @@ public:
 	int GetZonePopulation(PlaneType plane, ZoneType zone);
 	int GetZoneCapacity(PlaneType plane, ZoneType zone);
 	int GetTotalSouls();
+	int GetTotalSoulsForPlane(PlaneType plane);
+	int GetTotalCapacity();
 
 	int GetADPopulation(PlaneType plane);
 	int GetADCapacity(PlaneType plane);
@@ -27,6 +30,9 @@ public:
 	bool GetZoneFull(PlaneType plane, ZoneType zone);
 
 	bool PopulationCheck(PlaneType plane, ZoneType zone);
+
+	void IncrementReligions(PlaneType plane, int pop_inc);
+	int GetReligiousSpread(PlaneType plane, int rel);
 
 protected:
 
@@ -38,6 +44,10 @@ private:
 	int population_angel;
 	int capacity_angel;
 
+	// Religion Heaven
+	// HAHA, HOHO, OPRA, OCRA, ALF, RALF, SUMA, SUSA
+	int heaven_religion_spread[8] = { 0,0,0,0,0,0,0,0 };
+
 
 	// Hell
 	std::vector<int> hell_population;
@@ -45,5 +55,9 @@ private:
 	std::vector<bool> hell_full;
 	int population_demon;
 	int capacity_demon;
+
+	// Religion Hell
+	// HAHA, HOHO, OPRA, OCRA, ALF, RALF, SUMA, SUSA
+	int hell_religion_spread[8] = { 0,0,0,0,0,0,0,0 };
 };
 

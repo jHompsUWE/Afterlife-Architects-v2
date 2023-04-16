@@ -19,7 +19,7 @@ enum HeavenOrHell
     Adv_Heaven, Adv_Hell, Both, Neither
 };
 
-class AdvisorManager : public IEventReceiver
+class AdvisorManager : public AL::EventReceiver
 {
 public:
     AdvisorManager();
@@ -31,7 +31,7 @@ public:
     void Update(GameData* game_data);
     
     //Events
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
 
 private:
     // Starting, updating and stopping advise

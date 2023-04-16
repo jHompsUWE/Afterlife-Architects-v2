@@ -11,7 +11,8 @@ OrthographicCamera::OrthographicCamera(float _near_plane, float _far_plane, Vect
 	//win_x = _win_x;
 	//win_x = _win_y;
 
-	AL::NewEventManager::AddEventReceiver(this);
+	AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_input, AL::EventType::event_cursor_move,
+		AL::EventType::event_cursor_interact, AL::EventType::event_ui, AL::EventType::event_camera);
 }
 
 OrthographicCamera::~OrthographicCamera()
@@ -50,7 +51,7 @@ void OrthographicCamera::MouseInput(GameData* _GD, int win_x, int win_y)
 	}
 }
 
-void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
+const bool& OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 {
 	switch (al_event.type)
 	{
@@ -77,7 +78,6 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 			default:
 				break;
 		}
-
 		break;
 
 	case AL::event_cursor_move:
@@ -118,6 +118,7 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 			ZoomOut(10);
 			break;
 		}
+		break;
 
 	case AL::event_camera:
 		//Calles the move functions with a scalar to have a scaled controller movement
@@ -144,6 +145,8 @@ void OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 	default:
 		break;
 	}
+
+	return false;
 }
 
 /// <summary>

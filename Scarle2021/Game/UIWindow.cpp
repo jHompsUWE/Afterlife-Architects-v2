@@ -76,7 +76,7 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         DataManager::GetD3DDevice(),"Gate_T3_Heaven_4x4",
         AL::EventType::event_build_sys,AL::BuildSys::structure, Gate_T3,Vector2(0.5,0.5)));
 
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_cursor_interact);
 }
 
 UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -96,12 +96,12 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
     window_pos = _windowPosition - window_res/2;
     windowBackGround->SetPos(window_pos);
     
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_cursor_interact);
 }
 
-UIWindow::UIWindow()
+UIWindow::UIWindow(const bool& priority)
 {
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_interact);
 }
 
 UIWindow::~UIWindow()
@@ -111,6 +111,7 @@ UIWindow::~UIWindow()
     {
         delete button;        
     }
+    
     delete windowBackGround;
 
     for (auto text : text_vec)
@@ -149,9 +150,11 @@ void UIWindow::update(GameData* _gameData, Vector2& _mousePosition)
             text->Tick(_gameData);
         }
     }
+
+    inside = isInside(mouse_pos);
     
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -179,7 +182,11 @@ void UIWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void UIWindow::render(DrawData2D* _drawData)
 {
-    if(!is_visible) return;
+    if (!is_visible)
+    {
+        inside = false;
+        return;
+    }
     
     windowBackGround->Draw(_drawData);
     
@@ -198,28 +205,25 @@ void UIWindow::render(DrawData2D* _drawData)
     }
 }
 
-void UIWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
 {
-    switch (al_event.type)
+    if(al_event.type == AL::EventType::event_cursor_interact)
     {
-        case AL::event_input:
-            break;
-
-    case AL::event_cursor_interact:
-            //Saves the state of the action
-            if(al_event.cursor_interact.action == AL::Cursor::button_input1)
-            {
-                toggle_click = al_event.cursor_interact.active;
-            }
-            break;
-
-        default:
-            break;
+        //Saves the state of the action
+        if(al_event.cursor_interact.action == AL::Cursor::button_input1)
+        {
+            toggle_click = al_event.cursor_interact.active;
+        }
     }
+    return inside;
 }
 
+const bool& UIWindow::IsCursorInsideWindow()
+{
+    return inside;
+}
 
-void UIWindow::setPostion(Vector2& _new_pos)
+void UIWindow::setPosition(Vector2& _new_pos)
 {
     window_pos = _new_pos;
 }
@@ -271,13 +275,39 @@ const bool& UIWindow::getVisibility()
     return is_visible;
 }
 
+void UIWindow::MoveInFront()
+{
+    AL::NewEventManager::IncreaseReceiverPrioritySt(this);
+    
+    //Sets the current window and its buttons to the front of the receivers queue
+    for (auto& button : buttons)
+    {
+        button->MoveInFront();
+    }
+}
+
+void UIWindow::MoveToBack()
+{
+    AL::NewEventManager::DecreaseReceiverPrioritySt(this);
+    
+    //Sets the current window and its buttons to the Back of the receivers queue
+    for (auto& button : buttons)
+    {
+        button->MoveToBack();
+    }
+}
+
 bool UIWindow::isInside(Vector2& point) const
 {
-
     //checks bounding box of UI window
     if(point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
        point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))
            return true;
     
     return false;
+}
+
+Vector2 UIWindow::getWindowRes()
+{
+	return window_res;
 }

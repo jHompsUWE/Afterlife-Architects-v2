@@ -5,13 +5,13 @@
 #include "TextGO2D.h"
 #include "NewEventManager.h"
 #include "UIButtonInterFace.h"
-#include "Button.h"
+#include "Button.hpp"
 #include "DataManager.h"
 
 #include "GameplaySingletons.h"
 
 
-class UIPanel : public IEventReceiver
+class UIPanel : public AL::EventReceiver
 {
 public:
     UIPanel(Vector2 _panelPosition, ID3D11Device* _d3dDevice,std::string
@@ -21,7 +21,8 @@ public:
 
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
+    const bool& IsCursorInsideWindow() override;
 
     void setPostion(Vector2 _new_pos);
     void setScale(Vector2& _newScale);
@@ -51,6 +52,7 @@ private:
     Vector2 old_mouse_pos_panel {0,0};
 
     bool toggle_click_panel = false;
+    bool inside = false;
     //float year = 0;
     //int credits = 0;
 

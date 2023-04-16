@@ -366,6 +366,39 @@
   <ItemGroup>
     <ImageContentTask Include="Cursor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\MicroManager\micro_window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\arrow_left.png" />
+    <ImageContentTask Include="Afterlife\Slider\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\slider_handle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_back.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_belief.png" />
+    <ImageContentTask Include="Afterlife\GraphView\graphview_population.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\GraphView\graphview_religion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Window_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Global.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="bad_things.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="EventWarning.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

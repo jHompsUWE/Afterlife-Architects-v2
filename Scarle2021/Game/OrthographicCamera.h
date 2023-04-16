@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Gameobject.h"
-#include "Observer.h"
+#include "EventReceiver.hpp"
 
-class OrthographicCamera : public GameObject, public IEventReceiver
+class OrthographicCamera : public GameObject, public AL::EventReceiver
 {
 public:
 	OrthographicCamera(float _near_plane, float _far_plane, Vector3 _offset);
@@ -20,7 +20,7 @@ public:
 	Vector3 GetTarget() const { return camera_target; }
 	
 	void MouseInput(GameData* _GD, int win_x, int win_y);
-	void ReceiveEvents(const AL::Event& al_event) override;
+	const bool& ReceiveEvents(const AL::Event& al_event) override;
 
 	void MoveUp(float scalar = 1.f);
 	void MoveDown(float scalar = 1.f);

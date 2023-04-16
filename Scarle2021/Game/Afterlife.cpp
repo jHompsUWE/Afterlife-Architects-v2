@@ -38,7 +38,6 @@ Afterlife::~Afterlife()
     delete effect_factory;
     delete light;
     delete ortho_cam;
-    delete cursor_sprite;
 }
 
 void Afterlife::Initialize(HWND _window, int _width, int _height)
@@ -55,7 +54,6 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     CreateResources();
 
     //TODO: Uncomment this for fixed 60FPS
-    
     timer.SetFixedTimeStep(true);
     timer.SetTargetElapsedSeconds(1.0 / 60);
     
@@ -126,12 +124,9 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     audio_manager = std::make_unique<AudioManager>();
     audio_manager->init();
 
-    //Makes a custom mouse cursor!
-    cursor_sprite = new ImageGO2D("Cursor", d3d_device.Get());
-    cursor_sprite->set_layer_depth(128);
-    cursor_sprite->SetOrigin(Vector2{0,0});
-    cursor_sprite->SetScale(0.8f);
-    cursor_offset = cursor_sprite->GetRes();
+    //Inits the input manager
+    input_manager = std::make_unique<AL::InputManager>();
+    input_manager->init();    
 }
 
 // Executes the basic game loop
@@ -141,8 +136,9 @@ void Afterlife::Tick()
     timer.Tick([&]()
     {
         MainUpdate(timer);
-        event_manager->BroadcastData();
+        event_manager->DispatchEvents();
         ReadInput();
+        event_manager->LateUpdate();
     });
     Render();
 }
@@ -151,15 +147,10 @@ void Afterlife::MainUpdate(DX::StepTimer const& timer)
 {
     const float delta_time = float(timer.GetElapsedSeconds());
     game_data->delta_time = delta_time;
-    game_data->delta_time = delta_time;
    
     finite_state_machine->Update(game_data);
     audio_manager->Update(game_data);
     ortho_cam->Tick(game_data);
-
-    //Moves the cursor!
-    cursor_sprite->SetPos(event_manager->GetCursorPos());
-    cursor_sprite->Tick(game_data);
 }
 
 void Afterlife::ReadInput()
@@ -169,13 +160,11 @@ void Afterlife::ReadInput()
     const auto _gamepad= gamepad->GetState(gamepad_index);
     const auto _mouse = mouse->GetState();
     
-    //Sends input to the event manager
-    event_manager->FlushEventList();
-    event_manager->PollKeyboard(_keyboard);
-    event_manager->PollMouse(_mouse);
-    event_manager->PollGamepad(_gamepad, game_data->delta_time);
-    event_manager->UpdateCursorPos(output_width - (int)cursor_offset.x,
-                                   output_height - (int)cursor_offset.y);
+    //Sends input to the input manager
+    input_manager->PollKeyboard(_keyboard);
+    input_manager->PollMouse(_mouse);
+    input_manager->PollGamepad(_gamepad);
+    input_manager->UpdateCursorPos(output_width, output_height);
 
     //TODO:: USE THIS IF STRICTLY NEEDED
     // game_data->keyboard_state = _keyboard;
@@ -222,7 +211,7 @@ void Afterlife::Render()
     draw_data2D->sprites_batch->Begin(SpriteSortMode_Deferred, common_states->NonPremultiplied());
     //Draws the 2D GOs
     finite_state_machine->Render2D(draw_data2D);
-    cursor_sprite->Draw(draw_data2D);
+    input_manager->GetCursor()->Draw(draw_data2D);
     //Stops sprite batching
     draw_data2D->sprites_batch->End();
     
@@ -297,8 +286,8 @@ void Afterlife::OnWindowSizeChanged(int _width, int _height)
     CreateResources();
 
     // TODO: Game main_window is being resized.
-    event_manager->GenerateInterfaceEvent(AL::UI::Action::resize_ui);
-    event_manager->SetSpriteSpeed(cursor_sprite->ReSize((int)output_width, (int)output_height));
+    event_manager->GenerateEvent(AL::EventType::event_ui, AL::UI::Action::resize_ui);
+    input_manager->ResizeWithWindow(output_width, output_height);
 }
 
 // Properties

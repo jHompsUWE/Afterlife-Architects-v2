@@ -7,7 +7,7 @@ class TestSound :
 	public Sound
 {
 public:
-	TestSound(AudioEngine* _audEngine, string _filename);
+	TestSound(AudioEngine* _audEngine, string _filename, float _volume);
 	~TestSound();
 
 	virtual void Tick(GameData* _GD);

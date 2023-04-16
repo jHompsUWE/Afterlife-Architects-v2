@@ -1,6 +1,6 @@
 #pragma once
 #include "StateTemplate.h"
-#include "Button.h"
+#include "Button.hpp"
 
 class MainMenu : public StateTemplate
 {
@@ -24,6 +24,9 @@ public:
 
 private:
 	void ResizeUI() const;
+
+	void MoveOffScreen();
+	void MoveOnScreen() const;
 
 	//Button vector
 	std::vector<UIButtonInterFace*> buttons;

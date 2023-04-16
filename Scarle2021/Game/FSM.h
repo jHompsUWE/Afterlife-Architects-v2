@@ -1,17 +1,17 @@
 #pragma once
 #include "DataManager.h"
 #include "array"
-#include "Event.h"
+#include "Event.hpp"
 #include "StateTemplate.h"
 
 /**
  * \brief This is the main game Finite State Machine, basically, our game loop!
  */
-class FSM : public IEventReceiver
+class FSM : public AL::EventReceiver
 {
 public:
     explicit FSM(GameState& _current_state);
-    ~FSM() override = default;
+    ~FSM() override;
 
     bool init();
 
@@ -19,7 +19,7 @@ public:
     void Update(GameData* game_data);
 
     // Events
-    void ReceiveEvents(const AL::Event& al_event) override;
+    const bool& ReceiveEvents(const AL::Event& al_event) override;
 
     // Renderers
     void Render3D(DrawData* draw_data) const;

@@ -21,6 +21,9 @@ public:
 
 	virtual void reSize(Vector2 game_res)=0;
 
+	virtual void MoveInFront() = 0;
+	virtual void MoveToBack() = 0;
+	
 	bool interactable = true;
 	bool close_window = false;
 

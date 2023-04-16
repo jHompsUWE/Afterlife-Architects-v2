@@ -170,7 +170,6 @@
     <ClInclude Include="ActionListGame.h" />
     <ClInclude Include="ActionListInput.h" />
     <ClInclude Include="ActionListInterface.h" />
-    <ClInclude Include="ActionListPacket.h" />
     <ClInclude Include="AdvisorManager.h" />
     <ClInclude Include="AdvisorWindow.h" />
     <ClInclude Include="Afterlife.h" />
@@ -178,17 +177,20 @@
     <ClInclude Include="BuildingManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BuildingSystem.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="CMOGO.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DrawData.h" />
     <ClInclude Include="DrawData2D.h" />
     <ClInclude Include="EconomyManager.h" />
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
-    <ClInclude Include="Observable.h" />
-    <ClInclude Include="Observer.h" />
+    <ClInclude Include="GraphviewWindow.h" />
+    <ClInclude Include="MicromanagerWindow.h" />
+    <ClInclude Include="HierarchyManager.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="EventReceiver.hpp" />
     <ClInclude Include="fileVBGO.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FSM.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlaneType.h" />
     <ClInclude Include="PopulationManager.h" />
+    <ClInclude Include="RaDTilemap.h" />
     <ClInclude Include="StructureBuilding.h" />
     <ClInclude Include="StructureGate.h" />
     <ClInclude Include="MapAssembler.h" />
@@ -216,7 +219,7 @@
     <ClInclude Include="NewEventManager.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="OrthographicCamera.h" />
-    <ClInclude Include="Packet.h" />
+    <ClInclude Include="Packet.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="PerlinNoise.h" />
@@ -249,6 +252,9 @@
     <ClInclude Include="UIButtonInterFace.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UIWindow.h" />
+    <ClInclude Include="UIWindowBadThings.h" />
+    <ClInclude Include="UIWindowEvent.h" />
+    <ClInclude Include="UIWindowEventWarning.h" />
     <ClInclude Include="VBCube.h" />
     <ClInclude Include="VBGO.h" />
     <ClInclude Include="VBPillow.h" />
@@ -259,6 +265,9 @@
     <ClInclude Include="vertex.h" />
     <ClInclude Include="VibeTilemap.h" />
     <ClInclude Include="VibeTile.h" />
+    <ClInclude Include="WindowBoarder.h" />
+    <ClInclude Include="Window_file.h" />
+    <ClInclude Include="Window_Global.h" />
     <ClInclude Include="ZoneType.h" />
   </ItemGroup>
   <ItemGroup>
@@ -269,7 +278,6 @@
     <ClCompile Include="BuildingManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BuildingSystem.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CMOGO.cpp" />
     <ClCompile Include="EconomyManager.cpp" />
@@ -281,7 +289,12 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GameplaySingletons.cpp" />
+    <ClCompile Include="HierarchyManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="GraphviewWindow.cpp" />
+    <ClCompile Include="MicromanagerWindow.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
+    <ClCompile Include="RaDTilemap.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
     <ClCompile Include="StructureGate.cpp" />
     <ClCompile Include="GPGO.cpp" />
@@ -323,12 +336,21 @@
     <ClCompile Include="treebit.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UIWindow.cpp" />
+    <ClCompile Include="UIWindowBadThings.cpp" />
+    <ClCompile Include="UIWindowEvent.cpp" />
+    <ClCompile Include="UIWindowEventWarning.cpp" />
     <ClCompile Include="VBCube.cpp" />
     <ClCompile Include="VBGO.cpp" />
     <ClCompile Include="VBQuad.cpp" />
     <ClCompile Include="VBSnail.cpp" />
     <ClCompile Include="VibeTilemap.cpp" />
     <ClCompile Include="VibeTile.cpp" />
+    <ClCompile Include="WindowBoarder.cpp" />
+    <ClCompile Include="Window_file.cpp" />
+    <ClCompile Include="Window_Global.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NewEventManager.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

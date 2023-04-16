@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "AdvisorWindow.h"
-#include <iostream>
 
 #include "DataManager.h"
 
 
 AdvisorWindow::AdvisorWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
-                             std::string _filepath, Vector2 _setScale)
+                             std::string _filepath, Vector2 _setScale) : UIWindow()
 {
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
@@ -73,36 +72,19 @@ AdvisorWindow::AdvisorWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
     text_vec.push_back(new TextGO2D(""));
     text_vec[5]->SetPos(Vector2(window_pos.x+120,window_pos.y+150));
     text_vec[5]->SetScale(Vector2(0.3,0.3));
-
-    //Event receiver
-    AL::NewEventManager::AddEventReceiver(this); 
 }
+
 AdvisorWindow::~AdvisorWindow()
 {
-    //deletes pointers
-    for (auto button : buttons)
-    {
-        delete button;        
-    }
-    
-    delete windowBackGround;
-
-    for (auto text : text_vec)
-    {
-        delete text;
-    }
-    
+    //Deletes images for Aria And Jasper 
     for (auto image : image_vec_ar)
     {
         delete image;        
     }
-
     for (auto image : image_vec_ja)
     {
         delete image;        
     }
-
-    AL::NewEventManager::RemoveEventReceiver(this); 
 }
 
 void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
@@ -147,9 +129,11 @@ void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text->Tick(_gameData);
     }
+
+    inside = isInside(mouse_pos);
     
     //if clicked updates pos and scale for window drag  
-    if (toggle_click && isInside(mouse_pos))
+    if (toggle_click && inside)
     {
 
         //new pos on click and drag 
@@ -197,20 +181,9 @@ void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
 
 void AdvisorWindow::render(DrawData2D* _drawData)
 {
-    if (!is_visible) return;
+    UIWindow::render(_drawData);
     
-    windowBackGround->Draw(_drawData);
-    
-    // Renders buttons
-    for (const auto& button : buttons)
-    {
-        button->render(_drawData);
-    }
-    // Renders texts
-    for (const auto& text : text_vec)
-    {
-        text->Draw(_drawData);
-    }
+    if(!is_visible) return;
     
     // Render Images
     for (int i = 0; i < 13; i++)
@@ -238,45 +211,6 @@ void AdvisorWindow::render(DrawData2D* _drawData)
             indicators_ja[k]->Draw(_drawData);
         }
     }
-}
-
-void AdvisorWindow::ReceiveEvents(const AL::Event& al_event)
-{
-    switch (al_event.type) 
-    { 
-    case AL::event_input: 
-        break; 
- 
-    case AL::event_cursor_interact: 
-        //Saves the state of the action 
-        if(al_event.cursor_interact.action == AL::Cursor::button_input1) 
-        { 
-            toggle_click = al_event.cursor_interact.active; 
-        } 
-        break; 
- 
-    default: 
-        break; 
-    } 
-}
-
-void AdvisorWindow::set_postion(Vector2& _new_pos)
-{
-    window_pos = _new_pos;
-}
-
-void AdvisorWindow::set_scale(Vector2& _newScale)
-{
-}
-
-Vector2& AdvisorWindow::getPosition()
-{
-    return window_pos;
-}
-
-Vector2& AdvisorWindow::getButtonRes()
-{
-    return window_res;
 }
 
 void AdvisorWindow::reSize(Vector2 game_res)
@@ -317,17 +251,8 @@ void AdvisorWindow::reSize(Vector2 game_res)
     }
 }
 
-bool AdvisorWindow::isInside(Vector2& point) const
-{
-    //checks bounding box of UI window
-    if(point.x >= window_pos.x && point.x <= (window_pos.x + window_res.x) &&
-       point.y >= window_pos.y && point.y <= (window_pos.y + window_res.y))
-           return true;
-    
-    return false;
-}
 
-void AdvisorWindow::set_aria_image(string filename)
+void AdvisorWindow::setAriaImage(string filename)
 {
     for (int i = 0; i < 13; i++)
     {
@@ -338,7 +263,7 @@ void AdvisorWindow::set_aria_image(string filename)
     }
 }
 
-void AdvisorWindow::set_jasper_image(string filename)
+void AdvisorWindow::setJasperImage(string filename)
 {
     for (int i = 0; i < 12 ; i ++)
     {
@@ -349,12 +274,12 @@ void AdvisorWindow::set_jasper_image(string filename)
     }
 }
 
-void AdvisorWindow::set_text(string new_string)
+void AdvisorWindow::setText(string new_string)
 {
     text_vec[5]->ChangeString(new_string);
 }
 
-void AdvisorWindow::set_option_box(int box_num, int indicator, string title)
+void AdvisorWindow::setOptionBox(int box_num, int indicator, string title)
 {
     text_vec[box_num]->ChangeString(title);
     switch (indicator)

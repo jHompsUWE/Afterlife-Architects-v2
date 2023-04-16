@@ -5,6 +5,7 @@
 
 #include "Tilemap.h"
 #include "VibeTilemap.h"
+#include "RaDTilemap.h"
 #include "PreviewQuad.h"
 #include "BuildingManager.h"
 #include "TextureManager.h"
@@ -13,14 +14,14 @@
 
 #include "GameplaySingletons.h"
 
-class BuildingSystem : public IEventReceiver
+class BuildingSystem : public AL::EventReceiver
 {
 public:
 	BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device* GD);
 	~BuildingSystem() override;
 
 	void Tick(GameData* game_data);
-	void ReceiveEvents(const AL::Event& al_event) override;
+	const bool& ReceiveEvents(const AL::Event& al_event) override;
 	void Render3D(DrawData* draw_data);
 
 	PlaneType GetPositionPlane(Vector3 position);
@@ -63,11 +64,13 @@ private:
 	// Heaven
 	std::unique_ptr<Tilemap> tilemap_heaven;
 	std::unique_ptr<VibeTilemap> vibe_tilemap_heaven;
+	std::unique_ptr<RaDTilemap> rad_tilemap_heaven;
 	std::unique_ptr<BuildingManager> building_manager_heaven;
 
 	// Hell
 	std::unique_ptr<Tilemap> tilemap_hell;
 	std::unique_ptr<VibeTilemap> vibe_tilemap_hell;
+	std::unique_ptr<RaDTilemap> rad_tilemap_hell;
 	std::unique_ptr<BuildingManager> building_manager_hell;
 
 	bool show_vibes = false;

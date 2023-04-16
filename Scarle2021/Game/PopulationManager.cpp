@@ -32,6 +32,7 @@ void PopulationManager::IncrementZonePopulation(PlaneType plane, ZoneType zone, 
 		hell_population[(int)zone - 1] += population_increase;
 		break;
 	}
+	IncrementReligions(plane, population_increase);
 }
 
 void PopulationManager::IncrementZoneCapacity(PlaneType plane, ZoneType zone, int capacity_increase)
@@ -122,12 +123,52 @@ int PopulationManager::GetTotalSouls()
 {
 	int total = 0;
 
-	for (auto& soul: heaven_population)
+	for (auto& soul : heaven_population)
 	{
 		total += soul;
 	}
 
 	for (auto& soul : hell_population)
+	{
+		total += soul;
+	}
+
+	return total;
+}
+
+int PopulationManager::GetTotalSoulsForPlane(PlaneType plane)
+{
+	int total = 0;
+
+	switch (plane)
+	{
+	case Heaven:
+		for (auto& soul : heaven_population)
+		{
+			total += soul;
+		}
+		break;
+
+	case Hell:
+		for (auto& soul : hell_population)
+		{
+			total += soul;
+		}
+		break;
+	}
+	return total;
+}
+
+int PopulationManager::GetTotalCapacity()
+{
+	int total = 0;
+
+	for (auto& soul : heaven_capacity)
+	{
+		total += soul;
+	}
+
+	for (auto& soul : hell_capacity)
 	{
 		total += soul;
 	}
@@ -204,5 +245,54 @@ bool PopulationManager::PopulationCheck(PlaneType plane, ZoneType zone)
 		{
 			return false;
 		}
+	}
+}
+
+void PopulationManager::IncrementReligions(PlaneType plane, int pop_inc)
+{
+	int count = 0;
+	switch (plane)
+	{
+	case Heaven:
+		for (int i = 0; i < pop_inc; i++)
+		{
+			srand(std::time(nullptr) + count);
+			int belief_1 = rand() % 3;
+			if (belief_1 == 2) { belief_1 = 3; }
+			heaven_religion_spread[belief_1] += 1;
+			heaven_religion_spread[(rand() % 2) + 4] += 1;
+			heaven_religion_spread[(rand() % 2) + 6] += 1;
+			count++;
+		}
+		break;
+	case Hell:
+		for (int i = 0; i < pop_inc; i++)
+		{
+			srand(std::time(nullptr) + count);
+			hell_religion_spread[rand() % 3] += 1;
+			hell_religion_spread[(rand() % 2) + 4] += 1;
+			hell_religion_spread[(rand() % 2) + 6] += 1;
+			count++;
+		}
+		break;
+	}
+	/*
+	for (int i = 0; i < 8; i++)
+	{
+		std::cout << heaven_religion_spread[i] << " " << hell_religion_spread[i] << std::endl;
+	}
+	std::cout << "--" << std::endl;*/
+}
+
+int PopulationManager::GetReligiousSpread(PlaneType plane, int rel)
+{
+	switch (plane)
+	{
+	case Heaven:
+		return heaven_religion_spread[rel];
+		break;
+	case Hell:
+		return hell_religion_spread[rel];
+		break;
 	}
 }

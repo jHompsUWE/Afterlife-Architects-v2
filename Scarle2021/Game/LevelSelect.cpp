@@ -13,7 +13,6 @@ LevelSelect::~LevelSelect()
     }
 }
 
-
 bool LevelSelect::init()
 {
     // level select background image
@@ -22,21 +21,24 @@ bool LevelSelect::init()
     
     // UI buttons init................
     //Easy button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(109,37),DataManager::GetD3DDevice(),
-        "Easy","ButtonBackgroundMM", AL::EventType::event_game, AL::Game::Action::enter_gameplay, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+        "Easy","ButtonBackgroundMM", AL::EventType::event_game, AL::Game::Action::enter_gameplay,
+        0,Vector2(0.5,0.5)));
     
     //Medium button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(536,37),DataManager::GetD3DDevice(),
-        "Medium","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+        "Medium","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay,
+        0,Vector2(0.5,0.5)));
     
     //Bard button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(960,37),DataManager::GetD3DDevice(),
-        "Hard","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+        "Hard","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay,
+        0,Vector2(0.5,0.5)));
     
     //Return Main menu button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(262,661),DataManager::GetD3DDevice(),
-        "Return to Main Menu","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_main_menu, 0,Vector2(0.5,0.5)));
-
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+        "Return to Main Menu","ButtonBackgroundMM",AL::EventType::event_game,
+        AL::Game::Action::enter_main_menu, 0,Vector2(0.5,0.5)));
     
     return true;
 }
@@ -81,15 +83,16 @@ void LevelSelect::GetEvents(const AL::Event& al_event)
 
         switch (al_event.game.action)
         {
-        case AL::Game::enter_gameplay:
-            
+         case AL::Game::enter_gameplay:
+            MoveOffScreen();
+            AL::NewEventManager::FlushEventListSt();
             DataManager::GetGD()->current_game_state = gs_gameplay;
-            // TODO:: EconomyManager::ResetEconomy();
             break;
             
         case AL::Game::enter_main_menu:
+            MoveOffScreen();
+            AL::NewEventManager::FlushEventListSt();
             DataManager::GetGD()->current_game_state = gs_main_menu;
-            do_once = true;
             break;
             
         case AL::Game::quit_game:
@@ -110,6 +113,7 @@ void LevelSelect::Render2D(DrawData2D* draw_data2D)
 {
     if(do_once)
     {
+        MoveOnScreen();
         ResizeUI();
         do_once = false;
     }
@@ -134,5 +138,23 @@ void LevelSelect::ResizeUI()
     for (auto& button : buttons)
     {
         button->reSize(game_res);
+        button->update(DataManager::GetGD());
     }
+}
+
+void LevelSelect::MoveOffScreen()
+{
+    for (auto& button : buttons)
+    {
+        button->setPostion(Vector2(10000,10000));
+    }
+    do_once = true;
+}
+
+void LevelSelect::MoveOnScreen() const
+{
+    buttons[0]->setPostion(Vector2(22,16));
+    buttons[1]->setPostion(Vector2(449,16));
+    buttons[2]->setPostion(Vector2(873,16));
+    buttons[3]->setPostion(Vector2(175,640));
 }

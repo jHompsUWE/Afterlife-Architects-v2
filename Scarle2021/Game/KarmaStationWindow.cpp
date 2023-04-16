@@ -75,6 +75,7 @@ void KarmaStationWindow::render(DrawData2D* _drawData)
 
 void KarmaStationWindow::set_postion(Vector2& _new_pos)
 {
+    UIWindow::setPosition(_new_pos);
 }
 
 void KarmaStationWindow::setScale(Vector2& _newScale)

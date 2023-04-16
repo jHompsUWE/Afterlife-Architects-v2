@@ -6,10 +6,15 @@
 #include <iostream>
 
 AudioManager::AudioManager()
-= default;
+{
+    //Subscribes to the event system! 
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop);
+}
 
 AudioManager::~AudioManager()
-= default;
+{
+    AL::NewEventManager::RemoveEventReceiver(this);
+}
 
 /// <summary>
 /// Generating Audio Engine within initialisation
@@ -21,10 +26,6 @@ bool AudioManager::init()
     audEngine = std::make_unique<AudioEngine>(eflags);
     ShuffleMusic();
     PlayMusic(music_index_array[current_music_index]);
-
-    //Subscribes to the event system! 
-    AL::NewEventManager::AddEventReceiver(this);
-    
     return true;
 }
 
@@ -77,7 +78,7 @@ void AudioManager::Update(GameData* game_data)
 /// Get sound event from Event Manager
 /// </summary>
 /// <param name="al_event"></param>
-void AudioManager::ReceiveEvents(const AL::Event& al_event)
+const bool& AudioManager::ReceiveEvents(const AL::Event& al_event)
 {
     switch (al_event.type)
     {
@@ -92,6 +93,7 @@ void AudioManager::ReceiveEvents(const AL::Event& al_event)
     default:
         break;
     }
+    return false;
 }
 
 
@@ -101,7 +103,7 @@ void AudioManager::ReceiveEvents(const AL::Event& al_event)
 /// <param name="filename"></param>
 void AudioManager::PlaySound(string filename)
 {
-    Sound* sound_eff = new Sound(audEngine.get(), filename);
+    Sound* sound_eff = new Sound(audEngine.get(), filename, master_volume * sound_volume);
     sounds_list.push_back(sound_eff);
 }
 
@@ -112,7 +114,7 @@ void AudioManager::PlaySound(string filename)
 void AudioManager::PlayMusic(int index)
 {
     string temp_str = "Afterlife Theme " + std::to_string(index);
-    Sound* sound_eff = new Sound(audEngine.get(), temp_str);
+    Sound* sound_eff = new Sound(audEngine.get(), temp_str, master_volume * music_volume);
     music = sound_eff;
 }
 
