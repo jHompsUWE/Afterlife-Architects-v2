@@ -4,7 +4,7 @@
 
 AdvisorManager::AdvisorManager()
 {
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
 }
 
 AdvisorManager::~AdvisorManager()

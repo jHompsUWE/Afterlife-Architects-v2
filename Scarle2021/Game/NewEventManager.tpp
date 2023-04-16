@@ -25,15 +25,15 @@ namespace AL
 	// Static Filtered Subscriptions handlers ----------------------------------------------------------------------
 
 	template <typename... Payload>
-	void NewEventManager::AddEventReceiver(EventReceiver* receiver, const Payload&... types)
+	void NewEventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver, const Payload&... types)
     {
-    	Get().AddReceiver(receiver, types...);
+    	Get().AddReceiver(priority, receiver, types...);
     }
 
 	template <typename... Payload>
 	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver, const Payload&... types)
     {
-    	Get().AddReceiver(receiver, types...);
+    	Get().RemoveReceiver(receiver, types...);
     }
 
 	// Event Generation ------------------------------------------------------------------------------------------------
@@ -71,32 +71,43 @@ namespace AL
 	// Filtered Subscription Handlers ----------------------------------------------------------------------------------
 
 	template <typename T, typename... Payload>
-	void NewEventManager::AddReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
+	void NewEventManager::AddReceiver(const bool& priority, EventReceiver* receiver, const T& type, const Payload&... types)
     {
     	//Throws a compiler error if the wrong type is passed
     	static_assert(std::is_same<T, EventType>::value, "Tried Subscribing invalid event type");
-	
-    	event_receiver_list.emplace_back(type, receiver);
+
+    	// If receiver has priority is moved inside priority list
+    	(priority ? priority_event_receiver_list : event_receiver_list).emplace_back(type, receiver);
 	
     	//Keeps iterating until every type provided has been subscribed
     	if constexpr (sizeof...(types) > 0)
     	{
-    		AddReceiver(receiver, types...);
+    		AddReceiver(priority, receiver, types...);
     	}
     	else
     	{
     		//When iteration ends adds a single instance to ui_receiver_list
-    		ui_receiver_list.emplace_back(receiver);
+    		(priority ? priority_ui_receiver_list : ui_receiver_list).emplace_back(receiver);
     	}
     }
 
 	template <typename T, typename... Payload>
 	void NewEventManager::RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
     {
-    	// Cycles trough all receivers backwards
-    	for (int i = event_receiver_list.size() -1; i >= 0; --i)
+    	// Cycles trough all priority receivers backwards
+    	for (int i = priority_event_receiver_list.size() -1; i >= 0; --i)
     	{
     		// Removes the element that matches receiver and type provided
+    		if(priority_event_receiver_list[i].second == receiver && priority_event_receiver_list[i].first == type)
+    		{
+    			priority_event_receiver_list.erase(std::remove(priority_event_receiver_list.begin(), priority_event_receiver_list.end(),
+					priority_event_receiver_list[i]), priority_event_receiver_list.end());
+    		}
+    	}
+    	
+    	// Cycles trough all normal receivers backwards
+    	for (int i = event_receiver_list.size() -1; i >= 0; --i)
+    	{
     		if(event_receiver_list[i].second == receiver && event_receiver_list[i].first == type)
     		{
     			event_receiver_list.erase(std::remove(event_receiver_list.begin(), event_receiver_list.end(),
@@ -111,7 +122,12 @@ namespace AL
     	}
     	else
     	{
-    		//When iteration ends unsubscribes the receiver from the list of ui_receivers 
+    		//When iteration ends unsubscribes the receiver from the list of ui_receivers
+
+    		//Priority
+    		priority_ui_receiver_list.erase(std::remove(priority_ui_receiver_list.begin(),
+				priority_ui_receiver_list.end(), receiver), priority_ui_receiver_list.end());
+    		//Normal
     		ui_receiver_list.erase(std::remove(ui_receiver_list.begin(),
 				ui_receiver_list.end(), receiver), ui_receiver_list.end());
     	}

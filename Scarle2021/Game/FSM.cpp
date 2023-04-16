@@ -15,7 +15,7 @@ FSM::FSM(GameState& _current_state) : current_state(_current_state)
     state_array[gs_game_over] = std::make_unique<GameOver>();
 
     //Subscribe for all events as they are passed to gamestates
-    AL::NewEventManager::AddEventReceiver(this);
+    AL::NewEventManager::AddEventReceiver(false, this);
 }
 
 FSM::~FSM()

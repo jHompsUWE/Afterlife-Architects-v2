@@ -8,7 +8,7 @@
 AudioManager::AudioManager()
 {
     //Subscribes to the event system! 
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop);
 }
 
 AudioManager::~AudioManager()

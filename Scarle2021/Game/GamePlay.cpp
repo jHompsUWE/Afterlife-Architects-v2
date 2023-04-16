@@ -27,6 +27,23 @@ bool GamePlay::init()
     // Hierarchy
     hierarchy_manager = std::make_unique<HierarchyManager>();
 
+    //window border file button
+    window_file = new Window_file(Vector2(0, 35), DataManager::
+        GetD3DDevice(), "", "Window_file", Vector2(1, 1));
+
+    //window bad things button
+    ui_window_bad_things = new UIWindowBadThings(Vector2(250, 35), DataManager::
+        GetD3DDevice(), "", "bad_things", Vector2(1.5, 1.5));
+
+    //window border global button
+    window_global = new Window_Global(Vector2(90, 35), DataManager::
+        GetD3DDevice(), "", "Global", Vector2(1.5, 1.5));
+    hierarchy_manager->AddToHierarchy(window_global);
+
+    // ui frame init
+    window_boarder = new WindowBoarder(Vector2(0, 0),
+        DataManager::GetD3DDevice(), "", "UIFrame", Vector2(1, 1));
+
     //build panel
     main_panel = new UIPanel(Vector2(0, 30), DataManager::GetD3DDevice(), "UIPanel", Vector2(1, 1));
     main_panel->setPostion(Vector2(10000, 10000));
@@ -34,18 +51,22 @@ bool GamePlay::init()
     //advisor
     advisor_window = new AdvisorWindow(Vector2(675, 30), DataManager::
         GetD3DDevice(), "", "AdvisorBackground", Vector2(0.5, 0.5));
+    hierarchy_manager->AddToHierarchy(advisor_window);
 
     //soul view
     soul_view = new SoulViewWindow(Vector2(400, 120), DataManager::
         GetD3DDevice(), "", "SoulView", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
+    hierarchy_manager->AddToHierarchy(soul_view);
 
     //micro manager
     micro_manager = new MicromanagerWindow(Vector2(400, 120), DataManager::
         GetD3DDevice(), "", "micro_window", Vector2(1, 1), GameplaySingletons::GetEconomyManager());
+    hierarchy_manager->AddToHierarchy(micro_manager);
 
     //graphview
     graphview = new GraphviewWindow(Vector2(400, 120), DataManager::
         GetD3DDevice(), "", "graphview_back", Vector2(1, 1), GameplaySingletons::GetPopulationManager());
+    hierarchy_manager->AddToHierarchy(graphview);
 
     //window gate
     window_one_gate = new UIWindow(Vector2(*DataManager::GetRES().first * 0.5, *DataManager::GetRES().second * 0.5),
@@ -83,22 +104,6 @@ bool GamePlay::init()
         GetD3DDevice(), "", "EventWarning", Vector2(1.5, 1.5));
     hierarchy_manager->AddToHierarchy(ui_window_event_warning);
 
-    //window border file button
-    window_file = new Window_file(Vector2(0, 35), DataManager::
-        GetD3DDevice(), "", "Window_file", Vector2(1, 1));
-
-    //window bad things button
-    ui_window_bad_things = new UIWindowBadThings(Vector2(250, 35), DataManager::
-        GetD3DDevice(), "", "bad_things", Vector2(1.5, 1.5));
-
-    //window border global button
-    window_global = new Window_Global(Vector2(90, 35), DataManager::
-        GetD3DDevice(), "", "Global", Vector2(1.5, 1.5));
-
-    // ui frame init
-    window_boarder = new WindowBoarder(Vector2(0, 0),
-        DataManager::GetD3DDevice(), "", "UIFrame", Vector2(1, 1));
-
     // Mouse
     mouse_screen_pos.z = 0;
     mouse_world_pos = std::make_shared<Vector3>(0, 0, 0);
@@ -128,6 +133,8 @@ bool GamePlay::init()
     graphview->setVisibility(false);
     advisor_window->setVisibility(false);
 
+    hierarchy_manager->MoveAllToFront();
+    
     do_once = true;
     return true;
 }
@@ -135,48 +142,27 @@ void GamePlay::Update(GameData* game_data)
 {
     if (do_once)
     {
-        //TODO::REMOVE AFTER. WIP
-        window_four_training_centers_window->MoveInFront();
-        window_three_topias->MoveInFront();
-        window_two_karma_station->MoveInFront();
-        window_one_gate->MoveInFront();
-
         main_panel->setPostion(Vector2(0, 30));
         ResizeUI();
         do_once = false;
     }
 
-    //window file
-    window_file->update(game_data, mouse_pos);
-    //window global
-    window_global->update(game_data, mouse_pos);
-    //window bad things
-    ui_window_bad_things->update(game_data, mouse_pos);
-
-    //Adv window
-    advisor_window->update(game_data, mouse_pos);
-
-    //Soul view
-    soul_view->update(game_data, mouse_pos);
-
-    //Micro Manager
-    micro_manager->update(game_data, mouse_pos);
-
-    //Graph View
-    graphview->update(game_data, mouse_pos);
-
     //updates panel
     main_panel->update(game_data, mouse_pos);
-
+    // File Window
+    window_file->update(game_data, mouse_pos);
+    // Bad Things Selector
+    ui_window_bad_things->update(game_data, mouse_pos);
+    //Border
+    window_boarder->update(game_data, mouse_pos);
+    
     //All other windows
     hierarchy_manager->Update(game_data, mouse_pos);
-
+    
     // Advisors
     adv_man->Update(game_data);
-
     // Economy
     economy_manager->Tick(game_data);
-
     // Building System
     building_system->Tick(game_data);
 }
@@ -222,90 +208,90 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             break;
 
         case AL::UI::window_gate:
-            window_one_gate->setVisibility(!window_one_gate->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_one_gate);
             break;
 
         case AL::UI::window_karma_station:
-            window_two_karma_station->setVisibility(!window_two_karma_station->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_two_karma_station);
             break;
 
         case AL::UI::window_advisors:
-            advisor_window->setVisibility(!advisor_window->getVisibility());
+            hierarchy_manager->OpenCloseWindow(advisor_window);
             break;
 
         case AL::UI::window_topias:
-            window_three_topias->setVisibility(!window_three_topias->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_three_topias);
             break;
 
         case AL::UI::window_training_centre:
-            window_four_training_centers_window->setVisibility(!window_four_training_centers_window->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_four_training_centers_window);
             break;
 
         case AL::UI::window_soulview:
             soul_view->generateRandSoul();
-            soul_view->setVisibility(!soul_view->getVisibility());
+            hierarchy_manager->OpenCloseWindow(soul_view);
             break;
 
         case AL::UI::window_micro_manager:
-            micro_manager->setVisibility(!micro_manager->getVisibility());
+            hierarchy_manager->OpenCloseWindow(micro_manager);
             break;
 
         case AL::UI::window_graphview:
-            graphview->setVisibility(!graphview->getVisibility());
+            hierarchy_manager->OpenCloseWindow(graphview);
             break;
 
         case AL::UI::window_file:
-            window_file->setVisibility(!window_file->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_file);
             break;
 
         case AL::UI::window_global:
-            window_global->setVisibility(!window_global->getVisibility());
+            hierarchy_manager->OpenCloseWindow(window_global);
             break;
         case AL::UI::global_bad_things_window:
-            ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_bad_things);
             break;
 
         case AL::UI::no_bad_things:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("OMG such a cheat");
             break;
 
         case AL::UI::birds_of_paradise:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("birds are pooping every where");
             break;
         case AL::UI::rats_out_of_hell:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("rats are biting everyone");
             break;
 
         case AL::UI::my_blue_heaven:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("me soo sad !!");
             break;
 
         case AL::UI::hell_freezes_over:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("dam that is cold");
             break;
 
         case AL::UI::heaven_nose:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("that is a big nose");
             break;
 
         case AL::UI::hell_in_a_hand_basket:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("where did my sandwich go");
             break;
 
         case AL::UI::paradise_pair_of_dice:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("Snake eyes, you lose ");
             break;
 
         case AL::UI::disco_infernal:
-            ui_window_event_warning->setVisibility(!ui_window_event_warning->getVisibility());
+            hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("night fever, night fever");
             break;
 
@@ -358,20 +344,9 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
 {
     hierarchy_manager->Render(draw_data2D);
 
-    advisor_window->render(draw_data2D);
-    soul_view->render(draw_data2D);
-    micro_manager->render(draw_data2D);
-    graphview->render(draw_data2D);
-
-    //renders panel
     main_panel->render(draw_data2D);
-    //UI boarder
     window_boarder->render(draw_data2D);
-    //window_file
     window_file->render(draw_data2D);
-    //window_global
-    window_global->render(draw_data2D);
-    //ui window bad things
     ui_window_bad_things->render(draw_data2D);
 }
 

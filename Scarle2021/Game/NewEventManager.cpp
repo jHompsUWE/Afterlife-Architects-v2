@@ -25,9 +25,9 @@ namespace AL
 	
 	// Static ----------------------------------------------------------------------------------------------------------
 	
-	void NewEventManager::AddEventReceiver(EventReceiver* receiver)
+	void NewEventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver)
 	{
-		Get().AddReceiver(receiver);
+		Get().AddReceiver(priority, receiver);
 	}
 	
 	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver)
@@ -66,13 +66,25 @@ namespace AL
 	{
 		//Every update checks if the cursor is present inside any UI element
 		inside_ui = false;
+
+		//Prioritized receivers
+		for (const auto& priority_receiver : priority_ui_receiver_list)
+		{
+			//Stop iteration if cursor is inside of even a single one as there is no need to continue
+			if(priority_receiver->IsCursorInsideWindow())
+			{
+				inside_ui = true;
+				return;
+			}
+		}
+
+		//Normal Receivers
 		for (const auto& receiver : ui_receiver_list)
 		{
-			//Stop iteration if cursor is inside of even a single one as there is no need to contiue
 			if(receiver->IsCursorInsideWindow())
 			{
 				inside_ui = true;
-				break;
+				return;
 			}
 		}
 	}
@@ -92,13 +104,34 @@ namespace AL
 			//Fires the event if the delay is minus equals 0
 			if (current_ev.delay <= 0)
 			{
-				//Event is dispatched to each observer
-				for (const auto& receiver : event_receiver_list)
+				//Keeping track if the event has been consumed
+				bool consumed = false;
+				
+				//Events are dispatched to the priority receivers first
+				for (const auto& priority_receiver : priority_event_receiver_list)
 				{
 					//Fires the event only if the receiver matches the type it is listening for 
-					if(receiver.first == current_ev.type)
+					if(priority_receiver.first == current_ev.type)
 					{
-						if(receiver.second->ReceiveEvents(current_ev)) break;
+						if(priority_receiver.second->ReceiveEvents(current_ev))
+						{
+							consumed = true;
+							break;
+						}
+					}
+				}
+
+				//Does not dispatch to non-priority receivers if the event has been consumed by priority receivers
+				if(!consumed)
+				{
+					//Event is then dispatched to non-priority receivers
+					for (const auto& receiver : event_receiver_list)
+					{
+						//Fires the event only if the receiver matches the type it is listening for 
+						if(receiver.first == current_ev.type)
+						{
+							if(receiver.second->ReceiveEvents(current_ev)) break;
+						}
 					}
 				}
 
@@ -122,22 +155,33 @@ namespace AL
 	
 	// Unfiltered Subscription Handlers --------------------------------------------------------------------------------
 	
-	void NewEventManager::AddReceiver(EventReceiver* receiver)
+	void NewEventManager::AddReceiver(const bool& priority, EventReceiver* receiver)
 	{
 		//Subscribe a receiver to every event type
 		for (int i = last_entry; i > 0; --i)
 		{
-			event_receiver_list.emplace_back(static_cast<EventType>(i), receiver);
+			(priority ? priority_event_receiver_list : event_receiver_list).emplace_back(static_cast<EventType>(i), receiver);
 		}
 
 		//Subscribe only one instance of a receiver to a UI type
-		ui_receiver_list.emplace_back(receiver);
+		(priority ? priority_ui_receiver_list : ui_receiver_list).emplace_back(receiver);
 	}
 
 	void NewEventManager::RemoveReceiver(EventReceiver* receiver)
 	{
-		//Unsubscribes every entry of receiver from both vectors
+		//Unsubscribes every entry of receiver all receivers vectors
 
+		//Priority receiver list
+		for (int i = priority_event_receiver_list.size() -1; i >= 0; --i)
+		{
+			// Checks each entry to match the receiver ptr, if true removes that specific entry
+			if(priority_event_receiver_list[i].second == receiver)
+			{
+				priority_event_receiver_list.erase(std::remove(priority_event_receiver_list.begin(),
+					priority_event_receiver_list.end(), priority_event_receiver_list[i]), priority_event_receiver_list.end());
+			}
+		}
+		
 		//Event receiver list
 		for (int i = event_receiver_list.size() -1; i >= 0; --i)
 		{
@@ -150,6 +194,11 @@ namespace AL
 		}
 
 		//UI receiver list
+		
+		//Priority
+		priority_ui_receiver_list.erase(std::remove(priority_ui_receiver_list.begin(),
+			priority_ui_receiver_list.end(), receiver), priority_ui_receiver_list.end());
+		//Normal
 		ui_receiver_list.erase(std::remove(ui_receiver_list.begin(),
 			ui_receiver_list.end(), receiver), ui_receiver_list.end());
 	}

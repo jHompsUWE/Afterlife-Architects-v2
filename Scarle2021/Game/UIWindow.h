@@ -13,7 +13,8 @@ public:
     
     UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         std::string _filepath,Vector2 _setScale);
-    UIWindow();
+    
+    UIWindow(const bool& priority = false);
 
     ~UIWindow() override;
 

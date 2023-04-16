@@ -10,7 +10,7 @@ class Button : public UIButtonInterFace, public AL::EventReceiver
 {
 public:
 	Button(Vector2 _buttonPosition, ID3D11Device* _d3dDevice,std::string
-	_text,std::string _filepath,AL::EventType _event, Action1 _action1, Action2 _action2 ,Vector2 _setScale)
+	_text,std::string _filepath,AL::EventType _event, Action1 _action1, Action2 _action2 ,Vector2 _setScale, bool priority = false)
 		: UIButtonInterFace(_event), action_1(_action1), action_2(_action2)
 	{
 		//setup for button background
@@ -32,11 +32,11 @@ public:
 		buttonText->SetPos(Vector2(button_pos.x,button_pos.y));
 		buttonText->SetScale(Vector2(_setScale));
 
-		AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
+		AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	};
 	
 	Button(Vector2 _buttonPosition, ID3D11Device* _d3dDevice,std::string
-	_filepath,AL::EventType _event, Action1 _action1, Action2 _action2, Vector2 _setScale)
+	_filepath,AL::EventType _event, Action1 _action1, Action2 _action2, Vector2 _setScale, bool priority = false)
 		: UIButtonInterFace(_event), action_1(_action1), action_2(_action2)
 	{
 		//setup for button background
@@ -51,7 +51,7 @@ public:
 		button_pos = _buttonPosition - button_res/2;
 		buttonBackGround->SetPos(button_pos);
 
-		AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
+		AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	}
 	
 	~Button() override
@@ -74,7 +74,6 @@ public:
 			break;
 			
 		case AL::event_cursor_interact:
-
 			//Checks if the button specified is being pressed
 			if(al_event.cursor_interact.action == AL::Cursor::button_input1)
 			{

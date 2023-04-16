@@ -76,7 +76,7 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         DataManager::GetD3DDevice(),"Gate_T3_Heaven_4x4",
         AL::EventType::event_build_sys,AL::BuildSys::structure, Gate_T3,Vector2(0.5,0.5)));
 
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_cursor_interact);
 }
 
 UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
@@ -96,12 +96,12 @@ UIWindow::UIWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
     window_pos = _windowPosition - window_res/2;
     windowBackGround->SetPos(window_pos);
     
-    AL::NewEventManager::AddEventReceiver(this,AL::EventType::event_cursor_interact);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_cursor_interact);
 }
 
-UIWindow::UIWindow()
+UIWindow::UIWindow(const bool& priority)
 {
-    AL::NewEventManager::AddEventReceiver(this, AL::EventType::event_cursor_interact);
+    AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_interact);
 }
 
 UIWindow::~UIWindow()
@@ -215,7 +215,7 @@ const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
             toggle_click = al_event.cursor_interact.active;
         }
     }
-    return false;
+    return inside;
 }
 
 const bool& UIWindow::IsCursorInsideWindow()
@@ -277,24 +277,24 @@ const bool& UIWindow::getVisibility()
 
 void UIWindow::MoveInFront()
 {
+    AL::NewEventManager::IncreaseReceiverPrioritySt(this);
+    
     //Sets the current window and its buttons to the front of the receivers queue
     for (auto& button : buttons)
     {
         button->MoveInFront();
     }
-    
-    AL::NewEventManager::IncreaseReceiverPrioritySt(this);
 }
 
 void UIWindow::MoveToBack()
 {
+    AL::NewEventManager::DecreaseReceiverPrioritySt(this);
+    
     //Sets the current window and its buttons to the Back of the receivers queue
     for (auto& button : buttons)
     {
         button->MoveToBack();
     }
-    
-    AL::NewEventManager::DecreaseReceiverPrioritySt(this);
 }
 
 bool UIWindow::isInside(Vector2& point) const

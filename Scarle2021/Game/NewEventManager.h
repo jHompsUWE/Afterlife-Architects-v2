@@ -42,12 +42,13 @@ namespace AL
 		
 		/**
 		 * \brief Subscribe a receiver to listen for specific events
-		 * \tparam Payload Event Typs to listen to
+		 * \tparam Payload Event Types to listen to
+		 * \param priority Event will be added to the priority queue
 		 * \param receiver ptr to the receiver 
 		 * \param types list of types
 		*/
 		template <typename... Payload>
-		static void AddEventReceiver(EventReceiver* receiver, const Payload&... types);
+		static void AddEventReceiver(const bool& priority, EventReceiver* receiver, const Payload&... types);
 
 		/**
 		 * \brief Unsubscribes a receiver from listening to specific events
@@ -61,9 +62,10 @@ namespace AL
 		// Static Unfiltered Subscriptions handlers --------------------------------------------------------------------
 		
 		/**
+		 * \param priority if it will be inserted in the priority list
 		 * \param receiver to be subscribed to receive events
 		 */
-		static void AddEventReceiver(EventReceiver* receiver);
+		static void AddEventReceiver(const bool& priority, EventReceiver* receiver);
 
 		/**
 	     * \param receiver to be unsubscribed from receiving events
@@ -144,9 +146,10 @@ namespace AL
 	
 		/**
 		 * \brief Subscribes the provided receiver to every event type available
+		 * \param priority true if the receiver has to be put in the priority list
 		 * \param receiver Pointer to the receiver to subscribe
 		 */
-		void AddReceiver(EventReceiver* receiver);
+		void AddReceiver(const bool& priority, EventReceiver* receiver);
 
 		/**
 		 * \brief Fully unsubscribes a receiver from listening to any event
@@ -160,12 +163,13 @@ namespace AL
 		 * \brief 
 		 * \tparam T first type to subscribe the current receiver to
 		 * \tparam Payload Rest of types to subscribe the current receiver to
+		 * \param priority Event will be added to the priority queue
 		 * \param receiver prt to the receiver to add
 		 * \param type first type 
 		 * \param types rest of types
 		 */
 		template <typename T, typename... Payload>
-		void AddReceiver(EventReceiver* receiver, const T& type, const Payload&... types);
+		void AddReceiver(const bool& priority, EventReceiver* receiver, const T& type, const Payload&... types);
 	
 		/**
 		 * \brief 
@@ -214,8 +218,10 @@ namespace AL
 		void SetEventDataIterative(Event& event, size_t& byte_offset, const T& arg, const Payload&... args);
 
 		// Data --------------------------------------------------------------------------------------------------------
-		
+
+		std::vector<std::pair<EventType, EventReceiver*>> priority_event_receiver_list{};
 		std::vector<std::pair<EventType, EventReceiver*>> event_receiver_list{};
+		std::vector<EventReceiver*> priority_ui_receiver_list{};
 		std::vector<EventReceiver*> ui_receiver_list{};
 		std::vector<Event> event_list{};
 
