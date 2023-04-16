@@ -130,7 +130,7 @@ void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int
 
 int VibeTilemap::GetVibe(Vector3 tile_pos)
 {
-	return vibe_tilemap[tile_pos.x][tile_pos.z]->GetVibe();
+	return vibe_tilemap[tile_pos.x - start.x][tile_pos.z - start.z]->GetVibe();
 }
 
 std::vector<Vector3> VibeTilemap::CornerExpand(Vector3 point, int range, VibeDirection direction)

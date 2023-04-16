@@ -6,6 +6,7 @@
 #include "PlaneType.h"
 #include "StructureType.h"
 
+#include "GameplaySingletons.h"
 #include "PopulationManager.h"
 #include "TextureManager.h"
 #include "EconomyManager.h"
@@ -21,6 +22,8 @@
 #include "StructureKarmaAnchor.h"
 #include "StructureKarmaStation.h"
 
+#include "StructureData.h"
+
 class BuildingManager
 {
 public:
@@ -35,7 +38,6 @@ public:
 	void DestroyStructure(Vector3 tile_position);
 	std::vector<Vector3> GetStructureOccupiedTiles(Vector3 tile_position);
 
-	int GetTotalStructure();
 	static int GetSizeOfStructure(StructureType structure_type);
 	static int GetCostOfStructure(StructureType structure_type);
 	static int GetVibeOfStructure(StructureType structure_type);

@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "StructureBuilding.h"
 
-StructureBuilding::StructureBuilding(ID3D11Device* GD, Vector2 width_height, Vector3 _tile_pos, Vector3 _start, int _tile_size, ID3D11ShaderResourceView* texture, 
-	PlaneType _plane, ZoneType _zone, std::shared_ptr<PopulationManager> _population_manager, std::shared_ptr<EconomyManager> _economy_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity):
-	StructureSprite(GD, width_height, _tile_pos, _tile_size, texture, _plane), base_capacity(_capacity), capacity(_capacity), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), population_manager(_population_manager), economy_manager(_economy_manager), zone(_zone), tile_pos(_tile_pos), start(_start)
+StructureBuilding::StructureBuilding(StructureData* structure_data, ZoneType _zone, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity) :
+	StructureSprite(structure_data), base_capacity(_capacity), capacity(_capacity), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), zone(_zone), tile_pos(structure_data->tile_pos)
 {
 	// Increment soul capacity on creation
 	srand(time(0));
+	population_manager = GameplaySingletons::GetPopulationManager();
+	economy_manager = GameplaySingletons::GetEconomyManager();
 	population_manager->IncrementZoneCapacity(plane, zone, capacity);
 }
 
@@ -79,7 +80,7 @@ void StructureBuilding::DevolveStructure()
 int StructureBuilding::EfficiencyValue()
 {
 	//int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (rad_tilemap->GetRaD(tile_pos-start));
-	int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (100 - economy_manager->GetRaD());
+	int eff_val = (vibe_tilemap->GetVibe(tile_pos) * (100/32) + 50) + (100 - economy_manager->GetRaD());
 	eff_val = eff_val * 0.5f;
 	//std::cout << eff_val << std::endl;
 	return eff_val;

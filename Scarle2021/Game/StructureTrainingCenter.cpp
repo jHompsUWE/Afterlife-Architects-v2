@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "StructureTrainingCenter.h"
 
-StructureTrainingCenter::StructureTrainingCenter(ID3D11Device* GD, Vector2 width_height, Vector3 tile_pos, int _tile_size, 
-	ID3D11ShaderResourceView* texture, PlaneType _plane, std::shared_ptr<PopulationManager> _population_manager, float _conversion_rate):
-	StructureSprite(GD, width_height, tile_pos, _tile_size, texture, _plane), population_manager(_population_manager), conversion_rate(_conversion_rate)
+StructureTrainingCenter::StructureTrainingCenter(StructureData* structure_data, float _conversion_rate):
+	StructureSprite(structure_data), conversion_rate(_conversion_rate)
 {
+	population_manager = GameplaySingletons::GetPopulationManager();
 }
 
 StructureTrainingCenter::~StructureTrainingCenter()

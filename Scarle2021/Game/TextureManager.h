@@ -7,6 +7,7 @@
 #include <SimpleMath.h>
 #include "Helper.h"
 
+#include "GameplaySingletons.h"
 #include "ZoneType.h"
 #include "StructureType.h"
 #include "PlaneType.h"
@@ -25,6 +26,8 @@ public:
 protected:
 
 private:
+	void initializeStructureTextures(ID3D11Device* GD);
+
 	void AddTextureZone(ID3D11Device* GD, std::string file_name);
 	void AddTextureStructure(ID3D11Device* GD, std::string file_name, PlaneType plane);
 

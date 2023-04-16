@@ -35,84 +35,7 @@ TextureManager::TextureManager(ID3D11Device* GD)
 	AddTextureZone(GD, "Tile_Rock");
 
 	// Textures are stored in the same order as the StructureType enum for both Heaven and Hell
-	
-	AddTextureStructure(GD, "Building_Green_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Green_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Green_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Green_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Yellow_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Yellow_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Yellow_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Yellow_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Orange_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Orange_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Orange_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Orange_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Brown_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Brown_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Brown_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Brown_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Purple_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Purple_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Purple_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Purple_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Red_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Red_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Red_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Red_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Building_Blue_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Building_Blue_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Building_Blue_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Building_Blue_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Bank_T1_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "Bank_T1_Hell_1x1", Hell);
-	AddTextureStructure(GD, "Bank_T2_Heaven_2x2", Heaven);
-	AddTextureStructure(GD, "Bank_T2_Hell_2x2", Hell);
-
-	AddTextureStructure(GD, "Gate_T1_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "Gate_T1_Hell_3x3", Hell);
-	AddTextureStructure(GD, "Gate_T2_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "Gate_T2_Hell_3x3", Hell);
-	AddTextureStructure(GD, "Gate_T3_Heaven_4x4", Heaven);
-	AddTextureStructure(GD, "Gate_T3_Hell_4x4", Hell);
-
-	AddTextureStructure(GD, "KA_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "KA_Hell_3x3", Hell);
-
-	AddTextureStructure(GD, "KarmaPortal", Heaven);
-	AddTextureStructure(GD, "KarmaPortal", Hell);
-
-	AddTextureStructure(GD, "KS_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "KS_Hell_3x3", Hell);
-
-	AddTextureStructure(GD, "KT_Heaven_1x1", Heaven);
-	AddTextureStructure(GD, "KT_Hell_1x1", Hell);
-
-	AddTextureStructure(GD, "Rock_1", Heaven);
-	AddTextureStructure(GD, "Rock_1", Hell);
-	AddTextureStructure(GD, "Rock_2", Heaven);
-	AddTextureStructure(GD, "Rock_2", Hell);
-	AddTextureStructure(GD, "Rock_3", Heaven);
-	AddTextureStructure(GD, "Rock_3", Hell);
-
-	AddTextureStructure(GD, "Topias_T1_Heaven_4x4", Heaven);
-	AddTextureStructure(GD, "Topias_T1_Hell_4x4", Hell);
-	AddTextureStructure(GD, "Topias_T2_Heaven_4x4", Heaven);
-	AddTextureStructure(GD, "Topias_T2_Hell_4x4", Hell);
-
-	AddTextureStructure(GD, "TC_T1_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "TC_T1_Hell_3x3", Hell);
-	AddTextureStructure(GD, "TC_T2_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "TC_T2_Hell_3x3", Hell);
-	AddTextureStructure(GD, "TC_T3_Heaven_3x3", Heaven);
-	AddTextureStructure(GD, "TC_T3_Hell_3x3", Hell);
+	initializeStructureTextures(GD);
 }
 
 TextureManager::~TextureManager()
@@ -196,6 +119,23 @@ DirectX::SimpleMath::Vector2 TextureManager::GetSizeStructure(StructureType stru
 	resource->Release();
 
 	return DirectX::SimpleMath::Vector2(size_x, size_y);
+}
+
+void TextureManager::initializeStructureTextures(ID3D11Device* GD)
+{
+	for (auto& structure_type : GameplaySingletons::GetStructureValues()["structureValues"])
+	{
+		HRESULT hr;
+		texture_heaven_structure.emplace_back();
+		hr = DirectX::CreateDDSTextureFromFile(GD, Helper::charToWChar(("../Assets/" + structure_type.value("textureHeaven", "unknown") + ".dds").c_str()), nullptr,
+			&texture_heaven_structure.back());
+		assert(hr == S_OK);
+
+		texture_hell_structure.emplace_back();
+		hr = DirectX::CreateDDSTextureFromFile(GD, Helper::charToWChar(("../Assets/" + structure_type.value("textureHell", "unknown") + ".dds").c_str()), nullptr,
+			&texture_hell_structure.back());
+		assert(hr == S_OK);
+	}
 }
 
 void TextureManager::AddTextureZone(ID3D11Device* GD, std::string file_name)

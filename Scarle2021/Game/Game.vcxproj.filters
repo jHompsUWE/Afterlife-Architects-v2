@@ -160,6 +160,9 @@
     <Filter Include="Afterlife\Managers\BadThings">
       <UniqueIdentifier>{362aaeb0-1f73-48d6-bd65-e528bcc00bf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\Managers\Building System\JSON Files">
+      <UniqueIdentifier>{0006d097-c3b0-49bf-8c00-dcd6aae26f1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -480,6 +483,9 @@
     <ClInclude Include="ActionListBadThings.h">
       <Filter>Afterlife\Managers\Events\Action Lists</Filter>
     </ClInclude>
+    <ClInclude Include="StructureData.h">
+      <Filter>Afterlife\Managers\Building System\Structure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -701,10 +707,18 @@
     <ClCompile Include="BadThingsManager.cpp">
       <Filter>Afterlife\Managers\BadThings</Filter>
     </ClCompile>
+    <ClCompile Include="StructureData.cpp">
+      <Filter>Afterlife\Managers\Building System\Structure</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NewEventManager.tpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON_Files\StructureValues.json">
+      <Filter>Afterlife\Managers\Building System\JSON Files</Filter>
     </None>
   </ItemGroup>
 </Project>
