@@ -262,7 +262,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("birds are pooping every where");
             break;
-        case AL::UI::rats_out_of_hell:
+        case AL::UI::bats_out_of_hell:
             hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("rats are biting everyone");
             break;
@@ -292,7 +292,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             ui_window_event_warning->setString("Snake eyes, you lose ");
             break;
 
-        case AL::UI::disco_infernal:
+        case AL::UI::disco_inferno:
             hierarchy_manager->OpenCloseWindow(ui_window_event_warning);
             ui_window_event_warning->setString("night fever, night fever");
             break;

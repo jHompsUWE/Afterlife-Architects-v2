@@ -5,6 +5,7 @@
 #include "ActionListInterface.h"
 #include "ActionListGame.h"
 #include "ActionListBuildSys.h"
+#include "ActionListBadThings.h"
 #include "ZoneType.h"
 #include "StructureType.h"
 
@@ -25,6 +26,7 @@ namespace AL
         event_game,
         event_adv_fault,
         event_camera,
+        event_bad_things,
 
         last_entry
     };
@@ -133,6 +135,19 @@ namespace AL
         {
             int pos_x = 0;
             int pos_y = 0;
+        };
+
+        /**
+         * \brief Event related to bad things
+         * \var action = Bad thing in question
+         * \var timer = Duration in seconds of the Event
+         * \var start = If the event is starting or not
+         */
+        struct BadThingsEvent
+        {
+            BadThings::Action action = BadThings::unknown;
+            float timer = 0.0f;
+            bool start = false;
         };
         
         EventType type = unknown;

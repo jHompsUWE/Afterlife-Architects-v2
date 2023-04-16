@@ -157,6 +157,9 @@
     <Filter Include="Afterlife\User Interface\UIWindow\InfoWindows">
       <UniqueIdentifier>{4ead0902-6b90-4322-957e-765e26ed951c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Afterlife\Managers\BadThings">
+      <UniqueIdentifier>{362aaeb0-1f73-48d6-bd65-e528bcc00bf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -471,6 +474,12 @@
     <ClInclude Include="MicromanagerWindow.h">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
+    <ClInclude Include="BadThingsManager.h">
+      <Filter>Afterlife\Managers\BadThings</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionListBadThings.h">
+      <Filter>Afterlife\Managers\Events\Action Lists</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -688,6 +697,9 @@
     </ClCompile>
     <ClCompile Include="MicromanagerWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="BadThingsManager.cpp">
+      <Filter>Afterlife\Managers\BadThings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

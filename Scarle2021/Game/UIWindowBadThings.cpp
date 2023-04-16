@@ -29,7 +29,7 @@ UIWindowBadThings::UIWindowBadThings(Vector2 _windowPosition, ID3D11Device* _d3d
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+130,window_pos.y+85),
         DataManager::GetD3DDevice(),"Green",
-         AL::EventType::event_ui,AL::UI::rats_out_of_hell, 0,Vector2(5,0.7), true));
+         AL::EventType::event_ui,AL::UI::bats_out_of_hell, 0,Vector2(5,0.7), true));
     
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+130,window_pos.y+115),
         DataManager::GetD3DDevice(),"Green",
@@ -53,7 +53,7 @@ UIWindowBadThings::UIWindowBadThings(Vector2 _windowPosition, ID3D11Device* _d3d
 
     buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x+130,window_pos.y+265),
      DataManager::GetD3DDevice(),"Green",
-      AL::EventType::event_ui,AL::UI::disco_infernal, 0,Vector2(5,0.7), true));
+      AL::EventType::event_ui,AL::UI::disco_inferno, 0,Vector2(5,0.7), true));
     
     AL::NewEventManager::RemoveEventReceiver(this);
     AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);

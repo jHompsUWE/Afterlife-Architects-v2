@@ -50,13 +50,13 @@ namespace AL
 			//bad things window
 			no_bad_things,
 			birds_of_paradise,
-			rats_out_of_hell,
+			bats_out_of_hell,
 			my_blue_heaven,
 			hell_freezes_over,
 			heaven_nose,
 			hell_in_a_hand_basket,
 			paradise_pair_of_dice,
-			disco_infernal,
+			disco_inferno,
 
 			//bad thing trigger
 			event_activated,

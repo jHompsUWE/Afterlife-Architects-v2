@@ -165,6 +165,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ActionListBadThings.h" />
     <ClInclude Include="ActionListBuildSys.h" />
     <ClInclude Include="ActionListCursor.h" />
     <ClInclude Include="ActionListGame.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="AdvisorWindow.h" />
     <ClInclude Include="Afterlife.h" />
     <ClInclude Include="AStarPathfinding.h" />
+    <ClInclude Include="BadThingsManager.h" />
     <ClInclude Include="BuildingManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BuildingSystem.h" />
@@ -275,6 +277,7 @@
     <ClCompile Include="AdvisorWindow.cpp" />
     <ClCompile Include="Afterlife.cpp" />
     <ClCompile Include="AStarPathfinding.cpp" />
+    <ClCompile Include="BadThingsManager.cpp" />
     <ClCompile Include="BuildingManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BuildingSystem.cpp" />
