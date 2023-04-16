@@ -54,18 +54,14 @@ public:
 
 private:
     void ResizeUI();
-
-    bool do_once;
-
-    // Mouse
     void UpdateMousePos(DrawData* draw_data);
-    Vector2 screen_size;
-
+    
+    bool do_once;
+    
     // Building System
     std::unique_ptr<BuildingSystem> building_system;
-
-    TextGO2D* text = nullptr;
-
+    
+    Vector2 screen_size;
     Vector2 mouse_pos{ 0,0 };
     Vector3 mouse_screen_pos;
     std::shared_ptr<Vector3> mouse_world_pos;
@@ -97,10 +93,8 @@ private:
 
     // Adv manager
     std::unique_ptr<AdvisorManager> adv_man = nullptr;
-
     // Economy
     std::shared_ptr<EconomyManager> economy_manager = nullptr;
-
     // Window Hierarchy
     std::unique_ptr<HierarchyManager> hierarchy_manager = nullptr;
 };

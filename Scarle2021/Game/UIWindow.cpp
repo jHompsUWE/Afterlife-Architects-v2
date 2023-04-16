@@ -223,7 +223,7 @@ const bool& UIWindow::IsCursorInsideWindow()
     return inside;
 }
 
-void UIWindow::setPostion(Vector2& _new_pos)
+void UIWindow::setPosition(Vector2& _new_pos)
 {
     window_pos = _new_pos;
 }

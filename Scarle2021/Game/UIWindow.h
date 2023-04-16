@@ -15,7 +15,6 @@ public:
         std::string _filepath,Vector2 _setScale);
     
     UIWindow(const bool& priority = false);
-
     ~UIWindow() override;
 
     virtual void update(GameData* _gameData, Vector2& _mousePosition);
@@ -25,21 +24,20 @@ public:
     const bool& ReceiveEvents(const AL::Event& al_event) override;
     const bool& IsCursorInsideWindow() override;
     
-    virtual void setPostion(Vector2& _new_pos);
+    virtual void setPosition(Vector2& _new_pos);
     virtual void setScale(Vector2& _newScale);
+    virtual void reSize(Vector2 game_res);
 
+    //Getters/Setters
     virtual Vector2& getPosition();
     virtual Vector2& getButtonRes();
-
-    virtual void reSize(Vector2 game_res);
     virtual Vector2 getWindowRes();
-
     virtual void setVisibility(bool _vis);
     virtual const bool& getVisibility();
 
+    //Layering funcs
     virtual void MoveInFront();
     virtual void MoveToBack();
-
     
 protected:
     //mouse pointer inside window

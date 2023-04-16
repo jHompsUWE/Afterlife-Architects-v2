@@ -38,7 +38,6 @@ bool GamePlay::init()
     //window border global button
     window_global = new Window_Global(Vector2(90, 35), DataManager::
         GetD3DDevice(), "", "Global", Vector2(1.5, 1.5));
-    hierarchy_manager->AddToHierarchy(window_global);
 
     // ui frame init
     window_boarder = new WindowBoarder(Vector2(0, 0),
@@ -133,6 +132,7 @@ bool GamePlay::init()
     graphview->setVisibility(false);
     advisor_window->setVisibility(false);
 
+    //Rects the window's layers
     hierarchy_manager->MoveAllToFront();
     
     do_once = true;
@@ -149,10 +149,12 @@ void GamePlay::Update(GameData* game_data)
 
     //updates panel
     main_panel->update(game_data, mouse_pos);
-    // File Window
+    //Window file
     window_file->update(game_data, mouse_pos);
-    // Bad Things Selector
+    //Bad things selector
     ui_window_bad_things->update(game_data, mouse_pos);
+    //Window global
+    window_global->update(game_data, mouse_pos);
     //Border
     window_boarder->update(game_data, mouse_pos);
     
@@ -241,14 +243,14 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             break;
 
         case AL::UI::window_file:
-            hierarchy_manager->OpenCloseWindow(window_file);
+            window_file->setVisibility(!window_file->getVisibility());
             break;
 
         case AL::UI::window_global:
-            hierarchy_manager->OpenCloseWindow(window_global);
+            window_global->setVisibility(!window_global->getVisibility());
             break;
         case AL::UI::global_bad_things_window:
-            hierarchy_manager->OpenCloseWindow(ui_window_bad_things);
+            ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
             break;
 
         case AL::UI::no_bad_things:
@@ -345,9 +347,10 @@ void GamePlay::Render2D(DrawData2D* draw_data2D)
     hierarchy_manager->Render(draw_data2D);
 
     main_panel->render(draw_data2D);
-    window_boarder->render(draw_data2D);
     window_file->render(draw_data2D);
     ui_window_bad_things->render(draw_data2D);
+    window_global->render(draw_data2D);
+    window_boarder->render(draw_data2D);
 }
 
 void GamePlay::Render3D(DrawData* draw_data)
@@ -384,20 +387,12 @@ void GamePlay::ResizeUI()
 {
     //resize UI based on window resolution 
     screen_size = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
+    
     window_boarder->reSize(screen_size);
-    window_one_gate->reSize(screen_size);
-    main_panel->reSize(screen_size);
-    advisor_window->reSize(screen_size);
-    soul_view->reSize(screen_size);
-    micro_manager->reSize(screen_size);
-    graphview->reSize(screen_size);
-    window_two_karma_station->reSize(screen_size);
-    window_three_topias->reSize(screen_size);
-    window_four_training_centers_window->reSize(screen_size);
     window_file->reSize(screen_size);
     window_global->reSize(screen_size);
-    ui_window_event->reSize(screen_size);
     ui_window_bad_things->reSize(screen_size);
-    ui_window_event_warning->reSize(screen_size);
+    main_panel->reSize(screen_size);
+    hierarchy_manager->ResizeAll();
 }
 

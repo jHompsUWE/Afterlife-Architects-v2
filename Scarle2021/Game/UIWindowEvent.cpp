@@ -73,7 +73,7 @@ void UIWindowEvent::render(DrawData2D* _drawData)
 
 void UIWindowEvent::set_postion(Vector2& _new_pos)
 {
-    UIWindow::setPostion(_new_pos);
+    UIWindow::setPosition(_new_pos);
 }
 
 void UIWindowEvent::setScale(Vector2& _newScale)
