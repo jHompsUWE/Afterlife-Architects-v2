@@ -25,23 +25,12 @@ private:
     //Images
     std::vector<ImageGO2D*> image_vec;
 
-    string random_names[6] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli","Awse Noori", "Seb LLewellyn" }; 
-    string available_punishments[14] = { "Envy","Avarice","Gluttony","Sloth","Pride","Wrath","Lust","Contentment","Charity","Temperance","Diligence","Humility","Peacefulness","Chastity" };
-
-    // NAAA does not show in afterlife
-    // AAAA does believe in afterlife
-    // NOT USED
-    string beliefOne[4] = { "HAHA", "HOHO", "OCRA", "OPRA" };
-    // HAHA serve in hell, then heaven
-    // HOHO Only serve in one realm depending on balance
-    // OCRA only in heaven
-    // OPRA only in hell
-    string beliefTwo[2] = { "ALF" , "RALF" };
-    // ALF do not reincarnate
-    // RALF do reincarnate
-    string beliefThree[2] = { "SUMA", "SUSA" };
-    // SUMA serve all sins and virtues (multiple)
-    // SUSA serve one sin or virtue (single)
+    // Strings for all names, punsihment and religions
+    const string random_names[6] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli","Awse Noori", "Seb LLewellyn" }; 
+    const string available_punishments[14] = { "Envy","Avarice","Gluttony","Sloth","Pride","Wrath","Lust","Contentment","Charity","Temperance","Diligence","Humility","Peacefulness","Chastity" };
+    const string beliefOne[4] = { "HAHA", "HOHO", "OCRA", "OPRA" };
+    const string beliefTwo[2] = { "ALF" , "RALF" };
+    const string beliefThree[2] = { "SUMA", "SUSA" };
 };
 
 

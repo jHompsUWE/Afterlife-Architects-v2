@@ -36,12 +36,16 @@ private:
     std::vector<ImageGO2D*> population_bars_vec;
     std::vector<ImageGO2D*> religion_bars_vec;
     float religion_bars_x[8] = { 53.5, 67.5, 81.5, 95.5, 158.5, 172.5, 250.5, 264.5 };
+    Vector2 base_resolution = Vector2(352, 316);
+    Vector2 max_belief_scales = Vector2(8.4, 0.2);
+    Vector2 max_population_scales = Vector2(4.2, 0.275);
+    Vector2 max_religion_scales = Vector2(0.25, 1.925);
 
     GraphShown cur_graph = No_Graph;
     float timer = 0;
     float time_between_updates = 2;
     
-    float belief_amounts[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    float individual_spreads[8] = {0,0,0,0,0,0,0,0};
+    float belief_amounts[16] = {0.5,0.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    float rel_spreads[8] = {0,0,0,0,0,0,0,0};
 };
 
