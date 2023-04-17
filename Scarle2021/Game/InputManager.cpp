@@ -24,38 +24,18 @@ namespace AL
 	{
 		//Do not map keybindings if controller is being used 
 		if(controller_active) return;
+		
+		//Map keyboard keys here
+		///TEMPORARY
+		MapEntryToEvent(keyboard.E, Input::build_houses);
+		MapEntryToEvent(keyboard.P, Input::show_vibes);
+		MapEntryToEvent(keyboard.D1, Input::place_zone_green);
 
 		//Camera movement linked to keyboard
-		// MapEntryToEvent(keyboard.W,Input::camera_up, true);
-		// MapEntryToEvent(keyboard.S,Input::camera_down, true);
-		// MapEntryToEvent(keyboard.A,Input::camera_left, true);
-		// MapEntryToEvent(keyboard.D,Input::camera_right, true);
-
-		//ARCADE
-		if(keyboard.Left)
-		{
-			cursor_pos.x -= 6;
-		}
-		if (keyboard.Right)
-		{
-			cursor_pos.x += 6;
-		}
-		if (keyboard.Up)
-		{
-			cursor_pos.y -= 6;
-		}
-		if (keyboard.Down)
-		{
-			cursor_pos.y += 6;
-		}
-
-		MapEntryToEvent(keyboard.LeftShift, Cursor::button_input1);
-		MapEntryToEvent(keyboard.LeftControl, Cursor::button_input2);
-
-		MapEntryToEvent(keyboard.R, Input::camera_up, true);
-		MapEntryToEvent(keyboard.F, Input::camera_down, true);
-		MapEntryToEvent(keyboard.D, Input::camera_left, true);
-		MapEntryToEvent(keyboard.G, Input::camera_right, true);
+		MapEntryToEvent(keyboard.W,Input::camera_up, true);
+		MapEntryToEvent(keyboard.S,Input::camera_down, true);
+		MapEntryToEvent(keyboard.A,Input::camera_left, true);
+		MapEntryToEvent(keyboard.D,Input::camera_right, true);
 	}
 	
 	void InputManager::PollMouse(Mouse::State mouse)
@@ -70,9 +50,9 @@ namespace AL
 		if(controller_active) return;
 		
 		//Map mouse keys here
-		// MapEntryToEvent(mouse.leftButton, Cursor::button_input1);
-		// MapEntryToEvent(mouse.rightButton, Cursor::button_input2);
-		// MapEntryToEvent(mouse.middleButton, Cursor::button_input3);
+		MapEntryToEvent(mouse.leftButton, Cursor::button_input1);
+		MapEntryToEvent(mouse.rightButton, Cursor::button_input2);
+		MapEntryToEvent(mouse.middleButton, Cursor::button_input3);
 	}
 	
 	void InputManager::PollGamepad(GamePad::State gamepad)

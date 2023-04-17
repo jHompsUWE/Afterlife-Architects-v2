@@ -31,7 +31,7 @@ public:
     void Update(GameData* game_data);
     
     //Events
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
+    bool ReceiveEvents(const AL::Event& al_event) override;
 
 private:
     // Starting, updating and stopping advise

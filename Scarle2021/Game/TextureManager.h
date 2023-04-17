@@ -23,8 +23,6 @@ public:
 
 	DirectX::SimpleMath::Vector2 GetSizeStructure(StructureType structure, PlaneType plane);
 
-protected:
-
 private:
 	void initializeStructureTextures(ID3D11Device* GD);
 

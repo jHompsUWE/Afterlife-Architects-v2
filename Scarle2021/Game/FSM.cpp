@@ -71,8 +71,29 @@ void FSM::Update(GameData* game_data)
     state_array[current_state]->LateUpdate(game_data);
 }
 
-const bool& FSM::ReceiveEvents(const AL::Event& al_event)
+bool FSM::ReceiveEvents(const AL::Event& al_event)
 {
+    if(al_event.type == AL::EventType::event_game)
+    {
+        if(al_event.game.action == AL::Game::Action::reset)
+        {
+            for (const auto& state : state_array)
+            {
+                state->Reset();
+            }
+        }
+    }
+    else if(al_event.type == AL::EventType::event_ui)
+    {
+        if(al_event.ui.action == AL::UI::resize_ui)
+        {
+            for (const auto& state : state_array)
+            {
+                state->Resize();
+            }
+        }
+    }
+    
     state_array[current_state]->GetEvents(al_event);
     return false;
 }

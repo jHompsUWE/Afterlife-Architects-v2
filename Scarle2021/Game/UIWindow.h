@@ -21,8 +21,8 @@ public:
     virtual void render(DrawData2D* _drawData);
 
     //Overriden From Event Manager
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
-    const bool& IsCursorInsideWindow() override;
+    bool ReceiveEvents(const AL::Event& al_event) override;
+    bool IsCursorInsideWindow() override;
     
     virtual void setPosition(Vector2& _new_pos);
     virtual void setScale(Vector2& _newScale);

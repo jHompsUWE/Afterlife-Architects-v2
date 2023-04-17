@@ -77,7 +77,7 @@ public:
 	void ResizeAll() const;
 	
 	//Overriden from Event Receiver
-	const bool& ReceiveEvents(const AL::Event& al_event) override;
+	bool ReceiveEvents(const AL::Event& al_event) override;
 	
 private:
 	//Elements are stored inside this vector in the order wanted in the heirarchy

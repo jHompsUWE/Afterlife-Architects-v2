@@ -205,7 +205,7 @@ void UIWindow::render(DrawData2D* _drawData)
     }
 }
 
-const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
+bool UIWindow::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::EventType::event_cursor_interact)
     {
@@ -218,7 +218,7 @@ const bool& UIWindow::ReceiveEvents(const AL::Event& al_event)
     return inside;
 }
 
-const bool& UIWindow::IsCursorInsideWindow()
+bool UIWindow::IsCursorInsideWindow()
 {
     return inside;
 }

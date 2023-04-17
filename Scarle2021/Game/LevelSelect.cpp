@@ -21,24 +21,24 @@ bool LevelSelect::init()
     
     // UI buttons init................
     //Easy button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(109,37),DataManager::GetD3DDevice(),
         "Easy","ButtonBackgroundMM", AL::EventType::event_game, AL::Game::Action::enter_gameplay,
-        0,Vector2(0.5,0.5)));
+        0,Vector2(0.5,0.5), true));
     
     //Medium button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(536,37),DataManager::GetD3DDevice(),
         "Medium","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay,
-        0,Vector2(0.5,0.5)));
+        0,Vector2(0.5,0.5), true));
     
     //Bard button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(960,37),DataManager::GetD3DDevice(),
         "Hard","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_gameplay,
-        0,Vector2(0.5,0.5)));
+        0,Vector2(0.5,0.5), true));
     
     //Return Main menu button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(791,661),DataManager::GetD3DDevice(),
         "Return to Main Menu","ButtonBackgroundMM",AL::EventType::event_game,
-        AL::Game::Action::enter_main_menu, 0,Vector2(0.5,0.5)));
+        AL::Game::Action::enter_main_menu, 0,Vector2(0.5,0.5), true));
     
     return true;
 }
@@ -69,10 +69,6 @@ void LevelSelect::GetEvents(const AL::Event& al_event)
 
         switch (al_event.ui.action)
         { 
-        case AL::UI::resize_ui:
-            ResizeUI();
-            break;
-            
         default:
             break;
         }
@@ -114,7 +110,7 @@ void LevelSelect::Render2D(DrawData2D* draw_data2D)
     if(do_once)
     {
         MoveOnScreen();
-        ResizeUI();
+        Resize();
         do_once = false;
     }
     
@@ -130,31 +126,36 @@ void LevelSelect::Render3D(DrawData* draw_data)
 {
 }
 
-void LevelSelect::ResizeUI()
+void LevelSelect::Reset()
+{
+    MoveOffScreen();
+}
+
+void LevelSelect::Resize()
 {
     Vector2 game_res = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
-    main_menu_bg->ReSize(game_res.x, game_res.y);
-    
-    for (auto& button : buttons)
-    {
-        button->reSize(game_res);
-        button->update(DataManager::GetGD());
-    }
+        main_menu_bg->ReSize(game_res.x, game_res.y);
+        
+        for (auto& button : buttons)
+        {
+            button->reSize(game_res);
+            button->update(DataManager::GetGD());
+        }
 }
 
 void LevelSelect::MoveOffScreen()
 {
     for (auto& button : buttons)
     {
-        button->setPostion(Vector2(10000,10000));
+        button->interactable = false;
     }
     do_once = true;
 }
 
 void LevelSelect::MoveOnScreen() const
 {
-    buttons[0]->setPostion(Vector2(22,16));
-    buttons[1]->setPostion(Vector2(449,16));
-    buttons[2]->setPostion(Vector2(873,16));
-    buttons[3]->setPostion(Vector2(175,640));
+    for (auto& button : buttons)
+    {
+        button->interactable = true;
+    }
 }

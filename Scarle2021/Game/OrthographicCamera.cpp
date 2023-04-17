@@ -51,7 +51,7 @@ void OrthographicCamera::MouseInput(GameData* _GD, int win_x, int win_y)
 	}
 }
 
-const bool& OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
+bool OrthographicCamera::ReceiveEvents(const AL::Event& al_event)
 {
 	switch (al_event.type)
 	{

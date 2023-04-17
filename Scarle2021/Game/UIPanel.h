@@ -21,8 +21,8 @@ public:
 
     void update(GameData* _gameData, Vector2& _mousePosition);
     void render(DrawData2D* _drawData);
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
-    const bool& IsCursorInsideWindow() override;
+    bool ReceiveEvents(const AL::Event& al_event) override;
+    bool IsCursorInsideWindow() override;
 
     void setPostion(Vector2 _new_pos);
     void setScale(Vector2& _newScale);

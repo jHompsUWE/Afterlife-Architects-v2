@@ -139,7 +139,7 @@ void MicromanagerWindow::render(DrawData2D* _drawData)
     }
 }
 
-const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
+bool MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::event_ui)
     {

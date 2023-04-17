@@ -95,7 +95,7 @@ void HierarchyManager::MoveToFrontIfInside()
 
 // Extra ---------------------------------------------------------------------------------------------------------------
 
-const bool& HierarchyManager::ReceiveEvents(const AL::Event& al_event)
+bool HierarchyManager::ReceiveEvents(const AL::Event& al_event)
 {
     //Calls MoveToFrontIfInside if mouse is pressed
     if(al_event.cursor_interact.active) MoveToFrontIfInside();

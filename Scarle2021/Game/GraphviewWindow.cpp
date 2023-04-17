@@ -207,7 +207,7 @@ void GraphviewWindow::render(DrawData2D* _drawData)
     }
 }
 
-const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
+bool GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::EventType::event_ui)
     {

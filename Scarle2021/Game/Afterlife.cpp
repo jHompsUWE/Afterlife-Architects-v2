@@ -108,9 +108,13 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     draw_data->main_camera = ortho_cam;
     draw_data->main_light = light;
 
+    int start_res_x = 0;
+    int start_res_y = 0;
+    GetDefaultSize(start_res_x, start_res_y);
+
     //Sets up the data manager, a singleton that makes all those pointers accessible everywhere
     //TODO:: DO NOT CREATED 2D OBJECTS BEFORE DATA MANAGER IS INITIATED
-    DataManager::Get().PopulatePointers(AR, &main_window, &output_width, &output_height, game_data,
+    DataManager::Get().PopulatePointers(AR, &main_window, &start_res_x, &start_res_y, game_data,
         draw_data, draw_data2D, d3d_device.Get(),d3d_context.Get(), effect_factory);
 
     //Saves a pointer to the event manager
@@ -128,10 +132,8 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     input_manager = std::make_unique<AL::InputManager>();
     input_manager->init();
 
-    frame_counter = new TextGO2D("Framerate: ");
-    frame_counter->SetOrigin(Vector2(0, 0));
-    frame_counter->SetPos(Vector2(810, 30));
-    frame_counter->SetColour(Color((float*)&Colors::Green));
+    DataManager::GetRES() = std::pair<int*, int*>(&output_width, &output_height);
+    OnWindowSizeChanged(output_width, output_height);
 }
 
 // Executes the basic game loop
@@ -156,10 +158,6 @@ void Afterlife::MainUpdate(DX::StepTimer const& timer)
     finite_state_machine->Update(game_data);
     audio_manager->Update(game_data);
     ortho_cam->Tick(game_data);
-
-    float fps = (delta_time) * 60 * 60;
-    frame_counter->ChangeString(to_string(fps));
-    frame_counter->Tick(game_data);
 }
 
 void Afterlife::ReadInput()
@@ -221,7 +219,6 @@ void Afterlife::Render()
     //Draws the 2D GOs
     finite_state_machine->Render2D(draw_data2D);
     input_manager->GetCursor()->Draw(draw_data2D);
-    frame_counter->Draw(draw_data2D);
     //Stops sprite batching
     draw_data2D->sprites_batch->End();
     

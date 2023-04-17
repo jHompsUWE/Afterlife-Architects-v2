@@ -18,7 +18,6 @@
 
 //Json file manager
 #include "ImageGO2D.h"
-#include "TextGO2D.h"
 #include "../json/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
@@ -112,8 +111,5 @@ private:
 
     //Pointer to the Event Manager
     AL::NewEventManager* event_manager = nullptr;
-
-    //FRAMERATE COUNTER
-    TextGO2D* frame_counter = nullptr;
 };
 

@@ -19,7 +19,7 @@ public:
     void Update(GameData* game_data);
 
     // Events
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
+    bool ReceiveEvents(const AL::Event& al_event) override;
 
     // Renderers
     void Render3D(DrawData* draw_data) const;

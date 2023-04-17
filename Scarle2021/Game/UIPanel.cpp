@@ -252,7 +252,7 @@ void UIPanel::render(DrawData2D* _drawData)
     }
 }
 
-const bool& UIPanel::ReceiveEvents(const AL::Event& al_event)
+bool UIPanel::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.cursor_interact.action == AL::Cursor::button_input1)
     {
@@ -261,7 +261,7 @@ const bool& UIPanel::ReceiveEvents(const AL::Event& al_event)
     return inside;
 }
 
-const bool& UIPanel::IsCursorInsideWindow()
+bool UIPanel::IsCursorInsideWindow()
 {
     return inside;
 }
