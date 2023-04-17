@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "StructureBuilding.h"
 
-StructureBuilding::StructureBuilding(StructureData* structure_data, ZoneType _zone, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity) :
-	StructureSprite(structure_data), base_capacity(_capacity), capacity(_capacity), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), zone(_zone), tile_pos(structure_data->tile_pos)
+StructureBuilding::StructureBuilding(StructureData* structure_data, ZoneType _zone, std::unique_ptr<VibeTilemap>& _vibe_tilemap, float _capacity) :
+	StructureSprite(structure_data), base_capacity(_capacity), capacity(_capacity), vibe_tilemap(_vibe_tilemap), zone(_zone), tile_pos(structure_data->tile_pos)
 {
 	// Increment soul capacity on creation
 	srand(time(0));
@@ -45,6 +45,9 @@ bool StructureBuilding::CallEveryTicks(int tick_interval)
 	return false;
 }
 
+/// <summary>
+/// Evolve or devolve structure based off of efficiency
+/// </summary>
 void StructureBuilding::EvolveCheck()
 {
 	if (EfficiencyValue() <= 25)
@@ -57,31 +60,37 @@ void StructureBuilding::EvolveCheck()
 	}
 }
 
+/// <summary>
+/// Increase level and capacity
+/// </summary>
 void StructureBuilding::EvolveStructure()
 {
 	if (level < max_level)
 	{
-		//std::cout << "Structure evolved" << std::endl;
 		level += 1;
 		population_manager->IncrementZoneCapacity(plane, zone, capacity);
 	}
 }
 
+/// <summary>
+/// Decrease level and capacity
+/// </summary>
 void StructureBuilding::DevolveStructure()
 {
 	if (level > 0)
 	{
-		//std::cout << "Structure devolved" << std::endl;
 		level -= 1;
 		population_manager->IncrementZoneCapacity(plane, zone, -base_capacity);
 	}
 }
 
+/// <summary>
+/// Calculate efficienct of tile
+/// </summary>
+/// <returns>Int value of how efficient the tile is in evolution</returns>
 int StructureBuilding::EfficiencyValue()
-{
-	//int eff_val = (vibe_tilemap->GetVibe(tile_pos - start) * (100/32) + 50) + (rad_tilemap->GetRaD(tile_pos-start));
+{;
 	int eff_val = (vibe_tilemap->GetVibe(tile_pos) * (100/32) + 50) + (100 - economy_manager->GetRaD());
 	eff_val = eff_val * 0.5f;
-	//std::cout << eff_val << std::endl;
 	return eff_val;
 }

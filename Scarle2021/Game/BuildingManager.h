@@ -13,7 +13,6 @@
 #include "NewEventManager.h"
 
 #include "VibeTilemap.h"
-#include "RaDTilemap.h"
 
 #include "StructureGate.h"
 #include "StructureTopia.h"
@@ -27,7 +26,7 @@
 class BuildingManager
 {
 public:
-	BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap,
+	BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap,
 		std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane);
 	~BuildingManager();
 
@@ -50,13 +49,16 @@ private:
 	std::vector<std::vector<std::unique_ptr<StructureSprite>>> structure_map;
 
 	std::unique_ptr<VibeTilemap>& vibe_tilemap;
-	std::unique_ptr<RaDTilemap>& rad_tilemap;
 
 	std::shared_ptr<PopulationManager> population_manager;
 	std::shared_ptr<EconomyManager> economy_manager;
 	std::shared_ptr<TextureManager> texture_manager;
 
+	int total_gates = 0;
+	int total_buildings = 0;
+
 	PlaneType plane;
+	// All sounds filenames for structures
 	const char destroy_sound_1[32] = "Demolish1";
 	const char destroy_sound_2[32] = "Demolish2";
 	const char destroy_sound_3[32] = "Demolish3";

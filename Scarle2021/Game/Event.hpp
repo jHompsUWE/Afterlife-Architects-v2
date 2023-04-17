@@ -126,6 +126,8 @@ namespace AL
         struct AdvisorEvent
         {
             int fault_index = 0;
+            bool add_fault = false;
+            // False is remove, True is Add
         };
 
         /**

@@ -205,7 +205,6 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlaneType.h" />
     <ClInclude Include="PopulationManager.h" />
-    <ClInclude Include="RaDTilemap.h" />
     <ClInclude Include="StructureBuilding.h" />
     <ClInclude Include="StructureData.h" />
     <ClInclude Include="StructureGate.h" />
@@ -298,7 +297,6 @@
     <ClCompile Include="GraphviewWindow.cpp" />
     <ClCompile Include="MicromanagerWindow.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
-    <ClCompile Include="RaDTilemap.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
     <ClCompile Include="StructureData.cpp" />
     <ClCompile Include="StructureGate.cpp" />

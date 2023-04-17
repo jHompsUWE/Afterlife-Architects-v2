@@ -99,19 +99,22 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text->Tick(_gameData);
     }
-    switch (cur_graph)
+    timer += _gameData->delta_time;
+    if (timer >= time_between_updates)
     {
-    case Religion:
-        updateBeliefSpread();
-        updateReligionVisual();
-        break;
-    case Belief:
-        updateBeliefSpread();
-        updateBeliefVisual();
-        break;
-    case Population:
-        updatePopulationVisual();
-        break;
+        switch (cur_graph)
+        {
+        case Religion:
+            updateReligionVisual();
+            break;
+        case Belief:
+            updateBeliefVisual();
+            break;
+        case Population:
+            updatePopulationVisual();
+            break;
+        }
+        timer -= time_between_updates;
     }
 
     inside = isInside(mouse_pos);
@@ -214,14 +217,17 @@ const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
         if (al_event.ui.action == AL::UI::graphview_bel)
         {
             cur_graph = Belief;
+            updateBeliefVisual();
         }
         else if (al_event.ui.action == AL::UI::graphview_pop)
         {
             cur_graph = Population;
+            updatePopulationVisual();
         }
         else if (al_event.ui.action == AL::UI::graphview_rel)
         {
             cur_graph = Religion;
+            updateReligionVisual();
         }
     }
     
@@ -294,6 +300,7 @@ void GraphviewWindow::updateBeliefSpread()
 
 void GraphviewWindow::updateBeliefVisual()
 {
+    updateBeliefSpread();
     for (int i = 0; i < 16; i++)
     {
         belief_bars_vec[i]->SetPos(Vector2(window_pos.x + (95 + ((belief_amounts[i] * 2) * 98.5)) * window_res.x / 352, window_pos.y + (45 + 11 * i) * window_res.y / 316));
@@ -313,6 +320,7 @@ void GraphviewWindow::updatePopulationVisual()
 
 void GraphviewWindow::updateReligionVisual()
 {
+    updateBeliefSpread();
     for (int i = 0; i < 8; i++)
     {
         float percent_val = individual_spreads[i];

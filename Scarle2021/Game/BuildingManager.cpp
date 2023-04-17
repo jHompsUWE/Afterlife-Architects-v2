@@ -2,9 +2,9 @@
 #include "BuildingManager.h"
 #include <iostream>
 
-BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap,
+BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap,
 	std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane) :
-	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), economy_manager(_economy_manager)
+	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), vibe_tilemap(_vibe_tilemap), economy_manager(_economy_manager)
 {
 	for (int x = 0; x < _size; x++)
 	{
@@ -31,6 +31,14 @@ void BuildingManager::Tick(GameData* game_data)
 				y->TickStructure(game_data);
 			}
 		}
+	}
+	if (plane == Heaven)
+	{
+		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, 1, total_gates == 0);
+	}
+	else
+	{
+		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, 2, total_gates == 0);
 	}
 }
 
@@ -68,85 +76,85 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 	{
 	case Building_Green_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Green, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Green, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Green_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Green, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Green, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Yellow_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Yellow, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Yellow, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Yellow_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Yellow, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Yellow, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Orange_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Orange, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Orange, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Orange_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Orange, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Orange, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Brown_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Brown, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Brown, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Brown_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Brown, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Brown, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Purple_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Purple, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Purple, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Purple_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Purple, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Purple, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Red_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Red, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Red, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Red_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Red, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Red, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Blue_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Blue, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Blue, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
 	case Building_Blue_T2:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureBuilding>(structure_data, Blue, vibe_tilemap, rad_tilemap,
+			std::make_unique<StructureBuilding>(structure_data, Blue, vibe_tilemap,
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulCapacity"].get<int>());
 		break;
 
@@ -183,6 +191,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
+		total_gates++;
 		break;
 
 	case Gate_T2:
@@ -197,6 +206,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
+		total_gates++;
 		break;
 
 	case Gate_T3:
@@ -211,6 +221,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
+		total_gates++;
 		break;
 
 	case KarmaAnchor:
@@ -321,6 +332,27 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		break;
 	}
 
+	// Update total structure count for economy manager
+	switch (structure_type)
+	{
+	case Building_Blue_T1:
+	case Building_Blue_T2:
+	case Building_Brown_T1:
+	case Building_Brown_T2:
+	case Building_Red_T1:
+	case Building_Red_T2:
+	case Building_Green_T1:
+	case Building_Green_T2:
+	case Building_Orange_T1:
+	case Building_Orange_T2:
+	case Building_Purple_T1:
+	case Building_Purple_T2:
+	case Building_Yellow_T1:
+	case Building_Yellow_T2:
+		total_buildings++;
+		economy_manager->SetStructureCount(total_buildings);
+		break;
+	}
 	delete structure_data;
 }
 
@@ -332,6 +364,14 @@ void BuildingManager::DestroyStructure(Vector3 tile_position)
 {
 	if (structure_map[tile_position.x][tile_position.z])
 	{
+		if (typeid(structure_map[tile_position.x][tile_position.z]) == typeid(std::unique_ptr<class StructureSprite,struct std::default_delete<class StructureSprite> >))
+		{
+			total_gates--;
+		}
+		else if (typeid(structure_map[tile_position.x][tile_position.z]) == typeid(std::unique_ptr<class StructureSprite, struct std::default_delete<class StructureBuilding> >))
+		{
+			total_buildings--;
+		}
 		structure_map[tile_position.x][tile_position.z] = nullptr;
 		AL::NewEventManager::GenerateEventSt(AL::event_sound_start, destroy_sound_1, 1.0f ,true);
 	}

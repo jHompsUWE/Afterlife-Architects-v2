@@ -101,6 +101,10 @@ void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int
 		corner_expand.clear();
 	}
 
+	// Depending on an odd or even sized structure, change the structure pivot
+	// For each added position, check if it is a valid tile
+	// Get the distance of it from the centre of the structure
+	// Change vibe value based on the distance
 	if (tile_size % 2 == 0)
 	{
 		float pos_dist;
@@ -128,11 +132,23 @@ void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int
 	added_positions.clear();
 }
 
+/// <summary>
+/// Get vibe of specified tile
+/// </summary>
+/// <param name="tile_pos">Specified tile to get vibe value</param>
+/// <returns>Int vibe value of tile</returns>
 int VibeTilemap::GetVibe(Vector3 tile_pos)
 {
 	return vibe_tilemap[tile_pos.x - start.x][tile_pos.z - start.z]->GetVibe();
 }
 
+/// <summary>
+/// Get vector of tile positions expanding a certain range and direction
+/// </summary>
+/// <param name="point">Position of tile</param>
+/// <param name="range">Number of tiles to expand out to</param>
+/// <param name="direction">Section to expand to</param>
+/// <returns>Vector of Vector3 tile positions</returns>
 std::vector<Vector3> VibeTilemap::CornerExpand(Vector3 point, int range, VibeDirection direction)
 {
 	std::vector<Vector3> temp_list;
@@ -141,6 +157,7 @@ std::vector<Vector3> VibeTilemap::CornerExpand(Vector3 point, int range, VibeDir
 	int min_z = -range + 1;
 	int max_z = range - 1;
 
+	// Alter min and max pos based on direction based enum
 	switch (direction)
 	{
 	case Vibe_Right:
@@ -163,11 +180,13 @@ std::vector<Vector3> VibeTilemap::CornerExpand(Vector3 point, int range, VibeDir
 		std::cout << "Vibe error" << std::endl;
 		break;
 	}
+	// Iteration through box of min and max x,y values
 	Vector3 temp_vec;
 	for (int x = min_x; x <= max_x; x++)
 	{
 		for (int z = min_z; z <= max_z; z++)
 		{
+			// If within range then add to vector of positions
 			if (abs(x) + abs(z) < range - 1)
 			{ 
 				temp_vec = Vector3(point.x + x, 0, point.z + z);
@@ -179,6 +198,11 @@ std::vector<Vector3> VibeTilemap::CornerExpand(Vector3 point, int range, VibeDir
 	return temp_list;
 }
 
+/// <summary>
+/// Checks if tile position is on the map
+/// </summary>
+/// <param name="tile_pos">Tile position being checked</param>
+/// <returns>Boolean of if the tile is valid</returns>
 bool VibeTilemap::ValidTile(Vector3 tile_pos)
 {
 	if (tile_pos.x >= 100) { return false; }

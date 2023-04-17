@@ -166,6 +166,9 @@ const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
     return UIWindow::ReceiveEvents(al_event);
 }
 
+/// <summary>
+/// Update position of slider visual based off slider percentage
+/// </summary>
 void MicromanagerWindow::updateSlider()
 {
     Vector2 inital_position = image_vec[0]->GetPos();

@@ -38,6 +38,8 @@ private:
     float religion_bars_x[8] = { 53.5, 67.5, 81.5, 95.5, 158.5, 172.5, 250.5, 264.5 };
 
     GraphShown cur_graph = No_Graph;
+    float timer = 0;
+    float time_between_updates = 2;
     
     float belief_amounts[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     float individual_spreads[8] = {0,0,0,0,0,0,0,0};

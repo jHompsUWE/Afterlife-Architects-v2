@@ -117,7 +117,15 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
         }
         break;
     case AL::event_adv_fault:
-        AddFault(al_event.advisor.fault_index);
+        // Add or remove fault based off of event bool
+        if (al_event.advisor.add_fault)
+        {
+            AddFault(al_event.advisor.fault_index);
+        }
+        else
+        {
+            RemoveFault(al_event.advisor.fault_index);
+        }
         break;
     }
     return false;

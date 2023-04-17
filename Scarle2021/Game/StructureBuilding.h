@@ -5,7 +5,6 @@
 #include "PopulationManager.h"
 #include "EconomyManager.h"
 #include "VibeTilemap.h"
-#include "RaDTilemap.h"
 #include "ZoneType.h"
 #include "StructureData.h"
 #include "GameplaySingletons.h"
@@ -13,7 +12,7 @@
 class StructureBuilding : public StructureSprite
 {
 public:
-	StructureBuilding(StructureData* structure_data, ZoneType _zone, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap, float _capacity);
+	StructureBuilding(StructureData* structure_data, ZoneType _zone, std::unique_ptr<VibeTilemap>& _vibe_tilemap, float _capacity);
 	~StructureBuilding();
 
 	void TickStructure(GameData* game_data) override;
@@ -30,7 +29,6 @@ private:
 	std::shared_ptr<PopulationManager> population_manager;
 	std::shared_ptr<EconomyManager> economy_manager;
 	std::unique_ptr<VibeTilemap>& vibe_tilemap;
-	std::unique_ptr<RaDTilemap>& rad_tilemap;
 
 	ZoneType zone;
 	Vector3 tile_pos;

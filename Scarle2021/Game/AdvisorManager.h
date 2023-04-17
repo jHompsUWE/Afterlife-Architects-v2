@@ -57,16 +57,9 @@ private:
 
     DialogueState dia_state = Finished;
     float dia_time_tracker = 0;
-    float dia_time_scale = 0.15;
     int dia_string_length = 0;
     int dia_current_index = -1;
-
-    // String for every dialogue
-    string dia_array_string[5] = {"Starting first issue box!","Continuing first issue!","Ending first issue","Second issue start!","Second issue end!"};
-    // NOT POINTERS but instead directs the next dialogue index
-    int dia_array_pointers[5] = { 1,2,-1,4,-1 };
-    // Dictates who is saying what
-    Advisor dia_array_advisor[5] = { Jasper,Aria,Aria,Jasper,Aria };
+    float dia_time_scale = 0.15; // Speed of dialogue
 
     // ----------------ANIMATION-----------------
     // All images for Jasper dialogue (CHARACTERS)
@@ -80,14 +73,24 @@ private:
     int aria_img_pointers[26] = { 0 , 3 , 5 , 1 , 1 , 5 , 4 , 0 , 1 , 1 , 1 , 2 , 3 , 3 , 4 , 1 , 4 , 1 , 5 , 1 , 4 , 1 , 3 , 1 , 4 , 1 };
     // ------------------------------------------
 
-    int jasper_wing_timer = 1200;
-    int jasper_blink_timer = 600;
-    int aria_tongue_timer = 1800;
-    int aria_blink_timer = 300;
+    // Measured in in-game ticks
+    int jasper_wing_timer = 1200; // Initial time between jasper wings animation
+    int jasper_blink_timer = 600; // Initial time between jasper blink animatio
+    int aria_tongue_timer = 1800; // Initial time between aria tongue animation
+    int aria_blink_timer = 300; // Initial time between areai blink animation
 
+    // Faults Titles, Index Starts, Planes
     vector<int> current_faults = { -1,-1,-1,-1,-1 };
-    vector<int> dialogue_starts = {0,3};
-    vector<string> dialogue_titles = {"Start","Another"};
-    vector<HeavenOrHell> dialogue_standpoints = {Both, Adv_Heaven};
+    vector<int> dialogue_starts = {0,3,5};
+    vector<string> dialogue_titles = {"Roads","Gate", "Gate"};
+    vector<HeavenOrHell> dialogue_standpoints = {Both, Adv_Heaven, Adv_Hell};
+    // String for every dialogue
+    string dia_array_string[7] = {"There are no roads in your afterlife!","Roads are needed so that your SOULs\ncan traverse your planes.","Try placing some down by a gate.",
+        "There aren't any gates in heaven...","Gates are required for SOULs to\ncome to your afterlife!", 
+        "There aren't any gates in hell my liege.", "Place down a gate for SOULs to arrive."};
+    // NOT POINTERS but instead directs the next dialogue index
+    int dia_array_pointers[7] = { 1,2,-1,4,-1, 6, -1 };
+    // Dictates who is saying what
+    Advisor dia_array_advisor[7] = { Aria ,Jasper,Aria,Aria,Aria, Jasper, Jasper };
 };
 
