@@ -126,7 +126,12 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
 
     //Inits the input manager
     input_manager = std::make_unique<AL::InputManager>();
-    input_manager->init();    
+    input_manager->init();
+
+    frame_counter = new TextGO2D("Framerate: ");
+    frame_counter->SetOrigin(Vector2(0, 0));
+    frame_counter->SetPos(Vector2(810, 30));
+    frame_counter->SetColour(Color((float*)&Colors::Green));
 }
 
 // Executes the basic game loop
@@ -151,6 +156,10 @@ void Afterlife::MainUpdate(DX::StepTimer const& timer)
     finite_state_machine->Update(game_data);
     audio_manager->Update(game_data);
     ortho_cam->Tick(game_data);
+
+    float fps = (delta_time) * 60 * 60;
+    frame_counter->ChangeString(to_string(fps));
+    frame_counter->Tick(game_data);
 }
 
 void Afterlife::ReadInput()
@@ -212,6 +221,7 @@ void Afterlife::Render()
     //Draws the 2D GOs
     finite_state_machine->Render2D(draw_data2D);
     input_manager->GetCursor()->Draw(draw_data2D);
+    frame_counter->Draw(draw_data2D);
     //Stops sprite batching
     draw_data2D->sprites_batch->End();
     
