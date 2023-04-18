@@ -21,6 +21,7 @@ namespace AL
         event_cursor_interact,
         event_sound_start,
         event_sound_stop,
+        event_sound_volume,
         event_ui,
         event_build_sys,
         event_game,
@@ -90,6 +91,16 @@ namespace AL
         struct SoundEventStop
         {
             char filename[32] = "unknown";
+        };
+        
+        /**
+         * \brief Event to a sound from playing
+         * \var filename = filename as seen in the asset pipeline, no file extension, max 31 chars.
+         */
+        struct SetVolume
+        {
+            int volume_index = 0;
+            int new_volume = 0;
         };
 
         /**
@@ -165,6 +176,7 @@ namespace AL
             CursorEventInteract cursor_interact;
             SoundEventStart sound_start;
             SoundEventStop sound_stop;
+            SetVolume sound_volume;
             BuildSysEvent build_sys;
             InterfaceEvent ui;
             GameEvent game;

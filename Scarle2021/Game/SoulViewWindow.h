@@ -26,7 +26,7 @@ private:
     std::vector<ImageGO2D*> image_vec;
 
     // Strings for all names, punsihment and religions
-    const string random_names[6] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli","Awse Noori", "Seb LLewellyn" }; 
+    const string random_names[5] = { "Oscar Wilkinson","Scott Knapp","Elvin Nicholson","Simone Farinelli", "Seb LLewellyn" }; 
     const string available_punishments[14] = { "Envy","Avarice","Gluttony","Sloth","Pride","Wrath","Lust","Contentment","Charity","Temperance","Diligence","Humility","Peacefulness","Chastity" };
     const string beliefOne[4] = { "HAHA", "HOHO", "OCRA", "OPRA" };
     const string beliefTwo[2] = { "ALF" , "RALF" };

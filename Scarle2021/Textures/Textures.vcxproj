@@ -399,6 +399,12 @@
   <ItemGroup>
     <ImageContentTask Include="EventWarning.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Slider\slider_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Afterlife\Audio\audio_window.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

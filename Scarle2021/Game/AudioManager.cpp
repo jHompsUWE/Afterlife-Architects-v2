@@ -8,7 +8,7 @@
 AudioManager::AudioManager()
 {
     //Subscribes to the event system! 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop);
+    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop, AL::EventType::event_sound_volume);
 }
 
 AudioManager::~AudioManager()
@@ -47,6 +47,7 @@ void AudioManager::Update(GameData* game_data)
             /// Remove sound at this point
             temp_sounds.push_back(s);
         }
+        s->SetVolume(master_volume * sound_volume);
     }
     for (auto& t : temp_sounds)
     {
@@ -55,6 +56,7 @@ void AudioManager::Update(GameData* game_data)
     }
     temp_sounds.clear();
 
+    music->SetVolume(master_volume * music_volume);
     // If music stops
     if (!music->GetPlayState())
     {
@@ -85,9 +87,22 @@ const bool& AudioManager::ReceiveEvents(const AL::Event& al_event)
     case AL::event_sound_start:
         PlaySound(al_event.sound_start.filename);
         break;
-        
-    case AL::event_sound_stop:
-        //auto file_end = al_event.sound_stop.filename;
+
+    case AL::event_sound_volume:
+        switch (al_event.sound_volume.volume_index)
+        {
+        case 0:
+            master_volume = al_event.sound_volume.new_volume * 0.01f;
+            break;
+            
+        case 1:
+            music_volume = al_event.sound_volume.new_volume * 0.01f;
+            break;
+            
+        case 2:
+            sound_volume = al_event.sound_volume.new_volume * 0.01f;
+            break;
+        }
         break;
         
     default:

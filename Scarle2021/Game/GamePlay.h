@@ -26,6 +26,7 @@
 #include "TopiasWindowUI.h"
 #include "TrainingCentersWindow.h"
 #include "UIWindowBadThings.h"
+#include "UIWindowAudioSettings.h"
 #include "UIWindowEventWarning.h"
 #include "Window_file.h"
 #include "Window_Global.h"
@@ -83,6 +84,7 @@ private:
     TopiasWindowUI* window_three_topias;
     TrainingCentersWindow* window_four_training_centers_window;
     UIWindowEventWarning* ui_window_event_warning;
+    UIWindowAudioSettings* ui_window_audio_settings;
     UIWindowEvent* ui_window_event;
 
     // Pop up info

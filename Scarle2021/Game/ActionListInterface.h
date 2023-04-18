@@ -62,6 +62,14 @@ namespace AL
 			event_activated,
 			event_canceled,
 			
+			//audio settings
+			audio_master_left,
+			audio_master_right,
+			audio_sound_left,
+			audio_sound_right,
+			audio_music_left,
+			audio_music_right,
+			
 			//zoom buttons
 			button_zoom_in,
 			button_zoom_out,
@@ -72,8 +80,12 @@ namespace AL
 			adv_option3,
 			adv_option4,
 			adv_option5,
+
+			//micro manager
 			micro_manager_arrow_l,
 			micro_manager_arrow_r,
+
+			//graphview
 			graphview_bel,
 			graphview_rel,
 			graphview_pop

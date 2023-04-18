@@ -253,7 +253,9 @@
     <ClInclude Include="TreeBit.h" />
     <ClInclude Include="UIButtonInterFace.h" />
     <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIWindow.h" />
+    <ClInclude Include="UIWindowAudioSettings.h" />
     <ClInclude Include="UIWindowBadThings.h" />
     <ClInclude Include="UIWindowEvent.h" />
     <ClInclude Include="UIWindowEventWarning.h" />
@@ -338,7 +340,9 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="treebit.cpp" />
     <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIWindow.cpp" />
+    <ClCompile Include="UIWindowAudioSettings.cpp" />
     <ClCompile Include="UIWindowBadThings.cpp" />
     <ClCompile Include="UIWindowEvent.cpp" />
     <ClCompile Include="UIWindowEventWarning.cpp" />

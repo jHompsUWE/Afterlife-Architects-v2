@@ -480,6 +480,12 @@
     <ClInclude Include="StructureData.h">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
     </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Afterlife\User Interface\UISlider</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowAudioSettings.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -700,6 +706,12 @@
     </ClCompile>
     <ClCompile Include="StructureData.cpp">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Afterlife\User Interface\UISlider</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowAudioSettings.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
