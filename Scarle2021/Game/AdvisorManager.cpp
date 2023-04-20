@@ -489,11 +489,11 @@ void AdvisorManager::LoadFromJson()
             break;
         }
         int total_dias = json_values["advisorDialogues"][d]["texts"].size();
-        string adv_talking = json_values["advisorDialogues"][d]["whosTalking"].get<string>();
         for (int i = 0; i < total_dias; i++)
         {
-            dia_array_string.push_back(json_values["advisorDialogues"][d]["texts"][i].get<string>());
-            if (adv_talking[i] == '0')
+            string temp_string = json_values["advisorDialogues"][d]["texts"][i].get<string>();
+            dia_array_string.push_back(AddSpaces(temp_string));
+            if (json_values["advisorDialogues"][d]["whosTalking"][i].get<int>() == 0)
             {
                 // Jasper
                 dia_array_advisor.push_back(Jasper);
@@ -503,13 +503,35 @@ void AdvisorManager::LoadFromJson()
                 // Aria
                 dia_array_advisor.push_back(Aria);
             }
-            int next_dia = i + 1;
-            if (next_dia == total_dias)
+            if (i == total_dias - 1)
             {
-                next_dia = -1;
+                dia_array_pointers.push_back(-1);
             }
-            dia_array_pointers.push_back(next_dia);
-            index_tracker++;
+            else
+            {
+                dia_array_pointers.push_back(index_tracker + i + 1);
+            }
+        }
+        index_tracker+= total_dias;
+    }
+}
+
+std::string AdvisorManager::AddSpaces(std::string inp_string)
+{
+    std::string new_string;
+    int letter_tracker = 0;
+    for (auto& letter : inp_string)
+    {
+        new_string+=letter;
+        letter_tracker++;
+        if (letter_tracker > 30)
+        {
+            if (letter == ' ')
+            {
+                new_string += "\n";
+                letter_tracker = 0;
+            }
         }
     }
+    return new_string;
 }

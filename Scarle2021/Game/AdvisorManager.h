@@ -43,6 +43,7 @@ private:
     void StopAdvise();
     void AnimationUpdate();
     void GenerateAdvise(int index);
+    std::string AddSpaces(std::string inp_string);
 
     // Animation handling
     void IdleJasper();
