@@ -136,7 +136,7 @@ namespace AL
          */
         struct AdvisorEvent
         {
-            int fault_index = 0;
+            char fault_codename[32] = "unknown";
             bool add_fault = false;
             // False is remove, True is Add
         };

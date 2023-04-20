@@ -718,6 +718,9 @@
     <None Include="NewEventManager.tpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </None>
+    <None Include="JSON_Files\AdvisorDialogues.json">
+      <Filter>Afterlife\Managers\Advisors</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON_Files\StructureValues.json">

@@ -357,6 +357,7 @@
     <ClCompile Include="Window_Global.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="JSON_Files\AdvisorDialogues.json" />
     <None Include="NewEventManager.tpp" />
   </ItemGroup>
   <ItemGroup>

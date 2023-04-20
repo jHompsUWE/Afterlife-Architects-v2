@@ -3,6 +3,9 @@
 #include "NewEventManager.h"
 #include "AdvisorWindow.h"
 #include <unordered_map>
+#include <fstream>
+#include <memory>
+#include "../json/single_include/nlohmann/json.hpp"
 
 enum DialogueState
 {
@@ -34,6 +37,8 @@ public:
     const bool& ReceiveEvents(const AL::Event& al_event) override;
 
 private:
+    void LoadFromJson();
+
     // Starting, updating and stopping advise
     void StopAdvise();
     void AnimationUpdate();
@@ -46,8 +51,8 @@ private:
     void TalkingAria();
     
     // Fault handling
-    void AddFault(int index);
-    void RemoveFault(int index);
+    void AddFault(string codename);
+    void RemoveFault(string codename);
     void UpdateButtons();
     bool ContainsFault(int index);
 
@@ -81,16 +86,18 @@ private:
 
     // Faults Titles, Index Starts, Planes
     vector<int> current_faults = { -1,-1,-1,-1,-1 };
-    vector<int> dialogue_starts = {0,3,5};
-    vector<string> dialogue_titles = {"Roads","Gate", "Gate"};
-    vector<HeavenOrHell> dialogue_standpoints = {Both, Adv_Heaven, Adv_Hell};
+    vector<int> dialogue_starts = {};
+    vector<string> dialogue_titles = {};
+    vector<HeavenOrHell> dialogue_standpoints = {};
+    vector<string> dialogue_codenames = {};
     // String for every dialogue
-    string dia_array_string[7] = {"There are no roads in your afterlife!","Roads are needed so that your SOULs\ncan traverse your planes.","Try placing some down by a gate.",
-        "There aren't any gates in heaven...","Gates are required for SOULs to\ncome to your afterlife!", 
-        "There aren't any gates in hell my liege.", "Place down a gate for SOULs to arrive."};
+    vector<string> dia_array_string = {};
     // NOT POINTERS but instead directs the next dialogue index
-    int dia_array_pointers[7] = { 1,2,-1,4,-1, 6, -1 };
+    vector<int> dia_array_pointers = {};
     // Dictates who is saying what
-    Advisor dia_array_advisor[7] = { Aria ,Jasper,Aria,Aria,Aria, Jasper, Jasper };
+    vector<Advisor> dia_array_advisor = {};
+
+    nlohmann::json json_values;
+    vector<string> texts_json = { "text1","text2","text3","text4","text5","text6","text7","text8" };
 };
 

@@ -57,7 +57,7 @@ bool EconomyManager::PurchaseStructure(int cost)
 void EconomyManager::YearUpdate()
 {
     /// Advisor event for no roads being placed down
-    AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, 0, total_roads ==0);
+    AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "Road", total_roads == 0);
 
     year++;
 

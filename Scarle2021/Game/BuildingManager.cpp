@@ -34,11 +34,11 @@ void BuildingManager::Tick(GameData* game_data)
 	}
 	if (plane == Heaven)
 	{
-		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, 1, total_gates == 0);
+		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "GateHeaven", total_gates == 0);
 	}
 	else
 	{
-		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, 2, total_gates == 0);
+		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "GateHell", total_gates == 0);
 	}
 }
 

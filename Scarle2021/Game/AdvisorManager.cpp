@@ -4,6 +4,8 @@
 
 AdvisorManager::AdvisorManager()
 {
+    std::ifstream file("../Game/JSON_Files/AdvisorDialogues.json");
+    json_values = nlohmann::json::parse(file);
     AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
 }
 
@@ -18,6 +20,7 @@ AdvisorManager::~AdvisorManager()
 /// <returns></returns>
 bool AdvisorManager::init(AdvisorWindow* adv_wind)
 {
+    LoadFromJson();
     srand(time(0));
     advisor_window = adv_wind;
     
@@ -76,7 +79,6 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
             if (current_faults[0] != -1)
             {
                 GenerateAdvise(dialogue_starts[current_faults[0]]);
-                RemoveFault(current_faults[0]);
             }
             break;
 
@@ -84,7 +86,6 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
             if (current_faults[1] != -1)
             {
                 GenerateAdvise(dialogue_starts[current_faults[1]]);
-                RemoveFault(current_faults[1]);
             }
             break;
 
@@ -92,7 +93,6 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
             if (current_faults[2] != -1)
             {
                 GenerateAdvise(dialogue_starts[current_faults[2]]);
-                RemoveFault(current_faults[2]);
             }
             break;
 
@@ -100,7 +100,6 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
             if (current_faults[3] != -1)
             {
                 GenerateAdvise(dialogue_starts[current_faults[3]]);
-                RemoveFault(current_faults[3]);
             }
             break;
 
@@ -108,7 +107,6 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
             if (current_faults[4] != -1)
             {
                 GenerateAdvise(dialogue_starts[current_faults[4]]);
-                RemoveFault(current_faults[4]);
             }
             break;
 
@@ -120,11 +118,11 @@ const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
         // Add or remove fault based off of event bool
         if (al_event.advisor.add_fault)
         {
-            AddFault(al_event.advisor.fault_index);
+            AddFault(al_event.advisor.fault_codename);
         }
         else
         {
-            RemoveFault(al_event.advisor.fault_index);
+            RemoveFault(al_event.advisor.fault_codename);
         }
         break;
     }
@@ -341,8 +339,21 @@ int AdvisorManager::GetCharIndex()
 /// Add new fault to fault list dependant on an event
 /// </summary>
 /// <param name="index"></param>
-void AdvisorManager::AddFault(int index)
+void AdvisorManager::AddFault(string codename)
 {
+    // Convert codename into int
+    int index = -1;
+    for (int i = 0; i < 3; i++)
+    {
+        if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
+        {
+            index = i;
+        }
+    }
+    if (index == -1)
+    {
+        return;
+    }
     // Checks if fault is already shown
     bool contains_fault = false;
     int last_point = -1;
@@ -370,8 +381,21 @@ void AdvisorManager::AddFault(int index)
 /// Remove an existing fault of the list dependant on an event
 /// </summary>
 /// <param name="index"></param>
-void AdvisorManager::RemoveFault(int index)
+void AdvisorManager::RemoveFault(string codename)
 {
+    // Convert codename into int
+    int index = -1;
+    for (int i = 0; i < 3; i++)
+    {
+        if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
+        {
+            index = i;
+        }
+    }
+    if (index == -1)
+    {
+        return;
+    }
     // Checks if fault is already shown
     bool contains_fault = false;
     int fault_point = 0;
@@ -427,6 +451,65 @@ void AdvisorManager::UpdateButtons()
         else
         {
             advisor_window->setOptionBox(i, Neither, "");
+        }
+    }
+}
+
+/// <summary>
+/// Load all dialogue oriented variables from JSON
+/// </summary>
+void AdvisorManager::LoadFromJson()
+{
+    int index_tracker = 0;
+    for (int d = 0; d < 3; d++)
+    {
+        dialogue_starts.push_back(index_tracker);
+        dialogue_titles.push_back(json_values["advisorDialogues"][d]["dialogueTitle"].get<string>());
+        dialogue_codenames.push_back(json_values["advisorDialogues"][d]["codeName"].get<string>());
+        switch (json_values["advisorDialogues"][d]["standpoint"].get<int>())
+        {
+        case 0:
+            // Heaven
+            dialogue_standpoints.push_back(Adv_Heaven);
+            break;
+
+        case 1:
+            // Hell
+            dialogue_standpoints.push_back(Adv_Hell);
+            break;
+
+        case 2:
+            // Both
+            dialogue_standpoints.push_back(Both);
+            break;
+
+        case 3:
+            // Neither
+            dialogue_standpoints.push_back(Neither);
+            break;
+        }
+        int total_dias = json_values["advisorDialogues"][d]["totalTexts"].get<int>();
+        string adv_talking = json_values["advisorDialogues"][d]["whosTalking"].get<string>();
+        for (int i = 0; i < total_dias; i++)
+        {
+            dia_array_string.push_back(json_values["advisorDialogues"][d][texts_json[i]].get<string>());
+            if (adv_talking[i] == '0')
+            {
+                // Jasper
+                dia_array_advisor.push_back(Jasper);
+            }
+            else
+            {
+                // Aria
+                dia_array_advisor.push_back(Aria);
+            }
+            int next_dia = i + 1;
+            if (next_dia == total_dias)
+            {
+                next_dia = -1;
+            }
+            dia_array_pointers.push_back(next_dia);
+            index_tracker++;
         }
     }
 }
