@@ -98,6 +98,5 @@ private:
     vector<Advisor> dia_array_advisor = {};
 
     nlohmann::json json_values;
-    vector<string> texts_json = { "text1","text2","text3","text4","text5","text6","text7","text8" };
 };
 

@@ -343,7 +343,7 @@ void AdvisorManager::AddFault(string codename)
 {
     // Convert codename into int
     int index = -1;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < json_values["advisorDialogues"].size(); i++)
     {
         if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
         {
@@ -385,7 +385,7 @@ void AdvisorManager::RemoveFault(string codename)
 {
     // Convert codename into int
     int index = -1;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < json_values["advisorDialogues"].size(); i++)
     {
         if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
         {
@@ -461,7 +461,7 @@ void AdvisorManager::UpdateButtons()
 void AdvisorManager::LoadFromJson()
 {
     int index_tracker = 0;
-    for (int d = 0; d < 3; d++)
+    for (int d = 0; d < json_values["advisorDialogues"].size(); d++)
     {
         dialogue_starts.push_back(index_tracker);
         dialogue_titles.push_back(json_values["advisorDialogues"][d]["dialogueTitle"].get<string>());
@@ -488,11 +488,11 @@ void AdvisorManager::LoadFromJson()
             dialogue_standpoints.push_back(Neither);
             break;
         }
-        int total_dias = json_values["advisorDialogues"][d]["totalTexts"].get<int>();
+        int total_dias = json_values["advisorDialogues"][d]["texts"].size();
         string adv_talking = json_values["advisorDialogues"][d]["whosTalking"].get<string>();
         for (int i = 0; i < total_dias; i++)
         {
-            dia_array_string.push_back(json_values["advisorDialogues"][d][texts_json[i]].get<string>());
+            dia_array_string.push_back(json_values["advisorDialogues"][d]["texts"][i].get<string>());
             if (adv_talking[i] == '0')
             {
                 // Jasper
