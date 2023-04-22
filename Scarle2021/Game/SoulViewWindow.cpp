@@ -163,7 +163,7 @@ void SoulViewWindow::generateRandSoul()
     if (population_manager->GetTotalSouls() == 0) { return; }
 
     // Get random name out of name array
-    string temp_string = random_names[std::rand() % 6];
+    string temp_string = random_names[std::rand() % random_names.size()];
     text_vec[0]->ChangeString(temp_string);
 
     float heaven_percentage = population_manager->GetTotalSoulsForPlane(Heaven) / (float)population_manager->GetTotalSouls();
