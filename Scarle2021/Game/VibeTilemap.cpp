@@ -51,82 +51,58 @@ void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int
 	// Collect a vector of positions to later check for vibe change
 	std::vector<Vector3> added_positions;
 
-	Vector3 temp_vec;
 	// Box to the left, right, above and below
 	for (int i = 0; i < tile_size; i++)
 	{
 		for (int r = 0; r < range; r++)
 		{
-			temp_vec = Vector3(tile_pos.x + i, 0, tile_pos.z - r - 1);
-			added_positions.emplace_back(temp_vec);
-			temp_vec = Vector3(tile_pos.x + i, 0, tile_pos.z + r + tile_size);
-			added_positions.emplace_back(temp_vec);
-			temp_vec = Vector3(tile_pos.x - r - 1, 0, tile_pos.z + i);
-			added_positions.emplace_back(temp_vec);
-			temp_vec = Vector3(tile_pos.x + r + tile_size, 0, tile_pos.z + i);
-			added_positions.emplace_back(temp_vec);
+			added_positions.emplace_back(Vector3(tile_pos.x + i, 0, tile_pos.z - r - 1));
+			added_positions.emplace_back(Vector3(tile_pos.x + i, 0, tile_pos.z + r + tile_size));
+			added_positions.emplace_back(Vector3(tile_pos.x - r - 1, 0, tile_pos.z + i));
+			added_positions.emplace_back(Vector3(tile_pos.x + r + tile_size, 0, tile_pos.z + i));
 		}
 	}
-
 	if (range > 1)
 	{
 		// Expand for all four corners 
-		Vector3 corner_pos = Vector3(tile_pos.x-1,0,tile_pos.z-1);
-		std::vector<Vector3> corner_expand = CornerExpand(corner_pos, range, Vibe_Down);
-		for (int i = 0; i < corner_expand.size(); i++)
+		std::vector<Vector3> corner_positions;
+		std::vector<Vector3> corner_expand;
+		corner_positions.emplace_back(Vector3(tile_pos.x + tile_size, 0, tile_pos.z + tile_size));
+		corner_positions.emplace_back(Vector3(tile_pos.x - 1, 0, tile_pos.z - 1));
+		corner_positions.emplace_back(Vector3(tile_pos.x - 1, 0, tile_pos.z + tile_size));
+		corner_positions.emplace_back(Vector3(tile_pos.x + tile_size, 0, tile_pos.z - 1));
+		for (int i = 0; i < 4; i++)
 		{
-			added_positions.emplace_back(corner_expand[i]);
-		}
-
-		corner_pos = Vector3(tile_pos.x + tile_size, 0, tile_pos.z + tile_size);
-		corner_expand = CornerExpand(corner_pos, range, Vibe_Up);
-		for (int i = 0; i < corner_expand.size(); i++)
-		{
-			added_positions.emplace_back(corner_expand[i]);
-		}
-
-		corner_pos = Vector3(tile_pos.x + tile_size, 0, tile_pos.z - 1);
-		corner_expand = CornerExpand(corner_pos, range, Vibe_Left);
-		for (int i = 0; i < corner_expand.size(); i++)
-		{
-			added_positions.emplace_back(corner_expand[i]);
-		}
-
-		corner_pos = Vector3(tile_pos.x - 1, 0, tile_pos.z + tile_size);
-		corner_expand = CornerExpand(corner_pos, range, Vibe_Right);
-		for (int i = 0; i < corner_expand.size(); i++)
-		{
-			added_positions.emplace_back(corner_expand[i]);
+			corner_expand = CornerExpand(corner_positions[i], range, VibeDirection(i));
+			for (int i = 0; i < corner_expand.size(); i++)
+			{
+				added_positions.emplace_back(corner_expand[i]);
+			}
 		}
 		corner_expand.clear();
 	}
 
 	// Depending on an odd or even sized structure, change the structure pivot
-	// For each added position, check if it is a valid tile
-	// Get the distance of it from the centre of the structure
-	// Change vibe value based on the distance
+	Vector2 offset = Vector2(0,0);
+	int range_boost = 0;
 	if (tile_size % 2 == 0)
 	{
-		float pos_dist;
-		for (int i = 0; i < added_positions.size(); i++)
-		{
-			if (ValidTile(added_positions[i]))
-			{
-				pos_dist = abs(tile_pos.x - added_positions[i].x - 0.5f + (tile_size / 2)) + abs(tile_pos.z - added_positions[i].z - 0.5f + (tile_size / 2));
-				vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff * ( 1 + range - pos_dist + tile_size / 2) / range);
-			}
-		}
+		offset = Vector2(-0.5f, -0.5f);
 	}
 	else
 	{
-		int pos_dist;
-		for (int i = 0; i < added_positions.size(); i++)
+		range_boost = 1;
+	}
+	// For each added position, check if it is a valid tile
+	// Get the distance of it from the centre of the structure
+	// Change vibe value based on the distance
+	float pos_dist;
+	for (int i = 0; i < added_positions.size(); i++)
+	{
+		if (ValidTile(added_positions[i]))
 		{
-			if (ValidTile(added_positions[i]))
-			{
-				pos_dist = abs(tile_pos.x - added_positions[i].x + (tile_size / 2)) + abs(tile_pos.z - added_positions[i].z + (tile_size / 2));
-				vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff * ( 2 + range - pos_dist + tile_size / 2) / range);
-			}
+			pos_dist = abs(tile_pos.x - added_positions[i].x + (tile_size / 2)+ offset.x)  + abs(tile_pos.z - added_positions[i].z + (tile_size / 2) + offset.y);
+			vibe_tilemap[added_positions[i].x][added_positions[i].z]->ChangeVibe(vibe_diff * (1 + range_boost + range - pos_dist + tile_size / 2) / range);
 		}
 	}
 	added_positions.clear();

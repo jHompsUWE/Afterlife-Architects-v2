@@ -71,14 +71,15 @@ void EconomyManager::YearUpdate()
     money -= total_roads * cost_per_road;
 
     // Calculate averate tile population and population gain
-    float average_tile_population = pop_manager->GetTotalCapacity() / total_structures;
-    float previous_soul_gain = pop_manager->GetTotalCapacity() - prev_year_population;
-    prev_year_population = pop_manager->GetTotalCapacity();
+    float total_capacity = pop_manager->GetTotalCapacity();
+    float average_tile_population = total_capacity / total_structures;
+    float previous_soul_gain = total_capacity - prev_year_population;
+    prev_year_population = total_capacity;
 
     // Soul gain for new souls entered
     float soul_rate = average_tile_population / year;
     money += previous_soul_gain * soul_rate;
 
     // Soul gain for total population in buildings
-    money += money_per_soul * pop_manager->GetTotalCapacity() * (rad_prod_percent / 50);
+    money += money_per_soul * total_capacity * (rad_prod_percent / 50);
 }

@@ -189,7 +189,7 @@
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
     <ClInclude Include="GraphviewWindow.h" />
-    <ClInclude Include="MicromanagerWindow.h" />
+    <ClInclude Include="MacromanagerWindow.h" />
     <ClInclude Include="HierarchyManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="EventReceiver.hpp" />
@@ -297,7 +297,7 @@
     <ClCompile Include="HierarchyManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="GraphviewWindow.cpp" />
-    <ClCompile Include="MicromanagerWindow.cpp" />
+    <ClCompile Include="MacromanagerWindow.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
     <ClCompile Include="StructureData.cpp" />

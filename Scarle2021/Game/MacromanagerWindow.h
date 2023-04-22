@@ -2,13 +2,13 @@
 #include "UIWindow.h"
 #include "UISlider.h"
 
-class MicromanagerWindow : public UIWindow
+class MacromanagerWindow : public UIWindow
 {
 public:
-    MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
+    MacromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice,
         std::string _text, std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager);
 
-    ~MicromanagerWindow() override;
+    ~MacromanagerWindow() override;
 
     void update(GameData* _gameData, Vector2& _mousePosition) override;
     void render(DrawData2D* _drawData) override;

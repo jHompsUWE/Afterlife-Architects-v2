@@ -22,27 +22,17 @@ void VibeTile::ChangeVibe(int vibe_diff)
 	vibe_value += vibe_diff;
 	// Create temporary int and colour to produce required colour
 	Color new_color;
-	int temp_int = vibe_value;
 	// Make vibe value absolute
-	if (vibe_value < 0)
-	{
-		temp_int = -temp_int;
-	}
+	int temp_int = vibe_value < 0 ? -vibe_value : vibe_value;
 	// Scale colour down to 0,0,0
 	new_color.x = (255.0f - (temp_int * colour_scaling)) / 255.0f;
 	new_color.y = (255.0f - (temp_int * colour_scaling)) / 255.0f;
 	new_color.z = (255.0f - (temp_int * colour_scaling)) / 255.0f;
 
 	// If positive vibe, lean towards green
-	if (vibe_value > 0)
-	{
-		new_color.y = 1;
-	}
+	new_color.y = vibe_value > 0 ? 1 : new_color.y;
 	// If negative vibe, lean towards red
-	else if (vibe_value < 0)
-	{
-		new_color.x = 1;
-	}
+	new_color.x = vibe_value < 0 ? 1 : new_color.x;
 	quad->SetColor(new_color);
 }
 

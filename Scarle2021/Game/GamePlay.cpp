@@ -63,9 +63,9 @@ bool GamePlay::init()
     hierarchy_manager->AddToHierarchy(soul_view);
 
     //micro manager
-    micro_manager = new MicromanagerWindow(Vector2(400, 120), DataManager::
+    macro_manager = new MacromanagerWindow(Vector2(400, 120), DataManager::
         GetD3DDevice(), "", "micro_window", Vector2(1, 1), GameplaySingletons::GetEconomyManager());
-    hierarchy_manager->AddToHierarchy(micro_manager);
+    hierarchy_manager->AddToHierarchy(macro_manager);
 
     //graphview
     graphview = new GraphviewWindow(Vector2(400, 120), DataManager::
@@ -134,7 +134,7 @@ bool GamePlay::init()
     ui_window_event->setVisibility(false);
 
     soul_view->setVisibility(false);
-    micro_manager->setVisibility(false);
+    macro_manager->setVisibility(false);
     graphview->setVisibility(false);
     advisor_window->setVisibility(false);
 
@@ -242,8 +242,8 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             hierarchy_manager->OpenCloseWindow(soul_view);
             break;
 
-        case AL::UI::window_micro_manager:
-            hierarchy_manager->OpenCloseWindow(micro_manager);
+        case AL::UI::window_macro_manager:
+            hierarchy_manager->OpenCloseWindow(macro_manager);
             break;
 
         case AL::UI::window_graphview:
@@ -331,7 +331,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             ui_window_event->setVisibility(false);
 
             soul_view->setVisibility(false);
-            micro_manager->setVisibility(false);
+            macro_manager->setVisibility(false);
             graphview->setVisibility(false);
             advisor_window->setVisibility(false);
 

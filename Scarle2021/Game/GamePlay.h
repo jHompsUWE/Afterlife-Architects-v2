@@ -9,7 +9,7 @@
 #include "UIPanel.h"
 #include "UIWindow.h"
 #include "SoulViewWindow.h"
-#include "MicromanagerWindow.h"
+#include "MacromanagerWindow.h"
 #include "KarmaStationWindow.h"
 #include "TopiasWindowUI.h"
 #include "UIWindowEvent.h"
@@ -89,7 +89,7 @@ private:
 
     // Pop up info
     SoulViewWindow* soul_view;
-    MicromanagerWindow* micro_manager;
+    MacromanagerWindow* macro_manager;
     GraphviewWindow* graphview;
     AdvisorWindow* advisor_window;
 

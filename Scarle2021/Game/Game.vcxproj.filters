@@ -468,7 +468,7 @@
     <ClInclude Include="GraphviewWindow.h">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
-    <ClInclude Include="MicromanagerWindow.h">
+    <ClInclude Include="MacromanagerWindow.h">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
     <ClInclude Include="BadThingsManager.h">
@@ -698,7 +698,7 @@
     <ClCompile Include="GraphviewWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClCompile>
-    <ClCompile Include="MicromanagerWindow.cpp">
+    <ClCompile Include="MacromanagerWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClCompile>
     <ClCompile Include="BadThingsManager.cpp">

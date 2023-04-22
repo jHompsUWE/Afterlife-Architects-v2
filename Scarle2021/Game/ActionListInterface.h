@@ -24,7 +24,7 @@ namespace AL
 			window_delete_structures,
 			window_advisors,
 			window_soulview,
-            window_micro_manager,
+            window_macro_manager,
 			window_graphview,
 
 			//ui boarder UI
