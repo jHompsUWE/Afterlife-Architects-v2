@@ -7,6 +7,7 @@ namespace AL
 		enum Action
 		{
 			unknown = 0, //Not handled
+			reset,
 			enter_gameplay,
 			enter_main_menu,
 			enter_level_select,

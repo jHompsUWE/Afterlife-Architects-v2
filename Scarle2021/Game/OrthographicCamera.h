@@ -20,7 +20,7 @@ public:
 	Vector3 GetTarget() const { return camera_target; }
 	
 	void MouseInput(GameData* _GD, int win_x, int win_y);
-	const bool& ReceiveEvents(const AL::Event& al_event) override;
+	bool ReceiveEvents(const AL::Event& al_event) override;
 
 	void MoveUp(float scalar = 1.f);
 	void MoveDown(float scalar = 1.f);

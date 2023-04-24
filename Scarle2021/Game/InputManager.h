@@ -114,6 +114,11 @@ namespace AL
      //Keeping track of controller usage
      bool controller_active = false;
      int dead_zone = 0;
+
+#ifdef _ARCADE
+     //mouse speed using keys
+     float speed = 4.f;
+#endif
     };
 }
 

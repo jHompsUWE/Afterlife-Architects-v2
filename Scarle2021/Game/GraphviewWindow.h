@@ -17,7 +17,7 @@ public:
 
     void update(GameData* _gameData, Vector2& _mousePosition) override;
     void render(DrawData2D* _drawData) override;
-    const bool& ReceiveEvents(const AL::Event& al_event) override;
+    bool ReceiveEvents(const AL::Event& al_event) override;
     
     void reSize(Vector2 game_res) override;
 

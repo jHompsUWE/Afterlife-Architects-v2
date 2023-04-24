@@ -144,12 +144,13 @@ bool GamePlay::init()
     do_once = true;
     return true;
 }
+
 void GamePlay::Update(GameData* game_data)
 {
     if (do_once)
     {
         main_panel->setPostion(Vector2(0, 30));
-        ResizeUI();
+        Resize();
         do_once = false;
     }
 
@@ -213,10 +214,6 @@ void GamePlay::GetEvents(const AL::Event& al_event)
 
         switch (al_event.ui.action)
         {
-        case AL::UI::resize_ui:
-            ResizeUI();
-            break;
-
         case AL::UI::window_gate:
             hierarchy_manager->OpenCloseWindow(window_one_gate);
             break;
@@ -313,7 +310,6 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             break;
 
         case AL::UI::file_new_game:
-            do_once = true;
             main_panel->setPostion(Vector2(1000, 30));
 
             //Resets window states
@@ -336,6 +332,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             advisor_window->setVisibility(false);
 
             DataManager::GetGD()->current_game_state = gs_main_menu;
+            AL::NewEventManager::GenerateEventSt(AL::EventType::event_game, AL::Game::Action::reset);
             break;
 
         default:
@@ -373,6 +370,24 @@ void GamePlay::Render3D(DrawData* draw_data)
     building_system->Render3D(draw_data);
 }
 
+void GamePlay::Reset()
+{
+    do_once = true;
+}
+
+void GamePlay::Resize()
+{
+    //resize UI based on window resolution 
+    screen_size = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
+    
+    window_boarder->reSize(screen_size);
+    window_file->reSize(screen_size);
+    window_global->reSize(screen_size);
+    ui_window_bad_things->reSize(screen_size);
+    main_panel->reSize(screen_size);
+    hierarchy_manager->ResizeAll();
+}
+
 void GamePlay::UpdateMousePos(DrawData* draw_data)
 {
     // Translate screen pos to world pos
@@ -393,18 +408,5 @@ void GamePlay::UpdateMousePos(DrawData* draw_data)
 
     // Floor mouse_world_pos to tilemap grid (each tile is 1x1 unit)
     *mouse_world_pos = Vector3(std::floor(mouse_world_pos->x), 0, std::floor(mouse_world_pos->z));
-}
-
-void GamePlay::ResizeUI()
-{
-    //resize UI based on window resolution 
-    screen_size = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
-    
-    window_boarder->reSize(screen_size);
-    window_file->reSize(screen_size);
-    window_global->reSize(screen_size);
-    ui_window_bad_things->reSize(screen_size);
-    main_panel->reSize(screen_size);
-    hierarchy_manager->ResizeAll();
 }
 

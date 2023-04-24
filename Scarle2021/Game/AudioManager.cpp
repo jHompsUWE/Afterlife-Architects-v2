@@ -80,7 +80,7 @@ void AudioManager::Update(GameData* game_data)
 /// Get sound event from Event Manager
 /// </summary>
 /// <param name="al_event"></param>
-const bool& AudioManager::ReceiveEvents(const AL::Event& al_event)
+bool AudioManager::ReceiveEvents(const AL::Event& al_event)
 {
     switch (al_event.type)
     {

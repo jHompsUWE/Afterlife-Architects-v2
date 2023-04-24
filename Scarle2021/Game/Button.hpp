@@ -62,7 +62,7 @@ public:
 		delete buttonText;
 	}
 
-	const bool& ReceiveEvents(const AL::Event& al_event) override
+	bool ReceiveEvents(const AL::Event& al_event) override
 	{
 		if(!interactable) return false;
 		

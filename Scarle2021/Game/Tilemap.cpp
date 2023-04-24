@@ -26,9 +26,13 @@ void Tilemap::Draw(DrawData* _DD)
 {
 	for (auto& x : tilemap)
 	{
-		for (auto& y : x)
+		for (const auto& y : x)
 		{
+#ifdef _ARCADE
+			if (y->GetZoneType() != ZoneType::Void) y->Draw(_DD);
+#elif
 			y->Draw(_DD);
+#endif
 		}
 	}
 }

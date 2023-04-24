@@ -77,7 +77,7 @@ void BuildingSystem::Tick(GameData* game_data)
     CursorIntegration();
 }
 
-const bool& BuildingSystem::ReceiveEvents(const AL::Event& al_event)
+bool BuildingSystem::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::event_input)
     {

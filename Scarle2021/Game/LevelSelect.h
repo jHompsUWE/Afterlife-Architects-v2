@@ -21,10 +21,12 @@ public:
     //Renders
     void Render2D(DrawData2D* draw_data2D) override;
     void Render3D(DrawData* draw_data) override;
-    
-    private:
-    void ResizeUI();
 
+    //reset
+    void Reset() override;
+    void Resize() override;
+
+private:
     void MoveOffScreen();
     void MoveOnScreen() const;
     

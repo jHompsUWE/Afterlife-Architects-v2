@@ -67,7 +67,7 @@ void AdvisorManager::Update(GameData* game_data)
 /// Get advise event from Event Manager
 /// </summary>
 /// <param name="al_event"></param>
-const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
+bool AdvisorManager::ReceiveEvents(const AL::Event& al_event)
 {
     int index = -1;
     switch (al_event.type)

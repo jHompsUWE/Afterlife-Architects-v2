@@ -11,7 +11,12 @@ GameplaySingletons::GameplaySingletons()
 {
 	population_manager = std::make_shared<PopulationManager>();
 	economy_manager = std::make_shared<EconomyManager>(population_manager);
-
+	
+#ifdef _ARCADE
 	std::ifstream file("../Game/JSON_Files/StructureValues.json");
+#elif
+	std::ifstream file("../Game/JSON_Files/StructureValues.json");
+#endif
+	
 	structure_values = nlohmann::json::parse(file);
 }

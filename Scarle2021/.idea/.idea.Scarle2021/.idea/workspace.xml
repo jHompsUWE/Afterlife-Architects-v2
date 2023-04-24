@@ -13,16 +13,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b8328b1-bf6f-49f8-981b-3c7317042b6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Game/ActionListBadThings.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/BadThingsManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Game/BadThingsManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Blue_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Brown_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Green_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Blue_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Brown_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Green_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Orange_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Purple_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Red_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Inactive_Yellow_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Karma_Portal_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Karma_Track_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Lava_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Orange_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Purple_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Red_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Res_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Road_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Rock_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Structure_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Vibes_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Void_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Water_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tile_Yellow_Compressed.dds" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Blue_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Brown_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Green_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Blue_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Brown_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Green_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Orange_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Purple_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Red_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Inactive_Yellow_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Karma_Portal_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Karma_Track_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Lava_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Orange_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Purple_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Red_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Res_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Road_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Rock_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Structure_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Vibes_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Void_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Water_Compressed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Textures/Tiles/Compressed/Tile_Yellow_Compressed.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scarle2021/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/ActionListInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/ActionListInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Event.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Event.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Game.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Game.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/GamePlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GamePlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/UIWindowBadThings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/UIWindowBadThings.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/Afterlife.h" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Afterlife.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/GameplaySingletons.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/GameplaySingletons.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game/TextureManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Game/TextureManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Textures/Textures.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Textures/Textures.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Textures/Textures.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Textures/Textures.vcxproj.filters" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +81,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/WinUser.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/um/combaseapi.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/include/memory" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/include/utility" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/include/vector" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/AudioManager.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Game/AudioManager.h" root0="FORCE_HIGHLIGHTING" />
@@ -55,31 +100,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.45383412",
-    "git-widget-placeholder": "BadThings",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "ReSpellerSettingsId",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.45383412&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ArcadeBuild&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ReSpellerSettingsId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Simon\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Simon\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Simon\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Simon\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Simon\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Simon\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Direct3D_Win32" type="CppProject" factoryName="C++ Project" temporary="true">
       <configuration_1>
@@ -231,6 +276,11 @@
       <workItem from="1681600279755" duration="7000" />
       <workItem from="1681614862984" duration="18632000" />
       <workItem from="1681639090315" duration="1382000" />
+      <workItem from="1681887906263" duration="1150000" />
+      <workItem from="1682094908694" duration="1290000" />
+      <workItem from="1682303608913" duration="2412000" />
+      <workItem from="1682323978181" duration="1200000" />
+      <workItem from="1682328189861" duration="793000" />
     </task>
     <servers />
   </component>

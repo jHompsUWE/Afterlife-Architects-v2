@@ -405,6 +405,32 @@
   <ItemGroup>
     <ImageContentTask Include="Afterlife\Audio\audio_window.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Blue_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Brown_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Green_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Blue_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Brown_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Green_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Orange_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Purple_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Red_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Yellow_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Karma_Portal_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Karma_Track_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Lava_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Orange_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Purple_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Red_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Res_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Road_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Rock_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Structure_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Vibes_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Void_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Water_Compressed.png" />
+    <ImageContentTask Include="Tiles\Compressed\Tile_Yellow_Compressed.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

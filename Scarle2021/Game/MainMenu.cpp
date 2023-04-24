@@ -22,28 +22,24 @@ bool MainMenu::init()
 
     // UI buttons init................
     //start button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
-        "Start Game","ButtonBackgroundMM", AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5)));
-
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(109,37),DataManager::GetD3DDevice(),
+        "Start Game","ButtonBackgroundMM", AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5), true));
     
     //load button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
-        "Load Game","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(536,37),DataManager::GetD3DDevice(),
+        "Load Game","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5), true));
     
     //scenario button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
-        "Load Scenario","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(960,37),DataManager::GetD3DDevice(),
+        "Load Scenario","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5), true));
     
     //intro replay button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
-        "Replay Intro","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5)));
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(262,661),DataManager::GetD3DDevice(),
+        "Replay Intro","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::Action::enter_level_select, 0,Vector2(0.5,0.5), true));
     
     //Quit afterlife button
-    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(10000,10000),DataManager::GetD3DDevice(),
-        "Quit AfterLife","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::quit_game, 0,Vector2(0.5,0.5)));
-
-
-    std::cout <<     buttons.back()->getButtonRes().y << std::endl;
+    buttons.push_back(new Button<AL::Game::Action, int>(Vector2(791,661),DataManager::GetD3DDevice(),
+        "Quit AfterLife","ButtonBackgroundMM",AL::EventType::event_game, AL::Game::quit_game, 0,Vector2(0.5,0.5), true));
     
     return true;
 }
@@ -73,8 +69,8 @@ void MainMenu::GetEvents(const AL::Event& al_event)
         switch (al_event.ui.action)
         {
         case AL::UI::resize_ui:
-            ResizeUI();
-                break;
+            Resize();
+            break;
                         
         default:
             break;
@@ -115,7 +111,7 @@ void MainMenu::Render2D(DrawData2D* draw_data2D)
     if(do_once)
     {
         MoveOnScreen();
-        ResizeUI();
+        Resize();
         do_once = false;
     }
     
@@ -131,11 +127,16 @@ void MainMenu::Render3D(DrawData* draw_data)
 {
 }
 
-void MainMenu::ResizeUI() const
+void MainMenu::Reset()
+{
+    do_once = false;
+}
+
+void MainMenu::Resize()
 {
     Vector2 game_res = Vector2(*DataManager::GetRES().first, *DataManager::GetRES().second);
     main_menu_bg->ReSize(game_res.x, game_res.y);
-    
+     
     for (auto& button : buttons)
     {
         button->reSize(game_res);
@@ -146,16 +147,15 @@ void MainMenu::MoveOffScreen()
 {
     for (auto& button : buttons)
     {
-        button->setPostion(Vector2(10000,10000));
+        button->interactable = false;
     }
     do_once = true;
 }
 
 void MainMenu::MoveOnScreen() const
 {
-    buttons[0]->setPostion(Vector2(22,16));
-    buttons[1]->setPostion(Vector2(449,16));
-    buttons[2]->setPostion(Vector2(873,16));
-    buttons[3]->setPostion(Vector2(175,640));
-    buttons[4]->setPostion(Vector2(704,640));
+    for (auto& button : buttons)
+    {
+        button->interactable = true;
+    }
 }

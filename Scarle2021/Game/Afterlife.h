@@ -10,14 +10,15 @@
 #include "Audio.h"
 #include "FSM.h"
 #include "OrthographicCamera.h"
-
-//Player for debug purposes
 #include "NewEventManager.h"
 #include "InputManager.h"
 #include "Player.h"
 
+#ifdef _FPS
+#include "TextGO2D.h"
+#endif
+
 //Json file manager
-#include "ImageGO2D.h"
 #include "../json/single_include/nlohmann/json.hpp"
 using json = nlohmann::json;
 
@@ -111,5 +112,13 @@ private:
 
     //Pointer to the Event Manager
     AL::NewEventManager* event_manager = nullptr;
+
+#ifdef _FPS
+    TextGO2D* frame_counter = nullptr;
+#endif
+
+#ifdef _ARCADE
+    bool skip_frame = false;
+#endif
 };
 

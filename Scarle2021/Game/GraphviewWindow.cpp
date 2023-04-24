@@ -210,7 +210,7 @@ void GraphviewWindow::render(DrawData2D* _drawData)
     }
 }
 
-const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
+bool GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
 {
     // Change focused graph based on button input event
     if(al_event.type == AL::EventType::event_ui)

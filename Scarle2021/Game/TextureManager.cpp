@@ -5,6 +5,36 @@ TextureManager::TextureManager(ID3D11Device* GD)
 {
 	// Textures are stored in the same order as the ZoneType enum
 
+#ifdef _ARCADE
+	AddTextureZone(GD, "Tile_Void_Compressed");
+
+	AddTextureZone(GD, "Tile_Green_Compressed");
+	AddTextureZone(GD, "Tile_Yellow_Compressed");
+	AddTextureZone(GD, "Tile_Orange_Compressed");
+	AddTextureZone(GD, "Tile_Brown_Compressed");
+	AddTextureZone(GD, "Tile_Purple_Compressed");
+	AddTextureZone(GD, "Tile_Red_Compressed");
+	AddTextureZone(GD, "Tile_Blue_Compressed");
+
+	AddTextureZone(GD, "Tile_Inactive_Green_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Yellow_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Orange_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Brown_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Purple_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Red_Compressed");
+	AddTextureZone(GD, "Tile_Inactive_Blue_Compressed");
+
+	AddTextureZone(GD, "Tile_Structure_Compressed");
+	AddTextureZone(GD, "Tile_Road_Compressed");
+	AddTextureZone(GD, "Tile_Water_Compressed");
+	AddTextureZone(GD, "Tile_Lava_Compressed");
+
+	AddTextureZone(GD, "Tile_Karma_Track_Compressed");
+	AddTextureZone(GD, "Tile_Karma_Portal_Compressed");
+
+	AddTextureZone(GD, "Tile_Vibes_Compressed");
+	AddTextureZone(GD, "Tile_Rock_Compressed");
+#elif 
 	AddTextureZone(GD, "Tile_Void");
 
 	AddTextureZone(GD, "Tile_Green");
@@ -33,6 +63,7 @@ TextureManager::TextureManager(ID3D11Device* GD)
 
 	AddTextureZone(GD, "Tile_Vibes");
 	AddTextureZone(GD, "Tile_Rock");
+#endif
 
 	// Textures are stored in the same order as the StructureType enum for both Heaven and Hell
 	initializeStructureTextures(GD);

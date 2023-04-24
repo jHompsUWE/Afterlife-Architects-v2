@@ -28,4 +28,8 @@ public:
     // Render
     virtual void Render3D(DrawData* draw_data) = 0;
     virtual void Render2D(DrawData2D* draw_data2D) = 0;
+
+    //Reset
+    virtual void Resize() = 0;
+    virtual void Reset() = 0;
 };
