@@ -70,6 +70,7 @@ void Tilemap::BoxFill(std::unique_ptr<BuildingManager>& building_manager, std::u
 
 					// Get the tiles that this structure occupy
 					std::vector<Vector3> tiles_to_remove = building_manager->GetStructureOccupiedTiles(origin);
+					StructureType type_of_struct = building_manager->GetStructureTypeOfTile(origin);
 					for (auto& temp_pos : tiles_to_remove)
 					{
 						temp_pos = WorldToLocalPos(temp_pos);
@@ -85,7 +86,7 @@ void Tilemap::BoxFill(std::unique_ptr<BuildingManager>& building_manager, std::u
 					building_manager->DestroyStructure(origin);
 
 					// Adjust the vibe of the tiles around the structure destroyed
-					vibe_tilemap->VibeChange(origin, -5, sqrt(tiles_to_remove.size()), sqrt(tiles_to_remove.size()));
+					vibe_tilemap->VibeChange(origin, -BuildingManager::GetVibeOfStructure(type_of_struct), sqrt(tiles_to_remove.size()), sqrt(tiles_to_remove.size()));
 				}
 
 				tilemap[tile_pos.x][tile_pos.z]->UnoccupyTile();

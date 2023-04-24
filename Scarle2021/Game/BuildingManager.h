@@ -36,6 +36,7 @@ public:
 	void CreateStructure(StructureType structure_type, Vector3 tile_position);
 	void DestroyStructure(Vector3 tile_position);
 	std::vector<Vector3> GetStructureOccupiedTiles(Vector3 tile_position);
+	StructureType GetStructureTypeOfTile(Vector3 tile_position) { return structure_types[tile_position.x][tile_position.z]; };
 
 	static int GetSizeOfStructure(StructureType structure_type);
 	static int GetCostOfStructure(StructureType structure_type);
@@ -47,6 +48,7 @@ private:
 	ID3D11Device* d11_device = nullptr;
 	Vector3 start;
 	std::vector<std::vector<std::unique_ptr<StructureSprite>>> structure_map;
+	std::vector<std::vector<StructureType>> structure_types;
 
 	std::unique_ptr<VibeTilemap>& vibe_tilemap;
 

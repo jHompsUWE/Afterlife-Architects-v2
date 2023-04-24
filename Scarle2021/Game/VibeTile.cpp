@@ -5,6 +5,7 @@ VibeTile::VibeTile(ID3D11Device* GD, ID3D11ShaderResourceView* texture, Vector3 
 	Tile(GD, _tile_pos, zone_type)
 {
 	quad->SetTexture(texture);
+	quad->SetColor(Color(0, 0, 0));
 
 	is_occupied = true;
 }
@@ -21,18 +22,14 @@ void VibeTile::ChangeVibe(int vibe_diff)
 {
 	vibe_value += vibe_diff;
 	// Create temporary int and colour to produce required colour
-	Color new_color;
+	Color new_color = Color(0,0,0);
 	// Make vibe value absolute
 	int temp_int = vibe_value < 0 ? -vibe_value : vibe_value;
-	// Scale colour down to 0,0,0
-	new_color.x = (255.0f - (temp_int * colour_scaling)) / 255.0f;
-	new_color.y = (255.0f - (temp_int * colour_scaling)) / 255.0f;
-	new_color.z = (255.0f - (temp_int * colour_scaling)) / 255.0f;
 
 	// If positive vibe, lean towards green
-	new_color.y = vibe_value > 0 ? 1 : new_color.y;
+	new_color.x = vibe_value > 0 ? 0 : (temp_int * colour_scaling) / 255.0f;
 	// If negative vibe, lean towards red
-	new_color.x = vibe_value < 0 ? 1 : new_color.x;
+	new_color.y = vibe_value < 0 ? 0 : (temp_int * colour_scaling) / 255.0f;
 	quad->SetColor(new_color);
 }
 

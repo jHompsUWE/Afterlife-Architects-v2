@@ -69,49 +69,41 @@ void AdvisorManager::Update(GameData* game_data)
 /// <param name="al_event"></param>
 const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
 {
+    int index = -1;
     switch (al_event.type)
     {
     case AL::event_ui:
-
         switch (al_event.ui.action)
         {
         case AL::UI::adv_option1:
-            if (current_faults[0] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[0]]);
-            }
+            index = 0;
             break;
 
         case AL::UI::adv_option2:
-            if (current_faults[1] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[1]]);
-            }
+            index = 1;
             break;
 
         case AL::UI::adv_option3:
-            if (current_faults[2] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[2]]);
-            }
+            index = 2;
             break;
 
         case AL::UI::adv_option4:
-            if (current_faults[3] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[3]]);
-            }
+            index = 3;
             break;
 
         case AL::UI::adv_option5:
-            if (current_faults[4] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[4]]);
-            }
+            index = 4;
             break;
 
         default:
             break;;
+        }
+        if (index != -1)
+        {
+            if (current_faults[index] != -1)
+            {
+                GenerateAdvise(dialogue_starts[current_faults[index]]);
+            }
         }
         break;
     case AL::event_adv_fault:

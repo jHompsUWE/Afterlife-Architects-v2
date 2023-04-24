@@ -9,9 +9,11 @@ BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManage
 	for (int x = 0; x < _size; x++)
 	{
 		structure_map.emplace_back();
+		structure_types.emplace_back();
 		for (int y = 0; y < _size; y++)
 		{
 			structure_map[x].emplace_back(nullptr);
+			structure_types[x].emplace_back(unknown);
 		}
 	}
 }
@@ -65,7 +67,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 {
 	int size = GetSizeOfStructure(structure_type);
 	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
-
+	structure_types[tile_position.x][tile_position.z] = structure_type;
 	// Change the vibe of the tiles around the structure
 	vibe_tilemap->VibeChange(tile_position, GetVibeOfStructure(structure_type), GetSizeOfStructure(structure_type), GetSizeOfStructure(structure_type));
 
@@ -437,7 +439,7 @@ int BuildingManager::GetVibeOfStructure(StructureType structure_type)
 	case Rock_1:
 	case Rock_2:
 	case Rock_3:
-		return -4;
+		return -3;
 	case KarmaStation_T1:
 	case KarmaStation_T2:
 	case TrainingCenter_T1:

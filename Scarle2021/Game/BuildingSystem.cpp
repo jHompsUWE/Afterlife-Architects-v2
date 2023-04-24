@@ -180,11 +180,8 @@ void BuildingSystem::Render3D(DrawData* draw_data)
         vibe_tilemap_heaven->Draw(draw_data);
         vibe_tilemap_hell->Draw(draw_data);
     }
-    else
-    {
-        tilemap_heaven->Draw(draw_data);
-        tilemap_hell->Draw(draw_data);
-    }
+    tilemap_heaven->Draw(draw_data);
+    tilemap_hell->Draw(draw_data);
 
     if (show_preview_quad && selected_zone != null)
     {

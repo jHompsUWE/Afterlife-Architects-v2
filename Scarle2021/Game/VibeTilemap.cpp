@@ -25,7 +25,10 @@ void VibeTilemap::Draw(DrawData* _DD)
 	{
 		for (auto& y : x)
 		{
-			y->Draw(_DD);
+			if (y->GetVibe() != 0)
+			{
+				y->Draw(_DD);
+			}
 		}
 	}
 }
@@ -39,18 +42,18 @@ void VibeTilemap::Draw(DrawData* _DD)
 /// <param name="range">The range around the area to be changed</param>
 void VibeTilemap::VibeChange(Vector3 tile_pos, int vibe_diff, int tile_size, int range)
 {
+	std::vector<Vector3> added_positions;
+
 	// Change square of area contained
 	for (int x = 0; x < tile_size; x++)
 	{
 		for (int z = 0; z < tile_size; z++)
 		{
-			vibe_tilemap[tile_pos.x + x][tile_pos.z + z]->ChangeVibe(vibe_diff);
+			added_positions.emplace_back(Vector3(tile_pos.x + x,0 , tile_pos.z + z));
 		}
 	}
 
 	// Collect a vector of positions to later check for vibe change
-	std::vector<Vector3> added_positions;
-
 	// Box to the left, right, above and below
 	for (int i = 0; i < tile_size; i++)
 	{
