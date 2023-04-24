@@ -108,7 +108,7 @@ void UIWindowAudioSettings::update(GameData* _gameData, Vector2& _mousePosition)
     old_mouse_pos = mouse_pos;
 }
 
-const bool& UIWindowAudioSettings::ReceiveEvents(const AL::Event& al_event)
+bool UIWindowAudioSettings::ReceiveEvents(const AL::Event& al_event)
 {
     if (al_event.type == AL::event_ui)
     {

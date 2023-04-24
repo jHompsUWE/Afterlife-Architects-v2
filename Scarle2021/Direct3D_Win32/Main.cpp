@@ -85,10 +85,9 @@ int WINAPI wWinMain(_In_ HINSTANCE _hInstance, _In_opt_ HINSTANCE _hPrevInstance
 
         HWND hwnd =
 #ifdef _DEBUG
-            CreateWindowExW(0, L"Scarle2021WindowClass", L"Scarle2021", WS_OVERLAPPEDWINDOW,
+            CreateWindowExW(0, L"Scarle2021WindowClass", L"AfterLife", WS_OVERLAPPEDWINDOW,
 #else
-            //CreateWindowExW(WS_EX_TOPMOST, L"Scarle2021WindowClass", L"Scarle2021", WS_POPUP,
-            CreateWindowExW(0, L"Scarle2021WindowClass", L"Scarle2021", WS_POPUP | WS_MAXIMIZE,
+            CreateWindowExW(0, L"Scarle2021WindowClass", L"AfterLife", WS_POPUP | WS_MAXIMIZE,
 #endif
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, _hInstance,
             nullptr);

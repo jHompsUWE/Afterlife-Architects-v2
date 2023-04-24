@@ -117,7 +117,7 @@ namespace AL
 
 #ifdef _ARCADE
      //mouse speed using keys
-     float speed = 4.f;
+     float speed = 5.f;
 #endif
     };
 }

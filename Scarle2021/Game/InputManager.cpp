@@ -35,8 +35,8 @@ namespace AL
 		MapEntryToEvent(keyboard.G, Input::camera_right, true);
 
 		//Zoom
-		MapEntryToEvent(keyboard.E, Cursor::Action::scroll_up);
-		MapEntryToEvent(keyboard.T, Cursor::Action::scroll_down);
+		MapEntryToEvent(keyboard.A, Cursor::Action::scroll_up);
+		MapEntryToEvent(keyboard.W, Cursor::Action::scroll_down);
 
 		//Movement of cursor
 		if (keyboard.Up) cursor_pos.y -= speed;

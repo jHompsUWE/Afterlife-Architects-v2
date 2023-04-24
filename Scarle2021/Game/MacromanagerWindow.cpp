@@ -144,11 +144,7 @@ void MacromanagerWindow::render(DrawData2D* _drawData)
     }
 }
 
-<<<<<<< HEAD:Scarle2021/Game/MacromanagerWindow.cpp
-const bool& MacromanagerWindow::ReceiveEvents(const AL::Event& al_event)
-=======
-bool MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
->>>>>>> ArcadeBuild:Scarle2021/Game/MicromanagerWindow.cpp
+bool MacromanagerWindow::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::event_ui)
     {
