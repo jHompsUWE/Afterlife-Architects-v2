@@ -118,7 +118,7 @@ private:
 #endif
 
 #ifdef _ARCADE
-    bool skip_frame;
+    bool skip_frame = false;
 #endif
 };
 

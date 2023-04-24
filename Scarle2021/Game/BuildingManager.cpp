@@ -2,7 +2,8 @@
 #include "BuildingManager.h"
 #include <iostream>
 
-BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap,
+BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap, std::unique_ptr<RaDTilemap>& _rad_tilemap,
+
 	std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane) :
 	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), vibe_tilemap(_vibe_tilemap), rad_tilemap(_rad_tilemap), economy_manager(_economy_manager)
 {
@@ -56,9 +57,12 @@ void BuildingManager::Draw(DrawData* _DD)
 void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile_position)
 {
 	int size = GetSizeOfStructure(structure_type);
-	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
-
-	// Change the vibe of the tiles around the structure
+	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
+
+
+
+	// Change the vibe of the tiles around the structure
+
 	vibe_tilemap->VibeChange(tile_position, GetVibeOfStructure(structure_type), GetSizeOfStructure(structure_type), GetSizeOfStructure(structure_type));
 
 	StructureData* structure_data = new StructureData(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size), 

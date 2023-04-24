@@ -485,6 +485,78 @@
     <ImageContentTask Include="EventWarning.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Blue_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Brown_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Green_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Blue_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Brown_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Green_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Orange_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Purple_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Red_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Inactive_Yellow_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Karma_Portal_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Karma_Track_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Lava_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Orange_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Purple_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Red_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Res_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Road_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Rock_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Structure_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Vibes_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Void_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Water_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Tiles\Compressed\Tile_Yellow_Compressed.png">
+      <Filter>Tiles Compressed</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tiles">
@@ -555,6 +627,9 @@
     </Filter>
     <Filter Include="Afterlife\Advisors">
       <UniqueIdentifier>{8267a285-d289-476d-8445-43bdcfde4839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tiles Compressed">
+      <UniqueIdentifier>{fdd8ad15-b04c-4e54-84fd-13cba6cd052b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
