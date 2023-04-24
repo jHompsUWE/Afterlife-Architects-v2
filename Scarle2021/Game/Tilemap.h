@@ -36,7 +36,9 @@ public:
 	bool IsPosValid(Vector3 tile_pos);
 	bool IsAreaValid(Vector3 start, int _size);
 	bool IsRoadNearby(Vector3 tile_pos);
-	bool IsKarmaTracksNearby(Vector3 tile_pos);
+	bool IsKarmaTrackNearby(Vector3 tile_pos, ZoneType zone_type);
+	bool IsKarmaAnchorNearby(Vector3 tile_pos, ZoneType zone_type);
+	bool IsKarmaStationNearby(Vector3 tile_pos, ZoneType zone_type);
 	bool CanTileBeReplaced(ZoneType zone_type);
 	void ActivateNearbyTile(Vector3 tile_pos);
 	void DeactivateNearbyTile(Vector3 tile_pos);
@@ -49,6 +51,8 @@ protected:
 	float size; // Size of the tilemap
 	Vector3 start; // Starting/Origin point of the tilemap
 	PlaneType plane;
+	int total_roads;
+	int total_karma_tracks;
 
 private:
 	std::shared_ptr<TextureManager> texture_manager;

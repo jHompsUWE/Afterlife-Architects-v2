@@ -3,7 +3,7 @@
 
 Tilemap::Tilemap(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager,
 	int _size, Vector3 _start, PlaneType _plane, std::shared_ptr<EconomyManager> _economy_manager) :
-	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane), economy_manager(_economy_manager)
+	size(_size), start(_start), texture_manager(_texture_manager), population_manager(_population_manager), plane(_plane), economy_manager(_economy_manager), total_roads(0), total_karma_tracks(0)
 {
 	for (int x = 0; x < size; x++)
 	{
@@ -150,17 +150,17 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 			return false;
 		}
 		break;
+
 	case Road:
 		economy_manager->PurchaseStructure(5);
 		// Activate inactive tiles near road
 		tilemap[tile_pos.x][tile_pos.z]->SetTexture(texture_manager->GetTextureZone(zone_type));
 		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
 		ActivateNearbyTile(tile_pos);
+		total_roads++;
+		economy_manager->SetTotalRoads(total_roads);
 		return true;
 
-	case Karma_Tracks:
-		economy_manager->PurchaseStructure(5);
-		break;
 
 	default:
 		break;
@@ -172,6 +172,8 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 		tilemap[tile_pos.x][tile_pos.z]->SetTexture(texture_manager->GetTextureZone(zone_type));
 		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
 		DeactivateNearbyTile(tile_pos);
+		total_roads--;
+		economy_manager->SetTotalRoads(total_roads);
 		return true;
 	}
 
@@ -406,11 +408,12 @@ bool Tilemap::IsRoadNearby(Vector3 tile_pos)
 	}
 	return false;
 }
-
-// Checks to see if there is a karma track in a 3 tile radius around the tilepos
-// Checks if the zone type is a karma track and will return true if it is 
-// False if this is not the case
-bool Tilemap::IsKarmaTracksNearby(Vector3 tile_pos)
+/// <summary>
+/// Checks if there is a karma track in a 3 tile radius around the tilePos
+/// </summary>
+/// <param name="tile_pos">Position of tile to be checked</param>
+/// <returns>True if there is a karma track, False if there is no karma track</returns>
+bool Tilemap::IsKarmaTrackNearby(Vector3 tile_pos, ZoneType zone_type)
 {
 	for (int x = -3; x <= 3; x++)
 	{
@@ -424,6 +427,68 @@ bool Tilemap::IsKarmaTracksNearby(Vector3 tile_pos)
 				}
 			}
 		}
+	}
+
+	switch (zone_type)
+	{
+	case KarmaAnchor:
+		if (!IsKarmaTrackNearby)
+		{
+			population_manager->IncrementZonePopulation(plane, zone_type, false);
+		}
+		break;
+	case KarmaStation_T1:
+	case KarmaStation_T2:
+		if (!IsKarmaTrackNearby)
+		{
+			population_manager->IncrementZoneCapacity(plane, zone_type, true);
+		}
+		break;
+	case KarmaTrack:
+		economy_manager->PurchaseStructure(5);
+		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
+		total_karma_tracks++;
+		economy_manager->SetTotalKarmaTracks(total_karma_tracks);
+		break;
+	default:
+		break;
+	}
+
+	if (!IsRoadNearby(tile_pos))
+	{
+		// Turn zone to inactive if there is no road nearby
+		zone_type = GetInactiveZone(zone_type);
+	}
+	else
+	{
+		// Set zone to NOT full
+		population_manager->SetZoneFull(plane, zone_type, false);
+	}
+	return false;
+}
+
+bool Tilemap::IsKarmaAnchorNearby(Vector3 tile_pos, ZoneType zone_type)
+{
+	if (IsRoadNearby(tile_pos))
+	{
+		population_manager->IncrementZonePopulation(plane, zone_type, false);
+	}
+	else
+	{
+		population_manager->IncrementZonePopulation(plane, zone_type, true);
+	}
+	return false;
+}
+
+bool Tilemap::IsKarmaStationNearby(Vector3 tile_pos, ZoneType zone_type)
+{
+	if (IsRoadNearby(tile_pos))
+	{
+		population_manager->IncrementZonePopulation(plane, zone_type, true);
+	}
+	else
+	{
+		population_manager->IncrementZonePopulation(plane, zone_type, false);
 	}
 	return false;
 }
