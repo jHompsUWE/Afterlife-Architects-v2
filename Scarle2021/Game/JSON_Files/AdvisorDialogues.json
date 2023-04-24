@@ -1,0 +1,45 @@
+{
+  "advisorDialogues": [
+    {
+      "dialogueTitle": "Roads",
+      "codeName": "Road",
+      "standpoint": 2,
+      "texts": [
+        "You have no roads in your afterlife",
+        "You need roads for your SOULs to traverse around",
+        "Place down a road where you will place your structures my liege"
+      ],
+      "whosTalking": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "dialogueTitle": "Gates",
+      "codeName": "GateHell",
+      "standpoint": 0,
+      "texts": [
+        "Hell gates",
+        "more here 1"
+      ],
+      "whosTalking": [
+        0,
+        0
+      ]
+    },
+    {
+      "dialogueTitle": "Gates",
+      "codeName": "GateHeaven",
+      "standpoint": 1,
+      "texts": [
+        "Heaven gates ",
+        "even more here 1"
+      ],
+      "whosTalking": [
+        1,
+        1
+      ]
+    }
+  ]
+}

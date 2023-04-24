@@ -19,6 +19,12 @@ void EconomyManager::Tick(GameData* game_data)
     }
 }
 
+/// <summary>
+/// Function called every in-game year
+/// </summary>
+/// <param name="dt">Delta time of frame</param>
+/// <param name="time_interval">Duration of in-game year</param>
+/// <returns>Boolean if an in-game year has passed</returns>
 bool EconomyManager::CallEverySeconds(float dt, float time_interval)
 {
     timer += dt;
@@ -30,6 +36,11 @@ bool EconomyManager::CallEverySeconds(float dt, float time_interval)
     return false;
 }
 
+/// <summary>
+/// Reduce currency based on structure cost given
+/// </summary>
+/// <param name="cost">Structure cost</param>
+/// <returns>Boolean on if structure is bought</returns>
 bool EconomyManager::PurchaseStructure(int cost)
 {
     if (money >= cost)
@@ -40,25 +51,35 @@ bool EconomyManager::PurchaseStructure(int cost)
     return false;
 }
 
+/// <summary>
+/// All money generation and loss calculations called every in-game year
+/// </summary>
 void EconomyManager::YearUpdate()
 {
-    year++;
-    money -= total_roads * cost_per_road;
+    /// Advisor event for no roads being placed down
+    AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "Road", total_roads == 0);
 
+    year++;
+
+    // End function if no souls to calculate economy with
     if (pop_manager->GetTotalCapacity() == 0)
     {
         return;
     }
-    int total_structures = 100;
-    float average_tile_population = pop_manager->GetTotalCapacity() / total_structures;
 
-    float previous_soul_gain = pop_manager->GetTotalCapacity() - prev_year_population;
-    prev_year_population = pop_manager->GetTotalCapacity();
+    // Road upkeep cost
+    money -= total_roads * cost_per_road;
+
+    // Calculate averate tile population and population gain
+    float total_capacity = pop_manager->GetTotalCapacity();
+    float average_tile_population = total_capacity / total_structures;
+    float previous_soul_gain = total_capacity - prev_year_population;
+    prev_year_population = total_capacity;
 
     // Soul gain for new souls entered
     float soul_rate = average_tile_population / year;
     money += previous_soul_gain * soul_rate;
 
     // Soul gain for total population in buildings
-    money += money_per_soul * pop_manager->GetTotalCapacity() * (rad_prod_percent / 50);
+    money += money_per_soul * total_capacity * (rad_prod_percent / 50);
 }

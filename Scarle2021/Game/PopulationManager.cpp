@@ -276,12 +276,6 @@ void PopulationManager::IncrementReligions(PlaneType plane, int pop_inc)
 		}
 		break;
 	}
-	/*
-	for (int i = 0; i < 8; i++)
-	{
-		std::cout << heaven_religion_spread[i] << " " << hell_religion_spread[i] << std::endl;
-	}
-	std::cout << "--" << std::endl;*/
 }
 
 int PopulationManager::GetReligiousSpread(PlaneType plane, int rel)

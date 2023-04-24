@@ -485,6 +485,12 @@
     <ImageContentTask Include="EventWarning.png">
       <Filter>AfterLifeUI</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Afterlife\Slider\slider_back.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Afterlife\Audio\audio_window.png">
+      <Filter>AfterLifeUI</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tiles">

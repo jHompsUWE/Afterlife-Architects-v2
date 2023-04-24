@@ -7,6 +7,7 @@ SoulViewWindow::SoulViewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice
     std::string _filepath, Vector2 _setScale, std::shared_ptr<PopulationManager> pop_manager)
     : UIWindow(), population_manager(pop_manager)
 {
+    srand(std::time(nullptr));
     //setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
     windowBackGround->SetOrigin(Vector2(0, 0));
@@ -153,17 +154,19 @@ void SoulViewWindow::reSize(Vector2 game_res)
     }
 }
 
+/// <summary>
+/// Randomise the text shown for name, reward/punishment, time left on the plane, and religion of a soul in the aferlife
+/// </summary>
 void SoulViewWindow::generateRandSoul()
 {
+    // Don't generate soul if there are none
     if (population_manager->GetTotalSouls() == 0) { return; }
 
-    srand(std::time(nullptr));
-
-    string temp_string = random_names[std::rand() % 6];
+    // Get random name out of name array
+    string temp_string = random_names[std::rand() % random_names.size()];
     text_vec[0]->ChangeString(temp_string);
 
     float heaven_percentage = population_manager->GetTotalSoulsForPlane(Heaven) / (float)population_manager->GetTotalSouls();
-    float hell_percentage = population_manager->GetTotalSoulsForPlane(Hell) / (float)population_manager->GetTotalSouls();
     PlaneType hell_or_heaven;
     // If distribution is ONLY hell
     if (heaven_percentage == 0)
@@ -171,36 +174,35 @@ void SoulViewWindow::generateRandSoul()
         hell_or_heaven = Hell;
     }
     // If distribution is ONLY heaven
-    else if (hell_percentage == 0)
+    else if (heaven_percentage == 100)
     {
         hell_or_heaven = Heaven;
     }
     else
     {
+        // Otherwise get random chance of either plane
         float rand_perc = (rand() % 100) * 0.01f;
-        if (heaven_percentage > rand_perc)
-        {
-            hell_or_heaven = Heaven;
-        }
-        else
-        {
-            hell_or_heaven = Hell;
-        }
+        if (heaven_percentage > rand_perc) { hell_or_heaven = Heaven; }
+        else { hell_or_heaven = Hell; }
     }
 
+    // Say random punishment or reward based off chosen plane
     switch (hell_or_heaven)
     {
-    case Heaven:
-        text_vec[1]->ChangeString("Rewarded for " + generateZone(hell_or_heaven));
-        break;
-    case Hell:
-        text_vec[1]->ChangeString("Punished for " + generateZone(hell_or_heaven));
-        break;
+    case Heaven: text_vec[1]->ChangeString("Rewarded for " + generateZone(hell_or_heaven)); break;
+    case Hell: text_vec[1]->ChangeString("Punished for " + generateZone(hell_or_heaven)); break;
     }
+    // Generate random duration of stay
     text_vec[2]->ChangeString("Years left at location: " + std::to_string(rand() % 950 + 50));
+    // Generate random beleif out of percentage chances
     text_vec[3]->ChangeString("Believes in " + generateBelief(hell_or_heaven) + "ism");
 }
 
+/// <summary>
+/// Generate random religion based off current population
+/// </summary>
+/// <param name="plane">Plane of choice Heaven or Hell</param>
+/// <returns> String of decided complete religion </returns>
 string SoulViewWindow::generateBelief(PlaneType plane)
 {
     float total_souls_of_plane = population_manager->GetTotalSoulsForPlane(plane);
@@ -210,104 +212,58 @@ string SoulViewWindow::generateBelief(PlaneType plane)
     float ALF = population_manager->GetReligiousSpread(plane, 4) / total_souls_of_plane;
     float SUMA = population_manager->GetReligiousSpread(plane, 6) / total_souls_of_plane;
 
-    int bel_1 = 3;
-    int bel_2 = 1;
-    int bel_3 = 1;
+    string temp_string;
+    int temp_int;
     float rand_perc;
 
+    // Generate first random belief
     rand_perc = (rand() % 100) * 0.01f;
-    if (HAHA > rand_perc)
-    {
-        bel_1 = 0;
-    }
-    else if (HAHA + HOHO > rand_perc)
-    {
-        bel_1 = 1;
-    }
+    if (HAHA > rand_perc) { temp_int = 0; }
+    else if (HAHA + HOHO > rand_perc) { temp_int = 1; }
     else
     {
-        switch (plane)
-        {
-        case Heaven:
-            bel_1 = 3;
-            break;
-        case Hell:
-            bel_1 = 2;
-            break;
-        }
+        temp_int = plane == Heaven ? 3 : 2;
     }
+    temp_string.append(beliefOne[temp_int]);
 
+    // Generate second random belief
     rand_perc = (rand() % 100) * 0.01f;
-    if (ALF > rand_perc)
-    {
-        bel_2 = 0;
-    }
-    else
-    {
-        bel_2 = 1;
-    }
+    temp_int = ALF > rand_perc ? 0 : 1;
+    temp_string.append(beliefTwo[temp_int]);
 
+    // Generate third random belief
     rand_perc = (rand() % 100) * 0.01f;
-    if (SUMA > rand_perc)
-    {
-        bel_3 = 0;
-    }
-    else
-    {
-        bel_3 = 1;
-    }
+    temp_int = SUMA > rand_perc ? 0 : 1;
+    temp_string.append(beliefThree[temp_int]);
 
-    string temp_string = beliefOne[bel_1] + beliefTwo[bel_2] + beliefThree[bel_3];
     return temp_string;
 }
 
+/// <summary>
+/// Generate random zone based off current population
+/// </summary>
+/// <param name="plane"></param>
+/// <returns></returns>
 string SoulViewWindow::generateZone(PlaneType plane)
 {
     float total_souls_of_plane = (float)population_manager->GetTotalSoulsForPlane(plane);
 
-    float zone_1 = population_manager->GetZonePopulation(plane, ZoneType(1)) / total_souls_of_plane;
-    float zone_2 = zone_1 + population_manager->GetZonePopulation(plane, ZoneType(2)) / total_souls_of_plane;
-    float zone_3 = zone_2 + population_manager->GetZonePopulation(plane, ZoneType(3)) / total_souls_of_plane;
-    float zone_4 = zone_3 + population_manager->GetZonePopulation(plane, ZoneType(4)) / total_souls_of_plane;
-    float zone_5 = zone_4 + population_manager->GetZonePopulation(plane, ZoneType(5)) / total_souls_of_plane;
-    float zone_6 = zone_5 + population_manager->GetZonePopulation(plane, ZoneType(6)) / total_souls_of_plane;
-
-    int chosen_zone;
+    // Generate random number between 0-99
     float rand_perc = (rand() % 100) * 0.01f;
-    if (zone_1 > rand_perc)
+    int chosen_zone;
+    float chance_track = 0;
+    // Iterate through each zone chance
+    for (int i = 0; i < 7; i++)
     {
-        chosen_zone = 0;
+        // Stack onto existing chance tracker
+        chance_track += population_manager->GetZonePopulation(plane, ZoneType(i+1)) / total_souls_of_plane;
+        // If above chance generate then select as chosen zone
+        if (chance_track > rand_perc)
+        {
+            // But add 7 if it is heaven to offset where it checks in the array of zone names
+            chosen_zone = plane == Heaven ? i+7 : i;
+            return available_punishments[chosen_zone];
+        }
     }
-    else if (zone_2 > rand_perc)
-    {
-        chosen_zone = 1;
-    }
-    else if (zone_3 > rand_perc)
-    {
-        chosen_zone = 2;
-    }
-    else if (zone_4 > rand_perc)
-    {
-        chosen_zone = 3;
-    }
-    else if (zone_5 > rand_perc)
-    {
-        chosen_zone = 4;
-    }
-    else if (zone_6 > rand_perc)
-    {
-        chosen_zone = 5;
-    }
-    else
-    {
-        chosen_zone = 6;
-    }
-
-    if (plane == Heaven)
-    {
-        chosen_zone += 7;
-    }
-
-    string temp_string = available_punishments[chosen_zone];
-    return temp_string;
+    return "ERROR";
 }

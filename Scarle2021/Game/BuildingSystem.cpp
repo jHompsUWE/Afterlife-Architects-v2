@@ -13,13 +13,11 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
 
     tilemap_heaven = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_heaven, Heaven, economy_manager);
     vibe_tilemap_heaven = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_heaven);
-    rad_tilemap_heaven = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_heaven);
-    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_heaven, rad_tilemap_heaven, economy_manager, 100, start_heaven, Heaven);
+    building_manager_heaven = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_heaven, economy_manager, 100, start_heaven, Heaven);
 
     tilemap_hell = std::make_unique<Tilemap>(d11_device, texture_manager, population_manager, 100, start_hell, Hell, economy_manager);
     vibe_tilemap_hell = std::make_unique<VibeTilemap>(d11_device, texture_manager, 100, start_hell);
-    rad_tilemap_hell = std::make_unique<RaDTilemap>(d11_device, texture_manager, 100, start_hell);
-    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_hell, rad_tilemap_hell, economy_manager, 100, start_hell, Hell);
+    building_manager_hell = std::make_unique<BuildingManager>(d11_device, texture_manager, population_manager, vibe_tilemap_hell, economy_manager, 100, start_hell, Hell);
 
     PlaneAssembler::RefreshResSeed();
     GenerateTerrain(tilemap_heaven, vibe_tilemap_heaven, building_manager_heaven, Heaven);
@@ -182,11 +180,8 @@ void BuildingSystem::Render3D(DrawData* draw_data)
         vibe_tilemap_heaven->Draw(draw_data);
         vibe_tilemap_hell->Draw(draw_data);
     }
-    else
-    {
-        tilemap_heaven->Draw(draw_data);
-        tilemap_hell->Draw(draw_data);
-    }
+    tilemap_heaven->Draw(draw_data);
+    tilemap_hell->Draw(draw_data);
 
     if (show_preview_quad && selected_zone != null)
     {

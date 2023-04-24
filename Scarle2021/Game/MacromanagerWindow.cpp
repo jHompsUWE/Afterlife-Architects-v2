@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "MicromanagerWindow.h"
+#include "MacromanagerWindow.h"
 #include <iostream>
 
 #include "DataManager.h"
 
 
-MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
+MacromanagerWindow::MacromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
     std::string _filepath, Vector2 _setScale, std::shared_ptr<EconomyManager> _economy_manager) : UIWindow()
 {
     //setup for window background
@@ -38,16 +38,21 @@ MicromanagerWindow::MicromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d
         DataManager::GetD3DDevice(), "arrow_right",
         AL::EventType::event_ui, AL::UI::micro_manager_arrow_r, 0, Vector2(1.0,1.0)));
 
-    image_vec.push_back(new ImageGO2D("slider_handle", DataManager::GetD3DDevice()));
+    image_vec.push_back(new ImageGO2D("slider_back", DataManager::GetD3DDevice()));
     image_vec[0]->SetPos(Vector2(window_pos.x + 177.5, window_pos.y + 33));
     image_vec[0]->SetScale(Vector2(1, 1));
+    image_vec.push_back(new ImageGO2D("slider_handle", DataManager::GetD3DDevice()));
+    image_vec[1]->SetPos(Vector2(window_pos.x + 177.5, window_pos.y + 33));
+    image_vec[1]->SetScale(Vector2(1, 1));
     
+    rad_slider = new UISlider(50,1.0f);
+
     economy_manager = _economy_manager;
 
     AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
 }
 
-MicromanagerWindow::~MicromanagerWindow()
+MacromanagerWindow::~MacromanagerWindow()
 {
     for (auto image : image_vec)
     {
@@ -55,7 +60,7 @@ MicromanagerWindow::~MicromanagerWindow()
     }
 }
 
-void MicromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
+void MacromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
 {
     if (!is_visible) return;
 
@@ -115,7 +120,7 @@ void MicromanagerWindow::update(GameData* _gameData, Vector2& _mousePosition)
     old_mouse_pos = mouse_pos;
 }
 
-void MicromanagerWindow::render(DrawData2D* _drawData)
+void MacromanagerWindow::render(DrawData2D* _drawData)
 {
     if (!is_visible)
     {
@@ -139,46 +144,39 @@ void MicromanagerWindow::render(DrawData2D* _drawData)
     }
 }
 
-const bool& MicromanagerWindow::ReceiveEvents(const AL::Event& al_event)
+const bool& MacromanagerWindow::ReceiveEvents(const AL::Event& al_event)
 {
     if(al_event.type == AL::event_ui)
     {
         if (al_event.input.action == AL::UI::micro_manager_arrow_l)
         {
-            if (slider_percent >= 5)
-            {
-                slider_percent-=5;
-                economy_manager->SetRaD(slider_percent);
-            }
-            updateSlider();
+            updateSlider(-5);
         }
         else if (al_event.input.action == AL::UI::micro_manager_arrow_r)
         {
-            if (slider_percent <= 95)
-            {
-                slider_percent+=5;
-                economy_manager->SetRaD(slider_percent);
-            }
-            updateSlider();
+            updateSlider(5);
         }
     }
     
     return UIWindow::ReceiveEvents(al_event);
 }
 
-void MicromanagerWindow::updateSlider()
+/// <summary>
+/// Update position of slider visual based off slider percentage within slider class
+/// </summary>
+void MacromanagerWindow::updateSlider(int perc_change)
 {
-    Vector2 inital_position = image_vec[0]->GetPos();
-    Vector2 position_change = Vector2 ((slider_percent - prev_slider_percent) * 0.02f* slider_radius * window_res.x / 352,0);
-    image_vec[0]->SetPos(inital_position + position_change);
+    // Update position of slider handle
+    image_vec[1]->SetPos(Vector2(rad_slider->updateSlider(perc_change, window_res.x), 0) + image_vec[1]->GetPos());
 
+    // Update text and classes linked with RAD values
+    int slider_percent = rad_slider->getPercent();
     text_vec[0]->ChangeString(std::to_string(100-slider_percent) + "%");
     text_vec[1]->ChangeString(std::to_string(slider_percent) + "%");
-
-    prev_slider_percent = slider_percent;
+    economy_manager->SetRaD(slider_percent);
 }
 
-void MicromanagerWindow::reSize(Vector2 game_res)
+void MacromanagerWindow::reSize(Vector2 game_res)
 {
     auto& scale = windowBackGround->ReSize(game_res.x, game_res.y);
     //reScales background

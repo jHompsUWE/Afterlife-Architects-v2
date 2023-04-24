@@ -130,9 +130,6 @@
     <Filter Include="Afterlife\User Interface\UIWindow">
       <UniqueIdentifier>{4bbe157e-0adb-4290-a984-36c803e7d3bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Afterlife\Managers\ResearchAndDevelopment">
-      <UniqueIdentifier>{4a355032-4b98-473e-b739-8a06e7b5b431}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Afterlife\User Interface\UISlider">
       <UniqueIdentifier>{38efd9f4-20ab-476d-bd13-06988d3d7a81}</UniqueIdentifier>
     </Filter>
@@ -420,9 +417,6 @@
     <ClInclude Include="GameplaySingletons.h">
       <Filter>Afterlife\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="RaDTilemap.h">
-      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2Int.h">
       <Filter>Afterlife\Core Components</Filter>
     </ClInclude>
@@ -474,7 +468,7 @@
     <ClInclude Include="GraphviewWindow.h">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
-    <ClInclude Include="MicromanagerWindow.h">
+    <ClInclude Include="MacromanagerWindow.h">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClInclude>
     <ClInclude Include="BadThingsManager.h">
@@ -485,6 +479,12 @@
     </ClInclude>
     <ClInclude Include="StructureData.h">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>Afterlife\User Interface\UISlider</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindowAudioSettings.h">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -689,9 +689,6 @@
     <ClCompile Include="TrainingCentersWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
     </ClCompile>
-    <ClCompile Include="RaDTilemap.cpp">
-      <Filter>Afterlife\Managers\ResearchAndDevelopment</Filter>
-    </ClCompile>
     <ClCompile Include="UIWindowEvent.cpp">
       <Filter>Afterlife\User Interface\UIWindow\PopUpWindows</Filter>
     </ClCompile>
@@ -701,7 +698,7 @@
     <ClCompile Include="GraphviewWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClCompile>
-    <ClCompile Include="MicromanagerWindow.cpp">
+    <ClCompile Include="MacromanagerWindow.cpp">
       <Filter>Afterlife\User Interface\UIWindow\InfoWindows</Filter>
     </ClCompile>
     <ClCompile Include="BadThingsManager.cpp">
@@ -710,10 +707,19 @@
     <ClCompile Include="StructureData.cpp">
       <Filter>Afterlife\Managers\Building System\Structure</Filter>
     </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>Afterlife\User Interface\UISlider</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindowAudioSettings.cpp">
+      <Filter>Afterlife\User Interface\UIWindow\DropDownWindows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="NewEventManager.tpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
+    </None>
+    <None Include="JSON_Files\AdvisorDialogues.json">
+      <Filter>Afterlife\Managers\Advisors</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

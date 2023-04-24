@@ -114,21 +114,21 @@
     },
     {
       "structureType": "Bank_T1",
-      "cost": 100,
+      "cost": 2000,
       "tileSize": 1,
       "textureHeaven": "Bank_T1_Heaven_1x1",
       "textureHell": "Bank_T1_Hell_1x1"
     },
     {
       "structureType": "Bank_T2",
-      "cost": 200,
+      "cost": 20000,
       "tileSize": 2,
       "textureHeaven": "Bank_T2_Heaven_2x2",
       "textureHell": "Bank_T2_Hell_2x2"
     },
     {
       "structureType": "Gate_T1",
-      "cost": 300,
+      "cost": 50000,
       "tileSize": 3,
       "textureHeaven": "Gate_T1_Heaven_3x3",
       "textureHell": "Gate_T1_Hell_3x3",
@@ -136,7 +136,7 @@
     },
     {
       "structureType": "Gate_T2",
-      "cost": 900,
+      "cost": 500000,
       "tileSize": 3,
       "textureHeaven": "Gate_T2_Heaven_3x3",
       "textureHell": "Gate_T2_Hell_3x3",
@@ -144,7 +144,7 @@
     },
     {
       "structureType": "Gate_T3",
-      "cost": 2000,
+      "cost": 1000000,
       "tileSize": 4,
       "textureHeaven": "Gate_T3_Heaven_4x4",
       "textureHell": "Gate_T3_Hell_4x4",
@@ -152,28 +152,28 @@
     },
     {
       "structureType": "KarmaAnchor",
-      "cost": 300,
+      "cost": 10000,
       "tileSize": 3,
       "textureHeaven": "KA_Heaven_3x3",
       "textureHell": "KA_Hell_3x3"
     },
     {
       "structureType": "KarmaPortal",
-      "cost": 400,
+      "cost": 1000000,
       "tileSize": 4,
       "textureHeaven": "KarmaPortal",
       "textureHell": "KarmaPortal"
     },
     {
       "structureType": "KarmaStation_T1",
-      "cost": 300,
+      "cost": 10000,
       "tileSize": 3,
       "textureHeaven": "KS_Heaven_3x3",
       "textureHell": "KS_Hell_3x3"
     },
     {
       "structureType": "KarmaStation_T2",
-      "cost": 900,
+      "cost": 250000,
       "tileSize": 3,
       "textureHeaven": "KS_Heaven_3x3",
       "textureHell": "KS_Hell_3x3"
@@ -187,28 +187,28 @@
     },
     {
       "structureType": "Rock_1",
-      "cost": 100,
+      "cost": 0,
       "tileSize": 1,
       "textureHeaven": "Rock_1",
       "textureHell": "Rock_1"
     },
     {
       "structureType": "Rock_2",
-      "cost": 100,
+      "cost": 0,
       "tileSize": 1,
       "textureHeaven": "Rock_1",
       "textureHell": "Rock_1"
     },
     {
       "structureType": "Rock_3",
-      "cost": 100,
+      "cost": 0,
       "tileSize": 1,
       "textureHeaven": "Rock_1",
       "textureHell": "Rock_1"
     },
     {
       "structureType": "Topia_T1",
-      "cost": 400,
+      "cost": 100000,
       "tileSize": 4,
       "textureHeaven": "Topias_T1_Heaven_4x4",
       "textureHell": "Topias_T1_Hell_4x4",
@@ -216,7 +216,7 @@
     },
     {
       "structureType": "Topia_T2",
-      "cost": 1000,
+      "cost": 1000000,
       "tileSize": 4,
       "textureHeaven": "Topias_T2_Heaven_4x4",
       "textureHell": "Topias_T2_Hell_4x4",
@@ -224,7 +224,7 @@
     },
     {
       "structureType": "TrainingCenter_T1",
-      "cost": 300,
+      "cost": 100000,
       "tileSize": 3,
       "textureHeaven": "TC_T1_Heaven_3x3",
       "textureHell": "TC_T1_Hell_3x3",
@@ -232,7 +232,7 @@
     },
     {
       "structureType": "TrainingCenter_T2",
-      "cost": 900,
+      "cost": 250000,
       "tileSize": 3,
       "textureHeaven": "TC_T2_Heaven_3x3",
       "textureHell": "TC_T2_Hell_3x3",
@@ -240,7 +240,7 @@
     },
     {
       "structureType": "TrainingCenter_T3",
-      "cost": 2000,
+      "cost": 1000000,
       "tileSize": 3,
       "textureHeaven": "TC_T3_Heaven_3x3",
       "textureHell": "TC_T3_Hell_3x3",

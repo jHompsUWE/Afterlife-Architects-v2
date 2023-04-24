@@ -5,7 +5,6 @@
 
 #include "Tilemap.h"
 #include "VibeTilemap.h"
-#include "RaDTilemap.h"
 #include "PreviewQuad.h"
 #include "BuildingManager.h"
 #include "TextureManager.h"
@@ -64,13 +63,11 @@ private:
 	// Heaven
 	std::unique_ptr<Tilemap> tilemap_heaven;
 	std::unique_ptr<VibeTilemap> vibe_tilemap_heaven;
-	std::unique_ptr<RaDTilemap> rad_tilemap_heaven;
 	std::unique_ptr<BuildingManager> building_manager_heaven;
 
 	// Hell
 	std::unique_ptr<Tilemap> tilemap_hell;
 	std::unique_ptr<VibeTilemap> vibe_tilemap_hell;
-	std::unique_ptr<RaDTilemap> rad_tilemap_hell;
 	std::unique_ptr<BuildingManager> building_manager_hell;
 
 	bool show_vibes = false;

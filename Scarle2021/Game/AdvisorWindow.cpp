@@ -7,37 +7,26 @@
 AdvisorWindow::AdvisorWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std::string _text,
                              std::string _filepath, Vector2 _setScale) : UIWindow()
 {
-    //setup for window background
+    // Setup for window background
     windowBackGround = new ImageGO2D(_filepath, _d3dDevice);
     windowBackGround->SetOrigin(Vector2(0, 0));
     windowBackGround->SetScale(Vector2(0.5,0.5));
 
-    //sets window res
+    // Sets window res
     window_res = Vector2(windowBackGround->GetRes().x
         * windowBackGround->GetScale().x, windowBackGround->GetRes().y
         * windowBackGround->GetScale().y);
 
-    // sets window pos
+    // Sets window pos
     window_pos = _windowPosition;
     windowBackGround->SetPos(window_pos);
     
-    // ---------------CHANGE EACH BUTTON EVENT TO NEW EVENT CALLED ADVISOR BUTTON 1,2,3,4,5-------------------
-
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158),
+    for (int i = 0; i < 5; i++)
+    {
+        buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158 + 15 * i),
             DataManager::GetD3DDevice(), "ButtonAdvisor",
-            AL::EventType::event_ui, AL::UI::adv_option1, 0, Vector2(0.225, 0.25)));
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158 + 15),
-            DataManager::GetD3DDevice(), "ButtonAdvisor",
-            AL::EventType::event_ui, AL::UI::adv_option2, 0, Vector2(0.225, 0.25)));
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158 + 30),
-            DataManager::GetD3DDevice(), "ButtonAdvisor",
-            AL::EventType::event_ui, AL::UI::adv_option3, 0, Vector2(0.225, 0.25)));
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158 + 45),
-            DataManager::GetD3DDevice(), "ButtonAdvisor",
-            AL::EventType::event_ui, AL::UI::adv_option4, 0, Vector2(0.225, 0.25)));
-    buttons.push_back(new Button<AL::UI::Action, int>(Vector2(window_pos.x + 66, window_pos.y + 158 + 60),
-            DataManager::GetD3DDevice(), "ButtonAdvisor",
-            AL::EventType::event_ui, AL::UI::adv_option5, 0, Vector2(0.225, 0.25)));
+            AL::EventType::event_ui, AL::UI::Action(AL::UI::adv_option1 + i), 0, Vector2(0.225, 0.25)));
+    }
     
     // Texts
     for (int i = 0; i < 5; i++)
@@ -54,7 +43,7 @@ AdvisorWindow::AdvisorWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
         text_vec[i]->SetScale(Vector2(0.3, 0.3));
     }
 
-    //image vector
+    // Image vector for Jasper and Aria
     for (int i = 0; i < 13; i++)
     {
         image_vec_ar.push_back(new ImageGO2D(advisor_filenames_ar[i], DataManager::GetD3DDevice()));
@@ -68,7 +57,7 @@ AdvisorWindow::AdvisorWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
         image_vec_ja[j]->SetScale(Vector2(1, 1));
     }
     
-    //text vector
+    // Text vector
     text_vec.push_back(new TextGO2D(""));
     text_vec[5]->SetPos(Vector2(window_pos.x+120,window_pos.y+150));
     text_vec[5]->SetScale(Vector2(0.3,0.3));
@@ -85,20 +74,29 @@ AdvisorWindow::~AdvisorWindow()
     {
         delete image;        
     }
+    for (auto image : indicators_ar)
+    {
+        delete image;        
+    }
+    for (auto image : indicators_ja)
+    {
+        delete image;        
+    }
 }
 
 void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
 {
+    // Stop if not visible
     if (!is_visible) return;
 
     mouse_pos = _mousePosition; 
     
-    //updates buttons
+    // Updates buttons
     for (const auto& button : buttons)
     {
         button->update(_gameData);
     }
-    //updates image
+    // Updates image + text
     for (auto image_ar : image_vec_ar)
     {
         image_ar->Tick(_gameData);      
@@ -115,20 +113,12 @@ void AdvisorWindow::update(GameData* _gameData, Vector2& _mousePosition)
     {
         ind_ja->Tick(_gameData);      
     }
-
-    //updates image
-    for (auto text : text_vec)
-    {
-        text->Tick(_gameData);      
-    }
-    //window background
-    windowBackGround->Tick(_gameData);
-
-    //updates texts
     for (auto& text : text_vec)
     {
         text->Tick(_gameData);
     }
+
+    windowBackGround->Tick(_gameData);
 
     inside = isInside(mouse_pos);
     
@@ -185,7 +175,7 @@ void AdvisorWindow::render(DrawData2D* _drawData)
     
     if(!is_visible) return;
     
-    // Render Images
+    // Render Aria, Jasper + indicators
     for (int i = 0; i < 13; i++)
     {
         if (i == pointed_image_ar)
@@ -251,7 +241,10 @@ void AdvisorWindow::reSize(Vector2 game_res)
     }
 }
 
-
+/// <summary>
+/// Show aria image from the image pool
+/// </summary>
+/// <param name="filename">String filename for image to show</param>
 void AdvisorWindow::setAriaImage(string filename)
 {
     for (int i = 0; i < 13; i++)
@@ -263,6 +256,10 @@ void AdvisorWindow::setAriaImage(string filename)
     }
 }
 
+/// <summary>
+/// Show jasper image from the image pool
+/// </summary>
+/// <param name="filename">String filename for image to show</param>
 void AdvisorWindow::setJasperImage(string filename)
 {
     for (int i = 0; i < 12 ; i ++)
@@ -279,6 +276,12 @@ void AdvisorWindow::setText(string new_string)
     text_vec[5]->ChangeString(new_string);
 }
 
+/// <summary>
+/// Update side options text + indicator visal
+/// </summary>
+/// <param name="box_num"> Int index for which textbox to update</param>
+/// <param name="indicator"> Which indicators to show based off int acting as Enum </param>
+/// <param name="title"> String for new text for option box </param>
 void AdvisorWindow::setOptionBox(int box_num, int indicator, string title)
 {
     text_vec[box_num]->ChangeString(title);

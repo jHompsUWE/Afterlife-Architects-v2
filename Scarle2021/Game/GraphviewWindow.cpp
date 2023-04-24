@@ -99,19 +99,22 @@ void GraphviewWindow::update(GameData* _gameData, Vector2& _mousePosition)
     {
         text->Tick(_gameData);
     }
-    switch (cur_graph)
+    timer += _gameData->delta_time;
+    if (timer >= time_between_updates)
     {
-    case Religion:
-        updateBeliefSpread();
-        updateReligionVisual();
-        break;
-    case Belief:
-        updateBeliefSpread();
-        updateBeliefVisual();
-        break;
-    case Population:
-        updatePopulationVisual();
-        break;
+        switch (cur_graph)
+        {
+        case Religion:
+            updateReligionVisual();
+            break;
+        case Belief:
+            updateBeliefVisual();
+            break;
+        case Population:
+            updatePopulationVisual();
+            break;
+        }
+        timer -= time_between_updates;
     }
 
     inside = isInside(mouse_pos);
@@ -209,19 +212,23 @@ void GraphviewWindow::render(DrawData2D* _drawData)
 
 const bool& GraphviewWindow::ReceiveEvents(const AL::Event& al_event)
 {
+    // Change focused graph based on button input event
     if(al_event.type == AL::EventType::event_ui)
     {
         if (al_event.ui.action == AL::UI::graphview_bel)
         {
             cur_graph = Belief;
+            updateBeliefVisual();
         }
         else if (al_event.ui.action == AL::UI::graphview_pop)
         {
             cur_graph = Population;
+            updatePopulationVisual();
         }
         else if (al_event.ui.action == AL::UI::graphview_rel)
         {
             cur_graph = Religion;
+            updateReligionVisual();
         }
     }
     
@@ -251,72 +258,110 @@ void GraphviewWindow::reSize(Vector2 game_res)
     }
 }
 
+/// <summary>
+/// Updates the belief_amounts and rel_spreads arrays basedon current population manager variables
+/// </summary>
 void GraphviewWindow::updateBeliefSpread()
 {
+    // Stop if there are no souls to show
     if (population_manager->GetTotalSouls() == 0) { return; }
+
+    // Get the percentage of each religious section e.g. HAHA, HOHO
     float total_souls = (float)population_manager->GetTotalSouls();
-
-    float HAHA = (population_manager->GetReligiousSpread(Heaven, 0) + population_manager->GetReligiousSpread(Hell, 0)) / total_souls;
-    float HOHO = (population_manager->GetReligiousSpread(Heaven, 1) + population_manager->GetReligiousSpread(Hell, 1)) / total_souls;
-    float OPRA = (population_manager->GetReligiousSpread(Hell, 2)) / total_souls;
-    float OCRA = (population_manager->GetReligiousSpread(Heaven, 3)) / total_souls;
-    float ALF = (population_manager->GetReligiousSpread(Heaven, 4) + population_manager->GetReligiousSpread(Hell, 4)) / total_souls;
-    float RALF = (population_manager->GetReligiousSpread(Heaven, 5) + population_manager->GetReligiousSpread(Hell, 5)) / total_souls;
-    float SUMA = (population_manager->GetReligiousSpread(Heaven, 6) + population_manager->GetReligiousSpread(Hell, 6)) / total_souls;
-    float SUSA = (population_manager->GetReligiousSpread(Heaven, 7) + population_manager->GetReligiousSpread(Hell, 7)) / total_souls;
-
-    individual_spreads[0] = HAHA;
-    individual_spreads[1] = HOHO;
-    individual_spreads[2] = OPRA;
-    individual_spreads[3] = OCRA;
-    individual_spreads[4] = ALF;
-    individual_spreads[5] = RALF;
-    individual_spreads[6] = SUMA;
-    individual_spreads[7] = SUSA;
-
-    belief_amounts[0] = HAHA * ALF * SUMA;
-    belief_amounts[1] = HOHO * ALF * SUMA;
-    belief_amounts[2] = OPRA * ALF * SUMA;
-    belief_amounts[3] = OCRA * ALF * SUMA;
-    belief_amounts[4] = HAHA * RALF * SUMA;
-    belief_amounts[5] = HOHO * RALF * SUMA;
-    belief_amounts[6] = OPRA * RALF * SUMA;
-    belief_amounts[7] = OCRA * RALF * SUMA;
-    belief_amounts[8] = HAHA * ALF * SUSA;
-    belief_amounts[9] = HOHO * ALF * SUSA;
-    belief_amounts[10] = OPRA * ALF * SUSA;
-    belief_amounts[11] = OCRA * ALF * SUSA;
-    belief_amounts[12] = HAHA * RALF * SUSA;
-    belief_amounts[13] = HOHO * RALF * SUSA;
-    belief_amounts[14] = OPRA * RALF * SUSA;
-    belief_amounts[15] = OCRA * RALF * SUSA;
-}
-
-void GraphviewWindow::updateBeliefVisual()
-{
-    for (int i = 0; i < 16; i++)
-    {
-        belief_bars_vec[i]->SetPos(Vector2(window_pos.x + (95 + ((belief_amounts[i] * 2) * 98.5)) * window_res.x / 352, window_pos.y + (45 + 11 * i) * window_res.y / 316));
-        belief_bars_vec[i]->SetScale(Vector2((belief_amounts[i] * 2) * 4.2 * window_res.x / 352, 0.2 * window_res.y / 316));
-    }
-}
-
-void GraphviewWindow::updatePopulationVisual()
-{
-    for (int i = 0; i < 14; i++)
-    {
-        float percent_val = population_manager->GetZonePopulation(PlaneType(i % 2), ZoneType(1 + (int)i / 2)) / (float)population_manager->GetTotalSouls();
-        population_bars_vec[i]->SetPos(Vector2(window_pos.x + (85 + (103.5 * percent_val)) * window_res.x / 352, window_pos.y + (67 + 11 * i) * window_res.y / 316));
-        population_bars_vec[i]->SetScale(Vector2(percent_val * 4.2 * window_res.x / 352, 0.275 * window_res.y / 316));
-    }
-}
-
-void GraphviewWindow::updateReligionVisual()
-{
     for (int i = 0; i < 8; i++)
     {
-        float percent_val = individual_spreads[i];
-        religion_bars_vec[i]->SetPos(Vector2(window_pos.x + (religion_bars_x[i]) * window_res.x / 352, window_pos.y + (125 - percent_val * 35) * window_res.y / 316));
-        religion_bars_vec[i]->SetScale(Vector2(0.25 * window_res.x / 352, percent_val * 1.925 * window_res.y / 316));
+        rel_spreads[i] = (population_manager->GetReligiousSpread(Heaven, i) + population_manager->GetReligiousSpread(Hell, i)) / total_souls;
+    }
+
+    // Get the percentage of whole religious beliefs e.g. HAHAALFSUMA
+    // rel_spreads[i]: 0 = HAHA, 1 = HOHO, 2 = OPRA, 3 = OCRA, 4 = ALF, 5 =RALF, 6 = SUMA, 7 = SUSA
+    float temp;
+    for (int i = 0; i < 16; i++)
+    {
+        temp = 1;
+        temp *= rel_spreads[i % 4];
+
+        if (i < 8)
+        {
+            temp *= rel_spreads[6];
+            if (temp < 4) { temp *= rel_spreads[4]; }
+            else { temp *= rel_spreads[5]; }
+        }
+        else
+        {
+            temp *= rel_spreads[7];
+            if (temp < 12) { temp *= rel_spreads[4]; }
+            else { temp *= rel_spreads[5]; }
+        }
+
+        belief_amounts[i] = temp;
+    }
+}
+
+/// <summary>
+/// Update position and scale of bars for belief distribution
+/// </summary>
+void GraphviewWindow::updateBeliefVisual()
+{
+    updateBeliefSpread();
+    Vector2 res_factor = window_res / base_resolution;
+    for (int i = 0; i < 16; i++)
+    {
+        Vector2 new_pos;
+        new_pos.x = window_pos.x + (95 + ((belief_amounts[i] * 2) * 98.5)) * res_factor.x;
+        new_pos.y = window_pos.y + (45 + 11 * i) * res_factor.y;
+
+        Vector2 new_scale;
+        new_scale.x = belief_amounts[i] * max_belief_scales.x * res_factor.x;
+        new_scale.y = max_belief_scales.y * res_factor.y;
+
+        belief_bars_vec[i]->SetPos(new_pos);
+        belief_bars_vec[i]->SetScale(new_scale);
+    }
+}
+
+/// <summary>
+/// Update position and scale of bars for zone population distribution
+/// </summary>
+void GraphviewWindow::updatePopulationVisual()
+{
+    float total_pop = (float)population_manager->GetTotalSouls();
+    Vector2 res_factor = window_res / base_resolution;
+    for (int i = 0; i < 14; i++)
+    {
+        float percent_val = population_manager->GetZonePopulation(PlaneType(i % 2), ZoneType(1 + (int)i / 2)) / total_pop;
+        Vector2 new_pos;
+        new_pos.x = window_pos.x + (85 + (103.5 * percent_val)) * res_factor.x;
+        new_pos.y = window_pos.y + (67 + 11 * i) * res_factor.y;
+
+        Vector2 new_scale;
+        new_scale.x = percent_val * max_population_scales.x * res_factor.x;
+        new_scale.y = max_population_scales.y * res_factor.y;
+
+        population_bars_vec[i]->SetPos(new_pos);
+        population_bars_vec[i]->SetScale(new_scale);
+    }
+}
+
+/// <summary>
+/// Update position and scale of bars for religion distribution
+/// </summary>
+void GraphviewWindow::updateReligionVisual()
+{
+    updateBeliefSpread();
+    Vector2 res_factor = window_res / base_resolution;
+    for (int i = 0; i < 8; i++)
+    {
+        float percent_val = rel_spreads[i];
+        Vector2 new_pos;
+        new_pos.x = window_pos.x + (religion_bars_x[i]) * res_factor.x;
+        new_pos.y = window_pos.y + (125 - percent_val * 35) * res_factor.y;
+
+        Vector2 new_scale;
+        new_scale.x = max_religion_scales.x * res_factor.x;
+        new_scale.y = max_religion_scales.y * percent_val * res_factor.y;
+
+        religion_bars_vec[i]->SetPos(new_pos);
+        religion_bars_vec[i]->SetScale(new_scale);
     }
 }

@@ -4,6 +4,8 @@
 
 AdvisorManager::AdvisorManager()
 {
+    std::ifstream file("../Game/JSON_Files/AdvisorDialogues.json");
+    json_values = nlohmann::json::parse(file);
     AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
 }
 
@@ -18,6 +20,7 @@ AdvisorManager::~AdvisorManager()
 /// <returns></returns>
 bool AdvisorManager::init(AdvisorWindow* adv_wind)
 {
+    LoadFromJson();
     srand(time(0));
     advisor_window = adv_wind;
     
@@ -66,58 +69,53 @@ void AdvisorManager::Update(GameData* game_data)
 /// <param name="al_event"></param>
 const bool& AdvisorManager::ReceiveEvents(const AL::Event& al_event)
 {
+    int index = -1;
     switch (al_event.type)
     {
     case AL::event_ui:
-
         switch (al_event.ui.action)
         {
         case AL::UI::adv_option1:
-            if (current_faults[0] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[0]]);
-                RemoveFault(current_faults[0]);
-            }
+            index = 0;
             break;
 
         case AL::UI::adv_option2:
-            if (current_faults[1] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[1]]);
-                RemoveFault(current_faults[1]);
-            }
+            index = 1;
             break;
 
         case AL::UI::adv_option3:
-            if (current_faults[2] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[2]]);
-                RemoveFault(current_faults[2]);
-            }
+            index = 2;
             break;
 
         case AL::UI::adv_option4:
-            if (current_faults[3] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[3]]);
-                RemoveFault(current_faults[3]);
-            }
+            index = 3;
             break;
 
         case AL::UI::adv_option5:
-            if (current_faults[4] != -1)
-            {
-                GenerateAdvise(dialogue_starts[current_faults[4]]);
-                RemoveFault(current_faults[4]);
-            }
+            index = 4;
             break;
 
         default:
             break;;
         }
+        if (index != -1)
+        {
+            if (current_faults[index] != -1)
+            {
+                GenerateAdvise(dialogue_starts[current_faults[index]]);
+            }
+        }
         break;
     case AL::event_adv_fault:
-        AddFault(al_event.advisor.fault_index);
+        // Add or remove fault based off of event bool
+        if (al_event.advisor.add_fault)
+        {
+            AddFault(al_event.advisor.fault_codename);
+        }
+        else
+        {
+            RemoveFault(al_event.advisor.fault_codename);
+        }
         break;
     }
     return false;
@@ -333,8 +331,21 @@ int AdvisorManager::GetCharIndex()
 /// Add new fault to fault list dependant on an event
 /// </summary>
 /// <param name="index"></param>
-void AdvisorManager::AddFault(int index)
+void AdvisorManager::AddFault(string codename)
 {
+    // Convert codename into int
+    int index = -1;
+    for (int i = 0; i < json_values["advisorDialogues"].size(); i++)
+    {
+        if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
+        {
+            index = i;
+        }
+    }
+    if (index == -1)
+    {
+        return;
+    }
     // Checks if fault is already shown
     bool contains_fault = false;
     int last_point = -1;
@@ -362,8 +373,21 @@ void AdvisorManager::AddFault(int index)
 /// Remove an existing fault of the list dependant on an event
 /// </summary>
 /// <param name="index"></param>
-void AdvisorManager::RemoveFault(int index)
+void AdvisorManager::RemoveFault(string codename)
 {
+    // Convert codename into int
+    int index = -1;
+    for (int i = 0; i < json_values["advisorDialogues"].size(); i++)
+    {
+        if (json_values["advisorDialogues"][i]["codeName"].get<string>() == codename)
+        {
+            index = i;
+        }
+    }
+    if (index == -1)
+    {
+        return;
+    }
     // Checks if fault is already shown
     bool contains_fault = false;
     int fault_point = 0;
@@ -421,4 +445,85 @@ void AdvisorManager::UpdateButtons()
             advisor_window->setOptionBox(i, Neither, "");
         }
     }
+}
+
+/// <summary>
+/// Load all dialogue oriented variables from JSON
+/// </summary>
+void AdvisorManager::LoadFromJson()
+{
+    int index_tracker = 0;
+    for (int d = 0; d < json_values["advisorDialogues"].size(); d++)
+    {
+        dialogue_starts.push_back(index_tracker);
+        dialogue_titles.push_back(json_values["advisorDialogues"][d]["dialogueTitle"].get<string>());
+        dialogue_codenames.push_back(json_values["advisorDialogues"][d]["codeName"].get<string>());
+        switch (json_values["advisorDialogues"][d]["standpoint"].get<int>())
+        {
+        case 0:
+            // Heaven
+            dialogue_standpoints.push_back(Adv_Heaven);
+            break;
+
+        case 1:
+            // Hell
+            dialogue_standpoints.push_back(Adv_Hell);
+            break;
+
+        case 2:
+            // Both
+            dialogue_standpoints.push_back(Both);
+            break;
+
+        case 3:
+            // Neither
+            dialogue_standpoints.push_back(Neither);
+            break;
+        }
+        int total_dias = json_values["advisorDialogues"][d]["texts"].size();
+        for (int i = 0; i < total_dias; i++)
+        {
+            string temp_string = json_values["advisorDialogues"][d]["texts"][i].get<string>();
+            dia_array_string.push_back(AddSpaces(temp_string));
+            if (json_values["advisorDialogues"][d]["whosTalking"][i].get<int>() == 0)
+            {
+                // Jasper
+                dia_array_advisor.push_back(Jasper);
+            }
+            else
+            {
+                // Aria
+                dia_array_advisor.push_back(Aria);
+            }
+            if (i == total_dias - 1)
+            {
+                dia_array_pointers.push_back(-1);
+            }
+            else
+            {
+                dia_array_pointers.push_back(index_tracker + i + 1);
+            }
+        }
+        index_tracker+= total_dias;
+    }
+}
+
+std::string AdvisorManager::AddSpaces(std::string inp_string)
+{
+    std::string new_string;
+    int letter_tracker = 0;
+    for (auto& letter : inp_string)
+    {
+        new_string+=letter;
+        letter_tracker++;
+        if (letter_tracker > 30)
+        {
+            if (letter == ' ')
+            {
+                new_string += "\n";
+                letter_tracker = 0;
+            }
+        }
+    }
+    return new_string;
 }

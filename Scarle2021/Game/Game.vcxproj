@@ -189,7 +189,7 @@
     <ClInclude Include="Event.hpp" />
     <ClInclude Include="GameplaySingletons.h" />
     <ClInclude Include="GraphviewWindow.h" />
-    <ClInclude Include="MicromanagerWindow.h" />
+    <ClInclude Include="MacromanagerWindow.h" />
     <ClInclude Include="HierarchyManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="EventReceiver.hpp" />
@@ -205,7 +205,6 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="PlaneType.h" />
     <ClInclude Include="PopulationManager.h" />
-    <ClInclude Include="RaDTilemap.h" />
     <ClInclude Include="StructureBuilding.h" />
     <ClInclude Include="StructureData.h" />
     <ClInclude Include="StructureGate.h" />
@@ -254,7 +253,9 @@
     <ClInclude Include="TreeBit.h" />
     <ClInclude Include="UIButtonInterFace.h" />
     <ClInclude Include="UIPanel.h" />
+    <ClInclude Include="UISlider.h" />
     <ClInclude Include="UIWindow.h" />
+    <ClInclude Include="UIWindowAudioSettings.h" />
     <ClInclude Include="UIWindowBadThings.h" />
     <ClInclude Include="UIWindowEvent.h" />
     <ClInclude Include="UIWindowEventWarning.h" />
@@ -296,9 +297,8 @@
     <ClCompile Include="HierarchyManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="GraphviewWindow.cpp" />
-    <ClCompile Include="MicromanagerWindow.cpp" />
+    <ClCompile Include="MacromanagerWindow.cpp" />
     <ClCompile Include="PopulationManager.cpp" />
-    <ClCompile Include="RaDTilemap.cpp" />
     <ClCompile Include="StructureBuilding.cpp" />
     <ClCompile Include="StructureData.cpp" />
     <ClCompile Include="StructureGate.cpp" />
@@ -340,7 +340,9 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="treebit.cpp" />
     <ClCompile Include="UIPanel.cpp" />
+    <ClCompile Include="UISlider.cpp" />
     <ClCompile Include="UIWindow.cpp" />
+    <ClCompile Include="UIWindowAudioSettings.cpp" />
     <ClCompile Include="UIWindowBadThings.cpp" />
     <ClCompile Include="UIWindowEvent.cpp" />
     <ClCompile Include="UIWindowEventWarning.cpp" />
@@ -355,6 +357,7 @@
     <ClCompile Include="Window_Global.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="JSON_Files\AdvisorDialogues.json" />
     <None Include="NewEventManager.tpp" />
   </ItemGroup>
   <ItemGroup>

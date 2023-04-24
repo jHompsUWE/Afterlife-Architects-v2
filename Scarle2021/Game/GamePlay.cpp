@@ -34,6 +34,11 @@ bool GamePlay::init()
     //window bad things button
     ui_window_bad_things = new UIWindowBadThings(Vector2(250, 35), DataManager::
         GetD3DDevice(), "", "bad_things", Vector2(1.5, 1.5));
+    
+    //window bad things button
+    ui_window_audio_settings = new UIWindowAudioSettings(Vector2(450, 350), DataManager::
+        GetD3DDevice(), "", "audio_window", Vector2(1, 1));
+    hierarchy_manager->AddToHierarchy(ui_window_audio_settings);
 
     //window border global button
     window_global = new Window_Global(Vector2(90, 35), DataManager::
@@ -58,9 +63,9 @@ bool GamePlay::init()
     hierarchy_manager->AddToHierarchy(soul_view);
 
     //micro manager
-    micro_manager = new MicromanagerWindow(Vector2(400, 120), DataManager::
+    macro_manager = new MacromanagerWindow(Vector2(400, 120), DataManager::
         GetD3DDevice(), "", "micro_window", Vector2(1, 1), GameplaySingletons::GetEconomyManager());
-    hierarchy_manager->AddToHierarchy(micro_manager);
+    hierarchy_manager->AddToHierarchy(macro_manager);
 
     //graphview
     graphview = new GraphviewWindow(Vector2(400, 120), DataManager::
@@ -119,6 +124,7 @@ bool GamePlay::init()
     window_file->setVisibility(false);
     window_global->setVisibility(false);
     ui_window_bad_things->setVisibility(false);
+    ui_window_audio_settings->setVisibility(false);
 
     window_one_gate->setVisibility(false);
     window_two_karma_station->setVisibility(false);
@@ -128,7 +134,7 @@ bool GamePlay::init()
     ui_window_event->setVisibility(false);
 
     soul_view->setVisibility(false);
-    micro_manager->setVisibility(false);
+    macro_manager->setVisibility(false);
     graphview->setVisibility(false);
     advisor_window->setVisibility(false);
 
@@ -153,6 +159,8 @@ void GamePlay::Update(GameData* game_data)
     window_file->update(game_data, mouse_pos);
     //Bad things selector
     ui_window_bad_things->update(game_data, mouse_pos);
+    //Bad things selector
+    ui_window_audio_settings->update(game_data, mouse_pos);
     //Window global
     window_global->update(game_data, mouse_pos);
     //Border
@@ -234,8 +242,8 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             hierarchy_manager->OpenCloseWindow(soul_view);
             break;
 
-        case AL::UI::window_micro_manager:
-            hierarchy_manager->OpenCloseWindow(micro_manager);
+        case AL::UI::window_macro_manager:
+            hierarchy_manager->OpenCloseWindow(macro_manager);
             break;
 
         case AL::UI::window_graphview:
@@ -251,6 +259,9 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             break;
         case AL::UI::global_bad_things_window:
             ui_window_bad_things->setVisibility(!ui_window_bad_things->getVisibility());
+            break;
+        case AL::UI::global_audio_settings_window:
+            hierarchy_manager->OpenCloseWindow(ui_window_audio_settings);
             break;
 
         case AL::UI::no_bad_things:
@@ -310,6 +321,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             window_file->setVisibility(false);
             window_global->setVisibility(false);
             ui_window_bad_things->setVisibility(false);
+            ui_window_audio_settings->setVisibility(false);
 
             window_one_gate->setVisibility(false);
             window_two_karma_station->setVisibility(false);
@@ -319,7 +331,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             ui_window_event->setVisibility(false);
 
             soul_view->setVisibility(false);
-            micro_manager->setVisibility(false);
+            macro_manager->setVisibility(false);
             graphview->setVisibility(false);
             advisor_window->setVisibility(false);
 
