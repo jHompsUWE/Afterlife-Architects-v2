@@ -116,5 +116,9 @@ private:
 #ifdef _FPS
     TextGO2D* frame_counter = nullptr;
 #endif
+
+#ifdef _ARCADE
+    bool skip_frame;
+#endif
 };
 

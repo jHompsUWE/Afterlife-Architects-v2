@@ -23,7 +23,7 @@ void VibeTilemap::Draw(DrawData* _DD)
 {
 	for (auto& x : vibe_tilemap)
 	{
-		for (auto& y : x)
+		for (const auto& y : x)
 		{
 			y->Draw(_DD);
 		}

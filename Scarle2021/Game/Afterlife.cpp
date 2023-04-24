@@ -58,8 +58,8 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
     CreateResources();
 
     //TODO: Uncomment this for fixed 60FPS
-    //timer.SetFixedTimeStep(true);
-    //timer.SetTargetElapsedSeconds(1.0 / 60);
+    // timer.SetFixedTimeStep(true);
+    // timer.SetTargetElapsedSeconds(1.0 / 60);
     
     // Seed random gen
     srand((UINT)time(NULL));
@@ -173,7 +173,7 @@ void Afterlife::MainUpdate(DX::StepTimer const& timer)
     ortho_cam->Tick(game_data);
 
 #ifdef _FPS
-    int fps = 1 / delta_time;
+    float fps = 1 /  delta_time;
     frame_counter->ChangeString(std::to_string(fps));
     frame_counter->Tick(game_data);
 #endif
@@ -220,6 +220,11 @@ void Afterlife::Render()
 
     // Clear the main_window 
     Clear();
+
+#ifdef _ARCADE
+    skip_frame = !skip_frame;
+    if (skip_frame) return;
+#endif
 
     //set immediate context of the graphics device, has to be done every single frame
     draw_data->pd3d_immediate_context = d3d_context.Get();
