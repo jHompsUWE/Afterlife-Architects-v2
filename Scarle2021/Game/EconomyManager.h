@@ -13,6 +13,7 @@ public:
 
 	void Tick(GameData* game_data);
 	void SetTotalRoads(int t_roads) { total_roads = t_roads; };
+	void SetTotalKarmaTracks(int t_karma_tracks) { total_karma_tracks = t_karma_tracks; };
 	void SetStructureCount(int s_count) { total_structures = s_count; };
 
 	float GetMoney() { return money; }
@@ -46,6 +47,9 @@ private:
 	// Road variables
 	int total_roads;
 	float cost_per_road = 1.0f;
+
+	int total_karma_tracks;
+	float cost_per_karma_track = 1.0f;
 
 	float money_per_soul = 0.1f;
 };

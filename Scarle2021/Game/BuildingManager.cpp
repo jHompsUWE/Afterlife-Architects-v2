@@ -2,7 +2,8 @@
 #include "BuildingManager.h"
 #include <iostream>
 
-BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap,
+BuildingManager::BuildingManager(ID3D11Device* GD, std::shared_ptr<TextureManager> _texture_manager, std::shared_ptr<PopulationManager> _population_manager, std::unique_ptr<VibeTilemap>& _vibe_tilemap,
+
 	std::shared_ptr<EconomyManager> _economy_manager, int _size, Vector3 _start, PlaneType _plane) :
 	d11_device(GD), start(_start), plane(_plane), texture_manager(_texture_manager), population_manager(_population_manager), vibe_tilemap(_vibe_tilemap), economy_manager(_economy_manager)
 {
@@ -66,9 +67,12 @@ void BuildingManager::Draw(DrawData* _DD)
 void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile_position)
 {
 	int size = GetSizeOfStructure(structure_type);
-	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
-	structure_types[tile_position.x][tile_position.z] = structure_type;
-	// Change the vibe of the tiles around the structure
+	Vector2 dimensions = texture_manager->GetSizeStructure(structure_type, plane);
+
+	structure_types[tile_position.x][tile_position.z] = structure_type;
+
+	// Change the vibe of the tiles around the structure
+
 	vibe_tilemap->VibeChange(tile_position, GetVibeOfStructure(structure_type), GetSizeOfStructure(structure_type), GetSizeOfStructure(structure_type));
 
 	StructureData* structure_data = new StructureData(d11_device, Vector2(sqrt(2) * size, sqrt(2) * dimensions.y / dimensions.x * size), 
@@ -228,7 +232,8 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaAnchor:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaAnchor>(structure_data);
+			std::make_unique<StructureKarmaAnchor>(structure_data,
+				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
 		break;
 
 	case KarmaPortal:
@@ -239,18 +244,35 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaStation_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaStation>(structure_data);
+			std::make_unique<StructureKarmaStation>(structure_data,
+				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
+		if (plane == Heaven)
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
+		else
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
 		break;
 
 	case KarmaStation_T2:
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureKarmaStation>(structure_data);
+		if (plane == Heaven)
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
+		else
+		{
+			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
+		}
 		break;
 
 	case KarmaTrack:
-		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(structure_data);
+			std::make_unique<StructureSprite>(structure_data,
+				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
 		break;
 
 	case Rock_1:

@@ -7,6 +7,7 @@ EconomyManager::EconomyManager(std::shared_ptr<PopulationManager> _pop_manager) 
 	money = 333333;
 	year = 0;
     total_roads = 0;
+    total_karma_tracks = 0;
     timer = 0;
     prev_year_population = 0;
 }
@@ -69,6 +70,9 @@ void EconomyManager::YearUpdate()
 
     // Road upkeep cost
     money -= total_roads * cost_per_road;
+
+    // Takes money off the currency depending on the number of tracks, cost of track and how long they stay for
+    money -= total_karma_tracks * cost_per_karma_track;
 
     // Calculate averate tile population and population gain
     float total_capacity = pop_manager->GetTotalCapacity();

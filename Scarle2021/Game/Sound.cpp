@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Sound.h"
 
+// Checks volume 
+// Checks the location of the sounds and what file type
+// If wav it can be played. If not then it can't play
+// Plays the file
 Sound::Sound(AudioEngine* _audEngine, std::string _filename, float _volume)
 {
 	m_volume = _volume;
