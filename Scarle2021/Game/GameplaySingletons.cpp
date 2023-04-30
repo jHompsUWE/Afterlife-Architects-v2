@@ -14,7 +14,7 @@ GameplaySingletons::GameplaySingletons()
 	
 #ifdef _ARCADE
 	std::ifstream file("../Game/JSON_Files/StructureValues.json");
-#elif
+#else
 	std::ifstream file("../Game/JSON_Files/StructureValues.json");
 #endif
 	

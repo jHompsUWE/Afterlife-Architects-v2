@@ -30,7 +30,7 @@ void Tilemap::Draw(DrawData* _DD)
 		{
 #ifdef _ARCADE
 			if (y->GetZoneType() != ZoneType::Void) y->Draw(_DD);
-#elif
+#else
 			y->Draw(_DD);
 #endif
 		}

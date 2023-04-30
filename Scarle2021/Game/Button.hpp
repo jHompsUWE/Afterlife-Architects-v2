@@ -90,17 +90,20 @@ public:
 						if constexpr (std::is_same<Action2, int>::value)
 						{
 							AL::NewEventManager::GenerateEventSt(saved_event, action_1);
+							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 						//If the first action is from the building system, generate a building event
 						else if constexpr (std::is_same<Action1, AL::BuildSys::Section>::value)
 						{
 							AL::NewEventManager::GenerateEventSt(saved_event, (AL::BuildSys::Section)action_1,
 								(StructureType)action_2, (ZoneType)action_2);
+							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 						//For any other iteration generate a normal event
 						else
 						{
 							AL::NewEventManager::GenerateEventSt(saved_event, action_1, action_2);
+							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 
 						return true;
@@ -207,6 +210,7 @@ private:
 	
 	Action1 action_1 = NULL;
 	Action2 action_2 = NULL;
+	const char click_sound_1[32] = "Click";
 };
 
 
