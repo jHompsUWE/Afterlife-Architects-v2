@@ -37,7 +37,7 @@ UIWindowAudioSettings::UIWindowAudioSettings(Vector2 _windowPosition, ID3D11Devi
         sliders.push_back(new UISlider(100, 1));
     }
 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
 }
 
 UIWindowAudioSettings::~UIWindowAudioSettings()
@@ -145,7 +145,7 @@ void UIWindowAudioSettings::updateSlider(int slider_index, int perc_change)
 {
     // Update position of slider handle
     image_vec[2 * slider_index + 1]->SetPos(Vector2(sliders[slider_index]->updateSlider(perc_change, window_res.x), 0) + image_vec[2 * slider_index + 1]->GetPos());
-    AL::NewEventManager::GenerateEventSt(AL::event_sound_volume, slider_index, sliders[slider_index]->getPercent());
+    AL::EventManager::GenerateEventSt(AL::event_sound_volume, slider_index, sliders[slider_index]->getPercent());
 }
 
 void UIWindowAudioSettings::render(DrawData2D* _drawData)

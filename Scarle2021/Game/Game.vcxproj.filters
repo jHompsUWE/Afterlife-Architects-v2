@@ -342,7 +342,7 @@
     <ClInclude Include="Event.hpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="NewEventManager.h">
+    <ClInclude Include="EventManager.h">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClInclude>
     <ClInclude Include="EventReceiver.hpp">
@@ -596,7 +596,7 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Afterlife\Managers\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="NewEventManager.cpp">
+    <ClCompile Include="EventManager.cpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </ClCompile>
     <ClCompile Include="BuildingSystem.cpp">
@@ -706,7 +706,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NewEventManager.tpp">
+    <None Include="EventManager.tpp">
       <Filter>Afterlife\Managers\Events\Event Manager</Filter>
     </None>
     <None Include="JSON_Files\AdvisorDialogues.json">

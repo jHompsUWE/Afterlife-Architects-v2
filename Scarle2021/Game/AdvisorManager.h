@@ -1,6 +1,6 @@
 #pragma once
 #include "DataManager.h" 
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include "AdvisorWindow.h"
 #include <unordered_map>
 #include <fstream>

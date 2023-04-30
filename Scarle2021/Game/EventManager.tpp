@@ -11,13 +11,13 @@ namespace AL
 	// Static Event Generation -------------------------------------------------------------------------------------
 	
     template <typename... Payload>
-    void NewEventManager::GenerateEventSt(const EventType& type, const Payload&... args)
+    void EventManager::GenerateEventSt(const EventType& type, const Payload&... args)
     {
         Get().GenerateEvent(type, args...);
     }
 
 	template <typename... Payload>
-	void NewEventManager::GenerateEventWithDelaySt(const EventType& type, const float& delay, const Payload&... args)
+	void EventManager::GenerateEventWithDelaySt(const EventType& type, const float& delay, const Payload&... args)
     {
     	Get().GenerateEventWithDelay(type, delay, args...);
     }
@@ -25,13 +25,13 @@ namespace AL
 	// Static Filtered Subscriptions handlers ----------------------------------------------------------------------
 
 	template <typename... Payload>
-	void NewEventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver, const Payload&... types)
+	void EventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver, const Payload&... types)
     {
     	Get().AddReceiver(priority, receiver, types...);
     }
 
 	template <typename... Payload>
-	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver, const Payload&... types)
+	void EventManager::RemoveEventReceiver(EventReceiver* receiver, const Payload&... types)
     {
     	Get().RemoveReceiver(receiver, types...);
     }
@@ -39,7 +39,7 @@ namespace AL
 	// Event Generation ------------------------------------------------------------------------------------------------
 	
 	template <typename ... Payload>
-	void NewEventManager::GenerateEvent(EventType type, const Payload&... args)
+	void EventManager::GenerateEvent(EventType type, const Payload&... args)
     {
     	//Aborts event creation if wrong type is given
     	if(type == unknown || type == last_entry)
@@ -52,7 +52,7 @@ namespace AL
     }
 	
 	template <typename... Payload>
-	void NewEventManager::GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args)
+	void EventManager::GenerateEventWithDelay(EventType type, const float& delay, const Payload&... args)
     {
     	//Aborts event creation if wrong type is given
     	if(type == unknown || type == last_entry)
@@ -71,7 +71,7 @@ namespace AL
 	// Filtered Subscription Handlers ----------------------------------------------------------------------------------
 
 	template <typename T, typename... Payload>
-	void NewEventManager::AddReceiver(const bool& priority, EventReceiver* receiver, const T& type, const Payload&... types)
+	void EventManager::AddReceiver(const bool& priority, EventReceiver* receiver, const T& type, const Payload&... types)
     {
     	//Throws a compiler error if the wrong type is passed
     	static_assert(std::is_same<T, EventType>::value, "Tried Subscribing invalid event type");
@@ -92,7 +92,7 @@ namespace AL
     }
 
 	template <typename T, typename... Payload>
-	void NewEventManager::RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
+	void EventManager::RemoveReceiver(EventReceiver* receiver, const T& type, const Payload&... types)
     {
     	// Cycles trough all priority receivers backwards
     	for (int i = priority_event_receiver_list.size() -1; i >= 0; --i)
@@ -139,7 +139,7 @@ namespace AL
 	//easy way to bulk data inside events
 	
 	template <typename... Payload>
-	void NewEventManager::SetEventData(const EventType& type, const float& delay, const Payload&... args)
+	void EventManager::SetEventData(const EventType& type, const float& delay, const Payload&... args)
 	{
     	// Creates the event with data given, and an offset to reach the union
     	event_list.emplace_back(type, delay);
@@ -158,7 +158,7 @@ namespace AL
 
 	//Recursive, linked to the previous one
 	template <typename T, typename ... Payload>
-	void NewEventManager::SetEventDataIterative(Event& event, size_t& byte_offset, const T& arg, const Payload&... args)
+	void EventManager::SetEventDataIterative(Event& event, size_t& byte_offset, const T& arg, const Payload&... args)
 	{
     	//if the memory size of an event has been overflow, stop data insertion
 		if(byte_offset + sizeof(arg) > sizeof(Event))

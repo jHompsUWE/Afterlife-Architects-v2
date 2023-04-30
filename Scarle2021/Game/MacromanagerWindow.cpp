@@ -49,7 +49,7 @@ MacromanagerWindow::MacromanagerWindow(Vector2 _windowPosition, ID3D11Device* _d
 
     economy_manager = _economy_manager;
 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
 }
 
 MacromanagerWindow::~MacromanagerWindow()

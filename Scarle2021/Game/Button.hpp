@@ -32,7 +32,7 @@ public:
 		buttonText->SetPos(Vector2(button_pos.x,button_pos.y));
 		buttonText->SetScale(Vector2(_setScale));
 
-		AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
+		AL::EventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	};
 	
 	Button(Vector2 _buttonPosition, ID3D11Device* _d3dDevice,std::string
@@ -51,12 +51,12 @@ public:
 		button_pos = _buttonPosition - button_res/2;
 		buttonBackGround->SetPos(button_pos);
 
-		AL::NewEventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
+		AL::EventManager::AddEventReceiver(priority, this, AL::EventType::event_cursor_move, AL::EventType::event_cursor_interact);
 	}
 	
 	~Button() override
 	{
-		AL::NewEventManager::RemoveEventReceiver(this);
+		AL::EventManager::RemoveEventReceiver(this);
 		
 		delete buttonBackGround;
 		delete buttonText;
@@ -89,21 +89,21 @@ public:
 						//scrapped and the event will be generated with a single value
 						if constexpr (std::is_same<Action2, int>::value)
 						{
-							AL::NewEventManager::GenerateEventSt(saved_event, action_1);
-							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
+							AL::EventManager::GenerateEventSt(saved_event, action_1);
+							AL::EventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 						//If the first action is from the building system, generate a building event
 						else if constexpr (std::is_same<Action1, AL::BuildSys::Section>::value)
 						{
-							AL::NewEventManager::GenerateEventSt(saved_event, (AL::BuildSys::Section)action_1,
+							AL::EventManager::GenerateEventSt(saved_event, (AL::BuildSys::Section)action_1,
 								(StructureType)action_2, (ZoneType)action_2);
-							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
+							AL::EventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 						//For any other iteration generate a normal event
 						else
 						{
-							AL::NewEventManager::GenerateEventSt(saved_event, action_1, action_2);
-							AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
+							AL::EventManager::GenerateEventSt(saved_event, action_1, action_2);
+							AL::EventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 						}
 
 						return true;
@@ -187,12 +187,12 @@ public:
 
 	void MoveInFront() override
 	{
-		AL::NewEventManager::IncreaseReceiverPrioritySt(this);
+		AL::EventManager::IncreaseReceiverPrioritySt(this);
 	}
 
 	void MoveToBack() override
 	{
-		AL::NewEventManager::DecreaseReceiverPrioritySt(this);
+		AL::EventManager::DecreaseReceiverPrioritySt(this);
 	}
 
 private:

@@ -3,7 +3,7 @@
 #include "GameData.h"
 #include <iostream>
 
-#include "NewEventManager.h"
+#include "EventManager.h"
 
 OrthographicCamera::OrthographicCamera(float _near_plane, float _far_plane, Vector3 _offset) :
 	near_plane(_near_plane), far_plane(_far_plane), offset(_offset)
@@ -11,13 +11,13 @@ OrthographicCamera::OrthographicCamera(float _near_plane, float _far_plane, Vect
 	//win_x = _win_x;
 	//win_x = _win_y;
 
-	AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_input, AL::EventType::event_cursor_move,
+	AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_input, AL::EventType::event_cursor_move,
 		AL::EventType::event_cursor_interact, AL::EventType::event_ui, AL::EventType::event_camera);
 }
 
 OrthographicCamera::~OrthographicCamera()
 {
-	AL::NewEventManager::RemoveEventReceiver(this);
+	AL::EventManager::RemoveEventReceiver(this);
 }
 
 void OrthographicCamera::Tick(GameData* _GD)

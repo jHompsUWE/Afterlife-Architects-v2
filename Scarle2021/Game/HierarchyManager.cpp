@@ -3,12 +3,12 @@
 
 HierarchyManager::HierarchyManager()
 {
-    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
+    AL::EventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 HierarchyManager::~HierarchyManager()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 // Game Cycle ----------------------------------------------------------------------------------------------------------

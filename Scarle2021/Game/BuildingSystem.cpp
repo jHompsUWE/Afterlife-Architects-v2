@@ -31,13 +31,13 @@ BuildingSystem::BuildingSystem(std::shared_ptr<Vector3> mouse_pos, ID3D11Device*
 
     timer = 0;
 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_input, AL::EventType::event_cursor_interact,
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_input, AL::EventType::event_cursor_interact,
         AL::EventType::event_build_sys);
 }
 
 BuildingSystem::~BuildingSystem()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 void BuildingSystem::Tick(GameData* game_data)
@@ -138,7 +138,7 @@ bool BuildingSystem::ReceiveEvents(const AL::Event& al_event)
     if(al_event.type == AL::event_cursor_interact)
     {
         //Does not interact with the building manager if the cursor is inside the UI
-        if(!AL::NewEventManager::IsCursorInsideUi())
+        if(!AL::EventManager::IsCursorInsideUi())
         {
             if(al_event.cursor_interact.action == AL::Cursor::Action::button_input1)
             {

@@ -8,12 +8,12 @@
 AudioManager::AudioManager()
 {
     //Subscribes to the event system! 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop, AL::EventType::event_sound_volume);
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_sound_start, AL::EventType::event_sound_stop, AL::EventType::event_sound_volume);
 }
 
 AudioManager::~AudioManager()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 /// <summary>

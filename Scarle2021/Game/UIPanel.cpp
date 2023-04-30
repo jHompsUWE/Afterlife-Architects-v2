@@ -150,7 +150,7 @@ UIPanel::UIPanel(Vector2 _panelPosition, ID3D11Device*
     setPostion(Vector2(1000, 30));
     
     //Subscribe for events
-    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
+    AL::EventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 UIPanel::~UIPanel()
@@ -168,7 +168,7 @@ UIPanel::~UIPanel()
     delete panel_back_ground;
 
     //Unsubscribe from events
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 void UIPanel::update(GameData* _gameData, Vector2& _mousePosition)

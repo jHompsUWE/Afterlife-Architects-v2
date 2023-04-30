@@ -35,13 +35,13 @@ WindowBoarder::WindowBoarder(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
         DataManager::GetD3DDevice(),"Green",
         AL::EventType::event_ui,AL::UI::window_tutorial, 0,Vector2(1.5,1), true));
 
-    AL::NewEventManager::RemoveEventReceiver(this);
-    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
+    AL::EventManager::RemoveEventReceiver(this);
+    AL::EventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 WindowBoarder::~WindowBoarder()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 void WindowBoarder::update(GameData* _gameData, Vector2& _mousePosition)

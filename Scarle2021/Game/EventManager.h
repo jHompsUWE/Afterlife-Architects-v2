@@ -7,17 +7,17 @@
 
 namespace AL
 {
-	class NewEventManager
+	class EventManager
 	{
 	public:
 		//Deleted copy constructor and assignment operator
-		NewEventManager(const NewEventManager&) = delete;
-		NewEventManager& operator=(const NewEventManager&) = delete;
+		EventManager(const EventManager&) = delete;
+		EventManager& operator=(const EventManager&) = delete;
 
 		/**
 		 * \return Instance of EventManager
 		 */
-		static NewEventManager& Get();
+		static EventManager& Get();
 
 		// Static Event Generation -------------------------------------------------------------------------------------
 		
@@ -139,8 +139,8 @@ namespace AL
 		
 	private:
 		//Private constructor and de-constructor
-		NewEventManager();
-		~NewEventManager();
+		EventManager();
+		~EventManager();
 
 		// Unfiltered Subscription Handlers ----------------------------------------------------------------------------
 	
@@ -230,4 +230,4 @@ namespace AL
 }
 
 // A TPP file for templates is added at the bottom of this H file to allow the compiler to link it properly
-#include "NewEventManager.tpp"
+#include "EventManager.tpp"

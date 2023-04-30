@@ -36,11 +36,11 @@ void BuildingManager::Tick(GameData* game_data)
 	}
 	if (plane == Heaven)
 	{
-		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "GateHeaven", total_gates == 0);
+		AL::EventManager::GenerateEventSt(AL::event_adv_fault, "GateHeaven", total_gates == 0);
 	}
 	else
 	{
-		AL::NewEventManager::GenerateEventSt(AL::event_adv_fault, "GateHell", total_gates == 0);
+		AL::EventManager::GenerateEventSt(AL::event_adv_fault, "GateHell", total_gates == 0);
 	}
 }
 
@@ -164,7 +164,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 		// TODO: Give actual functionality to this building
 		structure_map[tile_position.x][tile_position.z] =
 			std::make_unique<StructureSprite>(structure_data);
-		AL::NewEventManager::GenerateEventSt(AL::event_sound_start, bank_sound, 1.0f, true);
+		AL::EventManager::GenerateEventSt(AL::event_sound_start, bank_sound, 1.0f, true);
 		break;
 
 	case Bank_T2:
@@ -173,11 +173,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 			std::make_unique<StructureSprite>(structure_data);
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -187,11 +187,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
 		total_gates++;
 		break;
@@ -202,11 +202,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
 		total_gates++;
 		break;
@@ -217,11 +217,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, gate_hell_sound, 1.0f, true);
 		}
 		total_gates++;
 		break;
@@ -266,11 +266,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["ADCapacity"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, topia_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, topia_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, topia_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, topia_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -280,11 +280,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["ADCapacity"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -294,11 +294,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["conversionRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -308,11 +308,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["conversionRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -322,11 +322,11 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["conversionRate"].get<int>());
 		if (plane == Heaven)
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_heaven_sound, 1.0f, true);
 		}
 		else
 		{
-			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
+			AL::EventManager::GenerateEventSt(AL::event_sound_start, institute_hell_sound, 1.0f, true);
 		}
 		break;
 
@@ -375,7 +375,7 @@ void BuildingManager::DestroyStructure(Vector3 tile_position)
 			total_buildings--;
 		}
 		structure_map[tile_position.x][tile_position.z] = nullptr;
-		AL::NewEventManager::GenerateEventSt(AL::event_sound_start, destroy_sound_1, 1.0f ,true);
+		AL::EventManager::GenerateEventSt(AL::event_sound_start, destroy_sound_1, 1.0f ,true);
 	}
 }
 

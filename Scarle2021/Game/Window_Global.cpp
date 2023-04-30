@@ -35,13 +35,13 @@ Window_Global::Window_Global(Vector2 _windowPosition, ID3D11Device* _d3dDevice, 
         DataManager::GetD3DDevice(),"Green",
          AL::EventType::event_ui,AL::UI::global_misc_options_window, 0,Vector2(5,0.7), true));
 
-    AL::NewEventManager::RemoveEventReceiver(this);
-    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
+    AL::EventManager::RemoveEventReceiver(this);
+    AL::EventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 Window_Global::~Window_Global()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 void Window_Global::update(GameData* _gameData, Vector2& _mousePosition)

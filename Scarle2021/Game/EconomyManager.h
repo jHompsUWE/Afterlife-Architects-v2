@@ -2,7 +2,7 @@
 #include <memory>
 #include "GameData.h"
 #include "PopulationManager.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include <iostream>
 
 class EconomyManager

@@ -43,13 +43,13 @@ Window_file::Window_file(Vector2 _windowPosition, ID3D11Device* _d3dDevice, std:
         DataManager::GetD3DDevice(),"Green",
          AL::EventType::event_ui,AL::UI::file_exit_game, 0,Vector2(5,0.7), true));
 
-    AL::NewEventManager::RemoveEventReceiver(this);
-    AL::NewEventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
+    AL::EventManager::RemoveEventReceiver(this);
+    AL::EventManager::AddEventReceiver(true, this, AL::EventType::event_cursor_interact);
 }
 
 Window_file::~Window_file()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 };
 
 void Window_file::update(GameData* _gameData, Vector2& _mousePosition)

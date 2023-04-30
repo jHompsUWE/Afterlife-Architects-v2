@@ -63,7 +63,7 @@ GraphviewWindow::GraphviewWindow(Vector2 _windowPosition, ID3D11Device* _d3dDevi
         DataManager::GetD3DDevice(), "green",
         AL::EventType::event_ui, AL::UI::graphview_pop, 0, Vector2(0.6, 0.6)));
 
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_ui);
 }
 
 GraphviewWindow::~GraphviewWindow()

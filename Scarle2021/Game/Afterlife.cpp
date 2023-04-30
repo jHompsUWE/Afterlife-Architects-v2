@@ -122,7 +122,7 @@ void Afterlife::Initialize(HWND _window, int _width, int _height)
         draw_data, draw_data2D, d3d_device.Get(),d3d_context.Get(), effect_factory);
 
     //Saves a pointer to the event manager
-    event_manager = &AL::NewEventManager::Get();
+    event_manager = &AL::EventManager::Get();
 
     //Inits the finite state machine
     finite_state_machine = std::make_unique<FSM>(game_data->current_game_state);

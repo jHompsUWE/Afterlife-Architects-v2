@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "DataManager.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include "AudioManager.h"
 
 /**

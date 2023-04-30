@@ -85,7 +85,7 @@ void PreviewQuad::ResizePreviewQuad(Vector3 start, Vector3 end)
 	SetPos(temp_pos);
 	if (GetScale() != Vector3(xCols * xDir, 1, zCols * zDir)) 
 	{
-		AL::NewEventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
+		AL::EventManager::GenerateEventSt(AL::event_sound_start, click_sound_1, 1.0f, true);
 	}
 	SetScale(Vector3(xCols * xDir, 1, zCols * zDir));
 	UpdateWorldMatrix();

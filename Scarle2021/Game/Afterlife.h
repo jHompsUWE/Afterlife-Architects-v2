@@ -10,7 +10,7 @@
 #include "Audio.h"
 #include "FSM.h"
 #include "OrthographicCamera.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include "InputManager.h"
 #include "Player.h"
 
@@ -111,7 +111,7 @@ private:
     std::unique_ptr<AL::InputManager> input_manager = nullptr;
 
     //Pointer to the Event Manager
-    AL::NewEventManager* event_manager = nullptr;
+    AL::EventManager* event_manager = nullptr;
 
 #ifdef _FPS
     TextGO2D* frame_counter = nullptr;

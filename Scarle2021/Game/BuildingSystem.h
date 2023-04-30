@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameData.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 
 #include "Tilemap.h"
 #include "VibeTilemap.h"

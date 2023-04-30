@@ -1,7 +1,7 @@
 #pragma once
 #include "VBQuad.h"
 #include "ZoneType.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 
 class PreviewQuad : public VBQuad
 {

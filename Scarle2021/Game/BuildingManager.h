@@ -10,7 +10,7 @@
 #include "PopulationManager.h"
 #include "TextureManager.h"
 #include "EconomyManager.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 
 #include "VibeTilemap.h"
 

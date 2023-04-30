@@ -81,13 +81,13 @@ void LevelSelect::GetEvents(const AL::Event& al_event)
         {
          case AL::Game::enter_gameplay:
             MoveOffScreen();
-            AL::NewEventManager::FlushEventListSt();
+            AL::EventManager::FlushEventListSt();
             DataManager::GetGD()->current_game_state = gs_gameplay;
             break;
             
         case AL::Game::enter_main_menu:
             MoveOffScreen();
-            AL::NewEventManager::FlushEventListSt();
+            AL::EventManager::FlushEventListSt();
             DataManager::GetGD()->current_game_state = gs_main_menu;
             break;
             

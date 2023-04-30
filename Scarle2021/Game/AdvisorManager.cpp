@@ -6,12 +6,12 @@ AdvisorManager::AdvisorManager()
 {
     std::ifstream file("../Game/JSON_Files/AdvisorDialogues.json");
     json_values = nlohmann::json::parse(file);
-    AL::NewEventManager::AddEventReceiver(false, this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
+    AL::EventManager::AddEventReceiver(false, this, AL::EventType::event_ui, AL::EventType::event_adv_fault);
 }
 
 AdvisorManager::~AdvisorManager()
 {
-    AL::NewEventManager::RemoveEventReceiver(this);
+    AL::EventManager::RemoveEventReceiver(this);
 }
 
 /// <summary>

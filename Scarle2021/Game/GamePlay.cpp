@@ -332,7 +332,7 @@ void GamePlay::GetEvents(const AL::Event& al_event)
             advisor_window->setVisibility(false);
 
             DataManager::GetGD()->current_game_state = gs_main_menu;
-            AL::NewEventManager::GenerateEventSt(AL::EventType::event_game, AL::Game::Action::reset);
+            AL::EventManager::GenerateEventSt(AL::EventType::event_game, AL::Game::Action::reset);
             break;
 
         default:

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include "DataManager.h"
 
 namespace AL
@@ -9,60 +9,60 @@ namespace AL
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//Default private constructor, no need to initialize inherited class
-	NewEventManager::NewEventManager() = default;
+	EventManager::EventManager() = default;
 	
 	//Default private de-constructor
-	NewEventManager::~NewEventManager() = default;
+	EventManager::~EventManager() = default;
 
 	// Instance --------------------------------------------------------------------------------------------------------
 	
 	//Gets singleton instance
-	NewEventManager& NewEventManager::Get()
+	EventManager& EventManager::Get()
 	{
-		static NewEventManager instance;
+		static EventManager instance;
 		return instance;
 	}
 	
 	// Static ----------------------------------------------------------------------------------------------------------
 	
-	void NewEventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver)
+	void EventManager::AddEventReceiver(const bool& priority, EventReceiver* receiver)
 	{
 		Get().AddReceiver(priority, receiver);
 	}
 	
-	void NewEventManager::RemoveEventReceiver(EventReceiver* receiver)
+	void EventManager::RemoveEventReceiver(EventReceiver* receiver)
 	{
 		Get().RemoveReceiver(receiver);
 	}
 	
-	void NewEventManager::IncreaseReceiverPrioritySt(EventReceiver* receiver)
+	void EventManager::IncreaseReceiverPrioritySt(EventReceiver* receiver)
 	{
 		Get().IncreaseReceiverPriority(receiver);
 	}
 
-	void NewEventManager::DecreaseReceiverPrioritySt(EventReceiver* receiver)
+	void EventManager::DecreaseReceiverPrioritySt(EventReceiver* receiver)
 	{
 		Get().DecreaseReceiverPriority(receiver);
 	}
 
-	std::vector<Event>& NewEventManager::GetEventListSt()
+	std::vector<Event>& EventManager::GetEventListSt()
 	{
 		return Get().event_list;
 	}
 	
-	void NewEventManager::FlushEventListSt()
+	void EventManager::FlushEventListSt()
 	{
 		Get().event_list.clear();
 	}
 
-	const bool& NewEventManager::IsCursorInsideUi()
+	const bool& EventManager::IsCursorInsideUi()
 	{
 		return Get().inside_ui;
 	}
 
 	// Update ----------------------------------------------------------------------------------------------------------
 
-	void NewEventManager::LateUpdate()
+	void EventManager::LateUpdate()
 	{
 		//Every update checks if the cursor is present inside any UI element
 		inside_ui = false;
@@ -91,7 +91,7 @@ namespace AL
 	
 	// Event Dispatching -----------------------------------------------------------------------------------------------
 	
-	void NewEventManager::DispatchEvents()
+	void EventManager::DispatchEvents()
 	{
 		//Empties the event list inside the dispatch list
 		std::vector<Event> dispatch_list = std::move(event_list);
@@ -155,7 +155,7 @@ namespace AL
 	
 	// Unfiltered Subscription Handlers --------------------------------------------------------------------------------
 	
-	void NewEventManager::AddReceiver(const bool& priority, EventReceiver* receiver)
+	void EventManager::AddReceiver(const bool& priority, EventReceiver* receiver)
 	{
 		//Subscribe a receiver to every event type
 		for (int i = last_entry; i > 0; --i)
@@ -167,7 +167,7 @@ namespace AL
 		(priority ? priority_ui_receiver_list : ui_receiver_list).emplace_back(receiver);
 	}
 
-	void NewEventManager::RemoveReceiver(EventReceiver* receiver)
+	void EventManager::RemoveReceiver(EventReceiver* receiver)
 	{
 		//Unsubscribes every entry of receiver all receivers vectors
 
@@ -205,7 +205,7 @@ namespace AL
 
 	// Receiver Priority Handlers --------------------------------------------------------------------------------------
 	
-	void NewEventManager::IncreaseReceiverPriority(EventReceiver* receiver)
+	void EventManager::IncreaseReceiverPriority(EventReceiver* receiver)
 	{
 		//Moves all receivers matching the current receiver to the front of both vectors
 		//Uses stable partition to move all elements back by one and replacing the desired at the front
@@ -227,7 +227,7 @@ namespace AL
 			});
 	}
 	
-	void NewEventManager::DecreaseReceiverPriority(EventReceiver* receiver)
+	void EventManager::DecreaseReceiverPriority(EventReceiver* receiver)
 	{
 		//Moves all receivers matching the current receiver to the back of both vectors
 		//Uses stable partition to move all elements forward by one and replacing the desired at the back

@@ -5,7 +5,7 @@
 
 namespace AL
 {
-	InputManager::InputManager() : event_manager(NewEventManager::Get()), game_data(DataManager::GetGD()) {}
+	InputManager::InputManager() : event_manager(EventManager::Get()), game_data(DataManager::GetGD()) {}
 
 	InputManager::~InputManager() = default;
 

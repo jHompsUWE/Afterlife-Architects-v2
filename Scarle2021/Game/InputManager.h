@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NewEventManager.h"
+#include "EventManager.h"
 #include "GameData.h"
 #include "ImageGO2D.h"
 #include "SimpleMath.h"
@@ -83,7 +83,7 @@ namespace AL
      void MapEntryToEvent(bool state, Cursor::Action action, bool repeat = false);
 
      // Data -----------------------------------------------------------------------------------------------------------
-     NewEventManager& event_manager;
+     EventManager& event_manager;
      GameData* game_data = nullptr;
      		
      //Key mapping data
