@@ -7,7 +7,7 @@
       "texts": [
         "You have no roads in your afterlife",
         "You need roads for your SOULs to traverse around",
-        "Place down a road where you will place your structures my liege"
+        "A A A A A A A A A A A A A A A AAAAAAAAAAAAAAA A A A A A A A A A A A A A A A A A A A A A A A"
       ],
       "whosTalking": [
         0,
@@ -18,27 +18,31 @@
     {
       "dialogueTitle": "Gates",
       "codeName": "GateHell",
-      "standpoint": 0,
+      "standpoint": 1,
       "texts": [
-        "Hell gates",
-        "more here 1"
+        "There are no gates in hell my liege",
+        "He's right SOULs need gates to travel into the afterlife",
+        "Start by placing down a gate in hell"
       ],
       "whosTalking": [
         0,
+        1,
         0
       ]
     },
     {
       "dialogueTitle": "Gates",
       "codeName": "GateHeaven",
-      "standpoint": 1,
+      "standpoint": 0,
       "texts": [
-        "Heaven gates ",
-        "even more here 1"
+        "You are not receiving any SOULs for heaven my lord",
+        "There are no gates for those SOULs to get here through",
+        "Place down a gate in heaven for them to get here"
       ],
       "whosTalking": [
         1,
-        1
+        1,
+        0
       ]
     }
   ]

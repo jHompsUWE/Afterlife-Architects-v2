@@ -508,22 +508,40 @@ void AdvisorManager::LoadFromJson()
     }
 }
 
+/// <summary>
+/// Add new lines for when the text will exit the window
+/// </summary>
+/// <param name="inp_string">String of dialogue</param>
+/// <returns>New string of dialogue with \n inbetween</returns>
 std::string AdvisorManager::AddSpaces(std::string inp_string)
 {
     std::string new_string;
+    std::string temp_word;
     int letter_tracker = 0;
-    for (auto& letter : inp_string)
+    for (int i = 0 ; i < inp_string.size(); i ++)
     {
-        new_string+=letter;
-        letter_tracker++;
-        if (letter_tracker > 30)
+        // If it's a space
+        if (inp_string[i] == ' ')
         {
-            if (letter == ' ')
+            // If it will make the text go outside the window
+            if (letter_tracker >= 35)
             {
+                // Make a new line beforehand
                 new_string += "\n";
                 letter_tracker = 0;
             }
+            // Then add the space and tracked word onto the new string
+            temp_word += ' ';
+            new_string += temp_word;
+            temp_word.clear();
         }
+        else
+        {
+            // Otherwise only add the new letter to the tracked word
+            temp_word += inp_string[i];
+        }
+        letter_tracker++;
     }
+    new_string += temp_word;
     return new_string;
 }
