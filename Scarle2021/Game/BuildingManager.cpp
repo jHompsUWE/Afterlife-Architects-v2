@@ -232,8 +232,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaAnchor:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaAnchor>(structure_data,
-				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
+			std::make_unique<StructureKarmaAnchor>(69);
 		break;
 
 	case KarmaPortal:
@@ -244,8 +243,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaStation_T1:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureKarmaStation>(structure_data,
-				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
+			std::make_unique<StructureKarmaStation>(8);
 		if (plane == Heaven)
 		{
 			AL::NewEventManager::GenerateEventSt(AL::event_sound_start, station_sound, 1.0f, true);
@@ -271,8 +269,7 @@ void BuildingManager::CreateStructure(StructureType structure_type, Vector3 tile
 
 	case KarmaTrack:
 		structure_map[tile_position.x][tile_position.z] =
-			std::make_unique<StructureSprite>(structure_data,
-				GameplaySingletons::GetStructureValues()["structureValues"][structure_type]["soulRate"].get<int>());
+			std::make_unique<StructureSprite>(structure_data);
 		break;
 
 	case Rock_1:

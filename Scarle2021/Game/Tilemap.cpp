@@ -30,7 +30,7 @@ void Tilemap::Draw(DrawData* _DD)
 		{
 #ifdef _ARCADE
 			if (y->GetZoneType() != ZoneType::Void) y->Draw(_DD);
-#elif
+#elif _ ARCADE
 			y->Draw(_DD);
 #endif
 		}
@@ -168,6 +168,9 @@ bool Tilemap::SetTile(Vector3 tile_pos, ZoneType zone_type)
 
 	case Karma_Tracks:
 		economy_manager->PurchaseStructure(5);
+		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
+		total_karma_tracks++;
+		economy_manager->SetTotalKarmaTracks(total_karma_tracks);
 		break;
 
 	default:
@@ -437,63 +440,52 @@ bool Tilemap::IsKarmaTrackNearby(Vector3 tile_pos, ZoneType zone_type)
 			}
 		}
 	}
+	return false;
+}
 	// Switches between the different karma structures
 	// If the karma track is nearby karma anchor. Take away souls
 	// if the karma track is nearby karma station. Increase souls
 	// Takes away currency when a karma track is placed
 	// Sets the total number of karma tracks
-	switch (zone_type)
-	{
-	case KarmaAnchor:
-		if (!IsKarmaTrackNearby)
-		{
-			population_manager->IncrementZonePopulation(plane, zone_type, false);
-		}
-		break;
-
-	case KarmaStation_T1:
-	case KarmaStation_T2:
-		if (!IsKarmaTrackNearby)
-		{
-			population_manager->IncrementZoneCapacity(plane, zone_type, true);
-		}
-		break;
-
-	case KarmaTrack:
-		economy_manager->PurchaseStructure(5);
-		tilemap[tile_pos.x][tile_pos.z]->SetZoneType(zone_type);
-		total_karma_tracks++;
-		economy_manager->SetTotalKarmaTracks(total_karma_tracks);
-		break;
-
-	default:
-		break;
-	}
-	return false;
-}
 
 bool Tilemap::IsKarmaAnchorNearby(Vector3 tile_pos, ZoneType zone_type)
 {
-	if (IsRoadNearby(tile_pos))
+	switch (zone_type)
 	{
-		population_manager->IncrementZonePopulation(plane, zone_type, false);
-	}
-	else
-	{
-		population_manager->IncrementZonePopulation(plane, zone_type, true);
+	
+	case Karma_Anchor:
+		break;
+	default:
+		break;
+		if (IsKarmaTrackNearby(tile_pos, zone_type))
+		{
+			population_manager->IncrementZonePopulation(plane, zone_type, false);
+		}
+		else
+		{
+			population_manager->IncrementZonePopulation(plane, zone_type, true);
+		}
 	}
 	return false;
 }
 
 bool Tilemap::IsKarmaStationNearby(Vector3 tile_pos, ZoneType zone_type)
 {
-	if (IsRoadNearby(tile_pos))
+	switch (zone_type)
 	{
-		population_manager->IncrementZonePopulation(plane, zone_type, true);
-	}
-	else
-	{
-		population_manager->IncrementZonePopulation(plane, zone_type, false);
+		case KarmaStation_T1:
+		case KarmaStation_T2:
+		break;
+	default:
+		break;
+		if (IsKarmaTrackNearby(tile_pos, zone_type))
+		{
+			population_manager->IncrementZonePopulation(plane, zone_type, true);
+		}
+		else
+		{
+			population_manager->IncrementZonePopulation(plane, zone_type, false);
+		}
 	}
 	return false;
 }
